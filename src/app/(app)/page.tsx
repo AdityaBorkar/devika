@@ -1,5 +1,6 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'react-router';
 
-export default function Dashboard() {
-	redirect("/dashboard");
+export default function HomePage() {
+	redirect('/dashboard');
+	return <></>;
 }

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { StyleConfigProvider } from "@/contexts/StyleConfigContext";
-import { Suspense } from "react";
-import RepositoryStylingFallback from "./fallback";
+import { Suspense } from 'react';
+import { StyleConfigProvider } from '@/contexts/StyleConfigContext';
+import RepositoryStylingFallback from './fallback';
 
 export default function StyleConfigLayout({
 	children,

@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
+import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import type { CycleStatus, FilterState, SortState } from "./types";
-import { PlusIcon, ArrowDownIcon, ArrowUpIcon } from "lucide-react";
+} from '@/components/ui/select';
+import type { CycleStatus, FilterState, SortState } from './types';
 
 interface CyclesHeaderProps {
 	totalCycles: number;
 	filteredCycles: number;
 	filterState: FilterState;
 	sortState: SortState;
-	onFilterChange: (status: CycleStatus | "All") => void;
+	onFilterChange: (status: CycleStatus | 'All') => void;
 	onSortChange: (column: string) => void;
 	onCreateCycle: () => void;
 }
@@ -30,27 +30,27 @@ export function CyclesHeader({
 	onSortChange,
 	onCreateCycle,
 }: CyclesHeaderProps) {
-	const statusOptions: Array<{ value: CycleStatus | "All"; label: string }> = [
-		{ value: "All", label: "All Statuses" },
-		{ value: "Not Started", label: "Not Started" },
-		{ value: "In Progress", label: "In Progress" },
-		{ value: "Completed", label: "Completed" },
-		{ value: "Cancelled", label: "Cancelled" },
+	const statusOptions: Array<{ value: CycleStatus | 'All'; label: string }> = [
+		{ value: 'All', label: 'All Statuses' },
+		{ value: 'Not Started', label: 'Not Started' },
+		{ value: 'In Progress', label: 'In Progress' },
+		{ value: 'Completed', label: 'Completed' },
+		{ value: 'Cancelled', label: 'Cancelled' },
 	];
 
 	const sortOptions = [
-		{ value: "name", label: "Name" },
-		{ value: "startDate", label: "Start Date" },
-		{ value: "endDate", label: "End Date" },
-		{ value: "status", label: "Status" },
-		{ value: "progress", label: "Progress" },
+		{ value: 'name', label: 'Name' },
+		{ value: 'startDate', label: 'Start Date' },
+		{ value: 'endDate', label: 'End Date' },
+		{ value: 'status', label: 'Status' },
+		{ value: 'progress', label: 'Progress' },
 	];
 
 	return (
 		<div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
 			<div>
-				<h1 className="text-2xl font-semibold">Cycles / Sprints</h1>
-				<p className="text-sm text-gray-500">
+				<h1 className="font-semibold text-2xl">Cycles / Sprints</h1>
+				<p className="text-gray-500 text-sm">
 					Showing {filteredCycles} of {totalCycles} cycles
 				</p>
 			</div>
@@ -60,7 +60,7 @@ export function CyclesHeader({
 					<Select
 						value={filterState.status}
 						onValueChange={(value) =>
-							onFilterChange(value as CycleStatus | "All")
+							onFilterChange(value as CycleStatus | 'All')
 						}
 					>
 						<SelectTrigger className="w-[150px]">
@@ -97,7 +97,7 @@ export function CyclesHeader({
 						onClick={() => onSortChange(sortState.column)}
 						className="h-9 w-9"
 					>
-						{sortState.direction === "asc" ? (
+						{sortState.direction === 'asc' ? (
 							<ArrowUpIcon className="h-4 w-4" />
 						) : (
 							<ArrowDownIcon className="h-4 w-4" />

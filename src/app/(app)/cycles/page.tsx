@@ -1,19 +1,26 @@
-"use client";
+'use client';
 
-import { Suspense } from "react";
-import { Card } from "@/components/ui/card";
-import { CyclesClient } from "./cycles-client";
+import { Suspense, useState } from 'react';
+import {
+	Cell,
+	Legend,
+	Pie,
+	PieChart,
+	ResponsiveContainer,
+	Tooltip,
+} from 'recharts';
+import { Card } from '@/components/ui/card';
 
 export default function CyclesPage() {
 	return (
-		<div className="p-6 space-y-4">
-			<h1 className="sr-only">Cycles</h1>
+		<div className="space-y-4 p-6">
+			<h1 className="font-bold text-2xl">Cycles</h1>
 
 			<Card className="h-[calc(100vh-100px)]">
 				<Suspense
 					fallback={<div className="p-8 text-center">Loading cycles...</div>}
 				>
-					<CyclesClient />
+					{/* <CyclesClient /> */}
 				</Suspense>
 			</Card>
 		</div>

@@ -3,17 +3,17 @@ import {
 	type CycleStatus,
 	SortDirection,
 	type SortState,
-} from "./types";
+} from './types';
 
 /**
  * Format a date string to a more readable format
  */
 export function formatDate(dateString: string): string {
 	const date = new Date(dateString);
-	return date.toLocaleDateString("en-US", {
-		month: "short",
-		day: "numeric",
-		year: "numeric",
+	return date.toLocaleDateString('en-US', {
+		month: 'short',
+		day: 'numeric',
+		year: 'numeric',
 	});
 }
 
@@ -61,33 +61,33 @@ export function sortCycles(cycles: Cycle[], sortState: SortState): Cycle[] {
 		let result = 0;
 
 		switch (sortState.column) {
-			case "name":
+			case 'name':
 				result = a.name.localeCompare(b.name);
 				break;
-			case "startDate":
+			case 'startDate':
 				result =
 					new Date(a.startDate).getTime() - new Date(b.startDate).getTime();
 				break;
-			case "endDate":
+			case 'endDate':
 				result = new Date(a.endDate).getTime() - new Date(b.endDate).getTime();
 				break;
-			case "status":
+			case 'status':
 				result = a.status.localeCompare(b.status);
 				break;
-			case "progress":
+			case 'progress':
 				result = a.progress.percentComplete - b.progress.percentComplete;
 				break;
-			case "tasks":
+			case 'tasks':
 				result = a.tasks.length - b.tasks.length;
 				break;
-			case "tokens":
+			case 'tokens':
 				result = a.tokensConsumed - b.tokensConsumed;
 				break;
 			default:
 				break;
 		}
 
-		return sortState.direction === "asc" ? result : -result;
+		return sortState.direction === 'asc' ? result : -result;
 	});
 }
 
@@ -96,9 +96,9 @@ export function sortCycles(cycles: Cycle[], sortState: SortState): Cycle[] {
  */
 export function filterCyclesByStatus(
 	cycles: Cycle[],
-	status: CycleStatus | "All",
+	status: CycleStatus | 'All',
 ): Cycle[] {
-	if (status === "All") {
+	if (status === 'All') {
 		return cycles;
 	}
 
@@ -110,15 +110,15 @@ export function filterCyclesByStatus(
  */
 export function getStatusColorClass(status: CycleStatus): string {
 	switch (status) {
-		case "Not Started":
-			return "bg-gray-200 text-gray-800";
-		case "In Progress":
-			return "bg-blue-100 text-blue-800";
-		case "Completed":
-			return "bg-green-100 text-green-800";
-		case "Cancelled":
-			return "bg-red-100 text-red-800";
+		case 'Not Started':
+			return 'bg-gray-200 text-gray-800';
+		case 'In Progress':
+			return 'bg-blue-100 text-blue-800';
+		case 'Completed':
+			return 'bg-green-100 text-green-800';
+		case 'Cancelled':
+			return 'bg-red-100 text-red-800';
 		default:
-			return "bg-gray-200 text-gray-800";
+			return 'bg-gray-200 text-gray-800';
 	}
 }

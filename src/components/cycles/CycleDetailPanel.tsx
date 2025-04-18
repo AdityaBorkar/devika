@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { Cycle } from "./types";
+import { OverviewCard } from '@/components/cycles/OverviewCard';
+import { RoadblocksList } from '@/components/cycles/RoadblocksList';
+import { TasksTable } from '@/components/cycles/TasksTable';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Progress } from './Progress';
+import type { Cycle } from './types';
 import {
 	formatDate,
 	formatTokens,
 	getDaysRemaining,
 	getStatusColorClass,
-} from "./utils";
-import { Progress } from "./Progress";
-import { Badge } from "@/components/ui/badge";
-import { OverviewCard } from "@/components/cycles/OverviewCard";
-import { RoadblocksList } from "@/components/cycles/RoadblocksList";
-import { TasksTable } from "@/components/cycles/TasksTable";
+} from './utils';
 
 interface CycleDetailPanelProps {
 	cycle: Cycle;
@@ -24,9 +24,9 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 	const statusClass = getStatusColorClass(cycle.status);
 
 	return (
-		<div className="h-full flex flex-col overflow-hidden">
+		<div className="flex h-full flex-col overflow-hidden">
 			{/* Header */}
-			<div className="p-4 border-b flex items-center justify-between">
+			<div className="flex items-center justify-between border-b p-4">
 				<div className="flex items-center space-x-3">
 					<button
 						type="button"
@@ -44,22 +44,22 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 							strokeLinecap="round"
 							strokeLinejoin="round"
 						>
-							<polyline points="15 18 9 12 15 6"></polyline>
+							<polyline points="15 18 9 12 15 6" />
 						</svg>
 					</button>
-					<h2 className="text-xl font-semibold">{cycle.name}</h2>
-					<span className={`text-xs px-2 py-1 rounded-full ${statusClass}`}>
+					<h2 className="font-semibold text-xl">{cycle.name}</h2>
+					<span className={`rounded-full px-2 py-1 text-xs ${statusClass}`}>
 						{cycle.status}
 					</span>
 				</div>
 
-				<div className="text-sm text-gray-500">
+				<div className="text-gray-500 text-sm">
 					{formatDate(cycle.startDate)} - {formatDate(cycle.endDate)}
-					{cycle.status === "In Progress" && (
+					{cycle.status === 'In Progress' && (
 						<span
-							className={`ml-2 ${isOverdue ? "text-red-600" : "text-green-600"}`}
+							className={`ml-2 ${isOverdue ? 'text-red-600' : 'text-green-600'}`}
 						>
-							({isOverdue ? "Overdue by" : "Days left:"} {days})
+							({isOverdue ? 'Overdue by' : 'Days left:'} {days})
 						</span>
 					)}
 				</div>
@@ -74,22 +74,22 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 						<TabsTrigger value="details">Details</TabsTrigger>
 						<TabsTrigger value="roadblocks">
 							Roadblocks
-							{cycle.roadblocks.some((rb) => rb.status === "Active") && (
-								<span className="ml-1 w-2 h-2 bg-red-500 rounded-full inline-block"></span>
+							{cycle.roadblocks.some((rb) => rb.status === 'Active') && (
+								<span className="ml-1 inline-block h-2 w-2 rounded-full bg-red-500" />
 							)}
 						</TabsTrigger>
 					</TabsList>
 
 					<TabsContent value="overview" className="space-y-4">
 						<div className="mb-4">
-							<h3 className="text-lg font-medium mb-2">Progress</h3>
+							<h3 className="mb-2 font-medium text-lg">Progress</h3>
 							<Progress
 								percent={cycle.progress.percentComplete}
 								tasksStatus={cycle.progress.tasksStatus}
 							/>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+						<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 							<OverviewCard
 								title="Tasks"
 								value={`${cycle.progress.completedTasks}/${cycle.progress.totalTasks}`}
@@ -108,30 +108,30 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 								title="Duration"
 								value={`${Math.ceil((new Date(cycle.endDate).getTime() - new Date(cycle.startDate).getTime()) / (1000 * 60 * 60 * 24))} days`}
 								description={
-									cycle.status === "In Progress"
+									cycle.status === 'In Progress'
 										? isOverdue
-											? "Overdue"
-											: "Remaining"
-										: "Total"
+											? 'Overdue'
+											: 'Remaining'
+										: 'Total'
 								}
 								icon="calendar"
-								status={isOverdue ? "negative" : "positive"}
+								status={isOverdue ? 'negative' : 'positive'}
 							/>
 						</div>
 
 						<div>
-							<h3 className="text-lg font-medium mb-2">Description</h3>
+							<h3 className="mb-2 font-medium text-lg">Description</h3>
 							<p className="text-gray-700">{cycle.description}</p>
 						</div>
 
-						{cycle.roadblocks.some((rb) => rb.status === "Active") && (
+						{cycle.roadblocks.some((rb) => rb.status === 'Active') && (
 							<div>
-								<h3 className="text-lg font-medium mb-2 text-red-600">
+								<h3 className="mb-2 font-medium text-lg text-red-600">
 									Active Roadblocks
 								</h3>
 								<RoadblocksList
 									roadblocks={cycle.roadblocks.filter(
-										(rb) => rb.status === "Active",
+										(rb) => rb.status === 'Active',
 									)}
 								/>
 							</div>
@@ -144,19 +144,19 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 
 					<TabsContent value="details" className="space-y-4">
 						<div>
-							<h3 className="text-lg font-medium mb-2">
+							<h3 className="mb-2 font-medium text-lg">
 								Additional Instructions
 							</h3>
 							<p className="text-gray-700">
 								{cycle.additionalInstructions ||
-									"No additional instructions provided."}
+									'No additional instructions provided.'}
 							</p>
 						</div>
 
 						{cycle.integrationTests && cycle.integrationTests.length > 0 && (
 							<div>
-								<h3 className="text-lg font-medium mb-2">Integration Tests</h3>
-								<ul className="list-disc pl-5 space-y-1">
+								<h3 className="mb-2 font-medium text-lg">Integration Tests</h3>
+								<ul className="list-disc space-y-1 pl-5">
 									{cycle.integrationTests.map((test, index) => (
 										<li key={index} className="text-gray-700">
 											{test}
@@ -167,19 +167,19 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 						)}
 
 						<div className="flex gap-2">
-							<Badge variant={cycle.writeTests ? "default" : "outline"}>
-								{cycle.writeTests ? "✓ Write Tests" : "× Write Tests"}
+							<Badge variant={cycle.writeTests ? 'default' : 'outline'}>
+								{cycle.writeTests ? '✓ Write Tests' : '× Write Tests'}
 							</Badge>
-							<Badge variant={cycle.writeDocumentation ? "default" : "outline"}>
+							<Badge variant={cycle.writeDocumentation ? 'default' : 'outline'}>
 								{cycle.writeDocumentation
-									? "✓ Write Documentation"
-									: "× Write Documentation"}
+									? '✓ Write Documentation'
+									: '× Write Documentation'}
 							</Badge>
 						</div>
 
 						{cycle.changelog && (
 							<div>
-								<h3 className="text-lg font-medium mb-2">Changelog</h3>
+								<h3 className="mb-2 font-medium text-lg">Changelog</h3>
 								<p className="text-gray-700">{cycle.changelog}</p>
 							</div>
 						)}

@@ -1,6 +1,6 @@
-import fs from "node:fs";
-import path from "node:path";
-import { promisify } from "node:util";
+import fs from 'node:fs';
+import path from 'node:path';
+import { promisify } from 'node:util';
 
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
@@ -28,7 +28,7 @@ export async function countCharactersInFolder(
 
 		if (stats.isFile()) {
 			// Read file content and add to total character count
-			const content = await readFile(itemPath, "utf8");
+			const content = await readFile(itemPath, 'utf8');
 			totalCharacters += content.length;
 		} else if (stats.isDirectory()) {
 			// Recursively process subdirectories

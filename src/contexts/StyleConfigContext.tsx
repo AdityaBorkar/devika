@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { type ReactNode, createContext, useContext, useState } from "react";
+import { createContext, type ReactNode, useContext, useState } from 'react';
 
 export type StyleConfig = {
 	id: string;
@@ -16,43 +16,43 @@ export type StyleConfig = {
 
 const defaultConfigs: StyleConfig[] = [
 	{
-		id: "common",
-		name: "Common Style Config",
+		id: 'common',
+		name: 'Common Style Config',
 		isCommon: true,
-		colors: "<h2>Colors</h2><p>Define your color palette here.</p>",
-		typography: "<h2>Typography</h2><p>Define your typography system here.</p>",
-		iconography: "<h2>Iconography</h2><p>Define your iconography here.</p>",
+		colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
+		typography: '<h2>Typography</h2><p>Define your typography system here.</p>',
+		iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
 		designSystem:
-			"<h2>Component Library / Design System</h2><p>Define your design system here.</p>",
+			'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
 		animations:
-			"<h2>Transitions and Animations</h2><p>Define your animations here.</p>",
-		cssStrategy: "<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>",
+			'<h2>Transitions and Animations</h2><p>Define your animations here.</p>',
+		cssStrategy: '<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>',
 	},
 	{
-		id: "app1",
-		name: "App 1 Style Config",
+		id: 'app1',
+		name: 'App 1 Style Config',
 		isCommon: false,
-		colors: "<h2>Colors</h2><p>App 1 specific colors.</p>",
-		typography: "<h2>Typography</h2><p>App 1 specific typography.</p>",
-		iconography: "<h2>Iconography</h2><p>App 1 specific iconography.</p>",
+		colors: '<h2>Colors</h2><p>App 1 specific colors.</p>',
+		typography: '<h2>Typography</h2><p>App 1 specific typography.</p>',
+		iconography: '<h2>Iconography</h2><p>App 1 specific iconography.</p>',
 		designSystem:
-			"<h2>Component Library / Design System</h2><p>App 1 specific design system.</p>",
+			'<h2>Component Library / Design System</h2><p>App 1 specific design system.</p>',
 		animations:
-			"<h2>Transitions and Animations</h2><p>App 1 specific animations.</p>",
-		cssStrategy: "<h2>CSS Strategy</h2><p>App 1 specific CSS strategy.</p>",
+			'<h2>Transitions and Animations</h2><p>App 1 specific animations.</p>',
+		cssStrategy: '<h2>CSS Strategy</h2><p>App 1 specific CSS strategy.</p>',
 	},
 	{
-		id: "app2",
-		name: "App 2 Style Config",
+		id: 'app2',
+		name: 'App 2 Style Config',
 		isCommon: false,
-		colors: "<h2>Colors</h2><p>App 2 specific colors.</p>",
-		typography: "<h2>Typography</h2><p>App 2 specific typography.</p>",
-		iconography: "<h2>Iconography</h2><p>App 2 specific iconography.</p>",
+		colors: '<h2>Colors</h2><p>App 2 specific colors.</p>',
+		typography: '<h2>Typography</h2><p>App 2 specific typography.</p>',
+		iconography: '<h2>Iconography</h2><p>App 2 specific iconography.</p>',
 		designSystem:
-			"<h2>Component Library / Design System</h2><p>App 2 specific design system.</p>",
+			'<h2>Component Library / Design System</h2><p>App 2 specific design system.</p>',
 		animations:
-			"<h2>Transitions and Animations</h2><p>App 2 specific animations.</p>",
-		cssStrategy: "<h2>CSS Strategy</h2><p>App 2 specific CSS strategy.</p>",
+			'<h2>Transitions and Animations</h2><p>App 2 specific animations.</p>',
+		cssStrategy: '<h2>CSS Strategy</h2><p>App 2 specific CSS strategy.</p>',
 	},
 ];
 
@@ -60,7 +60,7 @@ interface StyleConfigContextType {
 	configs: StyleConfig[];
 	updateConfig: (
 		id: string,
-		field: keyof Omit<StyleConfig, "id" | "name" | "isCommon">,
+		field: keyof Omit<StyleConfig, 'id' | 'name' | 'isCommon'>,
 		content: string,
 	) => void;
 	addConfig: (name: string) => void;
@@ -76,7 +76,7 @@ export function StyleConfigProvider({ children }: { children: ReactNode }) {
 
 	const updateConfig = (
 		id: string,
-		field: keyof Omit<StyleConfig, "id" | "name" | "isCommon">,
+		field: keyof Omit<StyleConfig, 'id' | 'name' | 'isCommon'>,
 		content: string,
 	) => {
 		setConfigs((prevConfigs) =>
@@ -91,22 +91,22 @@ export function StyleConfigProvider({ children }: { children: ReactNode }) {
 			id: `app-${Date.now()}`,
 			name,
 			isCommon: false,
-			colors: "<h2>Colors</h2><p>Define your color palette here.</p>",
+			colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
 			typography:
-				"<h2>Typography</h2><p>Define your typography system here.</p>",
-			iconography: "<h2>Iconography</h2><p>Define your iconography here.</p>",
+				'<h2>Typography</h2><p>Define your typography system here.</p>',
+			iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
 			designSystem:
-				"<h2>Component Library / Design System</h2><p>Define your design system here.</p>",
+				'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
 			animations:
-				"<h2>Transitions and Animations</h2><p>Define your animations here.</p>",
-			cssStrategy: "<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>",
+				'<h2>Transitions and Animations</h2><p>Define your animations here.</p>',
+			cssStrategy: '<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>',
 		};
 
 		setConfigs((prevConfigs) => [...prevConfigs, newConfig]);
 	};
 
 	const deleteConfig = (id: string) => {
-		if (id === "common") return; // Prevent deletion of common config
+		if (id === 'common') return; // Prevent deletion of common config
 		setConfigs((prevConfigs) =>
 			prevConfigs.filter((config) => config.id !== id),
 		);
@@ -125,7 +125,7 @@ export function useStyleConfig() {
 	const context = useContext(StyleConfigContext);
 
 	if (context === undefined) {
-		throw new Error("useStyleConfig must be used within a StyleConfigProvider");
+		throw new Error('useStyleConfig must be used within a StyleConfigProvider');
 	}
 
 	return context;

@@ -1,32 +1,31 @@
-"use client";
+'use client';
 
+import { PlusCircle, Trash2 } from 'lucide-react';
+import { useState } from 'react';
 // Shadcn UI components are now installed
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-
-import { PlusCircle, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 
 // TODO: Fetch actual style configs from backend
 const initialAppConfigs = [
-	{ id: "1", name: "Default App" },
-	{ id: "2", name: "Marketing Site" },
+	{ id: '1', name: 'Default App' },
+	{ id: '2', name: 'Marketing Site' },
 ];
 
 // TODO: Implement actual TipTap editor component
 function TipTapEditorPlaceholder({ configName }: { configName: string }) {
 	const sections = [
-		"Colors",
-		"Typography",
-		"Iconography",
-		"Component Library / Design System",
-		"Transitions and Animation Library and Animation Definitions",
-		"CSS Strategy",
+		'Colors',
+		'Typography',
+		'Iconography',
+		'Component Library / Design System',
+		'Transitions and Animation Library and Animation Definitions',
+		'CSS Strategy',
 	];
 
 	return (
-		<div className="prose prose-sm max-w-none border rounded-md p-4 min-h-[200px] bg-background">
+		<div className="prose prose-sm min-h-[200px] max-w-none rounded-md border bg-background p-4">
 			{/* This is a placeholder for the TipTap editor */}
 			<p className="text-muted-foreground">
 				TipTap editor for {configName}. Add content for the following sections:
@@ -44,7 +43,7 @@ function TipTapEditorPlaceholder({ configName }: { configName: string }) {
 export default function RepositoryStyling() {
 	// TODO: Replace with actual state management/fetching logic
 	const [appConfigs, setAppConfigs] = useState(initialAppConfigs);
-	const [newConfigName, setNewConfigName] = useState("");
+	const [newConfigName, setNewConfigName] = useState('');
 
 	const handleAddConfig = () => {
 		if (newConfigName.trim()) {
@@ -53,7 +52,7 @@ export default function RepositoryStyling() {
 				name: newConfigName.trim(),
 			};
 			setAppConfigs([...appConfigs, newConfig]);
-			setNewConfigName("");
+			setNewConfigName('');
 			// TODO: Persist new config to backend
 		}
 	};
@@ -65,7 +64,7 @@ export default function RepositoryStyling() {
 
 	return (
 		<div className="space-y-8">
-			<h1 className="text-3xl font-bold">Repository Styling</h1>
+			<h1 className="font-bold text-3xl">Repository Styling</h1>
 
 			{/* Common Style Config */}
 			<Card>
@@ -78,7 +77,7 @@ export default function RepositoryStyling() {
 						Define base styles, tokens, or settings shared across all app
 						configurations. (Editor Placeholder)
 					</p>
-					<div className="prose prose-sm max-w-none border rounded-md p-4 min-h-[150px] bg-background mt-4">
+					<div className="prose prose-sm mt-4 min-h-[150px] max-w-none rounded-md border bg-background p-4">
 						Common Style Editor Placeholder
 					</div>
 				</CardContent>
@@ -86,34 +85,34 @@ export default function RepositoryStyling() {
 
 			{/* App Style Configs */}
 			<div className="space-y-6">
-				<div className="flex justify-between items-center">
-					<h2 className="text-2xl font-semibold">App Style Configurations</h2>
-					<div className="flex gap-2 items-center">
+				<div className="flex items-center justify-between">
+					<h2 className="font-semibold text-2xl">App Style Configurations</h2>
+					<div className="flex items-center gap-2">
 						<Input
 							type="text"
 							placeholder="New app config name"
 							value={newConfigName}
 							onChange={(e) => setNewConfigName(e.target.value)}
-							onKeyDown={(e) => e.key === "Enter" && handleAddConfig()}
+							onKeyDown={(e) => e.key === 'Enter' && handleAddConfig()}
 						/>
 						<Button onClick={handleAddConfig} disabled={!newConfigName.trim()}>
-							<PlusCircle className="h-4 w-4 mr-2" />
+							<PlusCircle className="mr-2 h-4 w-4" />
 							Add Config
 						</Button>
 					</div>
 				</div>
 
 				{appConfigs.length === 0 ? (
-					<p className="text-muted-foreground text-center py-4">
+					<p className="py-4 text-center text-muted-foreground">
 						No app style configurations defined yet. Add one above.
 					</p>
 				) : (
 					appConfigs.map((config) => (
-						<Card key={config.id} className="relative group">
+						<Card key={config.id} className="group relative">
 							<Button
 								variant="outline"
 								size="icon"
-								className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+								className="absolute top-4 right-4 opacity-0 transition-opacity group-hover:opacity-100"
 								onClick={() => handleDeleteConfig(config.id)}
 							>
 								<Trash2 className="h-4 w-4" />

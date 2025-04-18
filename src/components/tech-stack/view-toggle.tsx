@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import type { ViewMode } from "@/types/tech-stack";
-import { LayoutGrid, Table } from "lucide-react";
+import { LayoutGrid, Table } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import type { ViewMode } from '@/types/tech-stack';
 
 interface ViewToggleProps {
 	viewMode: ViewMode;
@@ -11,15 +11,15 @@ interface ViewToggleProps {
 
 export function ViewToggle({ viewMode, onToggle }: ViewToggleProps) {
 	return (
-		<div className="flex border rounded-md overflow-hidden">
+		<div className="flex overflow-hidden rounded-md border">
 			<button
 				type="button"
-				onClick={() => onToggle("card")}
+				onClick={() => onToggle('card')}
 				className={cn(
-					"flex items-center gap-2 px-3 py-2 transition-colors",
-					viewMode === "card"
-						? "bg-primary text-primary-foreground"
-						: "hover:bg-accent",
+					'flex items-center gap-2 px-3 py-2 transition-colors',
+					viewMode === 'card'
+						? 'bg-primary text-primary-foreground'
+						: 'hover:bg-accent',
 				)}
 			>
 				<LayoutGrid className="h-4 w-4" />
@@ -27,12 +27,12 @@ export function ViewToggle({ viewMode, onToggle }: ViewToggleProps) {
 			</button>
 			<button
 				type="button"
-				onClick={() => onToggle("table")}
+				onClick={() => onToggle('table')}
 				className={cn(
-					"flex items-center gap-2 px-3 py-2 transition-colors",
-					viewMode === "table"
-						? "bg-primary text-primary-foreground"
-						: "hover:bg-accent",
+					'flex items-center gap-2 px-3 py-2 transition-colors',
+					viewMode === 'table'
+						? 'bg-primary text-primary-foreground'
+						: 'hover:bg-accent',
 				)}
 			>
 				<Table className="h-4 w-4" />

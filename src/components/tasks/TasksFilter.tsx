@@ -1,7 +1,7 @@
-import { Filter } from "lucide-react";
-import type React from "react";
-import type { ColumnFiltersState } from "./types";
-import { PRIORITY_OPTIONS, STATUS_OPTIONS } from "./utils";
+import { Filter } from 'lucide-react';
+import type React from 'react';
+import type { ColumnFiltersState } from './types';
+import { PRIORITY_OPTIONS, STATUS_OPTIONS } from './utils';
 
 interface TasksFilterProps {
 	columnFilters: ColumnFiltersState;
@@ -13,20 +13,20 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 	setColumnFilters,
 }) => {
 	const statusFilter =
-		(columnFilters.find((f) => f.id === "status")?.value as string) || "all";
+		(columnFilters.find((f) => f.id === 'status')?.value as string) || 'all';
 	const priorityFilter =
-		(columnFilters.find((f) => f.id === "priority")?.value as string) || "all";
+		(columnFilters.find((f) => f.id === 'priority')?.value as string) || 'all';
 
 	const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = e.target.value;
 
 		setColumnFilters((prev) => {
 			// Remove the existing status filter if it exists
-			const filtered = prev.filter((f) => f.id !== "status");
+			const filtered = prev.filter((f) => f.id !== 'status');
 
 			// Only add the filter if it's not "all"
-			if (value !== "all") {
-				return [...filtered, { id: "status", value }];
+			if (value !== 'all') {
+				return [...filtered, { id: 'status', value }];
 			}
 
 			return filtered;
@@ -38,11 +38,11 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 
 		setColumnFilters((prev) => {
 			// Remove the existing priority filter if it exists
-			const filtered = prev.filter((f) => f.id !== "priority");
+			const filtered = prev.filter((f) => f.id !== 'priority');
 
 			// Only add the filter if it's not "all"
-			if (value !== "all") {
-				return [...filtered, { id: "priority", value }];
+			if (value !== 'all') {
+				return [...filtered, { id: 'priority', value }];
 			}
 
 			return filtered;
@@ -50,17 +50,17 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 	};
 
 	return (
-		<div className="flex items-center gap-4 px-4 py-2 border-b border-gray-200 dark:border-gray-800">
+		<div className="flex items-center gap-4 border-gray-200 border-b px-4 py-2 dark:border-gray-800">
 			<div className="flex items-center gap-1">
 				<Filter size={16} className="text-gray-500" />
-				<span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+				<span className="font-medium text-gray-600 text-sm dark:text-gray-400">
 					Filters:
 				</span>
 			</div>
 
 			<div className="flex items-center gap-2">
 				<select
-					className="text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-2 py-1.5"
+					className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm dark:border-gray-700 dark:bg-gray-900"
 					value={statusFilter}
 					onChange={handleStatusChange}
 					aria-label="Filter by status"
@@ -73,7 +73,7 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 				</select>
 
 				<select
-					className="text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 px-2 py-1.5"
+					className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm dark:border-gray-700 dark:bg-gray-900"
 					value={priorityFilter}
 					onChange={handlePriorityChange}
 					aria-label="Filter by priority"

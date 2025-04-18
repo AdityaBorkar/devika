@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 type NavItem = {
 	label: string;
@@ -13,7 +13,7 @@ type NavItem = {
 export default function NavLayout({
 	children,
 	navItems,
-	prefix = "",
+	prefix = '',
 	header,
 }: {
 	children: React.ReactNode;
@@ -24,7 +24,7 @@ export default function NavLayout({
 	const currentPath = usePathname();
 	return (
 		<div className="flex h-full">
-			<aside className="w-64 border-r bg-card p-4 flex flex-col">
+			<aside className="flex w-64 flex-col border-r bg-card p-4">
 				<nav className="flex-1 space-y-1">
 					<div className="mb-6">{header}</div>
 					{navItems.map((item) => {
@@ -32,8 +32,8 @@ export default function NavLayout({
 						return (
 							<Button
 								key={item.href}
-								variant={currentPath === fullHref ? "default" : "ghost"}
-								className="w-full justify-start !px-4 !py-5"
+								variant={currentPath === fullHref ? 'default' : 'ghost'}
+								className="!px-4 !py-5 w-full justify-start"
 								asChild
 							>
 								<Link href={fullHref}>

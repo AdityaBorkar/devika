@@ -1,6 +1,6 @@
-import { getConfig } from "@/algorithm/config";
-import { atom } from "jotai";
-import { loadable } from "jotai/utils";
+import { atom } from 'jotai';
+import { loadable } from 'jotai/utils';
+import { getConfig } from '@/algorithm/config';
 
 export const ConfigAtom = atom(async (get) => {
 	const config = await getConfig();

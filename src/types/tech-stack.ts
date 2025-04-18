@@ -1,18 +1,18 @@
 export type PackageCategory =
-	| "backend"
-	| "frontend"
-	| "database"
-	| "logging"
-	| "testing"
-	| "hosting"
-	| "cicd"
-	| "monitoring"
-	| "documentation"
-	| "other";
+	| 'backend'
+	| 'frontend'
+	| 'database'
+	| 'logging'
+	| 'testing'
+	| 'hosting'
+	| 'cicd'
+	| 'monitoring'
+	| 'documentation'
+	| 'other';
 
-export type ViewMode = "card" | "table";
+export type ViewMode = 'card' | 'table';
 
-export type DocSource = "url" | "path" | "jsdoc";
+export type DocSource = 'url' | 'path' | 'jsdoc';
 
 export interface Package {
 	id: string;

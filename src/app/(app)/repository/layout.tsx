@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { useAtomValue } from "jotai";
-import Link from "next/link";
-
-import { ProjectsAtom, WorkspaceAtom } from "../store";
+import { useAtomValue } from 'jotai';
+import Link from 'next/link';
+import { ProjectsAtom, WorkspaceAtom } from '../../../lib/stores/app';
 
 export default function RepositoryLayout({
 	children,
@@ -14,21 +13,21 @@ export default function RepositoryLayout({
 	const projects = useAtomValue(ProjectsAtom);
 
 	return (
-		<div className="px-16 py-8 text-sm cursor-default">
-			<div className="grid grid-cols-[16rem_auto] border border-border rounded-md">
-				<aside className="flex flex-col gap-2 py-4 px-4 border-r border-border overflow-y-auto">
+		<div className="cursor-default px-16 py-8 text-sm">
+			<div className="grid grid-cols-[16rem_auto] rounded-md border border-border">
+				<aside className="flex flex-col gap-2 overflow-y-auto border-border border-r px-4 py-4">
 					{workspace.monorepo && (
-						<div className="py-1 px-2 rounded-md border border-border text-amber-800 bg-amber-100">
+						<div className="rounded-md border border-border bg-amber-100 px-2 py-1 text-amber-800">
 							Monorepo managed by {workspace.monorepo}
 						</div>
 					)}
 					{workspace.vcs && (
-						<div className="py-1 px-2 rounded-md border border-border text-amber-800 bg-amber-100">
+						<div className="rounded-md border border-border bg-amber-100 px-2 py-1 text-amber-800">
 							VCS using {workspace.vcs}
 						</div>
 					)}
 					{workspace.repo && (
-						<div className="py-1 px-2 rounded-md border border-border text-amber-800 bg-amber-100">
+						<div className="rounded-md border border-border bg-amber-100 px-2 py-1 text-amber-800">
 							Repository managed on {workspace.repo}
 						</div>
 					)}
@@ -36,11 +35,11 @@ export default function RepositoryLayout({
 						<Link
 							key={project.name}
 							href={
-								project.name === "$Root"
-									? "/repository"
+								project.name === '$Root'
+									? '/repository'
 									: `/repository/${project.name}`
 							}
-							className="py-1 px-2 rounded-md border border-border group"
+							className="group rounded-md border border-border px-2 py-1"
 						>
 							<div className="flex flex-row justify-between gap-8">
 								<div className="font-medium">{project.name}</div>

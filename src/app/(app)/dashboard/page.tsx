@@ -4,13 +4,13 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function DashboardPage() {
 	return (
-		<div className="p-6 space-y-6">
-			<h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+		<div className="space-y-6 p-6">
+			<h1 className="font-bold text-3xl tracking-tight">Dashboard</h1>
 
 			<Tabs defaultValue="overview" className="space-y-4">
 				<TabsList>
@@ -27,8 +27,8 @@ export default function DashboardPage() {
 								<CardDescription>Task count across project</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">24</div>
-								<p className="text-xs text-muted-foreground">
+								<div className="font-bold text-2xl">24</div>
+								<p className="text-muted-foreground text-xs">
 									+10% from last week
 								</p>
 							</CardContent>
@@ -40,8 +40,8 @@ export default function DashboardPage() {
 								<CardDescription>Finished tasks</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">12</div>
-								<p className="text-xs text-muted-foreground">
+								<div className="font-bold text-2xl">12</div>
+								<p className="text-muted-foreground text-xs">
 									50% completion rate
 								</p>
 							</CardContent>
@@ -53,8 +53,8 @@ export default function DashboardPage() {
 								<CardDescription>Active development</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">8</div>
-								<p className="text-xs text-muted-foreground">4 high priority</p>
+								<div className="font-bold text-2xl">8</div>
+								<p className="text-muted-foreground text-xs">4 high priority</p>
 							</CardContent>
 						</Card>
 					</div>

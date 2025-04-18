@@ -1,16 +1,16 @@
-import { MoreHorizontal } from "lucide-react";
-import type React from "react";
-import { Button } from "../ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
-import { TaskPriorityBadge } from "./TaskPriorityBadge";
-import type { Task } from "./types";
+import { MoreHorizontal } from 'lucide-react';
+import type React from 'react';
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Badge } from "../ui/badge";
+} from '@/components/ui/tooltip';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+import { TaskPriorityBadge } from './TaskPriorityBadge';
+import type { Task } from './types';
 
 interface TaskCardProps {
 	task: Task;
@@ -19,7 +19,7 @@ interface TaskCardProps {
 
 export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 	const handleKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === "Enter" || e.key === " ") {
+		if (e.key === 'Enter' || e.key === ' ') {
 			onClick(task.id);
 		}
 	};
@@ -34,23 +34,23 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 
 	return (
 		<Card
-			className="w-full cursor-pointer hover:shadow-md transition-all border-l-4 hover:translate-y-[-2px]"
+			className="w-full cursor-pointer border-l-4 transition-all hover:translate-y-[-2px] hover:shadow-md"
 			style={{
 				borderLeftColor:
-					task.status === "Done"
-						? "hsl(var(--success))"
-						: task.status === "In Progress"
-							? "hsl(var(--info))"
-							: "hsl(var(--muted))",
+					task.status === 'Done'
+						? 'hsl(var(--success))'
+						: task.status === 'In Progress'
+							? 'hsl(var(--info))'
+							: 'hsl(var(--muted))',
 			}}
 			onClick={() => onClick(task.id)}
 			onKeyDown={handleKeyDown}
 			tabIndex={0}
 			aria-label={`Open task ${task.id}: ${task.title}`}
 		>
-			<CardHeader className="py-2 px-3">
-				<div className="flex justify-between items-start">
-					<Badge variant="outline" className="text-xs font-mono">
+			<CardHeader className="px-3 py-2">
+				<div className="flex items-start justify-between">
+					<Badge variant="outline" className="font-mono text-xs">
 						{task.id}
 					</Badge>
 					<TooltipProvider>
@@ -77,11 +77,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 				</div>
 			</CardHeader>
 
-			<CardContent className="py-1 px-3">
+			<CardContent className="px-3 py-1">
 				<h3 className="font-medium text-sm">{task.title}</h3>
 			</CardContent>
 
-			<CardFooter className="py-2 px-3 flex justify-between items-center">
+			<CardFooter className="flex items-center justify-between px-3 py-2">
 				<div className="flex items-center gap-2">
 					<TaskPriorityBadge priority={task.priority} />
 					{isOverdue && (
@@ -93,15 +93,15 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<div className="text-xs text-muted-foreground flex items-center">
-								<div className="inline-flex items-center justify-center w-5 h-5 bg-secondary rounded-full mr-1 text-xs">
+							<div className="flex items-center text-muted-foreground text-xs">
+								<div className="mr-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-xs">
 									{task.assignee.charAt(0)}
 								</div>
 								<span>
 									{isOverdue
 										? `${Math.abs(daysRemaining)}d late`
 										: daysRemaining === 0
-											? "Today"
+											? 'Today'
 											: `${daysRemaining}d left`}
 								</span>
 							</div>

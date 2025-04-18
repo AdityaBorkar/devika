@@ -1,13 +1,5 @@
-"use client";
+'use client';
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
 	PiClockCountdown,
 	PiCodeBlock,
@@ -15,24 +7,32 @@ import {
 	PiRadioButton,
 	PiTimer,
 	PiWarningCircle,
-} from "react-icons/pi";
+} from 'react-icons/pi';
 import {
-	BarChart,
+	Area,
+	AreaChart,
 	Bar,
-	PieChart,
-	Pie,
+	BarChart,
+	CartesianGrid,
 	Cell,
+	Legend,
+	Line,
+	LineChart,
+	Pie,
+	PieChart,
+	ResponsiveContainer,
+	Tooltip,
 	XAxis,
 	YAxis,
-	CartesianGrid,
-	Tooltip,
-	Legend,
-	ResponsiveContainer,
-	LineChart,
-	Line,
-	AreaChart,
-	Area,
-} from "recharts";
+} from 'recharts';
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Mock data - would be replaced with actual data from API
 const stats = {
@@ -41,54 +41,54 @@ const stats = {
 		lastMonth: 850000,
 		average: 7500,
 		byModel: [
-			{ name: "Claude 3 Opus", value: 1200000 },
-			{ name: "Claude 3 Sonnet", value: 875000 },
-			{ name: "GPT-4", value: 400000 },
+			{ name: 'Claude 3 Opus', value: 1200000 },
+			{ name: 'Claude 3 Sonnet', value: 875000 },
+			{ name: 'GPT-4', value: 400000 },
 		],
 		monthly: [
-			{ month: "Jan", tokens: 320000 },
-			{ month: "Feb", tokens: 290000 },
-			{ month: "Mar", tokens: 330000 },
-			{ month: "Apr", tokens: 450000 },
-			{ month: "May", tokens: 560000 },
-			{ month: "Jun", tokens: 525000 },
+			{ month: 'Jan', tokens: 320000 },
+			{ month: 'Feb', tokens: 290000 },
+			{ month: 'Mar', tokens: 330000 },
+			{ month: 'Apr', tokens: 450000 },
+			{ month: 'May', tokens: 560000 },
+			{ month: 'Jun', tokens: 525000 },
 		],
 	},
 	time: {
 		total: 120, // hours
 		average: 25, // minutes per task
 		byPhase: [
-			{ name: "Planning", value: 30 },
-			{ name: "Development", value: 65 },
-			{ name: "Testing", value: 15 },
-			{ name: "Refinement", value: 10 },
+			{ name: 'Planning', value: 30 },
+			{ name: 'Development', value: 65 },
+			{ name: 'Testing', value: 15 },
+			{ name: 'Refinement', value: 10 },
 		],
 		monthly: [
-			{ month: "Jan", hours: 15 },
-			{ month: "Feb", hours: 18 },
-			{ month: "Mar", hours: 22 },
-			{ month: "Apr", hours: 25 },
-			{ month: "May", hours: 20 },
-			{ month: "Jun", hours: 20 },
+			{ month: 'Jan', hours: 15 },
+			{ month: 'Feb', hours: 18 },
+			{ month: 'Mar', hours: 22 },
+			{ month: 'Apr', hours: 25 },
+			{ month: 'May', hours: 20 },
+			{ month: 'Jun', hours: 20 },
 		],
 	},
 	errors: {
 		total: 156,
 		resolved: 142,
 		byType: [
-			{ name: "Syntax", value: 42 },
-			{ name: "Logic", value: 38 },
-			{ name: "Integration", value: 26 },
-			{ name: "Performance", value: 15 },
-			{ name: "Other", value: 35 },
+			{ name: 'Syntax', value: 42 },
+			{ name: 'Logic', value: 38 },
+			{ name: 'Integration', value: 26 },
+			{ name: 'Performance', value: 15 },
+			{ name: 'Other', value: 35 },
 		],
 		trend: [
-			{ week: "W1", reported: 28, resolved: 24 },
-			{ week: "W2", reported: 32, resolved: 30 },
-			{ week: "W3", reported: 36, resolved: 32 },
-			{ week: "W4", reported: 30, resolved: 27 },
-			{ week: "W5", reported: 22, resolved: 21 },
-			{ week: "W6", reported: 8, resolved: 8 },
+			{ week: 'W1', reported: 28, resolved: 24 },
+			{ week: 'W2', reported: 32, resolved: 30 },
+			{ week: 'W3', reported: 36, resolved: 32 },
+			{ week: 'W4', reported: 30, resolved: 27 },
+			{ week: 'W5', reported: 22, resolved: 21 },
+			{ week: 'W6', reported: 8, resolved: 8 },
 		],
 	},
 	cycles: {
@@ -180,17 +180,17 @@ const stats = {
 
 // Custom chart colors from CSS variables
 const chartColors = [
-	"var(--chart-1)",
-	"var(--chart-2)",
-	"var(--chart-3)",
-	"var(--chart-4)",
-	"var(--chart-5)",
+	'var(--chart-1)',
+	'var(--chart-2)',
+	'var(--chart-3)',
+	'var(--chart-4)',
+	'var(--chart-5)',
 ];
 
 export default function StatsPage() {
 	return (
-		<div className="p-6 space-y-6">
-			<h1 className="text-3xl font-bold tracking-tight">Usage Statistics</h1>
+		<div className="space-y-6 p-6">
+			<h1 className="font-bold text-3xl tracking-tight">Usage Statistics</h1>
 
 			<Tabs defaultValue="overview" className="space-y-6">
 				<TabsList>
@@ -206,16 +206,16 @@ export default function StatsPage() {
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Total Tokens
 								</CardTitle>
 								<PiCodeBlock className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.tokens.total.toLocaleString()}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									~{stats.tokens.average.toLocaleString()} per task
 								</p>
 							</CardContent>
@@ -223,16 +223,16 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Development Time
 								</CardTitle>
 								<PiTimer className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.time.total} hours
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									{stats.time.average} min average per task
 								</p>
 							</CardContent>
@@ -240,12 +240,12 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">Errors</CardTitle>
+								<CardTitle className="font-medium text-sm">Errors</CardTitle>
 								<PiWarningCircle className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">{stats.errors.total}</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<div className="font-bold text-2xl">{stats.errors.total}</div>
+								<p className="mt-1 text-muted-foreground text-xs">
 									{stats.errors.resolved} resolved (
 									{Math.round(
 										(stats.errors.resolved / stats.errors.total) * 100,
@@ -257,14 +257,14 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Development Cycles
 								</CardTitle>
 								<PiClockCountdown className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">{stats.cycles.count}</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<div className="font-bold text-2xl">{stats.cycles.count}</div>
+								<p className="mt-1 text-muted-foreground text-xs">
 									{stats.cycles.averageLOC.toLocaleString()} lines of code on
 									average
 								</p>
@@ -291,7 +291,7 @@ export default function StatsPage() {
 												paddingAngle={2}
 												dataKey="value"
 												label={({ name, percent }) =>
-													`${name} (${percent ? (percent * 100).toFixed(0) : "0"}%)`
+													`${name} (${percent ? (percent * 100).toFixed(0) : '0'}%)`
 												}
 												labelLine={false}
 											>
@@ -303,7 +303,7 @@ export default function StatsPage() {
 												))}
 											</Pie>
 											<Tooltip
-												formatter={(value) => [`${value} hours`, "Time"]}
+												formatter={(value) => [`${value} hours`, 'Time']}
 											/>
 											<Legend />
 										</PieChart>
@@ -330,7 +330,7 @@ export default function StatsPage() {
 												paddingAngle={2}
 												dataKey="value"
 												label={({ name, percent }) =>
-													`${name} (${percent ? (percent * 100).toFixed(0) : "0"}%)`
+													`${name} (${percent ? (percent * 100).toFixed(0) : '0'}%)`
 												}
 												labelLine={false}
 											>
@@ -344,7 +344,7 @@ export default function StatsPage() {
 											<Tooltip
 												formatter={(value) => [
 													`${(value / 1000000).toFixed(1)}M`,
-													"Tokens",
+													'Tokens',
 												]}
 											/>
 											<Legend />
@@ -366,26 +366,26 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent className="space-y-6">
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Total Used
 									</h3>
-									<p className="text-3xl font-bold">
+									<p className="font-bold text-3xl">
 										{stats.tokens.total.toLocaleString()}
 									</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Last Month
 									</h3>
-									<p className="text-3xl font-bold">
+									<p className="font-bold text-3xl">
 										{stats.tokens.lastMonth.toLocaleString()}
 									</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Average Per Task
 									</h3>
-									<p className="text-3xl font-bold">
+									<p className="font-bold text-3xl">
 										{stats.tokens.average.toLocaleString()}
 									</p>
 								</div>
@@ -409,7 +409,7 @@ export default function StatsPage() {
 											<Tooltip
 												formatter={(value) => [
 													`${(value / 1000000).toFixed(1)}M tokens`,
-													"Usage",
+													'Usage',
 												]}
 											/>
 											<Bar
@@ -446,7 +446,7 @@ export default function StatsPage() {
 										<Tooltip
 											formatter={(value) => [
 												`${(value / 1000).toFixed(0)}k tokens`,
-												"Usage",
+												'Usage',
 											]}
 										/>
 										<Area
@@ -473,22 +473,22 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent className="space-y-6">
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Total Hours
 									</h3>
-									<p className="text-3xl font-bold">{stats.time.total}</p>
+									<p className="font-bold text-3xl">{stats.time.total}</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Average per Task
 									</h3>
-									<p className="text-3xl font-bold">{stats.time.average} min</p>
+									<p className="font-bold text-3xl">{stats.time.average} min</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Cycle Average
 									</h3>
-									<p className="text-3xl font-bold">
+									<p className="font-bold text-3xl">
 										{stats.cycles.averageTime} hours
 									</p>
 								</div>
@@ -510,7 +510,7 @@ export default function StatsPage() {
 											<XAxis type="number" />
 											<YAxis dataKey="name" type="category" width={100} />
 											<Tooltip
-												formatter={(value) => [`${value} hours`, "Time"]}
+												formatter={(value) => [`${value} hours`, 'Time']}
 											/>
 											<Bar dataKey="value" radius={[0, 4, 4, 0]}>
 												{stats.time.byPhase.map((entry, index) => (
@@ -542,7 +542,7 @@ export default function StatsPage() {
 										<Tooltip
 											formatter={(value) => [
 												`${value} hours`,
-												"Development Time",
+												'Development Time',
 											]}
 										/>
 										<Line
@@ -570,18 +570,18 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent className="space-y-6">
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Total Errors
 									</h3>
-									<p className="text-3xl font-bold">{stats.errors.total}</p>
+									<p className="font-bold text-3xl">{stats.errors.total}</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Resolved
 									</h3>
-									<p className="text-3xl font-bold">
-										{stats.errors.resolved}{" "}
-										<span className="text-sm text-muted-foreground">
+									<p className="font-bold text-3xl">
+										{stats.errors.resolved}{' '}
+										<span className="text-muted-foreground text-sm">
 											(
 											{Math.round(
 												(stats.errors.resolved / stats.errors.total) * 100,
@@ -591,10 +591,10 @@ export default function StatsPage() {
 									</p>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium text-muted-foreground mb-2">
+									<h3 className="mb-2 font-medium text-muted-foreground text-sm">
 										Outstanding
 									</h3>
-									<p className="text-3xl font-bold">
+									<p className="font-bold text-3xl">
 										{stats.errors.total - stats.errors.resolved}
 									</p>
 								</div>
@@ -616,7 +616,7 @@ export default function StatsPage() {
 											<XAxis dataKey="name" />
 											<YAxis />
 											<Tooltip
-												formatter={(value) => [`${value} errors`, "Count"]}
+												formatter={(value) => [`${value} errors`, 'Count']}
 											/>
 											<Bar dataKey="value" radius={[4, 4, 0, 0]}>
 												{stats.errors.byType.map((entry, index) => (
@@ -675,16 +675,16 @@ export default function StatsPage() {
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Average Time
 								</CardTitle>
 								<PiTimer className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.cycles.averageTime} hours
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									Per development cycle
 								</p>
 							</CardContent>
@@ -692,16 +692,16 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Average Tokens
 								</CardTitle>
 								<PiCodeBlock className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.cycles.averageTokens.toLocaleString()}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									Per development cycle
 								</p>
 							</CardContent>
@@ -709,16 +709,16 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Average Commits
 								</CardTitle>
 								<PiGitCommit className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.cycles.averageCommits}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									Per development cycle
 								</p>
 							</CardContent>
@@ -726,16 +726,16 @@ export default function StatsPage() {
 
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
-								<CardTitle className="text-sm font-medium">
+								<CardTitle className="font-medium text-sm">
 									Re-prompt Rate
 								</CardTitle>
 								<PiRadioButton className="h-4 w-4 text-muted-foreground" />
 							</CardHeader>
 							<CardContent>
-								<div className="text-2xl font-bold">
+								<div className="font-bold text-2xl">
 									{stats.cycles.repromptRate}
 								</div>
-								<p className="text-xs text-muted-foreground mt-1">
+								<p className="mt-1 text-muted-foreground text-xs">
 									Average re-prompts per task
 								</p>
 							</CardContent>
@@ -760,8 +760,8 @@ export default function StatsPage() {
 										<XAxis
 											dataKey="id"
 											label={{
-												value: "Cycle #",
-												position: "insideBottom",
+												value: 'Cycle #',
+												position: 'insideBottom',
 												offset: -10,
 											}}
 										/>
@@ -769,9 +769,9 @@ export default function StatsPage() {
 											yAxisId="left"
 											orientation="left"
 											label={{
-												value: "Time (hours)",
+												value: 'Time (hours)',
 												angle: -90,
-												position: "insideLeft",
+												position: 'insideLeft',
 											}}
 										/>
 										<YAxis
@@ -779,9 +779,9 @@ export default function StatsPage() {
 											orientation="right"
 											tickFormatter={(value) => `${value / 1000}k`}
 											label={{
-												value: "Tokens",
+												value: 'Tokens',
 												angle: 90,
-												position: "insideRight",
+												position: 'insideRight',
 											}}
 										/>
 										<Tooltip />
@@ -812,7 +812,7 @@ export default function StatsPage() {
 						<CardContent>
 							<div className="grid gap-6 md:grid-cols-2">
 								<div>
-									<h3 className="text-sm font-medium mb-4">
+									<h3 className="mb-4 font-medium text-sm">
 										Time vs Output Ratio
 									</h3>
 									<div className="space-y-4">
@@ -824,7 +824,7 @@ export default function StatsPage() {
 														(stats.cycles.averageTime /
 															stats.cycles.averageLOC) *
 														1000
-													).toFixed(2)}{" "}
+													).toFixed(2)}{' '}
 													hours
 												</span>
 											</div>
@@ -856,7 +856,7 @@ export default function StatsPage() {
 									</div>
 								</div>
 								<div>
-									<h3 className="text-sm font-medium mb-4">
+									<h3 className="mb-4 font-medium text-sm">
 										Re-prompt Analysis
 									</h3>
 									<div className="space-y-4">
@@ -864,7 +864,7 @@ export default function StatsPage() {
 											<BarChart
 												data={[
 													{
-														name: "Re-prompts",
+														name: 'Re-prompts',
 														value: stats.cycles.repromptRate,
 													},
 												]}
@@ -875,7 +875,7 @@ export default function StatsPage() {
 												<Tooltip
 													formatter={(value) => [
 														`${value} per task`,
-														"Re-prompt Rate",
+														'Re-prompt Rate',
 													]}
 												/>
 												<Bar
@@ -894,10 +894,10 @@ export default function StatsPage() {
 												</Bar>
 											</BarChart>
 										</ResponsiveContainer>
-										<p className="text-xs text-muted-foreground mt-2">
+										<p className="mt-2 text-muted-foreground text-xs">
 											Scale: 0-5 re-prompts per task (industry average ~3.5)
 										</p>
-										<div className="space-y-2 mt-6">
+										<div className="mt-6 space-y-2">
 											<div className="flex justify-between text-sm">
 												<span>Time lost to re-prompting</span>
 												<span className="font-medium">
@@ -905,11 +905,11 @@ export default function StatsPage() {
 														stats.cycles.repromptRate *
 														stats.time.average *
 														0.3
-													).toFixed(0)}{" "}
+													).toFixed(0)}{' '}
 													min/task
 												</span>
 											</div>
-											<p className="text-xs text-muted-foreground mt-2">
+											<p className="mt-2 text-muted-foreground text-xs">
 												Estimated based on average task time and re-prompt rate
 											</p>
 										</div>

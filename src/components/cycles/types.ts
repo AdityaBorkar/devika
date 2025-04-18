@@ -1,13 +1,13 @@
 export type CycleStatus =
-	| "Not Started"
-	| "In Progress"
-	| "Completed"
-	| "Cancelled";
+	| 'Not Started'
+	| 'In Progress'
+	| 'Completed'
+	| 'Cancelled';
 
 export type CycleTask = {
 	id: string;
 	title: string;
-	status: "Todo" | "In Progress" | "Done" | "Blocked";
+	status: 'Todo' | 'In Progress' | 'Done' | 'Blocked';
 	assignee?: string;
 	estimatedHours?: number;
 	actualHours?: number;
@@ -16,7 +16,7 @@ export type CycleTask = {
 export type CycleRoadblock = {
 	id: string;
 	description: string;
-	status: "Active" | "Resolved";
+	status: 'Active' | 'Resolved';
 	createdAt: string;
 	resolvedAt?: string;
 };
@@ -57,7 +57,7 @@ export type CycleTableColumn = {
 	sortable?: boolean;
 };
 
-export type SortDirection = "asc" | "desc";
+export type SortDirection = 'asc' | 'desc';
 
 export type SortState = {
 	column: string;
@@ -65,5 +65,5 @@ export type SortState = {
 };
 
 export type FilterState = {
-	status: CycleStatus | "All";
+	status: CycleStatus | 'All';
 };

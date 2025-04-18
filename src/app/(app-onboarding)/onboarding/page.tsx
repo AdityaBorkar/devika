@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
-import { Button } from "@/components/ui/button";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 import {
 	Form,
 	FormControl,
@@ -11,42 +10,42 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { ProjectOnboardingSchema } from "@/schemas/ProjectOnboarding";
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { ProjectOnboardingSchema } from '@/schemas/ProjectOnboarding';
 
 // Default values matching the schema defaults
 const defaultValues: Partial<ProjectOnboardingSchema> = {
-	projectName: "",
-	description: "",
-	themeColor: "#000000",
-	theme: "light",
-	authorName: "",
-	isMonorepo: "no",
-	projectType: "project",
-	aiEditor: "cursor",
-	isBlank: "not_blank",
+	projectName: '',
+	description: '',
+	themeColor: '#000000',
+	theme: 'light',
+	authorName: '',
+	isMonorepo: 'no',
+	projectType: 'project',
+	aiEditor: 'cursor',
+	isBlank: 'not_blank',
 };
 
 export default function OnboardingPage() {
 	const form = useForm<ProjectOnboardingSchema>({
 		resolver: zodResolver(ProjectOnboardingSchema),
 		defaultValues,
-		mode: "onChange", // Or "onSubmit"
+		mode: 'onChange', // Or "onSubmit"
 	});
 
 	function onSubmit(data: ProjectOnboardingSchema) {
 		// TODO: Add submit logic
-		console.log("Form submitted with data:", data);
+		console.log('Form submitted with data:', data);
 	}
 
 	return (
@@ -56,7 +55,7 @@ export default function OnboardingPage() {
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="w-full max-w-lg space-y-6 rounded-lg border bg-card p-8 shadow-sm"
 				>
-					<h1 className="text-2xl font-semibold text-card-foreground">
+					<h1 className="font-semibold text-2xl text-card-foreground">
 						Project Onboarding
 					</h1>
 

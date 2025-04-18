@@ -1,8 +1,8 @@
-import { Badge } from "@/components/ui/badge";
-import { Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
-import type React from "react";
-import { Button } from "../ui/button";
+import { Plus } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import type React from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '../ui/button';
 import {
 	Card,
 	CardAction,
@@ -11,9 +11,9 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "../ui/card";
-import type { Task } from "./types";
-import { TaskCard } from "./TaskCard";
+} from '../ui/card';
+import { TaskCard } from './TaskCard';
+import type { Task } from './types';
 
 interface KanbanColumnProps {
 	title: string;
@@ -31,12 +31,12 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 	onClick,
 }) => {
 	return (
-		<div className="w-full lg:w-1/3 px-2">
+		<div className="w-full px-2 lg:w-1/3">
 			<Card className="mb-4 border-t-4" style={{ borderTopColor: color }}>
-				<CardHeader className="py-2 px-3">
+				<CardHeader className="px-3 py-2">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
-							<h2 className="text-sm font-medium">{title}</h2>
+							<h2 className="font-medium text-sm">{title}</h2>
 							<Badge variant="secondary" className="text-xs">
 								{count}
 							</Badge>
@@ -52,14 +52,14 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 						</Button>
 					</div>
 				</CardHeader>
-				<CardContent className="px-3 pb-3 pt-0">
+				<CardContent className="px-3 pt-0 pb-3">
 					<div className="space-y-2">
 						{tasks.map((task) => (
 							<TaskCard key={task.id} task={task} onClick={onClick} />
 						))}
 
 						{tasks.length === 0 && (
-							<div className="p-3 text-center text-muted-foreground text-sm border border-dashed border-gray-200 dark:border-gray-700 rounded-md">
+							<div className="rounded-md border border-gray-200 border-dashed p-3 text-center text-muted-foreground text-sm dark:border-gray-700">
 								No tasks
 							</div>
 						)}
@@ -81,13 +81,13 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ tasks }) => {
 		router.push(`/tasks/${id}`);
 	};
 
-	const todoTasks = tasks.filter((task) => task.status === "Todo");
-	const inProgressTasks = tasks.filter((task) => task.status === "In Progress");
-	const doneTasks = tasks.filter((task) => task.status === "Done");
+	const todoTasks = tasks.filter((task) => task.status === 'Todo');
+	const inProgressTasks = tasks.filter((task) => task.status === 'In Progress');
+	const doneTasks = tasks.filter((task) => task.status === 'Done');
 
 	return (
 		<div className="flex-1 overflow-x-auto">
-			<div className="min-w-full flex flex-wrap -mx-2 p-4">
+			<div className="-mx-2 flex min-w-full flex-wrap p-4">
 				<KanbanColumn
 					title="Todo"
 					tasks={todoTasks}

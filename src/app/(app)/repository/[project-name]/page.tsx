@@ -1,10 +1,9 @@
-"use client";
+'use client';
 
-import { useAtomValue } from "jotai";
-import { useQueryState } from "nuqs";
-
-import PackageList from "@/app/(app)/repository/_components/PackageList";
-import { ProjectsAtom } from "../../store";
+import { useAtomValue } from 'jotai';
+import { useQueryState } from 'nuqs';
+import PackageList from '@/app/(app)/repository/_components/PackageList';
+import { ProjectsAtom } from '../../../../lib/stores/app';
 
 // TODO: What if NOT A MONOREPO?
 // Show Files (if yes, show tokens and char count)
@@ -19,11 +18,11 @@ import { ProjectsAtom } from "../../store";
 export default function AppPage() {
 	const projects = useAtomValue(ProjectsAtom);
 
-	const [projectName] = useQueryState("project", {
+	const [projectName] = useQueryState('project', {
 		defaultValue: projects[0].name,
 	});
 	const project = projects.find((project) => project.name === projectName);
-	if (!project) throw new Error("Project not found");
+	if (!project) throw new Error('Project not found');
 
 	return (
 		<div>

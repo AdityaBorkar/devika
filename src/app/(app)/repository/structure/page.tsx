@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
 import {
 	ChevronDownIcon,
 	ChevronRightIcon,
@@ -10,14 +9,15 @@ import {
 	FolderOpenIcon,
 	MinusSquareIcon,
 	PlusSquareIcon,
-} from "lucide-react";
-import { useState } from "react";
+} from 'lucide-react';
+import { useState } from 'react';
+import { cn } from '@/lib/utils';
 
 // Define TypeScript interfaces for our file structure
 interface FileItem {
 	id: string;
 	name: string;
-	type: "file";
+	type: 'file';
 	charCount: number;
 	color: string;
 }
@@ -25,7 +25,7 @@ interface FileItem {
 interface DirectoryItem {
 	id: string;
 	name: string;
-	type: "directory";
+	type: 'directory';
 	charCount: number;
 	color: string;
 	children?: (FileItem | DirectoryItem)[];
@@ -35,62 +35,62 @@ type FileSystemItem = FileItem | DirectoryItem;
 
 // Mock file structure - in a real app, this would come from an API or file system
 const initialFileStructure: DirectoryItem = {
-	id: "root",
-	name: "project-root",
-	type: "directory",
+	id: 'root',
+	name: 'project-root',
+	type: 'directory',
 	charCount: 0,
-	color: "bg-blue-100",
+	color: 'bg-blue-100',
 	children: [
 		{
-			id: "src",
-			name: "src",
-			type: "directory",
+			id: 'src',
+			name: 'src',
+			type: 'directory',
 			charCount: 0,
-			color: "bg-violet-100",
+			color: 'bg-violet-100',
 			children: [
 				{
-					id: "app",
-					name: "app",
-					type: "directory",
+					id: 'app',
+					name: 'app',
+					type: 'directory',
 					charCount: 0,
-					color: "bg-emerald-100",
+					color: 'bg-emerald-100',
 					children: [
 						{
-							id: "page",
-							name: "page.tsx",
-							type: "file",
+							id: 'page',
+							name: 'page.tsx',
+							type: 'file',
 							charCount: 150,
-							color: "bg-emerald-50",
+							color: 'bg-emerald-50',
 						},
 						{
-							id: "layout",
-							name: "layout.tsx",
-							type: "file",
+							id: 'layout',
+							name: 'layout.tsx',
+							type: 'file',
 							charCount: 320,
-							color: "bg-emerald-50",
+							color: 'bg-emerald-50',
 						},
 					],
 				},
 				{
-					id: "components",
-					name: "components",
-					type: "directory",
+					id: 'components',
+					name: 'components',
+					type: 'directory',
 					charCount: 0,
-					color: "bg-amber-100",
+					color: 'bg-amber-100',
 					children: [
 						{
-							id: "ui",
-							name: "ui",
-							type: "directory",
+							id: 'ui',
+							name: 'ui',
+							type: 'directory',
 							charCount: 0,
-							color: "bg-amber-50",
+							color: 'bg-amber-50',
 							children: [
 								{
-									id: "button",
-									name: "button.tsx",
-									type: "file",
+									id: 'button',
+									name: 'button.tsx',
+									type: 'file',
 									charCount: 450,
-									color: "bg-amber-50",
+									color: 'bg-amber-50',
 								},
 							],
 						},
@@ -99,18 +99,18 @@ const initialFileStructure: DirectoryItem = {
 			],
 		},
 		{
-			id: "public",
-			name: "public",
-			type: "directory",
+			id: 'public',
+			name: 'public',
+			type: 'directory',
 			charCount: 0,
-			color: "bg-red-100",
+			color: 'bg-red-100',
 			children: [
 				{
-					id: "favicon",
-					name: "favicon.ico",
-					type: "file",
+					id: 'favicon',
+					name: 'favicon.ico',
+					type: 'file',
 					charCount: 1024,
-					color: "bg-red-50",
+					color: 'bg-red-50',
 				},
 			],
 		},
@@ -119,7 +119,7 @@ const initialFileStructure: DirectoryItem = {
 
 // Calculate character counts for directories based on their children
 const calculateCharCounts = (item: FileSystemItem): number => {
-	if (item.type === "file") {
+	if (item.type === 'file') {
 		return item.charCount;
 	}
 
@@ -153,7 +153,7 @@ export default function RepositoryStructure() {
 	});
 
 	const [expandedItems, setExpandedItems] = useState<Set<string>>(
-		new Set(["root", "src", "app", "components"]),
+		new Set(['root', 'src', 'app', 'components']),
 	);
 	const [isPrototypingMode, setIsPrototypingMode] = useState<boolean>(false);
 	const [notes, setNotes] = useState<Record<string, string>>({});
@@ -161,14 +161,14 @@ export default function RepositoryStructure() {
 
 	// Function to collect all directory IDs
 	const getAllDirectoryIds = (item: FileSystemItem): string[] => {
-		if (item.type === "file") {
+		if (item.type === 'file') {
 			return [];
 		}
 
 		let ids = [item.id];
 		if (item.children) {
 			for (const child of item.children) {
-				if (child.type === "directory") {
+				if (child.type === 'directory') {
 					ids = [...ids, ...getAllDirectoryIds(child)];
 				}
 			}
@@ -184,7 +184,7 @@ export default function RepositoryStructure() {
 			setExpandedItems(new Set(allDirIds));
 		} else {
 			// Only keep the root expanded
-			setExpandedItems(new Set(["root"]));
+			setExpandedItems(new Set(['root']));
 		}
 	};
 
@@ -214,9 +214,9 @@ export default function RepositoryStructure() {
 
 		const findParent = (item: FileSystemItem): DirectoryItem | null => {
 			if (item.id === parentId) {
-				return item.type === "directory" ? item : null;
+				return item.type === 'directory' ? item : null;
 			}
-			if (item.type === "directory" && item.children) {
+			if (item.type === 'directory' && item.children) {
 				for (const child of item.children) {
 					const found = findParent(child);
 					if (found) return found;
@@ -236,15 +236,15 @@ export default function RepositoryStructure() {
 		const newItem: FileSystemItem = isFile
 			? {
 					id: newId,
-					name: "newfile.tsx",
-					type: "file",
+					name: 'newfile.tsx',
+					type: 'file',
 					charCount: 0,
 					color: parent.color,
 				}
 			: {
 					id: newId,
-					name: "newfolder",
-					type: "directory",
+					name: 'newfolder',
+					type: 'directory',
 					charCount: 0,
 					color: parent.color,
 					children: [],
@@ -261,7 +261,7 @@ export default function RepositoryStructure() {
 
 	const renderFileStructure = (item: FileSystemItem, level = 0) => {
 		const isExpanded = expandedItems.has(item.id);
-		const isDirectory = item.type === "directory";
+		const isDirectory = item.type === 'directory';
 		const indent = level * 16;
 
 		// Skip files in prototyping mode if showFiles is false
@@ -274,7 +274,7 @@ export default function RepositoryStructure() {
 				<button
 					type="button"
 					className={cn(
-						"flex items-center w-full text-left py-1 px-2 hover:bg-gray-100 cursor-pointer rounded group",
+						'group flex w-full cursor-pointer items-center rounded px-2 py-1 text-left hover:bg-gray-100',
 						item.color,
 					)}
 					style={{ paddingLeft: `${indent}px` }}
@@ -282,7 +282,7 @@ export default function RepositoryStructure() {
 					onKeyDown={() => isDirectory && toggleExpand(item.id)}
 					disabled={!isDirectory}
 				>
-					<div className="flex-shrink-0 mr-1">
+					<div className="mr-1 flex-shrink-0">
 						{isDirectory ? (
 							isExpanded ? (
 								<ChevronDownIcon className="h-4 w-4" />
@@ -292,7 +292,7 @@ export default function RepositoryStructure() {
 						) : null}
 					</div>
 
-					<div className="flex-shrink-0 mr-1">
+					<div className="mr-1 flex-shrink-0">
 						{isDirectory ? (
 							isExpanded ? (
 								<FolderOpenIcon className="h-4 w-4 text-blue-500" />
@@ -306,17 +306,17 @@ export default function RepositoryStructure() {
 
 					<div className="flex-grow font-mono text-sm">{item.name}</div>
 
-					<div className="text-xs text-gray-500 ml-2">
+					<div className="ml-2 text-gray-500 text-xs">
 						{formatCharCount(item.charCount)}
 					</div>
 
 					{isPrototypingMode && (
-						<div className="hidden group-hover:flex ml-2 space-x-1">
+						<div className="ml-2 hidden space-x-1 group-hover:flex">
 							{isDirectory && (
 								<>
 									<button
 										type="button"
-										className="p-1 rounded hover:bg-gray-200"
+										className="rounded p-1 hover:bg-gray-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, false);
@@ -327,7 +327,7 @@ export default function RepositoryStructure() {
 									</button>
 									<button
 										type="button"
-										className="p-1 rounded hover:bg-gray-200"
+										className="rounded p-1 hover:bg-gray-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, true);
@@ -340,12 +340,12 @@ export default function RepositoryStructure() {
 							)}
 							<button
 								type="button"
-								className="p-1 rounded hover:bg-gray-200"
+								className="rounded p-1 hover:bg-gray-200"
 								onClick={(e) => {
 									e.stopPropagation();
 									const note = prompt(
-										"Enter note for this item:",
-										notes[item.id] || "",
+										'Enter note for this item:',
+										notes[item.id] || '',
 									);
 									if (note !== null) {
 										addNote(item.id, note);
@@ -361,7 +361,7 @@ export default function RepositoryStructure() {
 
 				{isPrototypingMode && notes[item.id] && (
 					<div
-						className="text-xs italic text-gray-600 pl-2 pr-2 py-1 border-l-2 border-gray-300 ml-6"
+						className="ml-6 border-gray-300 border-l-2 py-1 pr-2 pl-2 text-gray-600 text-xs italic"
 						style={{ marginLeft: `${indent + 24}px` }}
 					>
 						{notes[item.id]}
@@ -381,9 +381,9 @@ export default function RepositoryStructure() {
 
 	return (
 		<div className="">
-			<div className="bg-white border rounded shadow-sm">
-				<header className="px-4 py-2 border-b bg-gray-50 flex items-center justify-between">
-					<div className="text-sm font-medium">EXPLORER</div>
+			<div className="rounded border bg-white shadow-sm">
+				<header className="flex items-center justify-between border-b bg-gray-50 px-4 py-2">
+					<div className="font-medium text-sm">EXPLORER</div>
 					<div className="flex items-center space-x-4">
 						<div className="flex items-center space-x-2">
 							<span className="text-xs">Show Files:</span>
@@ -391,7 +391,7 @@ export default function RepositoryStructure() {
 							<button
 								type="button"
 								onClick={() => expandCollapseAll(true)}
-								className="p-1 rounded hover:bg-gray-200"
+								className="rounded p-1 hover:bg-gray-200"
 								title="Expand all"
 							>
 								<PlusSquareIcon className="h-5 w-5" />
@@ -399,13 +399,13 @@ export default function RepositoryStructure() {
 							<button
 								type="button"
 								onClick={() => expandCollapseAll(false)}
-								className="p-1 rounded hover:bg-gray-200"
+								className="rounded p-1 hover:bg-gray-200"
 								title="Collapse all"
 							>
 								<MinusSquareIcon className="h-5 w-5" />
 							</button>
 						</div>
-						<div className="text-xs text-gray-500">
+						<div className="text-gray-500 text-xs">
 							Total: {formatCharCount(fileStructure.charCount)}
 						</div>
 					</div>

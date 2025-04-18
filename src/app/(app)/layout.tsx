@@ -1,62 +1,62 @@
-"use client";
+'use client';
 
 import {
 	PiChartLine,
+	PiCode,
 	PiFileDoc,
 	PiFolder,
 	PiLayout,
 	PiListChecks,
 	PiRepeatOnce,
-	PiCode,
-} from "react-icons/pi";
-
-import useConfig from "@/hooks/useConfig";
-import { Button } from "@/components/ui/button";
+} from 'react-icons/pi';
+import { Link, Outlet, redirect, useLocation } from 'react-router';
+import { Button } from '@/components/ui/button';
+import useConfig from '@/hooks/useConfig';
 
 const NAV_ITEMS = [
 	{
-		label: "Dashboard",
-		href: "dashboard",
+		label: 'Dashboard',
+		href: 'dashboard',
 		icon: PiLayout,
 	},
 	{
-		label: "PRD",
-		href: "prd",
+		label: 'PRD',
+		href: 'prd',
 		icon: PiFileDoc,
 	},
 	{
-		label: "Tasks",
-		href: "tasks",
+		label: 'Tasks',
+		href: 'tasks',
 		icon: PiListChecks,
 	},
 	{
-		label: "Cycles",
-		href: "cycles",
+		label: 'Cycles',
+		href: 'cycles',
 		icon: PiRepeatOnce,
 	},
 	{
-		label: "Repository",
-		href: "repository",
+		label: 'Repository',
+		href: 'repository',
 		icon: PiFolder,
 	},
 	{
-		label: "Stats",
-		href: "stats",
+		label: 'Stats',
+		href: 'stats',
 		icon: PiChartLine,
 	},
 ];
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default function AppLayout() {
 	const config = useConfig();
-	if (!config) redirect("/onboarding");
+	if (!config) redirect('/onboarding');
 
-	const url = usePathname();
-	const segment = url.split("/")[1];
+	const location = useLocation();
+	const segment = location.pathname.split('/')[1];
 
 	return (
-		<div className="grid grid-cols-[16rem_auto] h-screen">
-			<aside className="border-r bg-card py-2 px-4">
-				<div className="flex items-center mb-6 gap-2 py-1.5 px-4 font-mono text-foreground font-semibold bg-zinc-200 rounded-lg">
+		<div className="grid h-screen grid-cols-[16rem_auto]">
+			<aside className="border-r bg-card px-4 py-2">
+				<div className="mb-6 flex items-center gap-2 rounded-lg bg-zinc-200 px-4 py-1.5 font-mono font-semibold text-foreground">
 					<PiCode className="size-5" />
 					{config.workspace.name}
 				</div>
@@ -66,11 +66,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 						return (
 							<Button
 								key={item.href}
-								variant={segment === item.href ? "default" : "ghost"}
-								className="w-full justify-start !px-4 !py-5"
+								variant={segment === item.href ? 'default' : 'ghost'}
+								className="!px-4 !py-5 w-full justify-start"
 								asChild
 							>
-								<Link href={item.href}>
+								<Link to={item.href}>
 									<item.icon className="size-5" />
 									{item.label}
 								</Link>
@@ -79,14 +79,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 					})}
 				</nav>
 			</aside>
-			<main className="overflow-y-auto">{children}</main>
+			<main className="overflow-y-auto">
+				<Outlet />
+			</main>
 		</div>
 	);
 }
-
-// Store notes, knowledge
-// Planner, find bugs
-
-// Code Mode
-// Debug Mode
-// Architect Mode

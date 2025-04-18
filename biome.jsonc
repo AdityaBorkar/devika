@@ -1,0 +1,134 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.0.0-beta.1/schema.json",
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"!**/dist/*",
+			"!**/coverage/*",
+			"!**/CHANGELOG.md",
+			"!**/node_modules/*"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentWidth": 2,
+		"indentStyle": "tab"
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							[
+								":URL:",
+								":NODE:",
+								":BUN:",
+								":PACKAGE:",
+								":PACKAGE_WITH_PROTOCOL:"
+							],
+							[":ALIAS:", ":PATH:"]
+						]
+					}
+				}
+			}
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"style": {
+				"useLiteralEnumMembers": "error",
+				"noCommaOperator": "error",
+				"useNodejsImportProtocol": "error",
+				"useAsConstAssertion": "error",
+				"useNumericLiterals": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useConst": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"useExponentiationOperator": "error",
+				"useTemplate": "error",
+				"noParameterAssign": "error",
+				"noNonNullAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"noArguments": "error",
+				"useImportType": "error",
+				"useExportType": "error",
+				"noUselessElse": "error",
+				"useShorthandFunctionType": "error"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"options": {
+						"attributes": ["classList"],
+						"functions": ["clsx", "cva", "tw", "tw.*"]
+					},
+					"fix": "safe",
+					"level": "error"
+				}
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"semicolons": "always",
+			"quoteStyle": "single"
+		}
+	},
+	"json": {
+		"formatter": {
+			"trailingCommas": "none"
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					}
+				}
+			}
+		}
+	]
+}
+// - Biome.json
+//   - core web vitals
+//   - configure with editorconfig
+//   - TailwindCSS Auto Class Sorting
+//   - Integrate with Astro CI/CD on Vercel / SST
+// module.exports = {
+//   semi: false,
+//   singleQuote: true,
+//   trailingComma: 'all',
+//   importOrder: [
+//     'server-only',
+//     '<THIRD_PARTY_MODULES>',
+//     '^@/(.*)$',
+//     '^[./]',
+//     '^@/schemas(.*)$',
+//   ],
+//   importOrderSeparation: true,
+//   importOrderSortSpecifiers: true,
+//   tailwindFunctions: ['clsx', 'tw', 'cva'],
+//   plugins: [
+//     require.resolve('@trivago/prettier-plugin-sort-imports'),
+//     require.resolve('prettier-plugin-astro'),
+//     require.resolve('prettier-plugin-tailwindcss'),
+//     // require.resolve('prettier-plugin-organize-imports'),
+//   ],
+//   overrides: [
+//     {
+//       files: '*.astro',
+//       options: { parser: 'astro' },
+//     },
+//   ],
+// }

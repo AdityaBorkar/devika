@@ -1,61 +1,60 @@
-import { useState, useMemo } from "react";
 import {
-	MoreHorizontal,
-	ExternalLink,
-	Search,
-	ChevronDown,
-	ChevronRight,
-} from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
-import {
-	ColumnDef,
-	ColumnFiltersState,
-	SortingState,
-	VisibilityState,
+	type ColumnDef,
+	type ColumnFiltersState,
+	flexRender,
 	getCoreRowModel,
-	getFilteredRowModel,
-	getSortedRowModel,
+	getExpandedRowModel,
 	getFacetedRowModel,
 	getFacetedUniqueValues,
-	getExpandedRowModel,
+	getFilteredRowModel,
 	getGroupedRowModel,
+	getSortedRowModel,
+	type SortingState,
 	useReactTable,
-	flexRender,
-} from "@tanstack/react-table";
-
-import { Badge } from "@/components/ui/badge";
+	type VisibilityState,
+} from '@tanstack/react-table';
+import { formatDistanceToNow } from 'date-fns';
+import {
+	ChevronDown,
+	ChevronRight,
+	ExternalLink,
+	MoreHorizontal,
+	Search,
+} from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { Package, PackageCategory } from "@/types/tech-stack";
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/select';
+import type { Package, PackageCategory } from '@/types/tech-stack';
 
 // Badge color mapping
-const getBadgeStyles = (color: Label["color"]) => {
-	const colorMap: Record<Label["color"], string> = {
-		red: "bg-red-100 text-red-800 border-red-200",
-		blue: "bg-blue-100 text-blue-800 border-blue-200",
-		green: "bg-green-100 text-green-800 border-green-200",
-		yellow: "bg-yellow-100 text-yellow-800 border-yellow-200",
-		purple: "bg-purple-100 text-purple-800 border-purple-200",
-		pink: "bg-pink-100 text-pink-800 border-pink-200",
-		indigo: "bg-indigo-100 text-indigo-800 border-indigo-200",
-		cyan: "bg-cyan-100 text-cyan-800 border-cyan-200",
-		amber: "bg-amber-100 text-amber-800 border-amber-200",
-		orange: "bg-orange-100 text-orange-800 border-orange-200",
-		violet: "bg-violet-100 text-violet-800 border-violet-200",
-		emerald: "bg-emerald-100 text-emerald-800 border-emerald-200",
+const getBadgeStyles = (color: Label['color']) => {
+	const colorMap: Record<Label['color'], string> = {
+		red: 'bg-red-100 text-red-800 border-red-200',
+		blue: 'bg-blue-100 text-blue-800 border-blue-200',
+		green: 'bg-green-100 text-green-800 border-green-200',
+		yellow: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+		purple: 'bg-purple-100 text-purple-800 border-purple-200',
+		pink: 'bg-pink-100 text-pink-800 border-pink-200',
+		indigo: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+		cyan: 'bg-cyan-100 text-cyan-800 border-cyan-200',
+		amber: 'bg-amber-100 text-amber-800 border-amber-200',
+		orange: 'bg-orange-100 text-orange-800 border-orange-200',
+		violet: 'bg-violet-100 text-violet-800 border-violet-200',
+		emerald: 'bg-emerald-100 text-emerald-800 border-emerald-200',
 	};
 
 	return colorMap[color];
@@ -63,17 +62,17 @@ const getBadgeStyles = (color: Label["color"]) => {
 
 const columns: ColumnDef<Package>[] = [
 	{
-		accessorKey: "name",
-		header: "Name",
+		accessorKey: 'name',
+		header: 'Name',
 		cell: ({ row }) => <div className="font-medium">{row.original.name}</div>,
 	},
 	{
-		accessorKey: "version",
-		header: "Version",
+		accessorKey: 'version',
+		header: 'Version',
 	},
 	{
-		accessorKey: "labels",
-		header: "Labels",
+		accessorKey: 'labels',
+		header: 'Labels',
 		cell: ({ row }) => (
 			<div className="flex flex-wrap gap-1">
 				{row.original.labels.map((label) => (
@@ -90,8 +89,8 @@ const columns: ColumnDef<Package>[] = [
 		enableSorting: false,
 	},
 	{
-		accessorKey: "docLink",
-		header: "Documentation",
+		accessorKey: 'docLink',
+		header: 'Documentation',
 		cell: ({ row }) => (
 			<>
 				{row.original.docLink && (
@@ -109,18 +108,18 @@ const columns: ColumnDef<Package>[] = [
 		enableSorting: false,
 	},
 	{
-		accessorKey: "lastUpdated",
-		header: "Last Updated",
+		accessorKey: 'lastUpdated',
+		header: 'Last Updated',
 		cell: ({ row }) =>
 			formatDistanceToNow(row.original.lastUpdated, { addSuffix: true }),
-		sortingFn: "datetime",
+		sortingFn: 'datetime',
 	},
 	{
-		accessorKey: "category",
-		header: "Category",
+		accessorKey: 'category',
+		header: 'Category',
 	},
 	{
-		id: "actions",
+		id: 'actions',
 		cell: () => (
 			<div className="text-right">
 				<DropdownMenu>
@@ -144,10 +143,10 @@ const columns: ColumnDef<Package>[] = [
 
 export default function PackageList({ project }: { project: any }) {
 	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-	const [globalFilter, setGlobalFilter] = useState("");
+	const [globalFilter, setGlobalFilter] = useState('');
 	const [sorting, setSorting] = useState<SortingState>([]);
 	const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-	const [grouping, setGrouping] = useState<string[]>(["category"]);
+	const [grouping, setGrouping] = useState<string[]>(['category']);
 
 	// Setup table data
 	const table = useReactTable({
@@ -187,7 +186,7 @@ export default function PackageList({ project }: { project: any }) {
 		<div>
 			<div>
 				{/* Table Controls */}
-				<div className="flex flex-col md:flex-row gap-4 py-4">
+				<div className="flex flex-col gap-4 py-4 md:flex-row">
 					<div className="flex flex-1 items-center space-x-2">
 						<Search className="h-4 w-4 text-muted-foreground" />
 						<Input
@@ -200,9 +199,9 @@ export default function PackageList({ project }: { project: any }) {
 					<div className="flex flex-wrap gap-2">
 						<div>
 							<Select
-								value={grouping[0] || "none"}
+								value={grouping[0] || 'none'}
 								onValueChange={(value) => {
-									if (value === "none") {
+									if (value === 'none') {
 										setGrouping([]);
 									} else {
 										setGrouping([value]);
@@ -221,19 +220,19 @@ export default function PackageList({ project }: { project: any }) {
 						<div>
 							<Select
 								value={
-									(columnFilters.find((f) => f.id === "category")
-										?.value as string) || "all"
+									(columnFilters.find((f) => f.id === 'category')
+										?.value as string) || 'all'
 								}
 								onValueChange={(value) => {
-									if (value === "all") {
+									if (value === 'all') {
 										setColumnFilters(
-											columnFilters.filter((f) => f.id !== "category"),
+											columnFilters.filter((f) => f.id !== 'category'),
 										);
 									} else {
 										setColumnFilters([
-											...columnFilters.filter((f) => f.id !== "category"),
+											...columnFilters.filter((f) => f.id !== 'category'),
 											{
-												id: "category",
+												id: 'category',
 												value: value,
 											},
 										]);
@@ -265,26 +264,26 @@ export default function PackageList({ project }: { project: any }) {
 									{headerGroup.headers.map((header) => (
 										<th
 											key={header.id}
-											className="px-4 py-3 text-left text-sm font-medium text-muted-foreground"
+											className="px-4 py-3 text-left font-medium text-muted-foreground text-sm"
 											style={{ width: header.getSize() }}
 										>
 											{header.isPlaceholder ? null : (
 												<div
 													className={
 														header.column.getCanSort()
-															? "flex items-center space-x-1 cursor-pointer select-none"
-															: ""
+															? 'flex cursor-pointer select-none items-center space-x-1'
+															: ''
 													}
 													onClick={header.column.getToggleSortingHandler()}
 													onKeyDown={(e) => {
-														if (e.key === "Enter" || e.key === " ") {
+														if (e.key === 'Enter' || e.key === ' ') {
 															e.preventDefault();
 															header.column.toggleSorting();
 														}
 													}}
 													tabIndex={header.column.getCanSort() ? 0 : undefined}
 													role={
-														header.column.getCanSort() ? "button" : undefined
+														header.column.getCanSort() ? 'button' : undefined
 													}
 												>
 													{flexRender(
@@ -311,9 +310,9 @@ export default function PackageList({ project }: { project: any }) {
 										<tr
 											key={row.id}
 											className={`border-b ${
-												row.getIsGrouped() ? "bg-muted/50 font-medium" : ""
+												row.getIsGrouped() ? 'bg-muted/50 font-medium' : ''
 											}`}
-											data-state={row.getIsSelected() ? "selected" : undefined}
+											data-state={row.getIsSelected() ? 'selected' : undefined}
 										>
 											{row.getVisibleCells().map((cell) => {
 												return (
@@ -343,7 +342,7 @@ export default function PackageList({ project }: { project: any }) {
 																{flexRender(
 																	cell.column.columnDef.cell,
 																	cell.getContext(),
-																)}{" "}
+																)}{' '}
 																({row.subRows.length})
 															</div>
 														) : cell.getIsAggregated() ? (

@@ -1,17 +1,17 @@
 import {
 	type ColumnFiltersState,
-	type SortingState,
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getSortedRowModel,
+	type SortingState,
 	useReactTable,
-} from "@tanstack/react-table";
-import { ArrowDown, ArrowUp } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useMemo } from "react";
-import { Button } from "../ui/button";
+} from '@tanstack/react-table';
+import { ArrowDown, ArrowUp } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useMemo } from 'react';
+import { Button } from '../ui/button';
 import {
 	Table,
 	TableBody,
@@ -19,10 +19,10 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "../ui/table";
-import { TaskPriorityBadge } from "./TaskPriorityBadge";
-import { TaskStatusBadge } from "./TaskStatusBadge";
-import type { Task } from "./types";
+} from '../ui/table';
+import { TaskPriorityBadge } from './TaskPriorityBadge';
+import { TaskStatusBadge } from './TaskStatusBadge';
+import type { Task } from './types';
 
 interface TasksTableProps {
 	tasks: Task[];
@@ -63,34 +63,34 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 	// Define columns
 	const columns = useMemo(
 		() => [
-			columnHelper.accessor("id", {
-				header: "ID",
+			columnHelper.accessor('id', {
+				header: 'ID',
 				cell: (info) => <span className="font-medium">{info.getValue()}</span>,
 				size: 80,
 			}),
-			columnHelper.accessor("title", {
-				header: "Title",
+			columnHelper.accessor('title', {
+				header: 'Title',
 				cell: (info) => <span>{info.getValue()}</span>,
 			}),
-			columnHelper.accessor("status", {
-				header: "Status",
+			columnHelper.accessor('status', {
+				header: 'Status',
 				cell: (info) => <TaskStatusBadge status={info.getValue()} />,
 				size: 120,
 			}),
-			columnHelper.accessor("priority", {
-				header: "Priority",
+			columnHelper.accessor('priority', {
+				header: 'Priority',
 				cell: (info) => <TaskPriorityBadge priority={info.getValue()} />,
 				size: 100,
 			}),
-			columnHelper.accessor("assignee", {
-				header: "Assignee",
+			columnHelper.accessor('assignee', {
+				header: 'Assignee',
 				cell: (info) => (
 					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
 				size: 150,
 			}),
-			columnHelper.accessor("due", {
-				header: "Due Date",
+			columnHelper.accessor('due', {
+				header: 'Due Date',
 				cell: (info) => (
 					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
@@ -125,9 +125,9 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 	// Show empty state if no tasks after filtering
 	if (filteredTasks.length === 0) {
 		return (
-			<div className="flex-grow flex flex-col items-center justify-center py-16">
-				<p className="text-muted-foreground mb-2">No tasks found</p>
-				<p className="text-sm text-muted-foreground/80">
+			<div className="flex flex-grow flex-col items-center justify-center py-16">
+				<p className="mb-2 text-muted-foreground">No tasks found</p>
+				<p className="text-muted-foreground/80 text-sm">
 					Try adjusting your filters or search criteria
 				</p>
 			</div>
@@ -144,7 +144,7 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 								<TableHead key={header.id} style={{ width: header.getSize() }}>
 									<Button
 										variant="ghost"
-										className="h-8 px-0 text-muted-foreground font-medium whitespace-nowrap"
+										className="h-8 whitespace-nowrap px-0 font-medium text-muted-foreground"
 										onClick={header.column.getToggleSortingHandler()}
 									>
 										{flexRender(
@@ -153,7 +153,7 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 										)}
 										{header.column.getIsSorted() && (
 											<span className="ml-1">
-												{header.column.getIsSorted() === "asc" ? (
+												{header.column.getIsSorted() === 'asc' ? (
 													<ArrowUp className="h-4 w-4" />
 												) : (
 													<ArrowDown className="h-4 w-4" />
@@ -173,12 +173,12 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 							className="cursor-pointer hover:bg-muted/50"
 							onClick={() => handleRowClick(row.original.id)}
 							onKeyDown={(e) => {
-								if (e.key === "Enter" || e.key === " ") {
+								if (e.key === 'Enter' || e.key === ' ') {
 									handleRowClick(row.original.id);
 								}
 							}}
 							tabIndex={0}
-							data-state={row.getIsSelected() ? "selected" : undefined}
+							data-state={row.getIsSelected() ? 'selected' : undefined}
 							aria-label={`View task ${row.original.id}`}
 						>
 							{row.getVisibleCells().map((cell) => (

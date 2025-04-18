@@ -1,26 +1,24 @@
-"use client";
+'use client';
 
-import type { ColumnFiltersState, SortingState } from "@tanstack/react-table";
-import { useState } from "react";
-
-import { KanbanBoard } from "@/components/tasks/KanbanBoard";
-import { type TabType, TasksHeader } from "@/components/tasks/TasksHeader";
-import { TasksTable } from "@/components/tasks/TasksTable";
-import { ToolbarControls } from "@/components/tasks/ToolbarControls";
-import type { ViewMode } from "@/components/tasks/ViewToggle";
-
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
+import { useState } from 'react';
+import { KanbanBoard } from '@/components/tasks/KanbanBoard';
 // Data
-import { MOCK_TASKS } from "@/components/tasks/mock-data";
+import { MOCK_TASKS } from '@/components/tasks/mock-data';
+import { type TabType, TasksHeader } from '@/components/tasks/TasksHeader';
+import { TasksTable } from '@/components/tasks/TasksTable';
+import { ToolbarControls } from '@/components/tasks/ToolbarControls';
+import type { ViewMode } from '@/components/tasks/ViewToggle';
 
 export function TasksClient() {
 	// Tab state
-	const [activeTab, setActiveTab] = useState<TabType>("all");
+	const [activeTab, setActiveTab] = useState<TabType>('all');
 
 	// View mode state
-	const [viewMode, setViewMode] = useState<ViewMode>("board");
+	const [viewMode, setViewMode] = useState<ViewMode>('board');
 
 	// Search state
-	const [searchQuery, setSearchQuery] = useState("");
+	const [searchQuery, setSearchQuery] = useState('');
 
 	// Table state
 	const [sorting, setSorting] = useState<SortingState>([]);
@@ -31,17 +29,17 @@ export function TasksClient() {
 
 	// Create new task handler (placeholder)
 	const handleCreateTask = () => {
-		alert("Create new task feature not implemented yet");
+		alert('Create new task feature not implemented yet');
 	};
 
 	// Filter tasks based on active tab and search query
 	const filteredTasks = MOCK_TASKS.filter((task) => {
 		// Tab filtering
-		if (activeTab === "active") {
-			return task.status === "Todo" || task.status === "In Progress";
+		if (activeTab === 'active') {
+			return task.status === 'Todo' || task.status === 'In Progress';
 		}
-		if (activeTab === "backlog") {
-			return task.status === "Todo";
+		if (activeTab === 'backlog') {
+			return task.status === 'Todo';
 		}
 		return true; // 'all' tab
 	}).filter((task) => {
@@ -56,7 +54,7 @@ export function TasksClient() {
 	});
 
 	return (
-		<div className="flex flex-col h-full">
+		<div className="flex h-full flex-col">
 			{/* Header with tabs */}
 			<TasksHeader
 				activeTab={activeTab}
@@ -75,7 +73,7 @@ export function TasksClient() {
 
 			{/* Main content area */}
 			<div className="flex-grow overflow-hidden">
-				{viewMode === "list" ? (
+				{viewMode === 'list' ? (
 					<TasksTable
 						tasks={filteredTasks}
 						sorting={sorting}

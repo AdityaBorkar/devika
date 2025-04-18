@@ -1,5 +1,5 @@
-import type React from "react";
-import { getStatusColor } from "./utils";
+import type React from 'react';
+import { getStatusColor } from './utils';
 
 interface TaskStatusBadgeProps {
 	status: string;
@@ -8,7 +8,7 @@ interface TaskStatusBadgeProps {
 export const TaskStatusBadge: React.FC<TaskStatusBadgeProps> = ({ status }) => {
 	return (
 		<span
-			className={`px-2 py-1 text-xs rounded-full ${getStatusColor(status)}`}
+			className={`rounded-full px-2 py-1 text-xs ${getStatusColor(status)}`}
 		>
 			{status}
 		</span>

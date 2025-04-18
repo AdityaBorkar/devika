@@ -1,29 +1,29 @@
-"use client";
+'use client';
 
-import { mockAppConfigs, mockPackages } from "@/lib/mock-data";
+import { useState } from 'react';
+import { mockAppConfigs, mockPackages } from '@/lib/mock-data';
 import type {
 	AppConfig,
 	Package,
 	PackageCategory,
 	ViewMode,
-} from "@/types/tech-stack";
-import { useState } from "react";
-import { AppConfigEdit } from "./app-config-edit";
-import { DocUrlDialog } from "./doc-url-dialog";
-import { PackageCard } from "./package-card";
-import { PackageTableView } from "./package-table-view";
-import { ViewToggle } from "./view-toggle";
+} from '@/types/tech-stack';
+import { AppConfigEdit } from './app-config-edit';
+import { DocUrlDialog } from './doc-url-dialog';
+import { PackageCard } from './package-card';
+import { PackageTableView } from './package-table-view';
+import { ViewToggle } from './view-toggle';
 
 export function TechStackPicker() {
-	const [selectedConfigId, setSelectedConfigId] = useState<string>("common");
-	const [viewMode, setViewMode] = useState<ViewMode>("card");
+	const [selectedConfigId, setSelectedConfigId] = useState<string>('common');
+	const [viewMode, setViewMode] = useState<ViewMode>('card');
 	const [appConfigs, setAppConfigs] = useState<AppConfig[]>(mockAppConfigs);
 	const [packages, setPackages] = useState<Package[]>(mockPackages);
 
 	// Dialog state for editing doc URL
 	const [isDocDialogOpen, setIsDocDialogOpen] = useState(false);
-	const [editingPackageId, setEditingPackageId] = useState("");
-	const [editingDocUrl, setEditingDocUrl] = useState("");
+	const [editingPackageId, setEditingPackageId] = useState('');
+	const [editingDocUrl, setEditingDocUrl] = useState('');
 
 	// Get the current config
 	const currentConfig =
@@ -93,16 +93,16 @@ export function TechStackPicker() {
 
 	// Category labels for display
 	const categoryLabels: Record<PackageCategory, string> = {
-		backend: "Backend",
-		frontend: "Frontend",
-		database: "Database",
-		logging: "Logging",
-		testing: "Testing",
-		hosting: "Hosting",
-		cicd: "CI/CD and Deployment",
-		monitoring: "Monitoring",
-		documentation: "Documentation",
-		other: "Others",
+		backend: 'Backend',
+		frontend: 'Frontend',
+		database: 'Database',
+		logging: 'Logging',
+		testing: 'Testing',
+		hosting: 'Hosting',
+		cicd: 'CI/CD and Deployment',
+		monitoring: 'Monitoring',
+		documentation: 'Documentation',
+		other: 'Others',
 	};
 
 	return (
@@ -110,22 +110,22 @@ export function TechStackPicker() {
 			{/* App Configurations */}
 			<div className="space-y-4">
 				<div className="flex items-center justify-between">
-					<h2 className="text-xl font-semibold">App Configuration</h2>
+					<h2 className="font-semibold text-xl">App Configuration</h2>
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 					{appConfigs.map((config) => (
 						<button
 							type="button"
 							key={config.id}
-							className={`p-4 border rounded-lg ${
+							className={`rounded-lg border p-4 ${
 								config.isLocal
-									? "border-indigo-200 dark:border-indigo-800"
-									: "border-gray-200 dark:border-gray-800"
-							} transition-all w-full text-left hover:shadow-sm ${
+									? 'border-indigo-200 dark:border-indigo-800'
+									: 'border-gray-200 dark:border-gray-800'
+							} w-full text-left transition-all hover:shadow-sm ${
 								selectedConfigId === config.id
-									? "bg-primary/5 border-primary"
-									: "hover:border-primary/30 bg-white dark:bg-gray-900"
+									? 'border-primary bg-primary/5'
+									: 'bg-white hover:border-primary/30 dark:bg-gray-900'
 							}`}
 							onClick={() => handleConfigChange(config.id)}
 							aria-pressed={selectedConfigId === config.id}
@@ -138,10 +138,10 @@ export function TechStackPicker() {
 
 			{/* Package display section */}
 			<div className="space-y-4">
-				<div className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
-					<h2 className="text-xl font-semibold">
-						{currentConfig?.name || "Tech Stack"} Packages
-						<span className="ml-2 text-sm text-muted-foreground">
+				<div className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+					<h2 className="font-semibold text-xl">
+						{currentConfig?.name || 'Tech Stack'} Packages
+						<span className="ml-2 text-muted-foreground text-sm">
 							({configPackages.length} packages)
 						</span>
 					</h2>
@@ -150,7 +150,7 @@ export function TechStackPicker() {
 
 				{/* No packages message */}
 				{configPackages.length === 0 && (
-					<div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 p-8 text-center">
+					<div className="rounded-lg border border-gray-200 bg-white p-8 text-center dark:border-gray-800 dark:bg-gray-900">
 						<p className="text-muted-foreground">
 							No packages found in this configuration.
 						</p>
@@ -164,7 +164,7 @@ export function TechStackPicker() {
 							const categoryPackages = packagesByCategory[category];
 							if (categoryPackages.length === 0) return null;
 
-							if (viewMode === "table") {
+							if (viewMode === 'table') {
 								return (
 									<PackageTableView
 										key={category}
@@ -176,14 +176,14 @@ export function TechStackPicker() {
 							}
 
 							return (
-								<div key={category} className="space-y-4 mt-6">
-									<h3 className="text-lg font-medium border-b pb-2 border-gray-200 dark:border-gray-800">
+								<div key={category} className="mt-6 space-y-4">
+									<h3 className="border-gray-200 border-b pb-2 font-medium text-lg dark:border-gray-800">
 										{categoryLabels[category]}
-										<span className="ml-2 text-sm text-muted-foreground">
+										<span className="ml-2 text-muted-foreground text-sm">
 											({categoryPackages.length})
 										</span>
 									</h3>
-									<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+									<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 										{categoryPackages.map((pkg) => (
 											<PackageCard
 												key={pkg.id}

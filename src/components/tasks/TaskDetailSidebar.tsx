@@ -1,5 +1,5 @@
-import type React from "react";
-import type { TaskDetail } from "./types";
+import type React from 'react';
+import type { TaskDetail } from './types';
 
 interface TaskDetailSidebarProps {
 	task: TaskDetail;
@@ -14,19 +14,19 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 	onTaskUpdate = () => {},
 }) => {
 	return (
-		<div className="w-64 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
-			<h2 className="text-sm font-medium text-gray-500 mb-3">Properties</h2>
+		<div className="w-64 overflow-y-auto bg-gray-50 p-4 dark:bg-gray-900">
+			<h2 className="mb-3 font-medium text-gray-500 text-sm">Properties</h2>
 
 			<div className="space-y-4">
 				<div>
-					<label htmlFor="status" className="block text-xs text-gray-500 mb-1">
+					<label htmlFor="status" className="mb-1 block text-gray-500 text-xs">
 						Status
 					</label>
 					<select
 						id="status"
-						className="w-full p-1.5 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded"
+						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
 						value={task.status}
-						onChange={(e) => onTaskUpdate("status", e.target.value)}
+						onChange={(e) => onTaskUpdate('status', e.target.value)}
 					>
 						<option value="Todo">Todo</option>
 						<option value="In Progress">In Progress</option>
@@ -37,15 +37,15 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 				<div>
 					<label
 						htmlFor="assignee"
-						className="block text-xs text-gray-500 mb-1"
+						className="mb-1 block text-gray-500 text-xs"
 					>
 						Assignee
 					</label>
 					<select
 						id="assignee"
-						className="w-full p-1.5 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded"
+						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
 						value={task.assignee}
-						onChange={(e) => onTaskUpdate("assignee", e.target.value)}
+						onChange={(e) => onTaskUpdate('assignee', e.target.value)}
 					>
 						<option>John Doe</option>
 						<option>Jane Smith</option>
@@ -58,15 +58,15 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 				<div>
 					<label
 						htmlFor="priority"
-						className="block text-xs text-gray-500 mb-1"
+						className="mb-1 block text-gray-500 text-xs"
 					>
 						Priority
 					</label>
 					<select
 						id="priority"
-						className="w-full p-1.5 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded"
+						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
 						value={task.priority}
-						onChange={(e) => onTaskUpdate("priority", e.target.value)}
+						onChange={(e) => onTaskUpdate('priority', e.target.value)}
 					>
 						<option value="High">High</option>
 						<option value="Medium">Medium</option>
@@ -75,48 +75,48 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 				</div>
 
 				<div>
-					<label htmlFor="dueDate" className="block text-xs text-gray-500 mb-1">
+					<label htmlFor="dueDate" className="mb-1 block text-gray-500 text-xs">
 						Due Date
 					</label>
 					<input
 						id="dueDate"
 						type="date"
-						className="w-full p-1.5 text-sm bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded"
+						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
 						value={task.due}
-						onChange={(e) => onTaskUpdate("due", e.target.value)}
+						onChange={(e) => onTaskUpdate('due', e.target.value)}
 					/>
 				</div>
 
 				<div>
-					<label htmlFor="labels" className="block text-xs text-gray-500 mb-1">
+					<label htmlFor="labels" className="mb-1 block text-gray-500 text-xs">
 						Labels
 					</label>
-					<div id="labels" className="flex flex-wrap gap-1 mt-1">
-						<div className="px-2 py-1 text-xs bg-indigo-100 text-indigo-800 rounded-full">
+					<div id="labels" className="mt-1 flex flex-wrap gap-1">
+						<div className="rounded-full bg-indigo-100 px-2 py-1 text-indigo-800 text-xs">
 							Frontend
 						</div>
-						<div className="px-2 py-1 text-xs bg-purple-100 text-purple-800 rounded-full">
+						<div className="rounded-full bg-purple-100 px-2 py-1 text-purple-800 text-xs">
 							Authentication
 						</div>
-						<div className="px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded-full cursor-pointer hover:bg-gray-200">
+						<div className="cursor-pointer rounded-full bg-gray-100 px-2 py-1 text-gray-800 text-xs hover:bg-gray-200">
 							+ Add
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800">
-				<h2 className="text-sm font-medium text-gray-500 mb-3">Activity</h2>
-				<div className="text-xs text-gray-500 space-y-2">
+			<div className="mt-6 border-gray-200 border-t pt-6 dark:border-gray-800">
+				<h2 className="mb-3 font-medium text-gray-500 text-sm">Activity</h2>
+				<div className="space-y-2 text-gray-500 text-xs">
 					<div>
 						<span className="font-medium text-gray-700">John Doe</span> created
 						this task
-						<div className="text-gray-400 mt-0.5">{task.createdAt}</div>
+						<div className="mt-0.5 text-gray-400">{task.createdAt}</div>
 					</div>
 					<div>
-						<span className="font-medium text-gray-700">Jane Smith</span>{" "}
+						<span className="font-medium text-gray-700">Jane Smith</span>{' '}
 						changed status to &quot;{task.status}&quot;
-						<div className="text-gray-400 mt-0.5">Yesterday</div>
+						<div className="mt-0.5 text-gray-400">Yesterday</div>
 					</div>
 				</div>
 			</div>

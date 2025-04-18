@@ -1,3 +1,5 @@
-export default function Layout({ children }: { children: React.ReactNode }) {
-	return <>{children}</>;
+import { Outlet } from 'react-router';
+
+export default function OnboardingLayout() {
+	return <Outlet />;
 }

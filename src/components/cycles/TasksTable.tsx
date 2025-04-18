@@ -1,5 +1,6 @@
-"use client";
+'use client';
 
+import { useState } from 'react';
 import {
 	Table,
 	TableBody,
@@ -7,39 +8,38 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@/components/ui/table";
-import type { CycleTask } from "./types";
-import { useState } from "react";
+} from '@/components/ui/table';
+import type { CycleTask } from './types';
 
 interface TasksTableProps {
 	tasks: CycleTask[];
 }
 
 export function TasksTable({ tasks }: TasksTableProps) {
-	const [sortColumn, setSortColumn] = useState<keyof CycleTask>("title");
-	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+	const [sortColumn, setSortColumn] = useState<keyof CycleTask>('title');
+	const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
 	const handleSort = (column: keyof CycleTask) => {
 		if (sortColumn === column) {
-			setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+			setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
 		} else {
 			setSortColumn(column);
-			setSortDirection("asc");
+			setSortDirection('asc');
 		}
 	};
 
 	const getStatusColorClass = (status: string) => {
 		switch (status) {
-			case "Todo":
-				return "bg-gray-100 text-gray-800";
-			case "In Progress":
-				return "bg-blue-100 text-blue-800";
-			case "Done":
-				return "bg-green-100 text-green-800";
-			case "Blocked":
-				return "bg-red-100 text-red-800";
+			case 'Todo':
+				return 'bg-gray-100 text-gray-800';
+			case 'In Progress':
+				return 'bg-blue-100 text-blue-800';
+			case 'Done':
+				return 'bg-green-100 text-green-800';
+			case 'Blocked':
+				return 'bg-red-100 text-red-800';
 			default:
-				return "bg-gray-100 text-gray-800";
+				return 'bg-gray-100 text-gray-800';
 		}
 	};
 
@@ -49,15 +49,15 @@ export function TasksTable({ tasks }: TasksTableProps) {
 
 		if (aValue === undefined || bValue === undefined) return 0;
 
-		if (typeof aValue === "string" && typeof bValue === "string") {
-			return sortDirection === "asc"
+		if (typeof aValue === 'string' && typeof bValue === 'string') {
+			return sortDirection === 'asc'
 				? aValue.localeCompare(bValue)
 				: bValue.localeCompare(aValue);
 		}
 
 		// For number comparisons
-		if (typeof aValue === "number" && typeof bValue === "number") {
-			return sortDirection === "asc" ? aValue - bValue : bValue - aValue;
+		if (typeof aValue === 'number' && typeof bValue === 'number') {
+			return sortDirection === 'asc' ? aValue - bValue : bValue - aValue;
 		}
 
 		return 0;
@@ -66,7 +66,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 	const renderSortIcon = (column: keyof CycleTask) => {
 		if (sortColumn !== column) return null;
 
-		return sortDirection === "asc" ? (
+		return sortDirection === 'asc' ? (
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				width="14"
@@ -79,7 +79,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 				strokeLinejoin="round"
 				className="ml-1"
 			>
-				<polyline points="18 15 12 9 6 15"></polyline>
+				<polyline points="18 15 12 9 6 15" />
 			</svg>
 		) : (
 			<svg
@@ -94,7 +94,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 				strokeLinejoin="round"
 				className="ml-1"
 			>
-				<polyline points="6 9 12 15 18 9"></polyline>
+				<polyline points="6 9 12 15 18 9" />
 			</svg>
 		);
 	};
@@ -105,12 +105,12 @@ export function TasksTable({ tasks }: TasksTableProps) {
 		const efficiency = (estimated / actual) * 100;
 
 		if (efficiency >= 100) {
-			return { value: `${Math.round(efficiency)}%`, class: "text-green-600" };
-		} else if (efficiency >= 80) {
-			return { value: `${Math.round(efficiency)}%`, class: "text-yellow-600" };
-		} else {
-			return { value: `${Math.round(efficiency)}%`, class: "text-red-600" };
+			return { value: `${Math.round(efficiency)}%`, class: 'text-green-600' };
 		}
+		if (efficiency >= 80) {
+			return { value: `${Math.round(efficiency)}%`, class: 'text-yellow-600' };
+		}
+		return { value: `${Math.round(efficiency)}%`, class: 'text-red-600' };
 	};
 
 	return (
@@ -120,15 +120,15 @@ export function TasksTable({ tasks }: TasksTableProps) {
 					<TableRow>
 						<TableHead
 							className="cursor-pointer"
-							onClick={() => handleSort("title")}
+							onClick={() => handleSort('title')}
 						>
-							Title {renderSortIcon("title")}
+							Title {renderSortIcon('title')}
 						</TableHead>
 						<TableHead
-							className="cursor-pointer w-[120px]"
-							onClick={() => handleSort("status")}
+							className="w-[120px] cursor-pointer"
+							onClick={() => handleSort('status')}
 						>
-							Status {renderSortIcon("status")}
+							Status {renderSortIcon('status')}
 						</TableHead>
 						<TableHead>Assignee</TableHead>
 						<TableHead className="text-right">Estimated</TableHead>
@@ -149,29 +149,29 @@ export function TasksTable({ tasks }: TasksTableProps) {
 									<TableCell className="font-medium">{task.title}</TableCell>
 									<TableCell>
 										<span
-											className={`text-xs px-2 py-1 rounded-full ${getStatusColorClass(task.status)}`}
+											className={`rounded-full px-2 py-1 text-xs ${getStatusColorClass(task.status)}`}
 										>
 											{task.status}
 										</span>
 									</TableCell>
-									<TableCell>{task.assignee || "-"}</TableCell>
+									<TableCell>{task.assignee || '-'}</TableCell>
 									<TableCell className="text-right">
-										{task.estimatedHours ? `${task.estimatedHours}h` : "-"}
+										{task.estimatedHours ? `${task.estimatedHours}h` : '-'}
 									</TableCell>
 									<TableCell className="text-right">
-										{task.actualHours ? `${task.actualHours}h` : "-"}
+										{task.actualHours ? `${task.actualHours}h` : '-'}
 									</TableCell>
 									<TableCell
-										className={`text-right ${efficiency?.class || ""}`}
+										className={`text-right ${efficiency?.class || ''}`}
 									>
-										{efficiency?.value || "-"}
+										{efficiency?.value || '-'}
 									</TableCell>
 								</TableRow>
 							);
 						})
 					) : (
 						<TableRow>
-							<TableCell colSpan={6} className="text-center py-4 text-gray-500">
+							<TableCell colSpan={6} className="py-4 text-center text-gray-500">
 								No tasks available
 							</TableCell>
 						</TableRow>

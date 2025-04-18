@@ -1,8 +1,8 @@
-import { Calendar, Check, Clock, Tag, User } from "lucide-react";
-import type React from "react";
-import { useState } from "react";
-import type { TaskDetail } from "./types";
-import { getPriorityColor, getStatusColor } from "./utils";
+import { Calendar, Check, Clock, Tag, User } from 'lucide-react';
+import type React from 'react';
+import { useState } from 'react';
+import type { TaskDetail } from './types';
+import { getPriorityColor, getStatusColor } from './utils';
 
 interface TaskDetailContentProps {
 	task: TaskDetail;
@@ -15,22 +15,22 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 	onSubtaskToggle = () => {},
 	onAddComment = () => {},
 }) => {
-	const [newComment, setNewComment] = useState("");
+	const [newComment, setNewComment] = useState('');
 
 	const handleCommentSubmit = () => {
 		if (newComment.trim()) {
 			onAddComment(newComment);
-			setNewComment("");
+			setNewComment('');
 		}
 	};
 
 	return (
-		<div className="flex-grow overflow-y-auto p-6 border-r border-gray-200 dark:border-gray-800">
+		<div className="flex-grow overflow-y-auto border-gray-200 border-r p-6 dark:border-gray-800">
 			{/* Status and metadata */}
 			<div className="mb-6 flex flex-wrap gap-4">
 				<div className="flex items-center gap-2">
 					<div
-						className={`px-3 py-1 text-sm rounded-full ${getStatusColor(task.status)}`}
+						className={`rounded-full px-3 py-1 text-sm ${getStatusColor(task.status)}`}
 					>
 						{task.status}
 					</div>
@@ -50,7 +50,7 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 				<div className="flex items-center gap-2">
 					<Tag size={14} className={getPriorityColor(task.priority)} />
 					<span
-						className={`text-sm font-medium ${getPriorityColor(task.priority)}`}
+						className={`font-medium text-sm ${getPriorityColor(task.priority)}`}
 					>
 						{task.priority}
 					</span>
@@ -59,9 +59,9 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Description */}
 			<div className="mb-8">
-				<h2 className="text-sm font-medium text-gray-500 mb-2">Description</h2>
-				<div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-md">
-					<p className="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-line">
+				<h2 className="mb-2 font-medium text-gray-500 text-sm">Description</h2>
+				<div className="rounded-md bg-gray-50 p-4 dark:bg-gray-800">
+					<p className="whitespace-pre-line text-gray-800 text-sm dark:text-gray-200">
 						{task.description}
 					</p>
 				</div>
@@ -69,14 +69,14 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Subtasks */}
 			<div className="mb-8">
-				<h2 className="text-sm font-medium text-gray-500 mb-2">Subtasks</h2>
+				<h2 className="mb-2 font-medium text-gray-500 text-sm">Subtasks</h2>
 				<div className="space-y-2">
 					{task.subtasks.map((subtask) => (
 						<div
 							key={subtask.id}
-							className="flex items-start gap-2 p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+							className="flex items-start gap-2 rounded-md p-2 hover:bg-gray-50 dark:hover:bg-gray-800"
 						>
-							<div className="flex items-center mt-0.5 relative">
+							<div className="relative mt-0.5 flex items-center">
 								<input
 									type="checkbox"
 									id={`subtask-${subtask.id}`}
@@ -84,16 +84,16 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 									onChange={() =>
 										onSubtaskToggle(subtask.id, !subtask.completed)
 									}
-									className={`w-4 h-4 rounded-sm border appearance-none ${
+									className={`h-4 w-4 appearance-none rounded-sm border ${
 										subtask.completed
-											? "bg-indigo-600 border-indigo-600"
-											: "border-gray-300 dark:border-gray-700"
+											? 'border-indigo-600 bg-indigo-600'
+											: 'border-gray-300 dark:border-gray-700'
 									}`}
 								/>
 								{subtask.completed && (
 									<Check
 										size={12}
-										className="text-white absolute pointer-events-none ml-0.5"
+										className="pointer-events-none absolute ml-0.5 text-white"
 									/>
 								)}
 							</div>
@@ -101,8 +101,8 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 								htmlFor={`subtask-${subtask.id}`}
 								className={`text-sm ${
 									subtask.completed
-										? "line-through text-gray-400"
-										: "text-gray-800 dark:text-gray-200"
+										? 'text-gray-400 line-through'
+										: 'text-gray-800 dark:text-gray-200'
 								}`}
 							>
 								{subtask.title}
@@ -110,8 +110,8 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 						</div>
 					))}
 
-					<div className="flex items-center gap-2 p-2 text-gray-400 hover:text-gray-600 cursor-pointer">
-						<div className="w-4 h-4 rounded-sm border border-dashed border-gray-300 dark:border-gray-700" />
+					<div className="flex cursor-pointer items-center gap-2 p-2 text-gray-400 hover:text-gray-600">
+						<div className="h-4 w-4 rounded-sm border border-gray-300 border-dashed dark:border-gray-700" />
 						<span className="text-sm">Add subtask...</span>
 					</div>
 				</div>
@@ -119,20 +119,20 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Comments */}
 			<div>
-				<h2 className="text-sm font-medium text-gray-500 mb-2">Comments</h2>
-				<div className="space-y-4 mb-4">
+				<h2 className="mb-2 font-medium text-gray-500 text-sm">Comments</h2>
+				<div className="mb-4 space-y-4">
 					{task.comments.map((comment) => (
 						<div
 							key={comment.id}
-							className="p-3 bg-gray-50 dark:bg-gray-800 rounded-md"
+							className="rounded-md bg-gray-50 p-3 dark:bg-gray-800"
 						>
-							<div className="flex justify-between mb-1">
-								<span className="text-sm font-medium">{comment.author}</span>
-								<span className="text-xs text-gray-500">
+							<div className="mb-1 flex justify-between">
+								<span className="font-medium text-sm">{comment.author}</span>
+								<span className="text-gray-500 text-xs">
 									{comment.timestamp}
 								</span>
 							</div>
-							<p className="text-sm text-gray-800 dark:text-gray-200">
+							<p className="text-gray-800 text-sm dark:text-gray-200">
 								{comment.content}
 							</p>
 						</div>
@@ -142,16 +142,16 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 				{/* New comment form */}
 				<div className="mt-4">
 					<textarea
-						className="w-full p-3 text-sm border border-gray-300 dark:border-gray-700 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+						className="w-full rounded-md border border-gray-300 p-3 text-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700"
 						rows={2}
 						placeholder="Add a comment..."
 						value={newComment}
 						onChange={(e) => setNewComment(e.target.value)}
-					></textarea>
+					/>
 					<div className="mt-2 flex justify-end">
 						<button
 							type="button"
-							className="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-md text-sm font-medium"
+							className="rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-sm text-white hover:bg-indigo-700"
 							disabled={!newComment.trim()}
 							onClick={handleCommentSubmit}
 						>

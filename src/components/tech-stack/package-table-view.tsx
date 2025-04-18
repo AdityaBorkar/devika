@@ -1,6 +1,5 @@
-"use client";
+'use client';
 
-import { type Package, PackageCategory } from "@/types/tech-stack";
 import {
 	Book,
 	Edit,
@@ -10,7 +9,8 @@ import {
 	Shield,
 	ShieldAlert,
 	XCircle,
-} from "lucide-react";
+} from 'lucide-react';
+import { type Package, PackageCategory } from '@/types/tech-stack';
 
 interface PackageTableViewProps {
 	packages: Package[];
@@ -24,28 +24,28 @@ export function PackageTableView({
 	categoryLabel,
 }: PackageTableViewProps) {
 	return (
-		<div className="overflow-x-auto my-4">
-			<h3 className="text-lg font-medium mb-3">{categoryLabel}</h3>
-			<div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
+		<div className="my-4 overflow-x-auto">
+			<h3 className="mb-3 font-medium text-lg">{categoryLabel}</h3>
+			<div className="overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
 				<table className="w-full border-collapse">
 					<thead className="bg-gray-50 dark:bg-gray-900/80">
 						<tr>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Package
 							</th>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Version
 							</th>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Last Updated
 							</th>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Status
 							</th>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Documentation
 							</th>
-							<th className="p-3 text-left font-medium text-sm border-b border-gray-200 dark:border-gray-800">
+							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
 								Actions
 							</th>
 						</tr>
@@ -54,12 +54,12 @@ export function PackageTableView({
 						{packages.map((pkg) => (
 							<tr
 								key={pkg.id}
-								className="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
+								className="border-gray-200 border-b transition-colors hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50"
 							>
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										{pkg.logoUrl && (
-											<div className="h-6 w-6 relative overflow-hidden rounded-sm bg-gray-50 dark:bg-gray-800 p-0.5">
+											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-gray-50 p-0.5 dark:bg-gray-800">
 												<img
 													src={pkg.logoUrl}
 													alt={pkg.name}
@@ -73,13 +73,13 @@ export function PackageTableView({
 											<div className="flex items-center gap-2">
 												<span className="font-medium">{pkg.name}</span>
 												{pkg.isLocal && (
-													<span className="px-1.5 py-0.5 rounded-full text-xs bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300 leading-none">
+													<span className="rounded-full bg-indigo-100 px-1.5 py-0.5 text-indigo-800 text-xs leading-none dark:bg-indigo-900 dark:text-indigo-300">
 														Local
 													</span>
 												)}
 											</div>
 											{pkg.description && (
-												<span className="text-xs text-muted-foreground mt-0.5 truncate max-w-xs">
+												<span className="mt-0.5 max-w-xs truncate text-muted-foreground text-xs">
 													{pkg.description}
 												</span>
 											)}
@@ -87,29 +87,29 @@ export function PackageTableView({
 									</div>
 								</td>
 								<td className="p-3">
-									<span className="px-2 py-1 text-xs bg-secondary rounded-full">
+									<span className="rounded-full bg-secondary px-2 py-1 text-xs">
 										{pkg.version}
 									</span>
 								</td>
-								<td className="p-3 text-sm text-muted-foreground">
+								<td className="p-3 text-muted-foreground text-sm">
 									{pkg.lastScrapedDate}
 								</td>
 								<td className="p-3">
 									<div className="flex flex-wrap gap-1">
 										{pkg.isUpdateAvailable && (
-											<span className="flex items-center text-xs gap-1 text-amber-500 px-2 py-0.5 rounded-full bg-amber-500/10">
+											<span className="flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-0.5 text-amber-500 text-xs">
 												<XCircle className="h-3 w-3" />
 												Update
 											</span>
 										)}
 										{pkg.isUnused && (
-											<span className="flex items-center text-xs gap-1 text-slate-500 px-2 py-0.5 rounded-full bg-slate-500/10">
+											<span className="flex items-center gap-1 rounded-full bg-slate-500/10 px-2 py-0.5 text-slate-500 text-xs">
 												<Shield className="h-3 w-3" />
 												Unused
 											</span>
 										)}
 										{pkg.hasSecurityAlert && (
-											<span className="flex items-center text-xs gap-1 text-red-500 px-2 py-0.5 rounded-full bg-red-500/10">
+											<span className="flex items-center gap-1 rounded-full bg-red-500/10 px-2 py-0.5 text-red-500 text-xs">
 												<ShieldAlert className="h-3 w-3" />
 												Security
 											</span>
@@ -119,7 +119,7 @@ export function PackageTableView({
 								<td className="p-3">
 									{pkg.isLocal ? (
 										<div className="flex items-center gap-1 text-xs">
-											{pkg.docSource === "path" ? (
+											{pkg.docSource === 'path' ? (
 												<>
 													<FolderDot className="h-3 w-3 text-blue-500" />
 													<span className="text-muted-foreground">
@@ -138,7 +138,7 @@ export function PackageTableView({
 									) : (
 										<div className="flex items-center gap-1 text-xs">
 											<ExternalLink className="h-3 w-3 text-blue-500" />
-											<span className="text-muted-foreground truncate max-w-xs">
+											<span className="max-w-xs truncate text-muted-foreground">
 												{pkg.docsUrl}
 											</span>
 										</div>
@@ -150,11 +150,11 @@ export function PackageTableView({
 											href={pkg.docsUrl}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="text-muted-foreground hover:text-primary p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
-											title={`View ${pkg.isLocal ? "local documentation" : "external documentation"}`}
+											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+											title={`View ${pkg.isLocal ? 'local documentation' : 'external documentation'}`}
 										>
 											{pkg.isLocal ? (
-												pkg.docSource === "path" ? (
+												pkg.docSource === 'path' ? (
 													<FileSymlink className="h-4 w-4" />
 												) : (
 													<Book className="h-4 w-4" />
@@ -166,7 +166,7 @@ export function PackageTableView({
 										<button
 											type="button"
 											onClick={() => onEditDocs(pkg.id, pkg.docsUrl)}
-											className="text-muted-foreground hover:text-primary p-1 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
 											title="Edit documentation link"
 										>
 											<Edit className="h-4 w-4" />

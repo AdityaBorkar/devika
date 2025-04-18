@@ -58,6 +58,16 @@ voice typing built-in
 
 ---
 
+
+Store notes, knowledge
+Planner, find bugs
+
+Code Mode
+Debug Mode
+Architect Mode
+
+---
+
 ## Collected TODOs from codebase
 
 ### Layout & Architecture

@@ -1,14 +1,14 @@
 export default function useConfig() {
 	const config = {
-		configPath: ".ai",
+		configPath: '.ai',
 		workspace: {
-			name: "AI Developer",
-			ide: "cursor",
+			name: 'AI Developer',
+			ide: 'cursor',
 		},
 		paths: {
-			cycles: "/cycles",
-			tasks: "/tasks",
-			prd: "/prd",
+			cycles: '/cycles',
+			tasks: '/tasks',
+			prd: '/prd',
 		},
 	};
 
