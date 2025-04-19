@@ -18,12 +18,12 @@ export function RoadblocksList({ roadblocks }: RoadblocksListProps) {
 		<div className="space-y-4">
 			{roadblocks.map((roadblock) => (
 				<div
-					key={roadblock.id}
 					className={`rounded-md border p-4 ${
 						roadblock.status === 'Active'
 							? 'border-red-200 bg-red-50'
 							: 'border-gray-200'
 					}`}
+					key={roadblock.id}
 				>
 					<div className="flex items-center justify-between">
 						<div className="flex items-center">

@@ -35,86 +35,86 @@ type FileSystemItem = FileItem | DirectoryItem;
 
 // Mock file structure - in a real app, this would come from an API or file system
 const initialFileStructure: DirectoryItem = {
-	id: 'root',
-	name: 'project-root',
-	type: 'directory',
 	charCount: 0,
-	color: 'bg-blue-100',
 	children: [
 		{
-			id: 'src',
-			name: 'src',
-			type: 'directory',
 			charCount: 0,
-			color: 'bg-violet-100',
 			children: [
 				{
-					id: 'app',
-					name: 'app',
-					type: 'directory',
 					charCount: 0,
-					color: 'bg-emerald-100',
 					children: [
 						{
+							charCount: 150,
+							color: 'bg-emerald-50',
 							id: 'page',
 							name: 'page.tsx',
 							type: 'file',
-							charCount: 150,
-							color: 'bg-emerald-50',
 						},
 						{
+							charCount: 320,
+							color: 'bg-emerald-50',
 							id: 'layout',
 							name: 'layout.tsx',
 							type: 'file',
-							charCount: 320,
-							color: 'bg-emerald-50',
 						},
 					],
+					color: 'bg-emerald-100',
+					id: 'app',
+					name: 'app',
+					type: 'directory',
 				},
 				{
-					id: 'components',
-					name: 'components',
-					type: 'directory',
 					charCount: 0,
-					color: 'bg-amber-100',
 					children: [
 						{
-							id: 'ui',
-							name: 'ui',
-							type: 'directory',
 							charCount: 0,
-							color: 'bg-amber-50',
 							children: [
 								{
+									charCount: 450,
+									color: 'bg-amber-50',
 									id: 'button',
 									name: 'button.tsx',
 									type: 'file',
-									charCount: 450,
-									color: 'bg-amber-50',
 								},
 							],
+							color: 'bg-amber-50',
+							id: 'ui',
+							name: 'ui',
+							type: 'directory',
 						},
 					],
+					color: 'bg-amber-100',
+					id: 'components',
+					name: 'components',
+					type: 'directory',
 				},
 			],
+			color: 'bg-violet-100',
+			id: 'src',
+			name: 'src',
+			type: 'directory',
 		},
 		{
-			id: 'public',
-			name: 'public',
-			type: 'directory',
 			charCount: 0,
-			color: 'bg-red-100',
 			children: [
 				{
+					charCount: 1024,
+					color: 'bg-red-50',
 					id: 'favicon',
 					name: 'favicon.ico',
 					type: 'file',
-					charCount: 1024,
-					color: 'bg-red-50',
 				},
 			],
+			color: 'bg-red-100',
+			id: 'public',
+			name: 'public',
+			type: 'directory',
 		},
 	],
+	color: 'bg-blue-100',
+	id: 'root',
+	name: 'project-root',
+	type: 'directory',
 };
 
 // Calculate character counts for directories based on their children
@@ -235,19 +235,19 @@ export default function RepositoryStructure() {
 		const newId = `new-${Date.now()}`;
 		const newItem: FileSystemItem = isFile
 			? {
+					charCount: 0,
+					color: parent.color,
 					id: newId,
 					name: 'newfile.tsx',
 					type: 'file',
-					charCount: 0,
-					color: parent.color,
 				}
 			: {
+					charCount: 0,
+					children: [],
+					color: parent.color,
 					id: newId,
 					name: 'newfolder',
 					type: 'directory',
-					charCount: 0,
-					color: parent.color,
-					children: [],
 				};
 
 		parent.children.push(newItem);
@@ -272,15 +272,15 @@ export default function RepositoryStructure() {
 		return (
 			<div key={item.id}>
 				<button
-					type="button"
 					className={cn(
 						'group flex w-full cursor-pointer items-center rounded px-2 py-1 text-left hover:bg-gray-100',
 						item.color,
 					)}
-					style={{ paddingLeft: `${indent}px` }}
+					disabled={!isDirectory}
 					onClick={() => isDirectory && toggleExpand(item.id)}
 					onKeyDown={() => isDirectory && toggleExpand(item.id)}
-					disabled={!isDirectory}
+					style={{ paddingLeft: `${indent}px` }}
+					type="button"
 				>
 					<div className="mr-1 flex-shrink-0">
 						{isDirectory ? (
@@ -315,31 +315,30 @@ export default function RepositoryStructure() {
 							{isDirectory && (
 								<>
 									<button
-										type="button"
 										className="rounded p-1 hover:bg-gray-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, false);
 										}}
 										title="Add folder"
+										type="button"
 									>
 										<FolderIcon className="h-3 w-3" />
 									</button>
 									<button
-										type="button"
 										className="rounded p-1 hover:bg-gray-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, true);
 										}}
 										title="Add file"
+										type="button"
 									>
 										<FileIcon className="h-3 w-3" />
 									</button>
 								</>
 							)}
 							<button
-								type="button"
 								className="rounded p-1 hover:bg-gray-200"
 								onClick={(e) => {
 									e.stopPropagation();
@@ -352,6 +351,7 @@ export default function RepositoryStructure() {
 									}
 								}}
 								title="Add note"
+								type="button"
 							>
 								<EditIcon className="h-3 w-3" />
 							</button>
@@ -389,18 +389,18 @@ export default function RepositoryStructure() {
 							<span className="text-xs">Show Files:</span>
 							{/* TODO: Replace with ShadCN Toggle Component */}
 							<button
-								type="button"
-								onClick={() => expandCollapseAll(true)}
 								className="rounded p-1 hover:bg-gray-200"
+								onClick={() => expandCollapseAll(true)}
 								title="Expand all"
+								type="button"
 							>
 								<PlusSquareIcon className="h-5 w-5" />
 							</button>
 							<button
-								type="button"
-								onClick={() => expandCollapseAll(false)}
 								className="rounded p-1 hover:bg-gray-200"
+								onClick={() => expandCollapseAll(false)}
 								title="Collapse all"
+								type="button"
 							>
 								<MinusSquareIcon className="h-5 w-5" />
 							</button>

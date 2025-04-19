@@ -9,8 +9,8 @@ import {
 	useReactTable,
 } from '@tanstack/react-table';
 import { ArrowDown, ArrowUp } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router';
 import { Button } from '../ui/button';
 import {
 	Table,
@@ -39,7 +39,6 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 	columnFilters,
 	searchQuery,
 }) => {
-	const router = useRouter();
 	const columnHelper = createColumnHelper<Task>();
 
 	// Define global text filter function for search
@@ -64,36 +63,36 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 	const columns = useMemo(
 		() => [
 			columnHelper.accessor('id', {
-				header: 'ID',
 				cell: (info) => <span className="font-medium">{info.getValue()}</span>,
+				header: 'ID',
 				size: 80,
 			}),
 			columnHelper.accessor('title', {
-				header: 'Title',
 				cell: (info) => <span>{info.getValue()}</span>,
+				header: 'Title',
 			}),
 			columnHelper.accessor('status', {
-				header: 'Status',
 				cell: (info) => <TaskStatusBadge status={info.getValue()} />,
+				header: 'Status',
 				size: 120,
 			}),
 			columnHelper.accessor('priority', {
-				header: 'Priority',
 				cell: (info) => <TaskPriorityBadge priority={info.getValue()} />,
+				header: 'Priority',
 				size: 100,
 			}),
 			columnHelper.accessor('assignee', {
-				header: 'Assignee',
 				cell: (info) => (
 					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
+				header: 'Assignee',
 				size: 150,
 			}),
 			columnHelper.accessor('due', {
-				header: 'Due Date',
 				cell: (info) => (
 					<span className="text-muted-foreground">{info.getValue()}</span>
 				),
+				header: 'Due Date',
 				size: 120,
 			}),
 		],
@@ -102,24 +101,26 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 
 	// Initialize the table
 	const table = useReactTable({
-		data: filteredTasks,
 		columns,
-		state: {
-			sorting,
-			columnFilters,
-		},
-		onSortingChange: setSorting,
-		getCoreRowModel: getCoreRowModel(),
-		getSortedRowModel: getSortedRowModel(),
-		getFilteredRowModel: getFilteredRowModel(),
-		enableSorting: true,
-		enableFilters: true,
+		data: filteredTasks,
 		enableColumnFilters: true,
+		enableFilters: true,
+		enableSorting: true,
+		getCoreRowModel: getCoreRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
+		getSortedRowModel: getSortedRowModel(),
+		onSortingChange: setSorting,
+		state: {
+			columnFilters,
+			sorting,
+		},
 	});
+
+	const navigate = useNavigate();
 
 	// Handle row click
 	const handleRowClick = (id: string) => {
-		router.push(`/tasks/${id}`);
+		navigate(`/tasks/${id}`);
 	};
 
 	// Show empty state if no tasks after filtering
@@ -143,9 +144,9 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 							{headerGroup.headers.map((header) => (
 								<TableHead key={header.id} style={{ width: header.getSize() }}>
 									<Button
-										variant="ghost"
 										className="h-8 whitespace-nowrap px-0 font-medium text-muted-foreground"
 										onClick={header.column.getToggleSortingHandler()}
+										variant="ghost"
 									>
 										{flexRender(
 											header.column.columnDef.header,
@@ -169,8 +170,10 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 				<TableBody>
 					{table.getRowModel().rows.map((row) => (
 						<TableRow
-							key={row.id}
+							aria-label={`View task ${row.original.id}`}
 							className="cursor-pointer hover:bg-muted/50"
+							data-state={row.getIsSelected() ? 'selected' : undefined}
+							key={row.id}
 							onClick={() => handleRowClick(row.original.id)}
 							onKeyDown={(e) => {
 								if (e.key === 'Enter' || e.key === ' ') {
@@ -178,8 +181,6 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 								}
 							}}
 							tabIndex={0}
-							data-state={row.getIsSelected() ? 'selected' : undefined}
-							aria-label={`View task ${row.original.id}`}
 						>
 							{row.getVisibleCells().map((cell) => (
 								<TableCell key={cell.id}>

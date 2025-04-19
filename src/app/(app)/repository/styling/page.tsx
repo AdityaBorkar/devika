@@ -89,13 +89,13 @@ export default function RepositoryStyling() {
 					<h2 className="font-semibold text-2xl">App Style Configurations</h2>
 					<div className="flex items-center gap-2">
 						<Input
-							type="text"
-							placeholder="New app config name"
-							value={newConfigName}
 							onChange={(e) => setNewConfigName(e.target.value)}
 							onKeyDown={(e) => e.key === 'Enter' && handleAddConfig()}
+							placeholder="New app config name"
+							type="text"
+							value={newConfigName}
 						/>
-						<Button onClick={handleAddConfig} disabled={!newConfigName.trim()}>
+						<Button disabled={!newConfigName.trim()} onClick={handleAddConfig}>
 							<PlusCircle className="mr-2 h-4 w-4" />
 							Add Config
 						</Button>
@@ -108,12 +108,12 @@ export default function RepositoryStyling() {
 					</p>
 				) : (
 					appConfigs.map((config) => (
-						<Card key={config.id} className="group relative">
+						<Card className="group relative" key={config.id}>
 							<Button
-								variant="outline"
-								size="icon"
 								className="absolute top-4 right-4 opacity-0 transition-opacity group-hover:opacity-100"
 								onClick={() => handleDeleteConfig(config.id)}
+								size="icon"
+								variant="outline"
 							>
 								<Trash2 className="h-4 w-4" />
 								<span className="sr-only">Delete {config.name}</span>

@@ -36,52 +36,52 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 			<div className="flex flex-col gap-2 rounded-md border p-2">
 				<div className="flex flex-col gap-1">
 					<label
-						htmlFor={`config-name-${config.id}`}
 						className="text-muted-foreground text-xs"
+						htmlFor={`config-name-${config.id}`}
 					>
 						Name
 					</label>
 					<input
+						className="rounded-sm border bg-transparent px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary"
 						id={`config-name-${config.id}`}
-						type="text"
-						value={name}
 						onChange={(e) => setName(e.target.value)}
 						onKeyDown={handleKeyDown}
-						className="rounded-sm border bg-transparent px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary"
+						type="text"
+						value={name}
 					/>
 				</div>
 				<div className="flex flex-col gap-1">
 					<label
-						htmlFor={`config-path-${config.id}`}
 						className="text-muted-foreground text-xs"
+						htmlFor={`config-path-${config.id}`}
 					>
 						File Path
 					</label>
 					<input
+						className="rounded-sm border bg-transparent px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary"
 						id={`config-path-${config.id}`}
-						type="text"
-						value={filePath}
 						onChange={(e) => setFilePath(e.target.value)}
 						onKeyDown={handleKeyDown}
-						className="rounded-sm border bg-transparent px-2 py-1 focus:outline-none focus:ring-1 focus:ring-primary"
+						type="text"
+						value={filePath}
 					/>
 				</div>
 				<div className="mt-1 flex justify-end gap-2">
 					<button
-						type="button"
+						className="px-2 py-1 text-muted-foreground text-xs hover:text-foreground"
 						onClick={() => {
 							setIsEditing(false);
 							setName(config.name);
 							setFilePath(config.filePath || '');
 						}}
-						className="px-2 py-1 text-muted-foreground text-xs hover:text-foreground"
+						type="button"
 					>
 						Cancel
 					</button>
 					<button
-						type="button"
-						onClick={handleSave}
 						className="flex items-center gap-1 rounded-md bg-primary px-2 py-1 text-primary-foreground text-xs"
+						onClick={handleSave}
+						type="button"
 					>
 						<Save className="h-3 w-3" />
 						Save
@@ -110,10 +110,10 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 					</h3>
 				</div>
 				<button
-					type="button"
-					onClick={() => setIsEditing(true)}
 					className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+					onClick={() => setIsEditing(true)}
 					title="Edit config"
+					type="button"
 				>
 					<Edit className="h-4 w-4" />
 				</button>

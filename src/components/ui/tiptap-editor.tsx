@@ -37,6 +37,7 @@ export function TipTapEditor({
 	className,
 }: TipTapEditorProps) {
 	const editor = useEditor({
+		content,
 		extensions: [
 			Document,
 			Paragraph,
@@ -52,7 +53,6 @@ export function TipTapEditor({
 			OrderedList,
 			ListItem,
 		],
-		content,
 		onUpdate: ({ editor }) => {
 			onChange(editor.getHTML());
 		},
@@ -66,85 +66,85 @@ export function TipTapEditor({
 		<div className={cn('overflow-hidden rounded-md border', className)}>
 			<div className="flex items-center gap-1 border-b bg-gray-50 p-2">
 				<Button
+					className={editor.isActive('bold') ? 'bg-gray-200' : ''}
+					onClick={() => editor.chain().focus().toggleBold().run()}
 					size="icon"
 					variant="ghost"
-					onClick={() => editor.chain().focus().toggleBold().run()}
-					className={editor.isActive('bold') ? 'bg-gray-200' : ''}
 				>
 					<BoldIcon className="h-4 w-4" />
 				</Button>
 				<Button
+					className={editor.isActive('italic') ? 'bg-gray-200' : ''}
+					onClick={() => editor.chain().focus().toggleItalic().run()}
 					size="icon"
 					variant="ghost"
-					onClick={() => editor.chain().focus().toggleItalic().run()}
-					className={editor.isActive('italic') ? 'bg-gray-200' : ''}
 				>
 					<ItalicIcon className="h-4 w-4" />
 				</Button>
 				<Button
-					size="icon"
-					variant="ghost"
-					onClick={() =>
-						editor.chain().focus().toggleHeading({ level: 1 }).run()
-					}
 					className={
 						editor.isActive('heading', { level: 1 }) ? 'bg-gray-200' : ''
 					}
+					onClick={() =>
+						editor.chain().focus().toggleHeading({ level: 1 }).run()
+					}
+					size="icon"
+					variant="ghost"
 				>
 					<Heading1 className="h-4 w-4" />
 				</Button>
 				<Button
-					size="icon"
-					variant="ghost"
-					onClick={() =>
-						editor.chain().focus().toggleHeading({ level: 2 }).run()
-					}
 					className={
 						editor.isActive('heading', { level: 2 }) ? 'bg-gray-200' : ''
 					}
+					onClick={() =>
+						editor.chain().focus().toggleHeading({ level: 2 }).run()
+					}
+					size="icon"
+					variant="ghost"
 				>
 					<Heading2 className="h-4 w-4" />
 				</Button>
 				<Button
-					size="icon"
-					variant="ghost"
-					onClick={() =>
-						editor.chain().focus().toggleHeading({ level: 3 }).run()
-					}
 					className={
 						editor.isActive('heading', { level: 3 }) ? 'bg-gray-200' : ''
 					}
+					onClick={() =>
+						editor.chain().focus().toggleHeading({ level: 3 }).run()
+					}
+					size="icon"
+					variant="ghost"
 				>
 					<Heading3 className="h-4 w-4" />
 				</Button>
 				<Button
+					className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}
+					onClick={() => editor.chain().focus().toggleBulletList().run()}
 					size="icon"
 					variant="ghost"
-					onClick={() => editor.chain().focus().toggleBulletList().run()}
-					className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}
 				>
 					<List className="h-4 w-4" />
 				</Button>
 				<Button
+					className={editor.isActive('orderedList') ? 'bg-gray-200' : ''}
+					onClick={() => editor.chain().focus().toggleOrderedList().run()}
 					size="icon"
 					variant="ghost"
-					onClick={() => editor.chain().focus().toggleOrderedList().run()}
-					className={editor.isActive('orderedList') ? 'bg-gray-200' : ''}
 				>
 					<ListOrdered className="h-4 w-4" />
 				</Button>
 				<Button
+					className={editor.isActive('code') ? 'bg-gray-200' : ''}
+					onClick={() => editor.chain().focus().toggleCode().run()}
 					size="icon"
 					variant="ghost"
-					onClick={() => editor.chain().focus().toggleCode().run()}
-					className={editor.isActive('code') ? 'bg-gray-200' : ''}
 				>
 					<CodeIcon className="h-4 w-4" />
 				</Button>
 			</div>
 			<EditorContent
-				editor={editor}
 				className="prose prose-sm min-h-[200px] max-w-none p-4 focus-visible:outline-none"
+				editor={editor}
 			/>
 		</div>
 	);

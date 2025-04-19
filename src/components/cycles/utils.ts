@@ -1,9 +1,4 @@
-import {
-	type Cycle,
-	type CycleStatus,
-	SortDirection,
-	type SortState,
-} from './types';
+import type { Cycle, CycleStatus, SortDirection, SortState } from './types';
 
 /**
  * Format a date string to a more readable format
@@ -11,8 +6,8 @@ import {
 export function formatDate(dateString: string): string {
 	const date = new Date(dateString);
 	return date.toLocaleDateString('en-US', {
-		month: 'short',
 		day: 'numeric',
+		month: 'short',
 		year: 'numeric',
 	});
 }

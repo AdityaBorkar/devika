@@ -1,6 +1,7 @@
-import { redirect } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export default function HomePage() {
-	redirect('/dashboard');
+	const navigate = useNavigate();
+	navigate('/dashboard');
 	return <></>;
 }

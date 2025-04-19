@@ -68,7 +68,7 @@ export function TechStackPicker() {
 	const saveAppConfig = (id: string, name: string, filePath: string) => {
 		setAppConfigs((prev) =>
 			prev.map((config) =>
-				config.id === id ? { ...config, name, filePath } : config,
+				config.id === id ? { ...config, filePath, name } : config,
 			),
 		);
 	};
@@ -76,15 +76,15 @@ export function TechStackPicker() {
 	// Group packages by category
 	const packagesByCategory: Record<PackageCategory, Package[]> = {
 		backend: [],
-		frontend: [],
-		database: [],
-		logging: [],
-		testing: [],
-		hosting: [],
 		cicd: [],
-		monitoring: [],
+		database: [],
 		documentation: [],
+		frontend: [],
+		hosting: [],
+		logging: [],
+		monitoring: [],
 		other: [],
+		testing: [],
 	};
 
 	for (const pkg of configPackages) {
@@ -94,15 +94,15 @@ export function TechStackPicker() {
 	// Category labels for display
 	const categoryLabels: Record<PackageCategory, string> = {
 		backend: 'Backend',
-		frontend: 'Frontend',
-		database: 'Database',
-		logging: 'Logging',
-		testing: 'Testing',
-		hosting: 'Hosting',
 		cicd: 'CI/CD and Deployment',
-		monitoring: 'Monitoring',
+		database: 'Database',
 		documentation: 'Documentation',
+		frontend: 'Frontend',
+		hosting: 'Hosting',
+		logging: 'Logging',
+		monitoring: 'Monitoring',
 		other: 'Others',
+		testing: 'Testing',
 	};
 
 	return (
@@ -116,8 +116,7 @@ export function TechStackPicker() {
 				<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
 					{appConfigs.map((config) => (
 						<button
-							type="button"
-							key={config.id}
+							aria-pressed={selectedConfigId === config.id}
 							className={`rounded-lg border p-4 ${
 								config.isLocal
 									? 'border-indigo-200 dark:border-indigo-800'
@@ -127,8 +126,9 @@ export function TechStackPicker() {
 									? 'border-primary bg-primary/5'
 									: 'bg-white hover:border-primary/30 dark:bg-gray-900'
 							}`}
+							key={config.id}
 							onClick={() => handleConfigChange(config.id)}
-							aria-pressed={selectedConfigId === config.id}
+							type="button"
 						>
 							<AppConfigEdit config={config} onSave={saveAppConfig} />
 						</button>
@@ -145,7 +145,7 @@ export function TechStackPicker() {
 							({configPackages.length} packages)
 						</span>
 					</h2>
-					<ViewToggle viewMode={viewMode} onToggle={handleViewModeToggle} />
+					<ViewToggle onToggle={handleViewModeToggle} viewMode={viewMode} />
 				</div>
 
 				{/* No packages message */}
@@ -167,16 +167,16 @@ export function TechStackPicker() {
 							if (viewMode === 'table') {
 								return (
 									<PackageTableView
-										key={category}
-										packages={categoryPackages}
-										onEditDocs={openDocUrlDialog}
 										categoryLabel={categoryLabels[category]}
+										key={category}
+										onEditDocs={openDocUrlDialog}
+										packages={categoryPackages}
 									/>
 								);
 							}
 
 							return (
-								<div key={category} className="mt-6 space-y-4">
+								<div className="mt-6 space-y-4" key={category}>
 									<h3 className="border-gray-200 border-b pb-2 font-medium text-lg dark:border-gray-800">
 										{categoryLabels[category]}
 										<span className="ml-2 text-muted-foreground text-sm">
@@ -187,8 +187,8 @@ export function TechStackPicker() {
 										{categoryPackages.map((pkg) => (
 											<PackageCard
 												key={pkg.id}
-												pkg={pkg}
 												onEditDocs={openDocUrlDialog}
+												pkg={pkg}
 											/>
 										))}
 									</div>
@@ -200,11 +200,11 @@ export function TechStackPicker() {
 
 			{/* Doc URL Dialog */}
 			<DocUrlDialog
-				isOpen={isDocDialogOpen}
-				packageId={editingPackageId}
 				initialUrl={editingDocUrl}
+				isOpen={isDocDialogOpen}
 				onClose={() => setIsDocDialogOpen(false)}
 				onSave={saveDocUrl}
+				packageId={editingPackageId}
 			/>
 		</div>
 	);

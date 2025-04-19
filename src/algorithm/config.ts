@@ -6,20 +6,20 @@ import { type } from 'arktype';
 const CONFIG_FILE_NAME = 'ai-dev.config.json';
 
 const CONFIG_SCHEMA = type({
-	name: 'string > 1',
-	description: 'string > 1',
 	aiEditor: "'cursor' | 'github-copilot' | 'windsurf'",
+	description: 'string > 1',
+	name: 'string > 1',
 	paths: {
 		cycles: 'string > 1',
-		tasks: 'string > 1',
 		prd: 'string > 1',
+		tasks: 'string > 1',
 	},
 	web: {
 		host: 'string > 1',
 		port: 'number > 0',
 		theme: {
-			name: 'string > 1',
 			color: 'string > 1',
+			name: 'string > 1',
 		},
 	},
 });
@@ -50,8 +50,8 @@ function getDefaultConfig(basePath: string) {
 		// aiEditor: "cursor",
 		paths: {
 			cycles: '.ai/cycles',
-			tasks: '.ai/tasks',
 			prd: '.ai/prd',
+			tasks: '.ai/tasks',
 		},
 		web: {
 			host: 'localhost',

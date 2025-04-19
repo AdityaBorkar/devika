@@ -12,20 +12,20 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TipTapEditor } from '@/components/ui/tiptap-editor';
 
 const defaultContent = {
-	commitStrategy: `<h1>Commit Strategy</h1>
-<p>Define whether your team uses Conventional Commits or another strategy.</p>`,
+	branchingStrategy: `<h1>Git Branching Strategy</h1>
+<p>Guidelines for branch organization and management.</p>`,
 
 	commitFormat: `<h1>Commit Message Format</h1>
 <p>Define the structure and guidelines for commit messages.</p>`,
 
-	whenToCommit: `<h1>When to Commit</h1>
-<p>Guidelines on when and how often to make commits.</p>`,
+	commitStrategy: `<h1>Commit Strategy</h1>
+<p>Define whether your team uses Conventional Commits or another strategy.</p>`,
 
 	preCommitChecks: `<h1>Pre-Commit Checks</h1>
 <p>Automated and manual checks to perform before committing code.</p>`,
 
-	branchingStrategy: `<h1>Git Branching Strategy</h1>
-<p>Guidelines for branch organization and management.</p>`,
+	whenToCommit: `<h1>When to Commit</h1>
+<p>Guidelines on when and how often to make commits.</p>`,
 };
 
 export default function GitConfigPage() {
@@ -52,9 +52,9 @@ export default function GitConfigPage() {
 				</CardHeader>
 				<CardContent>
 					<Tabs
-						value={activeTab}
-						onValueChange={setActiveTab}
 						className="w-full"
+						onValueChange={setActiveTab}
+						value={activeTab}
 					>
 						<TabsList className="mb-4 grid grid-cols-5">
 							<TabsTrigger value="commitStrategy">Commit Strategy</TabsTrigger>
@@ -68,69 +68,69 @@ export default function GitConfigPage() {
 							</TabsTrigger>
 						</TabsList>
 
-						<TabsContent value="commitStrategy" className="mt-0">
+						<TabsContent className="mt-0" value="commitStrategy">
 							<div className="mb-2 px-1 text-gray-500 text-sm">
 								Define whether your team uses Conventional Commits or another
 								approach
 							</div>
 							<TipTapEditor
+								className="min-h-[60vh]"
 								content={content.commitStrategy}
 								onChange={(newContent) =>
 									handleContentChange('commitStrategy', newContent)
 								}
-								className="min-h-[60vh]"
 							/>
 						</TabsContent>
 
-						<TabsContent value="commitFormat" className="mt-0">
+						<TabsContent className="mt-0" value="commitFormat">
 							<div className="mb-2 px-1 text-gray-500 text-sm">
 								Define the structure and guidelines for commit messages
 							</div>
 							<TipTapEditor
+								className="min-h-[60vh]"
 								content={content.commitFormat}
 								onChange={(newContent) =>
 									handleContentChange('commitFormat', newContent)
 								}
-								className="min-h-[60vh]"
 							/>
 						</TabsContent>
 
-						<TabsContent value="whenToCommit" className="mt-0">
+						<TabsContent className="mt-0" value="whenToCommit">
 							<div className="mb-2 px-1 text-gray-500 text-sm">
 								Guidelines on when and how often to make commits
 							</div>
 							<TipTapEditor
+								className="min-h-[60vh]"
 								content={content.whenToCommit}
 								onChange={(newContent) =>
 									handleContentChange('whenToCommit', newContent)
 								}
-								className="min-h-[60vh]"
 							/>
 						</TabsContent>
 
-						<TabsContent value="preCommitChecks" className="mt-0">
+						<TabsContent className="mt-0" value="preCommitChecks">
 							<div className="mb-2 px-1 text-gray-500 text-sm">
 								Automated and manual checks to perform before committing code
 							</div>
 							<TipTapEditor
+								className="min-h-[60vh]"
 								content={content.preCommitChecks}
 								onChange={(newContent) =>
 									handleContentChange('preCommitChecks', newContent)
 								}
-								className="min-h-[60vh]"
 							/>
 						</TabsContent>
 
-						<TabsContent value="branchingStrategy" className="mt-0">
+						<TabsContent className="mt-0" value="branchingStrategy">
 							<div className="mb-2 px-1 text-gray-500 text-sm">
 								Guidelines for branch organization and management
 							</div>
 							<TipTapEditor
+								className="min-h-[60vh]"
 								content={content.branchingStrategy}
 								onChange={(newContent) =>
 									handleContentChange('branchingStrategy', newContent)
 								}
-								className="min-h-[60vh]"
 							/>
 						</TabsContent>
 					</Tabs>

@@ -43,18 +43,18 @@ import type { Package, PackageCategory } from '@/types/tech-stack';
 // Badge color mapping
 const getBadgeStyles = (color: Label['color']) => {
 	const colorMap: Record<Label['color'], string> = {
-		red: 'bg-red-100 text-red-800 border-red-200',
-		blue: 'bg-blue-100 text-blue-800 border-blue-200',
-		green: 'bg-green-100 text-green-800 border-green-200',
-		yellow: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-		purple: 'bg-purple-100 text-purple-800 border-purple-200',
-		pink: 'bg-pink-100 text-pink-800 border-pink-200',
-		indigo: 'bg-indigo-100 text-indigo-800 border-indigo-200',
-		cyan: 'bg-cyan-100 text-cyan-800 border-cyan-200',
 		amber: 'bg-amber-100 text-amber-800 border-amber-200',
-		orange: 'bg-orange-100 text-orange-800 border-orange-200',
-		violet: 'bg-violet-100 text-violet-800 border-violet-200',
+		blue: 'bg-blue-100 text-blue-800 border-blue-200',
+		cyan: 'bg-cyan-100 text-cyan-800 border-cyan-200',
 		emerald: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+		green: 'bg-green-100 text-green-800 border-green-200',
+		indigo: 'bg-indigo-100 text-indigo-800 border-indigo-200',
+		orange: 'bg-orange-100 text-orange-800 border-orange-200',
+		pink: 'bg-pink-100 text-pink-800 border-pink-200',
+		purple: 'bg-purple-100 text-purple-800 border-purple-200',
+		red: 'bg-red-100 text-red-800 border-red-200',
+		violet: 'bg-violet-100 text-violet-800 border-violet-200',
+		yellow: 'bg-yellow-100 text-yellow-800 border-yellow-200',
 	};
 
 	return colorMap[color];
@@ -63,8 +63,8 @@ const getBadgeStyles = (color: Label['color']) => {
 const columns: ColumnDef<Package>[] = [
 	{
 		accessorKey: 'name',
-		header: 'Name',
 		cell: ({ row }) => <div className="font-medium">{row.original.name}</div>,
+		header: 'Name',
 	},
 	{
 		accessorKey: 'version',
@@ -72,14 +72,13 @@ const columns: ColumnDef<Package>[] = [
 	},
 	{
 		accessorKey: 'labels',
-		header: 'Labels',
 		cell: ({ row }) => (
 			<div className="flex flex-wrap gap-1">
 				{row.original.labels.map((label) => (
 					<Badge
+						className={getBadgeStyles(label.color)}
 						key={`${row.original.name}-${label.name}`}
 						variant="outline"
-						className={getBadgeStyles(label.color)}
 					>
 						{label.name}
 					</Badge>
@@ -87,18 +86,18 @@ const columns: ColumnDef<Package>[] = [
 			</div>
 		),
 		enableSorting: false,
+		header: 'Labels',
 	},
 	{
 		accessorKey: 'docLink',
-		header: 'Documentation',
 		cell: ({ row }) => (
 			<>
 				{row.original.docLink && (
 					<a
-						href={row.original.docLink}
-						target="_blank"
-						rel="noopener noreferrer"
 						className="inline-flex items-center text-blue-600 hover:underline"
+						href={row.original.docLink}
+						rel="noopener noreferrer"
+						target="_blank"
 					>
 						Docs <ExternalLink className="ml-1 h-3 w-3" />
 					</a>
@@ -106,12 +105,13 @@ const columns: ColumnDef<Package>[] = [
 			</>
 		),
 		enableSorting: false,
+		header: 'Documentation',
 	},
 	{
 		accessorKey: 'lastUpdated',
-		header: 'Last Updated',
 		cell: ({ row }) =>
 			formatDistanceToNow(row.original.lastUpdated, { addSuffix: true }),
+		header: 'Last Updated',
 		sortingFn: 'datetime',
 	},
 	{
@@ -119,12 +119,11 @@ const columns: ColumnDef<Package>[] = [
 		header: 'Category',
 	},
 	{
-		id: 'actions',
 		cell: () => (
 			<div className="text-right">
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
-						<Button variant="ghost" size="icon">
+						<Button size="icon" variant="ghost">
 							<MoreHorizontal className="h-4 w-4" />
 							<span className="sr-only">Actions</span>
 						</Button>
@@ -138,6 +137,7 @@ const columns: ColumnDef<Package>[] = [
 				</DropdownMenu>
 			</div>
 		),
+		id: 'actions',
 	},
 ];
 
@@ -150,27 +150,27 @@ export default function PackageList({ project }: { project: any }) {
 
 	// Setup table data
 	const table = useReactTable({
-		data: project.packages,
 		columns,
-		state: {
-			sorting,
-			columnFilters,
-			globalFilter,
-			columnVisibility,
-			grouping,
-		},
-		onSortingChange: setSorting,
-		onColumnFiltersChange: setColumnFilters,
-		onGlobalFilterChange: setGlobalFilter,
-		onColumnVisibilityChange: setColumnVisibility,
+		data: project.packages,
+		enableGrouping: true,
 		getCoreRowModel: getCoreRowModel(),
-		getFilteredRowModel: getFilteredRowModel(),
-		getSortedRowModel: getSortedRowModel(),
+		getExpandedRowModel: getExpandedRowModel(),
 		getFacetedRowModel: getFacetedRowModel(),
 		getFacetedUniqueValues: getFacetedUniqueValues(),
-		getExpandedRowModel: getExpandedRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
 		getGroupedRowModel: getGroupedRowModel(),
-		enableGrouping: true,
+		getSortedRowModel: getSortedRowModel(),
+		onColumnFiltersChange: setColumnFilters,
+		onColumnVisibilityChange: setColumnVisibility,
+		onGlobalFilterChange: setGlobalFilter,
+		onSortingChange: setSorting,
+		state: {
+			columnFilters,
+			columnVisibility,
+			globalFilter,
+			grouping,
+			sorting,
+		},
 	});
 
 	const selectedApp = project;
@@ -190,16 +190,15 @@ export default function PackageList({ project }: { project: any }) {
 					<div className="flex flex-1 items-center space-x-2">
 						<Search className="h-4 w-4 text-muted-foreground" />
 						<Input
+							className="h-8 w-full md:w-[250px]"
+							onChange={(e) => setGlobalFilter(e.target.value)}
 							placeholder="Search packages..."
 							value={globalFilter}
-							onChange={(e) => setGlobalFilter(e.target.value)}
-							className="h-8 w-full md:w-[250px]"
 						/>
 					</div>
 					<div className="flex flex-wrap gap-2">
 						<div>
 							<Select
-								value={grouping[0] || 'none'}
 								onValueChange={(value) => {
 									if (value === 'none') {
 										setGrouping([]);
@@ -207,6 +206,7 @@ export default function PackageList({ project }: { project: any }) {
 										setGrouping([value]);
 									}
 								}}
+								value={grouping[0] || 'none'}
 							>
 								<SelectTrigger className="h-8 w-[150px]">
 									<SelectValue placeholder="Group by" />
@@ -219,10 +219,6 @@ export default function PackageList({ project }: { project: any }) {
 						</div>
 						<div>
 							<Select
-								value={
-									(columnFilters.find((f) => f.id === 'category')
-										?.value as string) || 'all'
-								}
 								onValueChange={(value) => {
 									if (value === 'all') {
 										setColumnFilters(
@@ -238,6 +234,10 @@ export default function PackageList({ project }: { project: any }) {
 										]);
 									}
 								}}
+								value={
+									(columnFilters.find((f) => f.id === 'category')
+										?.value as string) || 'all'
+								}
 							>
 								<SelectTrigger className="h-8 w-[150px]">
 									<SelectValue placeholder="Filter by category" />
@@ -260,11 +260,11 @@ export default function PackageList({ project }: { project: any }) {
 					<table className="w-full">
 						<thead>
 							{table.getHeaderGroups().map((headerGroup) => (
-								<tr key={headerGroup.id} className="border-b bg-muted/50">
+								<tr className="border-b bg-muted/50" key={headerGroup.id}>
 									{headerGroup.headers.map((header) => (
 										<th
-											key={header.id}
 											className="px-4 py-3 text-left font-medium text-muted-foreground text-sm"
+											key={header.id}
 											style={{ width: header.getSize() }}
 										>
 											{header.isPlaceholder ? null : (
@@ -281,10 +281,10 @@ export default function PackageList({ project }: { project: any }) {
 															header.column.toggleSorting();
 														}
 													}}
-													tabIndex={header.column.getCanSort() ? 0 : undefined}
 													role={
 														header.column.getCanSort() ? 'button' : undefined
 													}
+													tabIndex={header.column.getCanSort() ? 0 : undefined}
 												>
 													{flexRender(
 														header.column.columnDef.header,
@@ -308,17 +308,17 @@ export default function PackageList({ project }: { project: any }) {
 								table.getRowModel().rows.map((row) => {
 									return (
 										<tr
-											key={row.id}
 											className={`border-b ${
 												row.getIsGrouped() ? 'bg-muted/50 font-medium' : ''
 											}`}
 											data-state={row.getIsSelected() ? 'selected' : undefined}
+											key={row.id}
 										>
 											{row.getVisibleCells().map((cell) => {
 												return (
 													<td
-														key={cell.id}
 														className="px-4 py-3 text-sm"
+														key={cell.id}
 														style={{
 															paddingLeft:
 																cell.getIsGrouped() || cell.row.getIsGrouped()
@@ -329,9 +329,9 @@ export default function PackageList({ project }: { project: any }) {
 														{cell.getIsGrouped() ? (
 															<div className="flex items-center gap-1">
 																<Button
-																	variant="ghost"
-																	size="icon"
 																	onClick={row.getToggleExpandedHandler()}
+																	size="icon"
+																	variant="ghost"
 																>
 																	{row.getIsExpanded() ? (
 																		<ChevronDown className="h-4 w-4" />
@@ -366,8 +366,8 @@ export default function PackageList({ project }: { project: any }) {
 							) : (
 								<tr>
 									<td
-										colSpan={columns.length}
 										className="py-6 text-center text-muted-foreground"
+										colSpan={columns.length}
 									>
 										No packages found
 									</td>

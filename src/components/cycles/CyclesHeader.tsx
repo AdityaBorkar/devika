@@ -31,19 +31,19 @@ export function CyclesHeader({
 	onCreateCycle,
 }: CyclesHeaderProps) {
 	const statusOptions: Array<{ value: CycleStatus | 'All'; label: string }> = [
-		{ value: 'All', label: 'All Statuses' },
-		{ value: 'Not Started', label: 'Not Started' },
-		{ value: 'In Progress', label: 'In Progress' },
-		{ value: 'Completed', label: 'Completed' },
-		{ value: 'Cancelled', label: 'Cancelled' },
+		{ label: 'All Statuses', value: 'All' },
+		{ label: 'Not Started', value: 'Not Started' },
+		{ label: 'In Progress', value: 'In Progress' },
+		{ label: 'Completed', value: 'Completed' },
+		{ label: 'Cancelled', value: 'Cancelled' },
 	];
 
 	const sortOptions = [
-		{ value: 'name', label: 'Name' },
-		{ value: 'startDate', label: 'Start Date' },
-		{ value: 'endDate', label: 'End Date' },
-		{ value: 'status', label: 'Status' },
-		{ value: 'progress', label: 'Progress' },
+		{ label: 'Name', value: 'name' },
+		{ label: 'Start Date', value: 'startDate' },
+		{ label: 'End Date', value: 'endDate' },
+		{ label: 'Status', value: 'status' },
+		{ label: 'Progress', value: 'progress' },
 	];
 
 	return (
@@ -58,10 +58,10 @@ export function CyclesHeader({
 			<div className="flex items-center space-x-2">
 				<div className="flex items-center space-x-2">
 					<Select
-						value={filterState.status}
 						onValueChange={(value) =>
 							onFilterChange(value as CycleStatus | 'All')
 						}
+						value={filterState.status}
 					>
 						<SelectTrigger className="w-[150px]">
 							<SelectValue placeholder="Status" />
@@ -76,8 +76,8 @@ export function CyclesHeader({
 					</Select>
 
 					<Select
-						value={sortState.column}
 						onValueChange={(value) => onSortChange(value)}
+						value={sortState.column}
 					>
 						<SelectTrigger className="w-[150px]">
 							<SelectValue placeholder="Sort by" />
@@ -92,10 +92,10 @@ export function CyclesHeader({
 					</Select>
 
 					<Button
-						variant="ghost"
-						size="icon"
-						onClick={() => onSortChange(sortState.column)}
 						className="h-9 w-9"
+						onClick={() => onSortChange(sortState.column)}
+						size="icon"
+						variant="ghost"
 					>
 						{sortState.direction === 'asc' ? (
 							<ArrowUpIcon className="h-4 w-4" />

@@ -1,8 +1,6 @@
-'use client';
-
 import { useAtomValue } from 'jotai';
-import Link from 'next/link';
-import { ProjectsAtom, WorkspaceAtom } from '../../../lib/stores/app';
+import { Link } from 'react-router';
+import { ProjectsAtom, WorkspaceAtom } from '@/lib/stores/app';
 
 export default function RepositoryLayout({
 	children,
@@ -33,13 +31,13 @@ export default function RepositoryLayout({
 					)}
 					{projects.map((project) => (
 						<Link
+							className="group rounded-md border border-border px-2 py-1"
 							key={project.name}
-							href={
+							to={
 								project.name === '$Root'
 									? '/repository'
 									: `/repository/${project.name}`
 							}
-							className="group rounded-md border border-border px-2 py-1"
 						>
 							<div className="flex flex-row justify-between gap-8">
 								<div className="font-medium">{project.name}</div>

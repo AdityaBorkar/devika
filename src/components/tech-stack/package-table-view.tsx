@@ -10,7 +10,7 @@ import {
 	ShieldAlert,
 	XCircle,
 } from 'lucide-react';
-import { type Package, PackageCategory } from '@/types/tech-stack';
+import type { Package } from '@/types/tech-stack';
 
 interface PackageTableViewProps {
 	packages: Package[];
@@ -53,19 +53,19 @@ export function PackageTableView({
 					<tbody>
 						{packages.map((pkg) => (
 							<tr
-								key={pkg.id}
 								className="border-gray-200 border-b transition-colors hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50"
+								key={pkg.id}
 							>
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										{pkg.logoUrl && (
 											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-gray-50 p-0.5 dark:bg-gray-800">
 												<img
-													src={pkg.logoUrl}
 													alt={pkg.name}
-													width={24}
-													height={24}
 													className="object-contain"
+													height={24}
+													src={pkg.logoUrl}
+													width={24}
 												/>
 											</div>
 										)}
@@ -147,10 +147,10 @@ export function PackageTableView({
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										<a
-											href={pkg.docsUrl}
-											target="_blank"
-											rel="noopener noreferrer"
 											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+											href={pkg.docsUrl}
+											rel="noopener noreferrer"
+											target="_blank"
 											title={`View ${pkg.isLocal ? 'local documentation' : 'external documentation'}`}
 										>
 											{pkg.isLocal ? (
@@ -164,10 +164,10 @@ export function PackageTableView({
 											)}
 										</a>
 										<button
-											type="button"
-											onClick={() => onEditDocs(pkg.id, pkg.docsUrl)}
 											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+											onClick={() => onEditDocs(pkg.id, pkg.docsUrl)}
 											title="Edit documentation link"
+											type="button"
 										>
 											<Edit className="h-4 w-4" />
 										</button>

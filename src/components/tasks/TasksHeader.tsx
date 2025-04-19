@@ -20,35 +20,35 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
 			<div className="flex items-center justify-between px-4 py-2">
 				<div className="flex space-x-1">
 					<button
-						type="button"
 						className={`rounded-md px-3 py-1.5 text-sm ${
 							activeTab === 'all'
 								? 'bg-gray-100 font-medium dark:bg-gray-800'
 								: 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
 						}`}
 						onClick={() => onTabChange('all')}
+						type="button"
 					>
 						All Issues
 					</button>
 					<button
-						type="button"
 						className={`rounded-md px-3 py-1.5 text-sm ${
 							activeTab === 'active'
 								? 'bg-gray-100 font-medium dark:bg-gray-800'
 								: 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
 						}`}
 						onClick={() => onTabChange('active')}
+						type="button"
 					>
 						Active
 					</button>
 					<button
-						type="button"
 						className={`rounded-md px-3 py-1.5 text-sm ${
 							activeTab === 'backlog'
 								? 'bg-gray-100 font-medium dark:bg-gray-800'
 								: 'text-gray-500 hover:text-gray-800 dark:hover:text-gray-200'
 						}`}
 						onClick={() => onTabChange('backlog')}
+						type="button"
 					>
 						Backlog
 					</button>
@@ -56,9 +56,9 @@ export const TasksHeader: React.FC<TasksHeaderProps> = ({
 
 				<div className="flex items-center space-x-2">
 					<button
-						type="button"
-						className="rounded-full p-1.5 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
 						aria-label="Notifications"
+						className="rounded-full p-1.5 text-gray-500 hover:text-gray-800 dark:hover:text-gray-200"
+						type="button"
 					>
 						<Bell size={18} />
 					</button>

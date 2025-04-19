@@ -29,20 +29,20 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 			<div className="flex items-center justify-between border-b p-4">
 				<div className="flex items-center space-x-3">
 					<button
-						type="button"
-						onClick={onClose}
 						className="text-gray-500 hover:text-gray-700"
+						onClick={onClose}
+						type="button"
 					>
 						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
 							fill="none"
+							height="20"
 							stroke="currentColor"
-							strokeWidth="2"
 							strokeLinecap="round"
 							strokeLinejoin="round"
+							strokeWidth="2"
+							viewBox="0 0 24 24"
+							width="20"
+							xmlns="http://www.w3.org/2000/svg"
 						>
 							<polyline points="15 18 9 12 15 6" />
 						</svg>
@@ -67,7 +67,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 
 			{/* Content */}
 			<div className="flex-1 overflow-auto p-4">
-				<Tabs defaultValue="overview" className="w-full">
+				<Tabs className="w-full" defaultValue="overview">
 					<TabsList className="mb-4">
 						<TabsTrigger value="overview">Overview</TabsTrigger>
 						<TabsTrigger value="tasks">Tasks</TabsTrigger>
@@ -80,7 +80,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 						</TabsTrigger>
 					</TabsList>
 
-					<TabsContent value="overview" className="space-y-4">
+					<TabsContent className="space-y-4" value="overview">
 						<div className="mb-4">
 							<h3 className="mb-2 font-medium text-lg">Progress</h3>
 							<Progress
@@ -91,22 +91,20 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 
 						<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
 							<OverviewCard
-								title="Tasks"
-								value={`${cycle.progress.completedTasks}/${cycle.progress.totalTasks}`}
 								description="Tasks completed"
 								icon="tasks"
+								title="Tasks"
+								value={`${cycle.progress.completedTasks}/${cycle.progress.totalTasks}`}
 							/>
 
 							<OverviewCard
-								title="Tokens"
-								value={formatTokens(cycle.tokensConsumed)}
 								description="Tokens consumed"
 								icon="tokens"
+								title="Tokens"
+								value={formatTokens(cycle.tokensConsumed)}
 							/>
 
 							<OverviewCard
-								title="Duration"
-								value={`${Math.ceil((new Date(cycle.endDate).getTime() - new Date(cycle.startDate).getTime()) / (1000 * 60 * 60 * 24))} days`}
 								description={
 									cycle.status === 'In Progress'
 										? isOverdue
@@ -116,6 +114,8 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 								}
 								icon="calendar"
 								status={isOverdue ? 'negative' : 'positive'}
+								title="Duration"
+								value={`${Math.ceil((new Date(cycle.endDate).getTime() - new Date(cycle.startDate).getTime()) / (1000 * 60 * 60 * 24))} days`}
 							/>
 						</div>
 
@@ -142,7 +142,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 						<TasksTable tasks={cycle.tasks} />
 					</TabsContent>
 
-					<TabsContent value="details" className="space-y-4">
+					<TabsContent className="space-y-4" value="details">
 						<div>
 							<h3 className="mb-2 font-medium text-lg">
 								Additional Instructions
@@ -158,7 +158,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 								<h3 className="mb-2 font-medium text-lg">Integration Tests</h3>
 								<ul className="list-disc space-y-1 pl-5">
 									{cycle.integrationTests.map((test, index) => (
-										<li key={index} className="text-gray-700">
+										<li className="text-gray-700" key={index}>
 											{test}
 										</li>
 									))}

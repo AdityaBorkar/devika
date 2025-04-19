@@ -1,7 +1,4 @@
-'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from 'react-router';
 import { Button } from '@/components/ui/button';
 
 type NavItem = {
@@ -21,7 +18,7 @@ export default function NavLayout({
 	prefix?: string;
 	header?: React.ReactNode;
 }) {
-	const currentPath = usePathname();
+	const pathname = useLocation().pathname;
 	return (
 		<div className="flex h-full">
 			<aside className="flex w-64 flex-col border-r bg-card p-4">
@@ -31,12 +28,12 @@ export default function NavLayout({
 						const fullHref = `${prefix}${item.href}`;
 						return (
 							<Button
-								key={item.href}
-								variant={currentPath === fullHref ? 'default' : 'ghost'}
-								className="!px-4 !py-5 w-full justify-start"
 								asChild
+								className="!px-4 !py-5 w-full justify-start"
+								key={item.href}
+								variant={pathname === fullHref ? 'default' : 'ghost'}
 							>
-								<Link href={fullHref}>
+								<Link to={fullHref}>
 									<item.icon className="size-5" />
 									{item.label}
 								</Link>

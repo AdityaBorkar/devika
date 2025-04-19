@@ -1,7 +1,7 @@
 ---
-description: Guide for using meta-development script (scripts/dev.js) to manage task-driven development workflows
-globs: **/*
-alwaysApply: true
+description: 
+globs: 
+alwaysApply: false
 ---
 
 - **Global CLI Commands**

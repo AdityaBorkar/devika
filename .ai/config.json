@@ -1,10 +1,10 @@
 {
-	"name": "AI Developer",
 	"ide": "cursor",
+	"name": "AI Developer",
 	"paths": {
+		"config": "/config",
 		"cycles": "/cycles",
-		"tasks": "/tasks",
 		"prd": "/prd",
-		"config": "/config"
+		"tasks": "/tasks"
 	}
 }

@@ -10,11 +10,11 @@ export const HeaderActions: React.FC<HeaderActionsProps> = ({
 }) => {
 	return (
 		<button
-			type="button"
 			className="flex items-center rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-sm text-white hover:bg-indigo-700"
 			onClick={onCreateTask}
+			type="button"
 		>
-			<Plus size={16} className="mr-1" />
+			<Plus className="mr-1" size={16} />
 			New Task
 		</button>
 	);

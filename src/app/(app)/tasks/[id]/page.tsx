@@ -1,23 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'react-router';
 import { getTaskDetail } from '@/components/tasks/mock-data';
 import { TaskDetailContent } from '@/components/tasks/TaskDetailContent';
 import { TaskDetailHeader } from '@/components/tasks/TaskDetailHeader';
 import { TaskDetailSidebar } from '@/components/tasks/TaskDetailSidebar';
-import {
-	type Comment,
-	Subtask,
-	type TaskDetail,
-} from '@/components/tasks/types';
+import type { Comment, TaskDetail } from '@/components/tasks/types';
 
 type TaskDetailPageProps = {
 	params: { id: string };
 };
 
-export default function TaskDetailPage({ params }: TaskDetailPageProps) {
+export default function TaskDetailPage() {
 	// Get initial task data
-	const [task, setTask] = useState<TaskDetail>(() => getTaskDetail(params.id));
+	const { id } = useParams();
+	const [task, setTask] = useState<TaskDetail>(() => getTaskDetail(id));
 
 	// Handle task updates
 	const handleTaskUpdate = (

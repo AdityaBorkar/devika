@@ -1,17 +1,9 @@
 import { Plus } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import type React from 'react';
+import { useNavigate } from 'react-router';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '../ui/button';
-import {
-	Card,
-	CardAction,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '../ui/card';
+import { Card, CardContent, CardHeader } from '../ui/card';
 import { TaskCard } from './TaskCard';
 import type { Task } from './types';
 
@@ -37,16 +29,16 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<h2 className="font-medium text-sm">{title}</h2>
-							<Badge variant="secondary" className="text-xs">
+							<Badge className="text-xs" variant="secondary">
 								{count}
 							</Badge>
 						</div>
 						<Button
+							aria-label={`Add task to ${title}`}
+							className="h-6 w-6"
+							size="icon"
 							type="button"
 							variant="ghost"
-							size="icon"
-							className="h-6 w-6"
-							aria-label={`Add task to ${title}`}
 						>
 							<Plus size={14} />
 						</Button>
@@ -55,7 +47,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 				<CardContent className="px-3 pt-0 pb-3">
 					<div className="space-y-2">
 						{tasks.map((task) => (
-							<TaskCard key={task.id} task={task} onClick={onClick} />
+							<TaskCard key={task.id} onClick={onClick} task={task} />
 						))}
 
 						{tasks.length === 0 && (
@@ -75,10 +67,10 @@ interface KanbanBoardProps {
 }
 
 export const KanbanBoard: React.FC<KanbanBoardProps> = ({ tasks }) => {
-	const router = useRouter();
+	const navigate = useNavigate();
 
 	const handleTaskClick = (id: string) => {
-		router.push(`/tasks/${id}`);
+		navigate(`/tasks/${id}`);
 	};
 
 	const todoTasks = tasks.filter((task) => task.status === 'Todo');
@@ -89,25 +81,25 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ tasks }) => {
 		<div className="flex-1 overflow-x-auto">
 			<div className="-mx-2 flex min-w-full flex-wrap p-4">
 				<KanbanColumn
-					title="Todo"
-					tasks={todoTasks}
-					color="#6b7280" // gray-500
+					color="#6b7280"
 					count={todoTasks.length}
-					onClick={handleTaskClick}
+					onClick={handleTaskClick} // gray-500
+					tasks={todoTasks}
+					title="Todo"
 				/>
 				<KanbanColumn
-					title="In Progress"
-					tasks={inProgressTasks}
-					color="#3b82f6" // blue-500
+					color="#3b82f6"
 					count={inProgressTasks.length}
-					onClick={handleTaskClick}
+					onClick={handleTaskClick} // blue-500
+					tasks={inProgressTasks}
+					title="In Progress"
 				/>
 				<KanbanColumn
-					title="Done"
-					tasks={doneTasks}
-					color="#10b981" // emerald-500
+					color="#10b981"
 					count={doneTasks.length}
-					onClick={handleTaskClick}
+					onClick={handleTaskClick} // emerald-500
+					tasks={doneTasks}
+					title="Done"
 				/>
 			</div>
 		</div>

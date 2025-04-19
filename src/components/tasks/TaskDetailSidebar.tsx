@@ -19,14 +19,14 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 
 			<div className="space-y-4">
 				<div>
-					<label htmlFor="status" className="mb-1 block text-gray-500 text-xs">
+					<label className="mb-1 block text-gray-500 text-xs" htmlFor="status">
 						Status
 					</label>
 					<select
-						id="status"
 						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
-						value={task.status}
+						id="status"
 						onChange={(e) => onTaskUpdate('status', e.target.value)}
+						value={task.status}
 					>
 						<option value="Todo">Todo</option>
 						<option value="In Progress">In Progress</option>
@@ -36,16 +36,16 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 
 				<div>
 					<label
-						htmlFor="assignee"
 						className="mb-1 block text-gray-500 text-xs"
+						htmlFor="assignee"
 					>
 						Assignee
 					</label>
 					<select
-						id="assignee"
 						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
-						value={task.assignee}
+						id="assignee"
 						onChange={(e) => onTaskUpdate('assignee', e.target.value)}
+						value={task.assignee}
 					>
 						<option>John Doe</option>
 						<option>Jane Smith</option>
@@ -57,16 +57,16 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 
 				<div>
 					<label
-						htmlFor="priority"
 						className="mb-1 block text-gray-500 text-xs"
+						htmlFor="priority"
 					>
 						Priority
 					</label>
 					<select
-						id="priority"
 						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
-						value={task.priority}
+						id="priority"
 						onChange={(e) => onTaskUpdate('priority', e.target.value)}
+						value={task.priority}
 					>
 						<option value="High">High</option>
 						<option value="Medium">Medium</option>
@@ -75,23 +75,23 @@ export const TaskDetailSidebar: React.FC<TaskDetailSidebarProps> = ({
 				</div>
 
 				<div>
-					<label htmlFor="dueDate" className="mb-1 block text-gray-500 text-xs">
+					<label className="mb-1 block text-gray-500 text-xs" htmlFor="dueDate">
 						Due Date
 					</label>
 					<input
-						id="dueDate"
-						type="date"
 						className="w-full rounded border border-gray-300 bg-white p-1.5 text-sm dark:border-gray-700 dark:bg-gray-800"
-						value={task.due}
+						id="dueDate"
 						onChange={(e) => onTaskUpdate('due', e.target.value)}
+						type="date"
+						value={task.due}
 					/>
 				</div>
 
 				<div>
-					<label htmlFor="labels" className="mb-1 block text-gray-500 text-xs">
+					<label className="mb-1 block text-gray-500 text-xs" htmlFor="labels">
 						Labels
 					</label>
-					<div id="labels" className="mt-1 flex flex-wrap gap-1">
+					<div className="mt-1 flex flex-wrap gap-1" id="labels">
 						<div className="rounded-full bg-indigo-100 px-2 py-1 text-indigo-800 text-xs">
 							Frontend
 						</div>

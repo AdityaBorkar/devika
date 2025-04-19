@@ -34,7 +34,10 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 
 	return (
 		<Card
+			aria-label={`Open task ${task.id}: ${task.title}`}
 			className="w-full cursor-pointer border-l-4 transition-all hover:translate-y-[-2px] hover:shadow-md"
+			onClick={() => onClick(task.id)}
+			onKeyDown={handleKeyDown}
 			style={{
 				borderLeftColor:
 					task.status === 'Done'
@@ -43,28 +46,25 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 							? 'hsl(var(--info))'
 							: 'hsl(var(--muted))',
 			}}
-			onClick={() => onClick(task.id)}
-			onKeyDown={handleKeyDown}
 			tabIndex={0}
-			aria-label={`Open task ${task.id}: ${task.title}`}
 		>
 			<CardHeader className="px-3 py-2">
 				<div className="flex items-start justify-between">
-					<Badge variant="outline" className="font-mono text-xs">
+					<Badge className="font-mono text-xs" variant="outline">
 						{task.id}
 					</Badge>
 					<TooltipProvider>
 						<Tooltip>
 							<TooltipTrigger asChild>
 								<Button
-									type="button"
-									variant="ghost"
-									size="icon"
 									className="h-6 w-6"
 									onClick={(e) => {
 										e.stopPropagation();
 										// Handle options menu
 									}}
+									size="icon"
+									type="button"
+									variant="ghost"
 								>
 									<MoreHorizontal size={14} />
 								</Button>
@@ -85,7 +85,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 				<div className="flex items-center gap-2">
 					<TaskPriorityBadge priority={task.priority} />
 					{isOverdue && (
-						<Badge variant="destructive" className="text-[10px]">
+						<Badge className="text-[10px]" variant="destructive">
 							Overdue
 						</Badge>
 					)}

@@ -25,22 +25,22 @@ import { ProjectOnboardingSchema } from '@/schemas/ProjectOnboarding';
 
 // Default values matching the schema defaults
 const defaultValues: Partial<ProjectOnboardingSchema> = {
-	projectName: '',
-	description: '',
-	themeColor: '#000000',
-	theme: 'light',
-	authorName: '',
-	isMonorepo: 'no',
-	projectType: 'project',
 	aiEditor: 'cursor',
+	authorName: '',
+	description: '',
 	isBlank: 'not_blank',
+	isMonorepo: 'no',
+	projectName: '',
+	projectType: 'project',
+	theme: 'light',
+	themeColor: '#000000',
 };
 
 export default function OnboardingPage() {
 	const form = useForm<ProjectOnboardingSchema>({
-		resolver: zodResolver(ProjectOnboardingSchema),
 		defaultValues,
-		mode: 'onChange', // Or "onSubmit"
+		mode: 'onChange',
+		resolver: zodResolver(ProjectOnboardingSchema), // Or "onSubmit"
 	});
 
 	function onSubmit(data: ProjectOnboardingSchema) {
@@ -52,8 +52,8 @@ export default function OnboardingPage() {
 		<div className="flex min-h-screen items-center justify-center bg-background p-4">
 			<Form {...form}>
 				<form
-					onSubmit={form.handleSubmit(onSubmit)}
 					className="w-full max-w-lg space-y-6 rounded-lg border bg-card p-8 shadow-sm"
+					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<h1 className="font-semibold text-2xl text-card-foreground">
 						Project Onboarding
@@ -95,7 +95,7 @@ export default function OnboardingPage() {
 								<FormItem>
 									<FormLabel>Theme Color</FormLabel>
 									<FormControl>
-										<Input type="color" className="h-10 w-full" {...field} />
+										<Input className="h-10 w-full" type="color" {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -109,23 +109,23 @@ export default function OnboardingPage() {
 									<FormLabel>Theme</FormLabel>
 									<FormControl>
 										<RadioGroup
-											onValueChange={field.onChange}
-											defaultValue={field.value}
 											className="flex items-center space-x-4 pt-2"
+											defaultValue={field.value}
+											onValueChange={field.onChange}
 										>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="light" id="light" />
+													<RadioGroupItem id="light" value="light" />
 												</FormControl>
-												<FormLabel htmlFor="light" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="light">
 													Light
 												</FormLabel>
 											</FormItem>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="dark" id="dark" />
+													<RadioGroupItem id="dark" value="dark" />
 												</FormControl>
-												<FormLabel htmlFor="dark" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="dark">
 													Dark
 												</FormLabel>
 											</FormItem>
@@ -160,23 +160,23 @@ export default function OnboardingPage() {
 									<FormLabel>Monorepo?</FormLabel>
 									<FormControl>
 										<RadioGroup
-											onValueChange={field.onChange}
-											defaultValue={field.value}
 											className="flex items-center space-x-4 pt-2"
+											defaultValue={field.value}
+											onValueChange={field.onChange}
 										>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="yes" id="mono-yes" />
+													<RadioGroupItem id="mono-yes" value="yes" />
 												</FormControl>
-												<FormLabel htmlFor="mono-yes" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="mono-yes">
 													Yes
 												</FormLabel>
 											</FormItem>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="no" id="mono-no" />
+													<RadioGroupItem id="mono-no" value="no" />
 												</FormControl>
-												<FormLabel htmlFor="mono-no" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="mono-no">
 													No
 												</FormLabel>
 											</FormItem>
@@ -194,23 +194,23 @@ export default function OnboardingPage() {
 									<FormLabel>Type</FormLabel>
 									<FormControl>
 										<RadioGroup
-											onValueChange={field.onChange}
-											defaultValue={field.value}
 											className="flex items-center space-x-4 pt-2"
+											defaultValue={field.value}
+											onValueChange={field.onChange}
 										>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="library" id="type-lib" />
+													<RadioGroupItem id="type-lib" value="library" />
 												</FormControl>
-												<FormLabel htmlFor="type-lib" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="type-lib">
 													Library
 												</FormLabel>
 											</FormItem>
 											<FormItem className="flex items-center space-x-2">
 												<FormControl>
-													<RadioGroupItem value="project" id="type-proj" />
+													<RadioGroupItem id="type-proj" value="project" />
 												</FormControl>
-												<FormLabel htmlFor="type-proj" className="font-normal">
+												<FormLabel className="font-normal" htmlFor="type-proj">
 													Project
 												</FormLabel>
 											</FormItem>
@@ -229,8 +229,8 @@ export default function OnboardingPage() {
 							<FormItem>
 								<FormLabel>Choose AI Editor</FormLabel>
 								<Select
-									onValueChange={field.onChange}
 									defaultValue={field.value}
+									onValueChange={field.onChange}
 								>
 									<FormControl>
 										<SelectTrigger>
@@ -258,28 +258,28 @@ export default function OnboardingPage() {
 								<FormLabel>Start with</FormLabel>
 								<FormControl>
 									<RadioGroup
-										onValueChange={field.onChange}
-										defaultValue={field.value}
 										className="flex items-center space-x-4 pt-2"
+										defaultValue={field.value}
+										onValueChange={field.onChange}
 									>
 										<FormItem className="flex items-center space-x-2">
 											<FormControl>
-												<RadioGroupItem value="blank" id="start-blank" />
+												<RadioGroupItem id="start-blank" value="blank" />
 											</FormControl>
-											<FormLabel htmlFor="start-blank" className="font-normal">
+											<FormLabel className="font-normal" htmlFor="start-blank">
 												Blank Project
 											</FormLabel>
 										</FormItem>
 										<FormItem className="flex items-center space-x-2">
 											<FormControl>
 												<RadioGroupItem
-													value="not_blank"
 													id="start-not-blank"
+													value="not_blank"
 												/>
 											</FormControl>
 											<FormLabel
-												htmlFor="start-not-blank"
 												className="font-normal"
+												htmlFor="start-not-blank"
 											>
 												Template
 											</FormLabel>
@@ -291,7 +291,7 @@ export default function OnboardingPage() {
 						)}
 					/>
 
-					<Button type="submit" className="w-full">
+					<Button className="w-full" type="submit">
 						Complete Onboarding
 					</Button>
 				</form>

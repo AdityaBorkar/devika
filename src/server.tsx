@@ -2,20 +2,20 @@ import { serve } from 'bun';
 import index from './index.html';
 
 const server = serve({
+	development: process.env.NODE_ENV !== 'production',
 	routes: { '/*': index },
+
 	websocket: {
-		open(ws) {
-			console.log('WebSocket opened');
+		close(ws, code, reason) {
+			console.log('WebSocket closed', code, reason);
 		},
 		message(ws, message) {
 			console.log('WebSocket message', message);
 		},
-		close(ws, code, reason) {
-			console.log('WebSocket closed', code, reason);
+		open(ws) {
+			console.log('WebSocket opened');
 		},
 	},
-
-	development: process.env.NODE_ENV !== 'production',
 });
 
 console.log(`🚀 Server running at ${server.url}`);

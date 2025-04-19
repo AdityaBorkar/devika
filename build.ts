@@ -41,6 +41,7 @@ const toCamelCase = (str: string): string => {
 };
 
 // Helper function to parse a value into appropriate type
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 const parseValue = (value: string): any => {
 	// Handle true/false strings
 	if (value === 'true') return true;
@@ -59,6 +60,7 @@ const parseValue = (value: string): any => {
 
 // Magical argument parser that converts CLI args to BuildConfig
 function parseArgs(): Partial<BuildConfig> {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	const config: Record<string, any> = {};
 	const args = process.argv.slice(2);
 
@@ -132,7 +134,7 @@ const outdir = cliConfig.outdir || path.join(process.cwd(), 'dist');
 
 if (existsSync(outdir)) {
 	console.log(`🗑️ Cleaning previous build at ${outdir}`);
-	await rm(outdir, { recursive: true, force: true });
+	await rm(outdir, { force: true, recursive: true });
 }
 
 const start = performance.now();
@@ -147,15 +149,15 @@ console.log(
 
 // Build all the HTML files
 const result = await build({
-	entrypoints,
-	outdir,
-	plugins: [plugin],
-	minify: true,
-	target: 'browser',
-	sourcemap: 'linked',
 	define: {
 		'process.env.NODE_ENV': JSON.stringify('production'),
 	},
+	entrypoints,
+	minify: true,
+	outdir,
+	plugins: [plugin],
+	sourcemap: 'linked',
+	target: 'browser',
 	...cliConfig, // Merge in any CLI-provided options
 });
 
@@ -164,8 +166,8 @@ const end = performance.now();
 
 const outputTable = result.outputs.map((output) => ({
 	File: path.relative(process.cwd(), output.path),
-	Type: output.kind,
 	Size: formatFileSize(output.size),
+	Type: output.kind,
 }));
 
 console.table(outputTable);

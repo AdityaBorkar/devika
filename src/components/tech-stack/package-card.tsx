@@ -1,5 +1,3 @@
-'use client';
-
 import {
 	Book,
 	Edit,
@@ -10,7 +8,6 @@ import {
 	ShieldAlert,
 	XCircle,
 } from 'lucide-react';
-import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import type { Package } from '@/types/tech-stack';
 
@@ -48,11 +45,11 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 					{logoUrl && (
 						<div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-gray-50 p-1 dark:bg-gray-800">
 							<img
-								src={logoUrl}
 								alt={name}
-								width={40}
-								height={40}
 								className="object-contain"
+								height={40}
+								src={logoUrl}
+								width={40}
 							/>
 						</div>
 					)}
@@ -75,10 +72,10 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 
 				<div className="flex items-center gap-2">
 					<a
-						href={docsUrl}
-						target="_blank"
-						rel="noopener noreferrer"
 						className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+						href={docsUrl}
+						rel="noopener noreferrer"
+						target="_blank"
 						title={`View ${isLocal ? 'local documentation' : 'external documentation'}`}
 					>
 						{isLocal ? (
@@ -92,13 +89,13 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 						)}
 					</a>
 					<button
-						type="button"
+						className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
 						onClick={(e) => {
 							e.stopPropagation();
 							onEditDocs(pkg.id, docsUrl);
 						}}
-						className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
 						title="Edit documentation link"
+						type="button"
 					>
 						<Edit className="h-4 w-4" />
 					</button>

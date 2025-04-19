@@ -30,15 +30,15 @@ export const getPriorityColor = (priority: string): string => {
 
 // Filter options
 export const STATUS_OPTIONS: StatusOption[] = [
-	{ value: 'all', label: 'All Tasks' },
-	{ value: 'Todo', label: 'Todo' },
-	{ value: 'In Progress', label: 'In Progress' },
-	{ value: 'Done', label: 'Done' },
+	{ label: 'All Tasks', value: 'all' },
+	{ label: 'Todo', value: 'Todo' },
+	{ label: 'In Progress', value: 'In Progress' },
+	{ label: 'Done', value: 'Done' },
 ];
 
 export const PRIORITY_OPTIONS: PriorityOption[] = [
-	{ value: 'all', label: 'All Priorities' },
-	{ value: 'High', label: 'High' },
-	{ value: 'Medium', label: 'Medium' },
-	{ value: 'Low', label: 'Low' },
+	{ label: 'All Priorities', value: 'all' },
+	{ label: 'High', value: 'High' },
+	{ label: 'Medium', value: 'Medium' },
+	{ label: 'Low', value: 'Low' },
 ];

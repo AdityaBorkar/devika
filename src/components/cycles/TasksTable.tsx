@@ -68,31 +68,31 @@ export function TasksTable({ tasks }: TasksTableProps) {
 
 		return sortDirection === 'asc' ? (
 			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="14"
-				height="14"
-				viewBox="0 0 24 24"
+				className="ml-1"
 				fill="none"
+				height="14"
 				stroke="currentColor"
-				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
-				className="ml-1"
+				strokeWidth="2"
+				viewBox="0 0 24 24"
+				width="14"
+				xmlns="http://www.w3.org/2000/svg"
 			>
 				<polyline points="18 15 12 9 6 15" />
 			</svg>
 		) : (
 			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="14"
-				height="14"
-				viewBox="0 0 24 24"
+				className="ml-1"
 				fill="none"
+				height="14"
 				stroke="currentColor"
-				strokeWidth="2"
 				strokeLinecap="round"
 				strokeLinejoin="round"
-				className="ml-1"
+				strokeWidth="2"
+				viewBox="0 0 24 24"
+				width="14"
+				xmlns="http://www.w3.org/2000/svg"
 			>
 				<polyline points="6 9 12 15 18 9" />
 			</svg>
@@ -105,12 +105,12 @@ export function TasksTable({ tasks }: TasksTableProps) {
 		const efficiency = (estimated / actual) * 100;
 
 		if (efficiency >= 100) {
-			return { value: `${Math.round(efficiency)}%`, class: 'text-green-600' };
+			return { class: 'text-green-600', value: `${Math.round(efficiency)}%` };
 		}
 		if (efficiency >= 80) {
-			return { value: `${Math.round(efficiency)}%`, class: 'text-yellow-600' };
+			return { class: 'text-yellow-600', value: `${Math.round(efficiency)}%` };
 		}
-		return { value: `${Math.round(efficiency)}%`, class: 'text-red-600' };
+		return { class: 'text-red-600', value: `${Math.round(efficiency)}%` };
 	};
 
 	return (
@@ -171,7 +171,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 						})
 					) : (
 						<TableRow>
-							<TableCell colSpan={6} className="py-4 text-center text-gray-500">
+							<TableCell className="py-4 text-center text-gray-500" colSpan={6}>
 								No tasks available
 							</TableCell>
 						</TableRow>

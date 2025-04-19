@@ -16,43 +16,43 @@ export type StyleConfig = {
 
 const defaultConfigs: StyleConfig[] = [
 	{
-		id: 'common',
-		name: 'Common Style Config',
-		isCommon: true,
-		colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
-		typography: '<h2>Typography</h2><p>Define your typography system here.</p>',
-		iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
-		designSystem:
-			'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
 		animations:
 			'<h2>Transitions and Animations</h2><p>Define your animations here.</p>',
+		colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
 		cssStrategy: '<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>',
+		designSystem:
+			'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
+		iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
+		id: 'common',
+		isCommon: true,
+		name: 'Common Style Config',
+		typography: '<h2>Typography</h2><p>Define your typography system here.</p>',
 	},
 	{
-		id: 'app1',
-		name: 'App 1 Style Config',
-		isCommon: false,
-		colors: '<h2>Colors</h2><p>App 1 specific colors.</p>',
-		typography: '<h2>Typography</h2><p>App 1 specific typography.</p>',
-		iconography: '<h2>Iconography</h2><p>App 1 specific iconography.</p>',
-		designSystem:
-			'<h2>Component Library / Design System</h2><p>App 1 specific design system.</p>',
 		animations:
 			'<h2>Transitions and Animations</h2><p>App 1 specific animations.</p>',
+		colors: '<h2>Colors</h2><p>App 1 specific colors.</p>',
 		cssStrategy: '<h2>CSS Strategy</h2><p>App 1 specific CSS strategy.</p>',
+		designSystem:
+			'<h2>Component Library / Design System</h2><p>App 1 specific design system.</p>',
+		iconography: '<h2>Iconography</h2><p>App 1 specific iconography.</p>',
+		id: 'app1',
+		isCommon: false,
+		name: 'App 1 Style Config',
+		typography: '<h2>Typography</h2><p>App 1 specific typography.</p>',
 	},
 	{
-		id: 'app2',
-		name: 'App 2 Style Config',
-		isCommon: false,
-		colors: '<h2>Colors</h2><p>App 2 specific colors.</p>',
-		typography: '<h2>Typography</h2><p>App 2 specific typography.</p>',
-		iconography: '<h2>Iconography</h2><p>App 2 specific iconography.</p>',
-		designSystem:
-			'<h2>Component Library / Design System</h2><p>App 2 specific design system.</p>',
 		animations:
 			'<h2>Transitions and Animations</h2><p>App 2 specific animations.</p>',
+		colors: '<h2>Colors</h2><p>App 2 specific colors.</p>',
 		cssStrategy: '<h2>CSS Strategy</h2><p>App 2 specific CSS strategy.</p>',
+		designSystem:
+			'<h2>Component Library / Design System</h2><p>App 2 specific design system.</p>',
+		iconography: '<h2>Iconography</h2><p>App 2 specific iconography.</p>',
+		id: 'app2',
+		isCommon: false,
+		name: 'App 2 Style Config',
+		typography: '<h2>Typography</h2><p>App 2 specific typography.</p>',
 	},
 ];
 
@@ -88,18 +88,18 @@ export function StyleConfigProvider({ children }: { children: ReactNode }) {
 
 	const addConfig = (name: string) => {
 		const newConfig: StyleConfig = {
-			id: `app-${Date.now()}`,
-			name,
-			isCommon: false,
-			colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
-			typography:
-				'<h2>Typography</h2><p>Define your typography system here.</p>',
-			iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
-			designSystem:
-				'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
 			animations:
 				'<h2>Transitions and Animations</h2><p>Define your animations here.</p>',
+			colors: '<h2>Colors</h2><p>Define your color palette here.</p>',
 			cssStrategy: '<h2>CSS Strategy</h2><p>Define your CSS strategy here.</p>',
+			designSystem:
+				'<h2>Component Library / Design System</h2><p>Define your design system here.</p>',
+			iconography: '<h2>Iconography</h2><p>Define your iconography here.</p>',
+			id: `app-${Date.now()}`,
+			isCommon: false,
+			name,
+			typography:
+				'<h2>Typography</h2><p>Define your typography system here.</p>',
 		};
 
 		setConfigs((prevConfigs) => [...prevConfigs, newConfig]);
@@ -114,7 +114,7 @@ export function StyleConfigProvider({ children }: { children: ReactNode }) {
 
 	return (
 		<StyleConfigContext.Provider
-			value={{ configs, updateConfig, addConfig, deleteConfig }}
+			value={{ addConfig, configs, deleteConfig, updateConfig }}
 		>
 			{children}
 		</StyleConfigContext.Provider>

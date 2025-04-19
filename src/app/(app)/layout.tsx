@@ -15,34 +15,34 @@ import useConfig from '@/hooks/useConfig';
 
 const NAV_ITEMS = [
 	{
-		label: 'Dashboard',
 		href: 'dashboard',
 		icon: PiLayout,
+		label: 'Dashboard',
 	},
 	{
-		label: 'PRD',
 		href: 'prd',
 		icon: PiFileDoc,
+		label: 'PRD',
 	},
 	{
-		label: 'Tasks',
 		href: 'tasks',
 		icon: PiListChecks,
+		label: 'Tasks',
 	},
 	{
-		label: 'Cycles',
 		href: 'cycles',
 		icon: PiRepeatOnce,
+		label: 'Cycles',
 	},
 	{
-		label: 'Repository',
 		href: 'repository',
 		icon: PiFolder,
+		label: 'Repository',
 	},
 	{
-		label: 'Stats',
 		href: 'stats',
 		icon: PiChartLine,
+		label: 'Stats',
 	},
 ];
 
@@ -65,10 +65,10 @@ export default function AppLayout() {
 					{NAV_ITEMS.map((item) => {
 						return (
 							<Button
+								asChild
+								className="!px-4 !py-5 w-full justify-start"
 								key={item.href}
 								variant={segment === item.href ? 'default' : 'ghost'}
-								className="!px-4 !py-5 w-full justify-start"
-								asChild
 							>
 								<Link to={item.href}>
 									<item.icon className="size-5" />

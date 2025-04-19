@@ -36,15 +36,136 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 // Mock data - would be replaced with actual data from API
 const stats = {
+	cycles: {
+		averageCommits: 14,
+		averageLOC: 780, // hours
+		averageTime: 10,
+		averageTokens: 206250,
+		count: 12,
+		data: [
+			{
+				commits: 16,
+				id: 1,
+				loc: 850,
+				reprompts: 3.1,
+				time: 12,
+				tokens: 220000,
+			},
+			{ commits: 12, id: 2, loc: 720, reprompts: 2.3, time: 9, tokens: 190000 },
+			{
+				commits: 15,
+				id: 3,
+				loc: 820,
+				reprompts: 2.7,
+				time: 11,
+				tokens: 240000,
+			},
+			{ commits: 11, id: 4, loc: 650, reprompts: 1.9, time: 8, tokens: 180000 },
+			{
+				commits: 14,
+				id: 5,
+				loc: 790,
+				reprompts: 2.2,
+				time: 10,
+				tokens: 210000,
+			},
+			{
+				commits: 13,
+				id: 6,
+				loc: 760,
+				reprompts: 2.0,
+				time: 10,
+				tokens: 200000,
+			},
+			{ commits: 12, id: 7, loc: 730, reprompts: 2.1, time: 9, tokens: 195000 },
+			{
+				commits: 15,
+				id: 8,
+				loc: 800,
+				reprompts: 2.6,
+				time: 11,
+				tokens: 220000,
+			},
+			{
+				commits: 14,
+				id: 9,
+				loc: 770,
+				reprompts: 2.4,
+				time: 10,
+				tokens: 210000,
+			},
+			{
+				commits: 13,
+				id: 10,
+				loc: 740,
+				reprompts: 2.2,
+				time: 9,
+				tokens: 195000,
+			},
+			{
+				commits: 16,
+				id: 11,
+				loc: 830,
+				reprompts: 2.8,
+				time: 12,
+				tokens: 230000,
+			},
+			{
+				commits: 14,
+				id: 12,
+				loc: 780,
+				reprompts: 2.3,
+				time: 10,
+				tokens: 205000,
+			},
+		], // average reprompts per task
+		repromptRate: 2.4,
+	},
+	errors: {
+		byType: [
+			{ name: 'Syntax', value: 42 },
+			{ name: 'Logic', value: 38 },
+			{ name: 'Integration', value: 26 },
+			{ name: 'Performance', value: 15 },
+			{ name: 'Other', value: 35 },
+		],
+		resolved: 142,
+		total: 156,
+		trend: [
+			{ reported: 28, resolved: 24, week: 'W1' },
+			{ reported: 32, resolved: 30, week: 'W2' },
+			{ reported: 36, resolved: 32, week: 'W3' },
+			{ reported: 30, resolved: 27, week: 'W4' },
+			{ reported: 22, resolved: 21, week: 'W5' },
+			{ reported: 8, resolved: 8, week: 'W6' },
+		],
+	},
+	time: {
+		average: 25, // hours
+		byPhase: [
+			{ name: 'Planning', value: 30 },
+			{ name: 'Development', value: 65 },
+			{ name: 'Testing', value: 15 },
+			{ name: 'Refinement', value: 10 },
+		], // minutes per task
+		monthly: [
+			{ hours: 15, month: 'Jan' },
+			{ hours: 18, month: 'Feb' },
+			{ hours: 22, month: 'Mar' },
+			{ hours: 25, month: 'Apr' },
+			{ hours: 20, month: 'May' },
+			{ hours: 20, month: 'Jun' },
+		],
+		total: 120,
+	},
 	tokens: {
-		total: 2475000,
-		lastMonth: 850000,
 		average: 7500,
 		byModel: [
 			{ name: 'Claude 3 Opus', value: 1200000 },
 			{ name: 'Claude 3 Sonnet', value: 875000 },
 			{ name: 'GPT-4', value: 400000 },
 		],
+		lastMonth: 850000,
 		monthly: [
 			{ month: 'Jan', tokens: 320000 },
 			{ month: 'Feb', tokens: 290000 },
@@ -53,128 +174,7 @@ const stats = {
 			{ month: 'May', tokens: 560000 },
 			{ month: 'Jun', tokens: 525000 },
 		],
-	},
-	time: {
-		total: 120, // hours
-		average: 25, // minutes per task
-		byPhase: [
-			{ name: 'Planning', value: 30 },
-			{ name: 'Development', value: 65 },
-			{ name: 'Testing', value: 15 },
-			{ name: 'Refinement', value: 10 },
-		],
-		monthly: [
-			{ month: 'Jan', hours: 15 },
-			{ month: 'Feb', hours: 18 },
-			{ month: 'Mar', hours: 22 },
-			{ month: 'Apr', hours: 25 },
-			{ month: 'May', hours: 20 },
-			{ month: 'Jun', hours: 20 },
-		],
-	},
-	errors: {
-		total: 156,
-		resolved: 142,
-		byType: [
-			{ name: 'Syntax', value: 42 },
-			{ name: 'Logic', value: 38 },
-			{ name: 'Integration', value: 26 },
-			{ name: 'Performance', value: 15 },
-			{ name: 'Other', value: 35 },
-		],
-		trend: [
-			{ week: 'W1', reported: 28, resolved: 24 },
-			{ week: 'W2', reported: 32, resolved: 30 },
-			{ week: 'W3', reported: 36, resolved: 32 },
-			{ week: 'W4', reported: 30, resolved: 27 },
-			{ week: 'W5', reported: 22, resolved: 21 },
-			{ week: 'W6', reported: 8, resolved: 8 },
-		],
-	},
-	cycles: {
-		count: 12,
-		averageTime: 10, // hours
-		averageTokens: 206250,
-		averageCommits: 14,
-		averageLOC: 780,
-		repromptRate: 2.4, // average reprompts per task
-		data: [
-			{
-				id: 1,
-				time: 12,
-				tokens: 220000,
-				commits: 16,
-				loc: 850,
-				reprompts: 3.1,
-			},
-			{ id: 2, time: 9, tokens: 190000, commits: 12, loc: 720, reprompts: 2.3 },
-			{
-				id: 3,
-				time: 11,
-				tokens: 240000,
-				commits: 15,
-				loc: 820,
-				reprompts: 2.7,
-			},
-			{ id: 4, time: 8, tokens: 180000, commits: 11, loc: 650, reprompts: 1.9 },
-			{
-				id: 5,
-				time: 10,
-				tokens: 210000,
-				commits: 14,
-				loc: 790,
-				reprompts: 2.2,
-			},
-			{
-				id: 6,
-				time: 10,
-				tokens: 200000,
-				commits: 13,
-				loc: 760,
-				reprompts: 2.0,
-			},
-			{ id: 7, time: 9, tokens: 195000, commits: 12, loc: 730, reprompts: 2.1 },
-			{
-				id: 8,
-				time: 11,
-				tokens: 220000,
-				commits: 15,
-				loc: 800,
-				reprompts: 2.6,
-			},
-			{
-				id: 9,
-				time: 10,
-				tokens: 210000,
-				commits: 14,
-				loc: 770,
-				reprompts: 2.4,
-			},
-			{
-				id: 10,
-				time: 9,
-				tokens: 195000,
-				commits: 13,
-				loc: 740,
-				reprompts: 2.2,
-			},
-			{
-				id: 11,
-				time: 12,
-				tokens: 230000,
-				commits: 16,
-				loc: 830,
-				reprompts: 2.8,
-			},
-			{
-				id: 12,
-				time: 10,
-				tokens: 205000,
-				commits: 14,
-				loc: 780,
-				reprompts: 2.3,
-			},
-		],
+		total: 2475000,
 	},
 };
 
@@ -192,7 +192,7 @@ export default function StatsPage() {
 		<div className="space-y-6 p-6">
 			<h1 className="font-bold text-3xl tracking-tight">Usage Statistics</h1>
 
-			<Tabs defaultValue="overview" className="space-y-6">
+			<Tabs className="space-y-6" defaultValue="overview">
 				<TabsList>
 					<TabsTrigger value="overview">Overview</TabsTrigger>
 					<TabsTrigger value="tokens">Tokens</TabsTrigger>
@@ -202,7 +202,7 @@ export default function StatsPage() {
 				</TabsList>
 
 				{/* Overview Tab */}
-				<TabsContent value="overview" className="space-y-6">
+				<TabsContent className="space-y-6" value="overview">
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -280,25 +280,25 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="h-[300px]">
-									<ResponsiveContainer width="100%" height="100%">
+									<ResponsiveContainer height="100%" width="100%">
 										<PieChart>
 											<Pie
-												data={stats.time.byPhase}
 												cx="50%"
 												cy="50%"
-												innerRadius={60}
-												outerRadius={100}
-												paddingAngle={2}
+												data={stats.time.byPhase}
 												dataKey="value"
+												innerRadius={60}
 												label={({ name, percent }) =>
 													`${name} (${percent ? (percent * 100).toFixed(0) : '0'}%)`
 												}
 												labelLine={false}
+												outerRadius={100}
+												paddingAngle={2}
 											>
 												{stats.time.byPhase.map((entry, index) => (
 													<Cell
-														key={`cell-time-${entry.name}`}
 														fill={chartColors[index % chartColors.length]}
+														key={`cell-time-${entry.name}`}
 													/>
 												))}
 											</Pie>
@@ -319,30 +319,30 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="h-[300px]">
-									<ResponsiveContainer width="100%" height="100%">
+									<ResponsiveContainer height="100%" width="100%">
 										<PieChart>
 											<Pie
-												data={stats.tokens.byModel}
 												cx="50%"
 												cy="50%"
-												innerRadius={60}
-												outerRadius={100}
-												paddingAngle={2}
+												data={stats.tokens.byModel}
 												dataKey="value"
+												innerRadius={60}
 												label={({ name, percent }) =>
 													`${name} (${percent ? (percent * 100).toFixed(0) : '0'}%)`
 												}
 												labelLine={false}
+												outerRadius={100}
+												paddingAngle={2}
 											>
 												{stats.tokens.byModel.map((entry, index) => (
 													<Cell
-														key={`cell-token-${entry.name}`}
 														fill={chartColors[index % chartColors.length]}
+														key={`cell-token-${entry.name}`}
 													/>
 												))}
 											</Pie>
 											<Tooltip
-												formatter={(value) => [
+												formatter={(value: number) => [
 													`${(value / 1000000).toFixed(1)}M`,
 													'Tokens',
 												]}
@@ -357,7 +357,7 @@ export default function StatsPage() {
 				</TabsContent>
 
 				{/* Tokens Tab */}
-				<TabsContent value="tokens" className="space-y-6">
+				<TabsContent className="space-y-6" value="tokens">
 					<div className="grid gap-6 md:grid-cols-3">
 						<Card>
 							<CardHeader>
@@ -401,13 +401,13 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="h-[300px]">
-									<ResponsiveContainer width="100%" height="100%">
+									<ResponsiveContainer height="100%" width="100%">
 										<BarChart data={stats.tokens.byModel}>
 											<CartesianGrid strokeDasharray="3 3" />
 											<XAxis dataKey="name" />
 											<YAxis tickFormatter={(value) => `${value / 1000000}M`} />
 											<Tooltip
-												formatter={(value) => [
+												formatter={(value: number) => [
 													`${(value / 1000000).toFixed(1)}M tokens`,
 													'Usage',
 												]}
@@ -419,8 +419,8 @@ export default function StatsPage() {
 											>
 												{stats.tokens.byModel.map((entry, index) => (
 													<Cell
-														key={`cell-bar-${entry.name}`}
 														fill={chartColors[index % chartColors.length]}
+														key={`cell-bar-${entry.name}`}
 													/>
 												))}
 											</Bar>
@@ -438,23 +438,23 @@ export default function StatsPage() {
 						</CardHeader>
 						<CardContent>
 							<div className="h-[300px]">
-								<ResponsiveContainer width="100%" height="100%">
+								<ResponsiveContainer height="100%" width="100%">
 									<AreaChart data={stats.tokens.monthly}>
 										<CartesianGrid strokeDasharray="3 3" />
 										<XAxis dataKey="month" />
 										<YAxis tickFormatter={(value) => `${value / 1000}k`} />
 										<Tooltip
-											formatter={(value) => [
+											formatter={(value: number) => [
 												`${(value / 1000).toFixed(0)}k tokens`,
 												'Usage',
 											]}
 										/>
 										<Area
-											type="monotone"
 											dataKey="tokens"
-											stroke="var(--chart-1)"
 											fill="var(--chart-1)"
 											fillOpacity={0.2}
+											stroke="var(--chart-1)"
+											type="monotone"
 										/>
 									</AreaChart>
 								</ResponsiveContainer>
@@ -464,7 +464,7 @@ export default function StatsPage() {
 				</TabsContent>
 
 				{/* Time Tab */}
-				<TabsContent value="time" className="space-y-6">
+				<TabsContent className="space-y-6" value="time">
 					<div className="grid gap-6 md:grid-cols-3">
 						<Card>
 							<CardHeader>
@@ -504,8 +504,8 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="h-[300px]">
-									<ResponsiveContainer width="100%" height="100%">
-										<BarChart layout="vertical" data={stats.time.byPhase}>
+									<ResponsiveContainer height="100%" width="100%">
+										<BarChart data={stats.time.byPhase} layout="vertical">
 											<CartesianGrid strokeDasharray="3 3" />
 											<XAxis type="number" />
 											<YAxis dataKey="name" type="category" width={100} />
@@ -515,8 +515,8 @@ export default function StatsPage() {
 											<Bar dataKey="value" radius={[0, 4, 4, 0]}>
 												{stats.time.byPhase.map((entry, index) => (
 													<Cell
-														key={`cell-time-bar-${entry.name}`}
 														fill={chartColors[index % chartColors.length]}
+														key={`cell-time-bar-${entry.name}`}
 													/>
 												))}
 											</Bar>
@@ -534,7 +534,7 @@ export default function StatsPage() {
 						</CardHeader>
 						<CardContent>
 							<div className="h-[300px]">
-								<ResponsiveContainer width="100%" height="100%">
+								<ResponsiveContainer height="100%" width="100%">
 									<LineChart data={stats.time.monthly}>
 										<CartesianGrid strokeDasharray="3 3" />
 										<XAxis dataKey="month" />
@@ -546,12 +546,12 @@ export default function StatsPage() {
 											]}
 										/>
 										<Line
-											type="monotone"
+											activeDot={{ r: 6 }}
 											dataKey="hours"
+											dot={{ r: 4, strokeWidth: 1 }}
 											stroke="var(--chart-2)"
 											strokeWidth={2}
-											dot={{ r: 4, strokeWidth: 1 }}
-											activeDot={{ r: 6 }}
+											type="monotone"
 										/>
 									</LineChart>
 								</ResponsiveContainer>
@@ -561,7 +561,7 @@ export default function StatsPage() {
 				</TabsContent>
 
 				{/* Errors Tab */}
-				<TabsContent value="errors" className="space-y-6">
+				<TabsContent className="space-y-6" value="errors">
 					<div className="grid gap-6 md:grid-cols-3">
 						<Card>
 							<CardHeader>
@@ -610,7 +610,7 @@ export default function StatsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="h-[300px]">
-									<ResponsiveContainer width="100%" height="100%">
+									<ResponsiveContainer height="100%" width="100%">
 										<BarChart data={stats.errors.byType}>
 											<CartesianGrid strokeDasharray="3 3" />
 											<XAxis dataKey="name" />
@@ -621,8 +621,8 @@ export default function StatsPage() {
 											<Bar dataKey="value" radius={[4, 4, 0, 0]}>
 												{stats.errors.byType.map((entry, index) => (
 													<Cell
-														key={`cell-error-${entry.name}`}
 														fill={chartColors[index % chartColors.length]}
+														key={`cell-error-${entry.name}`}
 													/>
 												))}
 											</Bar>
@@ -640,7 +640,7 @@ export default function StatsPage() {
 						</CardHeader>
 						<CardContent>
 							<div className="h-[300px]">
-								<ResponsiveContainer width="100%" height="100%">
+								<ResponsiveContainer height="100%" width="100%">
 									<LineChart data={stats.errors.trend}>
 										<CartesianGrid strokeDasharray="3 3" />
 										<XAxis dataKey="week" />
@@ -648,20 +648,20 @@ export default function StatsPage() {
 										<Tooltip />
 										<Legend />
 										<Line
-											type="monotone"
 											dataKey="reported"
+											dot={{ r: 4, strokeWidth: 1 }}
 											name="Reported Errors"
 											stroke="var(--chart-3)"
 											strokeWidth={2}
-											dot={{ r: 4, strokeWidth: 1 }}
+											type="monotone"
 										/>
 										<Line
-											type="monotone"
 											dataKey="resolved"
+											dot={{ r: 4, strokeWidth: 1 }}
 											name="Resolved Errors"
 											stroke="var(--chart-1)"
 											strokeWidth={2}
-											dot={{ r: 4, strokeWidth: 1 }}
+											type="monotone"
 										/>
 									</LineChart>
 								</ResponsiveContainer>
@@ -671,7 +671,7 @@ export default function StatsPage() {
 				</TabsContent>
 
 				{/* Cycles Tab */}
-				<TabsContent value="cycles" className="space-y-6">
+				<TabsContent className="space-y-6" value="cycles">
 					<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
 						<Card>
 							<CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -751,52 +751,52 @@ export default function StatsPage() {
 						</CardHeader>
 						<CardContent>
 							<div className="h-[350px]">
-								<ResponsiveContainer width="100%" height="100%">
+								<ResponsiveContainer height="100%" width="100%">
 									<BarChart
 										data={stats.cycles.data}
-										margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
+										margin={{ bottom: 20, left: 20, right: 30, top: 20 }}
 									>
 										<CartesianGrid strokeDasharray="3 3" />
 										<XAxis
 											dataKey="id"
 											label={{
-												value: 'Cycle #',
-												position: 'insideBottom',
 												offset: -10,
+												position: 'insideBottom',
+												value: 'Cycle #',
 											}}
 										/>
 										<YAxis
-											yAxisId="left"
-											orientation="left"
 											label={{
-												value: 'Time (hours)',
 												angle: -90,
 												position: 'insideLeft',
+												value: 'Time (hours)',
 											}}
+											orientation="left"
+											yAxisId="left"
 										/>
 										<YAxis
-											yAxisId="right"
-											orientation="right"
-											tickFormatter={(value) => `${value / 1000}k`}
 											label={{
-												value: 'Tokens',
 												angle: 90,
 												position: 'insideRight',
+												value: 'Tokens',
 											}}
+											orientation="right"
+											tickFormatter={(value) => `${value / 1000}k`}
+											yAxisId="right"
 										/>
 										<Tooltip />
 										<Legend />
 										<Bar
-											yAxisId="left"
 											dataKey="time"
-											name="Time (hours)"
 											fill="var(--chart-1)"
+											name="Time (hours)"
+											yAxisId="left"
 										/>
 										<Bar
-											yAxisId="right"
 											dataKey="tokens"
-											name="Tokens"
 											fill="var(--chart-2)"
+											name="Tokens"
+											yAxisId="right"
 										/>
 									</BarChart>
 								</ResponsiveContainer>
@@ -860,7 +860,7 @@ export default function StatsPage() {
 										Re-prompt Analysis
 									</h3>
 									<div className="space-y-4">
-										<ResponsiveContainer width="100%" height={100}>
+										<ResponsiveContainer height={100} width="100%">
 											<BarChart
 												data={[
 													{
@@ -869,9 +869,9 @@ export default function StatsPage() {
 													},
 												]}
 												layout="vertical"
-												margin={{ top: 5, right: 5, bottom: 5, left: 5 }}
+												margin={{ bottom: 5, left: 5, right: 5, top: 5 }}
 											>
-												<XAxis type="number" domain={[0, 5]} hide />
+												<XAxis domain={[0, 5]} hide type="number" />
 												<Tooltip
 													formatter={(value) => [
 														`${value} per task`,
@@ -886,10 +886,10 @@ export default function StatsPage() {
 													<Cell fill="var(--chart-1)" />
 													{/* Add industry average reference line */}
 													<Cell
-														x={3.5}
-														width={0.5}
 														fill="var(--chart-3)"
 														radius={0}
+														width={0.5}
+														x={3.5}
 													/>
 												</Bar>
 											</BarChart>

@@ -15,7 +15,7 @@ import { ProjectsAtom } from '../../../../lib/stores/app';
 // Last updated must be a date in DDMMMYYYY format
 // Documentation can be of type - Path / External URL / Auto-infer (Disable/Enable HMR with a warning of high token usage if enabled)
 
-export default function AppPage() {
+export default function RepositoryProjectPage() {
 	const projects = useAtomValue(ProjectsAtom);
 
 	const [projectName] = useQueryState('project', {

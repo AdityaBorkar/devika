@@ -34,10 +34,10 @@ export function APITester() {
 	return (
 		<div className="mx-auto mt-8 flex w-full max-w-2xl flex-col gap-4 text-left">
 			<form
-				onSubmit={testEndpoint}
 				className="flex w-full items-center gap-2 rounded-xl border border-input bg-card p-3 font-mono"
+				onSubmit={testEndpoint}
 			>
-				<Select name="method" defaultValue="GET">
+				<Select defaultValue="GET" name="method">
 					<SelectTrigger className="w-[100px]">
 						<SelectValue placeholder="Method" />
 					</SelectTrigger>
@@ -48,15 +48,15 @@ export function APITester() {
 				</Select>
 
 				<Input
-					type="text"
-					name="endpoint"
-					defaultValue="/api/hello"
 					className={cn(
 						'flex-1 font-mono',
 						'border-0 bg-transparent shadow-none',
 						'focus-visible:ring-0 focus-visible:ring-offset-0',
 					)}
+					defaultValue="/api/hello"
+					name="endpoint"
 					placeholder="/api/hello"
+					type="text"
 				/>
 
 				<Button type="submit" variant="secondary">
@@ -65,15 +65,15 @@ export function APITester() {
 			</form>
 
 			<textarea
-				ref={responseInputRef}
-				readOnly
-				placeholder="Response will appear here..."
 				className={cn(
 					'min-h-[140px] w-full bg-card',
 					'rounded-xl border border-input p-3',
 					'resize-y font-mono',
 					'placeholder:text-muted-foreground',
 				)}
+				placeholder="Response will appear here..."
+				readOnly
+				ref={responseInputRef}
 			/>
 		</div>
 	);
