@@ -43,6 +43,7 @@ export function OverviewCard({
 						width="24"
 						xmlns="http://www.w3.org/2000/svg"
 					>
+						<title>Tasks</title>
 						<path d="M9 11l3 3L22 4" />
 						<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
 					</svg>
@@ -60,6 +61,7 @@ export function OverviewCard({
 						width="24"
 						xmlns="http://www.w3.org/2000/svg"
 					>
+						<title>Tokens</title>
 						<circle cx="12" cy="12" r="10" />
 						<line x1="12" x2="12" y1="8" y2="12" />
 						<line x1="12" x2="12.01" y1="16" y2="16" />
@@ -78,6 +80,7 @@ export function OverviewCard({
 						width="24"
 						xmlns="http://www.w3.org/2000/svg"
 					>
+						<title>Calendar</title>
 						<rect height="18" rx="2" ry="2" width="18" x="3" y="4" />
 						<line x1="16" x2="16" y1="2" y2="6" />
 						<line x1="8" x2="8" y1="2" y2="6" />
@@ -97,6 +100,7 @@ export function OverviewCard({
 						width="24"
 						xmlns="http://www.w3.org/2000/svg"
 					>
+						<title>Roadblocks</title>
 						<circle cx="12" cy="12" r="10" />
 						<line x1="4.93" x2="19.07" y1="4.93" y2="19.07" />
 					</svg>

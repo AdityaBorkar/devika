@@ -55,28 +55,28 @@ export default function TasksPage() {
 					{/* Header with tabs */}
 					<TasksHeader
 						activeTab={activeTab}
-						onTabChange={setActiveTab}
 						onCreateTask={handleCreateTask}
+						onTabChange={setActiveTab}
 					/>
 
 					{/* Toolbar with display options */}
 					<ToolbarControls
-						viewMode={viewMode}
-						onViewModeChange={setViewMode}
 						onShowFilterPanel={() => setShowFilterPanel(!showFilterPanel)}
+						onViewModeChange={setViewMode}
 						searchQuery={searchQuery}
 						setSearchQuery={setSearchQuery}
+						viewMode={viewMode}
 					/>
 
 					{/* Main content area */}
 					<div className="flex-grow overflow-hidden">
 						{viewMode === 'list' ? (
 							<TasksTable
-								tasks={filteredTasks}
-								sorting={sorting}
-								setSorting={setSorting}
 								columnFilters={columnFilters}
 								searchQuery={searchQuery}
+								setSorting={setSorting}
+								sorting={sorting}
+								tasks={filteredTasks}
 							/>
 						) : (
 							<KanbanBoard tasks={filteredTasks} />

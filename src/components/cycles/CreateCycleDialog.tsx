@@ -28,10 +28,10 @@ interface CreateCycleDialogProps {
 export function CreateCycleDialog({ onCycleCreate }: CreateCycleDialogProps) {
 	const [open, setOpen] = useState(false);
 	const [formData, setFormData] = useState({
-		name: '',
 		description: '',
-		startDate: '',
 		endDate: '',
+		name: '',
+		startDate: '',
 	});
 
 	const handleChange = (
@@ -48,18 +48,18 @@ export function CreateCycleDialog({ onCycleCreate }: CreateCycleDialogProps) {
 		e.preventDefault();
 		onCycleCreate(formData);
 		setFormData({
-			name: '',
 			description: '',
-			startDate: '',
 			endDate: '',
+			name: '',
+			startDate: '',
 		});
 		setOpen(false);
 	};
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog onOpenChange={setOpen} open={open}>
 			<DialogTrigger asChild>
-				<Button>
+				<Button className="justify-end">
 					<PlusCircle className="mr-2 h-4 w-4" />
 					Create Cycle
 				</Button>
@@ -74,57 +74,57 @@ export function CreateCycleDialog({ onCycleCreate }: CreateCycleDialogProps) {
 					</DialogHeader>
 					<div className="grid gap-4 py-4">
 						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="name" className="text-right">
+							<Label className="text-right" htmlFor="name">
 								Name
 							</Label>
 							<Input
+								className="col-span-3"
 								id="name"
 								name="name"
-								value={formData.name}
 								onChange={handleChange}
-								className="col-span-3"
 								required
+								value={formData.name}
 							/>
 						</div>
 						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="description" className="text-right">
+							<Label className="text-right" htmlFor="description">
 								Description
 							</Label>
 							<Textarea
+								className="col-span-3"
 								id="description"
 								name="description"
-								value={formData.description}
 								onChange={handleChange}
-								className="col-span-3"
 								required
+								value={formData.description}
 							/>
 						</div>
 						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="startDate" className="text-right">
+							<Label className="text-right" htmlFor="startDate">
 								Start Date
 							</Label>
 							<Input
+								className="col-span-3"
 								id="startDate"
 								name="startDate"
+								onChange={handleChange}
+								required
 								type="date"
 								value={formData.startDate}
-								onChange={handleChange}
-								className="col-span-3"
-								required
 							/>
 						</div>
 						<div className="grid grid-cols-4 items-center gap-4">
-							<Label htmlFor="endDate" className="text-right">
+							<Label className="text-right" htmlFor="endDate">
 								End Date
 							</Label>
 							<Input
+								className="col-span-3"
 								id="endDate"
 								name="endDate"
+								onChange={handleChange}
+								required
 								type="date"
 								value={formData.endDate}
-								onChange={handleChange}
-								className="col-span-3"
-								required
 							/>
 						</div>
 					</div>

@@ -2,7 +2,7 @@
 
 import { useAtomValue } from 'jotai';
 import { useQueryState } from 'nuqs';
-import PackageList from '@/app/(app)/repository/_components/PackageList';
+// import PackageList from '@/app/(app)/repository/_components/PackageList';
 import { ProjectsAtom } from '../../../../lib/stores/app';
 
 // TODO: What if NOT A MONOREPO?
@@ -61,7 +61,7 @@ Add over every input box
 */}
 
 			<h2>Packages</h2>
-			<PackageList project={project} />
+			{/* <PackageList project={project} /> */}
 		</div>
 	);
 }

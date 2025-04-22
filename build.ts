@@ -1,4 +1,5 @@
 #!/usr/bin/env bun
+
 import { existsSync } from 'node:fs';
 import { rm } from 'node:fs/promises';
 import path from 'node:path';

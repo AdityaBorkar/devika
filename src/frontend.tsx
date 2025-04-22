@@ -1,12 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import OnboardingLayout from '@/app/(app-onboarding)/layout';
 import OnboardingPage from '@/app/(app-onboarding)/onboarding/page';
 import CycleDetailPage from '@/app/(app)/cycles/[id]/page';
 import CyclesPage from '@/app/(app)/cycles/page';
 import DashboardPage from '@/app/(app)/dashboard/page';
-import HomePage from '@/app/(app)/page';
 import PRDPage from '@/app/(app)/prd/page';
 import RepositoryProjectPage from '@/app/(app)/repository/[project-name]/page';
 import RepositoryPage from '@/app/(app)/repository/page';
@@ -21,7 +20,7 @@ const app = (
 		<BrowserRouter>
 			<Routes>
 				<Route element={<RootLayout />}>
-					<Route element={<HomePage />} path="/" />
+					<Route element={<Navigate to="/dashboard" />} path="/" />
 
 					<Route element={<AppLayout />}>
 						<Route element={<DashboardPage />} path="dashboard" />

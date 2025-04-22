@@ -8,13 +8,10 @@ import { TaskDetailHeader } from '@/components/tasks/TaskDetailHeader';
 import { TaskDetailSidebar } from '@/components/tasks/TaskDetailSidebar';
 import type { Comment, TaskDetail } from '@/components/tasks/types';
 
-type TaskDetailPageProps = {
-	params: { id: string };
-};
-
 export default function TaskDetailPage() {
 	// Get initial task data
 	const { id } = useParams();
+	if (!id) throw new Error('Task ID is required');
 	const [task, setTask] = useState<TaskDetail>(() => getTaskDetail(id));
 
 	// Handle task updates
@@ -38,9 +35,9 @@ export default function TaskDetailPage() {
 	// Handle adding comments
 	const handleAddComment = (content: string) => {
 		const newComment: Comment = {
-			id: Date.now(),
 			author: 'Current User',
 			content,
+			id: Date.now(),
 			timestamp: new Date().toLocaleString(),
 		};
 
@@ -58,13 +55,13 @@ export default function TaskDetailPage() {
 			<div className="flex flex-1 overflow-hidden">
 				{/* Main content */}
 				<TaskDetailContent
-					task={task}
-					onSubtaskToggle={handleSubtaskToggle}
 					onAddComment={handleAddComment}
+					onSubtaskToggle={handleSubtaskToggle}
+					task={task}
 				/>
 
 				{/* Sidebar */}
-				<TaskDetailSidebar task={task} onTaskUpdate={handleTaskUpdate} />
+				<TaskDetailSidebar onTaskUpdate={handleTaskUpdate} task={task} />
 			</div>
 		</div>
 	);

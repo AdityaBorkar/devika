@@ -5,31 +5,28 @@
 // - Integrate with Astro CI/CD on Vercel / SST
 {
 	"$schema": "https://biomejs.dev/schemas/2.0.0-beta.1/schema.json",
-	"assist": {
-		"actions": {
-			"source": {
-				"organizeImports": {
-					"level": "on",
-					"options": {
-						//   importOrder: [
-						//     'server-only',
-						//     '<THIRD_PARTY_MODULES>',
-						//     '^@/(.*)$',
-						//     '^[./]',
-						//     '^@/schemas(.*)$',
-						//   ],
-						"groups": [
-							[":URL:"],
-							[":NODE:", ":BUN:", ":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:"],
-							[":ALIAS:", ":PATH:"]
-						]
-					}
-				},
-				"useSortedAttributes": "on",
-				"useSortedKeys": "on"
-			}
-		}
-	},
+	// "assist": {
+	// 	"actions": {
+	// 		"source": {
+	// 			"organizeImports": {
+	// 				"level": "on",
+	// 				"options": {
+	// 					"groups": [
+	// 						["server-only", "use client", "use server"],
+	// 						":BLANK_LINE:",
+	// 						":URL:",
+	// 						":BLANK_LINE:",
+	// 						[":NODE:", ":BUN:", ":PACKAGE:", ":PACKAGE_WITH_PROTOCOL:"],
+	// 						":BLANK_LINE:",
+	// 						[":ALIAS:", ":PATH:"]
+	// 					]
+	// 				}
+	// 			},
+	// 			"useSortedAttributes": "on",
+	// 			"useSortedKeys": "on"
+	// 		}
+	// 	}
+	// },
 	"files": {
 		"ignoreUnknown": false,
 		"includes": ["**", "!**/dist/*", "!**/node_modules/*", "!**/CHANGELOG.md"]
@@ -60,8 +57,8 @@
 					"fix": "safe",
 					"level": "error",
 					"options": {
-						"attributes": ["classList"],
-						"functions": ["clsx", "cva", "tw", "tw.*"]
+						"attributes": ["classList"]
+						// "functions": ["clsx", "cva", "tw", "tw.*"]
 					}
 				}
 			},

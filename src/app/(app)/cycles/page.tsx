@@ -1,12 +1,9 @@
 'use client';
 
+import { useAtomValue } from 'jotai';
+import { useQueryState } from 'nuqs';
 import { useState } from 'react';
-import type {
-	Cycle,
-	CycleStatus,
-	FilterState,
-	SortState,
-} from '@/components/cycles';
+import type { CycleStatus, FilterState, SortState } from '@/components/cycles';
 import {
 	CreateCycleDialog,
 	CyclesTable,
@@ -14,38 +11,31 @@ import {
 	MOCK_CYCLES,
 	sortCycles,
 } from '@/components/cycles';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { CycleAtom } from '@/lib/stores/app';
 
 export default function CyclesPage() {
-	const [filterState, setFilterState] = useState<FilterState>({
-		status: 'All',
-	});
-	const [sortState, setSortState] = useState<SortState>({
-		column: 'endDate',
-		direction: 'asc',
+	const VIEWS = useAtomValue(CycleAtom.Views);
+	const [viewId, setViewId] = useQueryState('view', {
+		defaultValue: VIEWS[0].id,
 	});
 
-	// Filter and sort cycles
+	const view = VIEWS.find((v) => v.id === viewId);
+	if (!view) throw new Error('View not found');
+
+	const [filterState, setFilterState] = useState<FilterState>(view.filters[0]);
+	const [sortState, setSortState] = useState<SortState>(view.sort);
+	const [search, setSearch] = useQueryState('search', { defaultValue: '' });
+
+	// TODO: FETCH DATA
 	const filteredCycles = filterCyclesByStatus(MOCK_CYCLES, filterState.status);
 	const sortedAndFilteredCycles = sortCycles(filteredCycles, sortState);
 
+	// TODO: Make a component of Table Handlers:
 	const handleFilterChange = (status: CycleStatus | 'All') => {
 		setFilterState({ status });
 	};
-
 	const handleSortChange = (column: string) => {
 		setSortState((prev) => ({
 			column,
@@ -54,56 +44,34 @@ export default function CyclesPage() {
 		}));
 	};
 
-	const handleCreateCycle = (data: {
-		name: string;
-		description: string;
-		startDate: string;
-		endDate: string;
-	}) => {
-		// In a real app, we would make an API call here
-		console.log('Creating new cycle:', data);
-		// Then refresh the data
-	};
-
 	return (
-		<div className="container mx-auto py-6">
-			<div className="space-y-6 p-6">
-				<div className="flex items-center justify-between">
-					{/* Views */}
-					<CreateCycleDialog onCycleCreate={handleCreateCycle} />
-				</div>
+		<div className="flex h-screen flex-col gap-2 p-4">
+			<div className="flex items-center gap-4">
+				{/* Views */}
+				<div>View 1</div>
+				<div>View 2</div>
+				<div>View 3</div>
+				{/* <CreateCycleDialog /> */}
+			</div>
 
-				<div className="flex items-center gap-4">
-					{/* Implement Search, Filters, Sort */}
-					<div className="flex items-center gap-2">
-						<span className="font-medium text-sm">Status:</span>
-						<Select
-							value={filterState.status}
-							onValueChange={(value: string) =>
-								handleFilterChange(value as CycleStatus | 'All')
-							}
-						>
-							<SelectTrigger className="w-[150px]">
-								<SelectValue placeholder="Select a status" />
-							</SelectTrigger>
-							<SelectContent>
-								<SelectItem value="All">All</SelectItem>
-								<SelectItem value="Not Started">Not Started</SelectItem>
-								<SelectItem value="In Progress">In Progress</SelectItem>
-								<SelectItem value="Completed">Completed</SelectItem>
-								<SelectItem value="Cancelled">Cancelled</SelectItem>
-							</SelectContent>
-						</Select>
-					</div>
-					<div className="ml-auto text-muted-foreground text-sm">
-						Showing {filteredCycles.length} of {MOCK_CYCLES.length} cycles
-					</div>
-				</div>
+			<div className="flex gap-4">
+				<Input className="grow" placeholder="Filters" />
+				<Button variant="outline">Save View</Button>
+				<Button variant="outline">Display</Button>
+			</div>
 
+			<div className="flex items-center justify-between">
+				<Input className="max-w-72" placeholder="Search" />
+				<div className="ml-auto text-muted-foreground text-sm">
+					Showing {filteredCycles.length} of {MOCK_CYCLES.length} cycles
+				</div>
+			</div>
+
+			<div className="grow">
 				<CyclesTable
 					cycles={sortedAndFilteredCycles}
-					sortState={sortState}
 					onSortChange={handleSortChange}
+					sortState={sortState}
 				/>
 			</div>
 		</div>

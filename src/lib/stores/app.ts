@@ -219,3 +219,17 @@ const workspace = {
 export const ProjectsAtom = atom(projects);
 
 export const WorkspaceAtom = atom(workspace);
+
+export const CycleAtom = {
+	Views: atom([
+		{
+			display: {},
+			filters: [{ status: 'All' }],
+			id: '1',
+			label: 'View 1',
+			sort: { column: 'endDate', direction: 'asc' },
+		},
+		// { id: '2', label: 'View 2', filters: [], display: {} },
+		// { id: '3', label: 'View 3', filters: [], display: {} },
+	] as const),
+};

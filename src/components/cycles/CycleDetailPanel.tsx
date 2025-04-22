@@ -44,6 +44,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 							width="20"
 							xmlns="http://www.w3.org/2000/svg"
 						>
+							<title>Close</title>
 							<polyline points="15 18 9 12 15 6" />
 						</svg>
 					</button>
@@ -157,8 +158,8 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 							<div>
 								<h3 className="mb-2 font-medium text-lg">Integration Tests</h3>
 								<ul className="list-disc space-y-1 pl-5">
-									{cycle.integrationTests.map((test, index) => (
-										<li className="text-gray-700" key={index}>
+									{cycle.integrationTests.map((test) => (
+										<li className="text-gray-700" key={test}>
 											{test}
 										</li>
 									))}

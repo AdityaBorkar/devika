@@ -7,6 +7,7 @@ import {
 	PiFolder,
 	PiLayout,
 	PiListChecks,
+	PiNotepad,
 	PiRepeatOnce,
 } from 'react-icons/pi';
 import { Link, Outlet, redirect, useLocation } from 'react-router';
@@ -33,6 +34,11 @@ const NAV_ITEMS = [
 		href: 'cycles',
 		icon: PiRepeatOnce,
 		label: 'Cycles',
+	},
+	{
+		href: 'memory',
+		icon: PiNotepad,
+		label: 'Memory',
 	},
 	{
 		href: 'repository',

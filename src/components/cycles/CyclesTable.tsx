@@ -95,20 +95,20 @@ export function CyclesTable({
 				<TableBody>
 					{cycles.length === 0 ? (
 						<TableRow>
-							<TableCell colSpan={6} className="h-24 text-center">
+							<TableCell className="h-24 text-center" colSpan={6}>
 								No cycles found.
 							</TableCell>
 						</TableRow>
 					) : (
 						cycles.map((cycle) => (
 							<TableRow
-								key={cycle.id}
 								className="cursor-pointer hover:bg-muted/50"
+								key={cycle.id}
 							>
 								<TableCell>
 									<Link
-										to={`/tasks/${cycle.id}`}
 										className="text-primary hover:underline"
+										to={`/tasks/${cycle.id}`}
 									>
 										{cycle.name}
 									</Link>

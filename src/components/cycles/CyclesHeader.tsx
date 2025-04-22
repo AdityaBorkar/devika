@@ -2,13 +2,13 @@
 
 import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
+// import {
+// 	Select,
+// 	SelectContent,
+// 	SelectItem,
+// 	SelectTrigger,
+// 	SelectValue,
+// } from '@/components/ui/select';
 import type { CycleStatus, FilterState, SortState } from './types';
 
 interface CyclesHeaderProps {
@@ -57,40 +57,6 @@ export function CyclesHeader({
 
 			<div className="flex items-center space-x-2">
 				<div className="flex items-center space-x-2">
-					<Select
-						onValueChange={(value) =>
-							onFilterChange(value as CycleStatus | 'All')
-						}
-						value={filterState.status}
-					>
-						<SelectTrigger className="w-[150px]">
-							<SelectValue placeholder="Status" />
-						</SelectTrigger>
-						<SelectContent>
-							{statusOptions.map((option) => (
-								<SelectItem key={option.value} value={option.value}>
-									{option.label}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-
-					<Select
-						onValueChange={(value) => onSortChange(value)}
-						value={sortState.column}
-					>
-						<SelectTrigger className="w-[150px]">
-							<SelectValue placeholder="Sort by" />
-						</SelectTrigger>
-						<SelectContent>
-							{sortOptions.map((option) => (
-								<SelectItem key={option.value} value={option.value}>
-									{option.label}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-
 					<Button
 						className="h-9 w-9"
 						onClick={() => onSortChange(sortState.column)}
@@ -112,4 +78,39 @@ export function CyclesHeader({
 			</div>
 		</div>
 	);
+}
+{
+	/* <Select
+onValueChange={(value) =>
+	onFilterChange(value as CycleStatus | 'All')
+}
+value={filterState.status}
+>
+<SelectTrigger className="w-[150px]">
+	<SelectValue placeholder="Status" />
+</SelectTrigger>
+<SelectContent>
+	{statusOptions.map((option) => (
+		<SelectItem key={option.value} value={option.value}>
+			{option.label}
+		</SelectItem>
+	))}
+</SelectContent>
+</Select>
+
+<Select
+onValueChange={(value) => onSortChange(value)}
+value={sortState.column}
+>
+<SelectTrigger className="w-[150px]">
+	<SelectValue placeholder="Sort by" />
+</SelectTrigger>
+<SelectContent>
+	{sortOptions.map((option) => (
+		<SelectItem key={option.value} value={option.value}>
+			{option.label}
+		</SelectItem>
+	))}
+</SelectContent>
+</Select> */
 }

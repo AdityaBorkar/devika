@@ -79,6 +79,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 				width="14"
 				xmlns="http://www.w3.org/2000/svg"
 			>
+				<title>Sort Ascending</title>
 				<polyline points="18 15 12 9 6 15" />
 			</svg>
 		) : (
@@ -94,6 +95,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 				width="14"
 				xmlns="http://www.w3.org/2000/svg"
 			>
+				<title>Sort Descending</title>
 				<polyline points="6 9 12 15 18 9" />
 			</svg>
 		);
