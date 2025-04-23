@@ -1,8 +1,8 @@
 {
 	"mcpServers": {
 		"context7": {
-			"args": ["-y", "@upstash/context7-mcp"],
-			"command": "bunx"
+			"command": "C:\\Windows\\System32\\wsl.exe",
+			"args": ["-e", "/home/aditya/run-context7.sh"]
 		}
 	}
 }

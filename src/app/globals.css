@@ -1,7 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&display=swap");
-
 @import "tailwindcss";
 @import "tw-animate-css";
+
+@font-face {
+	font-family: "Geist";
+	src: url("./fonts/Geist.ttf");
+}
+
+@font-face {
+	font-family: "Geist Mono";
+	src: url("./fonts/Geist-Mono.ttf");
+}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -138,10 +146,10 @@
 
 @layer base {
 	* {
-		@apply font-sans border-border outline-ring/50;
+		@apply font-sans border-border outline-ring/50 cursor-default;
 	}
 	body {
-		@apply min-h-screen relative m-0 bg-background text-foreground;
+		@apply min-h-screen relative m-0 bg-background text-foreground text-sm;
 	}
 }
 

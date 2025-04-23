@@ -7,7 +7,7 @@ interface OverviewCardProps {
 	value: string;
 	description: string;
 	icon: 'tasks' | 'tokens' | 'calendar' | 'roadblocks';
-	status?: 'positive' | 'negative' | 'neutral';
+	status?: 'positive' | 'negative' | 'zinc';
 }
 
 export function OverviewCard({
@@ -15,7 +15,7 @@ export function OverviewCard({
 	value,
 	description,
 	icon,
-	status = 'neutral',
+	status = 'zinc',
 }: OverviewCardProps) {
 	const getStatusClass = () => {
 		switch (status) {

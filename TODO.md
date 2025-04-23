@@ -66,6 +66,121 @@ Code Mode
 Debug Mode
 Architect Mode
 
+SPARC stands for Specification, Pseudocode, Architecture, Refinement, and Completion.
+
+
+Each subtask operates within its own isolated context, ensuring focused and efficient task management
+SPARC Orchestrator guarantees that every subtask adheres to best practices—avoiding hard-coded environment variables, maintaining files under 500 lines, and ensuring a modular, extensible design.
+Model: Reasoning Models: o3, Sonnet 3.7 Thinking, DeepSeek
+
+---
+
+📋Specification & Pseudocode 
+Role: Captures the complete project context and produces a modular pseudocode blueprint with TDD anchors. 
+
+Focus: Clear, modular design; externalizes configuration; splits complex logic across modules.
+
+Model: Reasoning Models: o3, Sonnet 3.7 Thinking, DeepSeek
+
+🏗️ Architect 
+Role: Designs scalable, secure, and modular architectures based on requirements and pseudocode. 
+
+Focus: Detailed system diagrams, data flows, API boundaries, and service segmentation. Leverages Sonnet 3.7 for instructive reasoning.
+
+Model: Reasoning Models: o3, Sonnet 3.7 Thinking, DeepSeek
+
+🧠 Code 
+Role: Implements robust, efficient code using externalized configurations. 
+
+Focus: Clean, modular code split into files under 500 lines, with no hard-coded secrets.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+🧪 TDD 
+Role: Enforces Test-Driven Development by writing failing tests first and then minimal code followed by refactoring. 
+
+Focus: Thorough test coverage, modular test files, and adherence to security practices.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+🪲 Debug 
+ Role: Troubleshoots and resolves runtime issues using logging, tracing, and analysis tools.
+
+Focus: Isolates and fixes bugs while keeping fixes modular and secure.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+🛡️Security Reviewer 
+Role: Audits code and architecture to identify vulnerabilities and enforce secure practices.
+
+Focus: Detects exposed secrets, oversized files, and non-modular code, recommending necessary mitigations.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+📚Documentation Writer 
+Role: Produces clear, comprehensive Markdown documentation for usage, configuration, and integration. 
+
+Focus: Modular documentation (files under 500 lines) that avoids exposing sensitive data.
+
+Model: Reasoning Models: o3, Sonnet 3.7 Thinking, DeepSeek
+
+🔗 Integrator 
+Role: Merges outputs from all specialized modes into a cohesive final product. 
+
+Focus: Seamless integration of components ensuring modularity and adherence to security standards.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+📈Post-Deployment Monitor 
+Role: Monitors system performance post-deployment, collecting metrics, logs, and user feedback. 
+
+Focus: Continuous monitoring with secure, modular configurations and prompt escalation of issues.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+🧹Optimizer 
+Role: Continuously refines and optimizes the codebase for performance, modularity, and maintainability. 
+
+Focus: Refactoring, splitting large files, and externalizing configurations to meet best practices.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+
+❓ Ask 
+Role: Guides users in formulating precise, modular requests to delegate tasks to the correct specialized modes. 
+
+Focus: Providing task formulation and delegation strategies, leveraging DeepSeek and Sonnet 3.7 Thinking for effective inquiries.
+
+Model: Reasoning Models: o3, Sonnet 3.7 Thinking, DeepSeek
+
+🚀DevOps 
+Role: Manages deployments and infrastructure operations across cloud providers, edge platforms, and internal environments. 
+
+Focus: Secure, traceable, and automated deployments using CI/CD pipelines and managed configuration, with no hard-coded credentials.
+
+Model: Instruct Models: Sonnet 3.7, GPT-4o Thinking, Mistral
+--
+Tool Access Restrictions: Adjust the "groups" field for each mode to control which tools they can use (e.g., read, edit, browser, command, mcp).
+
+Role Definitions & Custom Instructions: Edit the roleDefinition and customInstructions to match your organization’s language and standards. For lengthy instructions, consider using .clinerules-{mode-slug} files.
+
+API Configuration (Optional): Add an "apiConfiguration" property to any mode for model-specific parameters (e.g., {"model": "gpt-4", "temperature": 0.2}).
+
+Approval Settings: Configure manual or auto-approvals for new_task and attempt_completion actions in your Roo Code workflow settings.
+
+Project-Specific Overrides: Store this JSON in .roomodes at your project root to override global settings from cline_custom_modes.json.
+
+
+Context7 + Sequential Thinking + Serper Search + n8n MCP = Absolute Agentic Power
+@OP, Brave search, Fetcher and a database mcp server are important to me.
+just using Quillopy for specific library context.
+
+---
+Feedback
+
+- Is the current UI/UX good?
+- How can we make the UI/UX better?
+- What features do you think are missing?
+
 ---
 
 ## Collected TODOs from codebase
@@ -108,3 +223,10 @@ Architect Mode
 - Ensure consistency in task status naming and filtering across components
 - Implement proper state management for task filtering and updates
 
+---
+
+- https://docs.cline.bot/exploring-clines-tools/remote-browser-support
+- Interaction Tools
+	- ask_followup_question: Ask user for clarification
+	- attempt_completion: Present final results
+- 

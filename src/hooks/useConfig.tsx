@@ -8,7 +8,7 @@ export default function useConfig() {
 		},
 		workspace: {
 			ide: 'cursor',
-			name: 'AI Developer',
+			name: 'Devika',
 		},
 	};
 

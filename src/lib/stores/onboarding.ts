@@ -211,7 +211,7 @@ const projects: MonorepoApp[] = [
 
 const workspace = {
 	monorepo: 'bun',
-	name: 'My Workspace',
+	name: 'Devika',
 	repo: 'github',
 	vcs: 'git',
 };
