@@ -1,0 +1,52 @@
+{
+	"ui_component_system": {
+		"primary_library": "shadcn/ui with Radix UI primitives",
+		"component_pattern": "atomic components with composition",
+		"design_tokens": "CSS variables via Tailwind",
+		"evidence": [
+			"components.json contains shadcn configuration",
+			"src/components/ui/button.tsx uses Radix Slot and cva for variants",
+			"package.json includes multiple @radix-ui/* primitive components"
+		]
+	},
+	"styling_implementation": {
+		"approach": "Tailwind CSS with class-variance-authority (cva)",
+		"naming_convention": "utility-first with cn() helper function",
+		"responsive_technique": "Tailwind breakpoint utilities (md:text-sm)",
+		"evidence": [
+			"src/lib/utils.ts combines clsx and tailwind-merge",
+			"src/components/ui/button.tsx uses cva for variant styling",
+			"src/components/ui/input.tsx uses responsive classes like md:text-sm"
+		]
+	},
+	"layout_architecture": {
+		"grid_system": "Tailwind Flexbox and Grid",
+		"spacing_pattern": "Tailwind spacing scale with gap utilities",
+		"page_composition": "Flex and Grid layouts with component nesting",
+		"evidence": [
+			"src/components/ui/card.tsx uses flex flex-col gap-6",
+			"Components use rounded-md/xl for consistent border radius",
+			"Consistent use of sizing units like h-9 w-full"
+		]
+	},
+	"design_system": {
+		"theme_configuration": "Tailwind theme with CSS variables",
+		"color_implementation": "Semantic color naming with -foreground pattern",
+		"typography_system": "Tailwind text utilities with consistent sizing",
+		"evidence": [
+			"components.json shows New York style with zinc as base color",
+			"Color tokens like bg-card, text-card-foreground, text-primary",
+			"Typography scale with text-sm, text-base patterns"
+		]
+	},
+	"state_management": {
+		"primary_approach": "Jotai for global state",
+		"interaction_patterns": "Radix UI primitives for accessible interactions",
+		"form_handling": "react-hook-form with zod validation",
+		"evidence": [
+			"package.json includes jotai dependency",
+			"package.json includes @hookform/resolvers and react-hook-form",
+			"Components use controlled patterns with React state hooks"
+		]
+	}
+}

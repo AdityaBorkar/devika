@@ -6,19 +6,18 @@ import CycleDetailPage from '@/app/(app)/cycles/[id]/page';
 import CyclesPage from '@/app/(app)/cycles/page';
 import DashboardPage from '@/app/(app)/dashboard/page';
 import HomePage from '@/app/(app)/page';
-import { PRDExplorerDocPage } from '@/app/(app)/prd/explorer/[pageId]/page';
-import PRDExplorerPage from '@/app/(app)/prd/explorer/page';
-import PRDLayout from '@/app/(app)/prd/layout';
-import PRDPage from '@/app/(app)/prd/page';
-import PRDSearchPage from '@/app/(app)/prd/search/page';
-import PRDVersioningPage from '@/app/(app)/prd/versioning/page';
-import RepositoryProjectPage from '@/app/(app)/repository/[project-name]/page';
-import RepositoryPage from '@/app/(app)/repository/page';
+import { PrdDocPage } from '@/app/(app)/prd/[pageId]/page';
+import PrdLayout from '@/app/(app)/prd/layout';
+import PrdDefaultPage from '@/app/(app)/prd/page';
 import StatsPage from '@/app/(app)/stats/page';
 import TaskDetailPage from '@/app/(app)/tasks/[id]/page';
 import TasksPage from '@/app/(app)/tasks/page';
 import OnboardingLayout from '@/app/(onboarding)/layout';
 import OnboardingPage from '@/app/(onboarding)/onboarding/page';
+import SettingsLayout from '@/app/settings/layout';
+import SettingsDefaultPage from '@/app/settings/page';
+import RepoSettings from '@/app/settings/repo/page';
+import WorkspaceSettings from '@/app/settings/workspace/page';
 import AppLayout from './app/(app)/layout';
 import RootLayout from './app/layout';
 
@@ -36,24 +35,21 @@ const app = (
 							<Route element={<CyclesPage />} index />
 							<Route element={<CycleDetailPage />} path=":cycleId" />
 						</Route>
-						<Route path="prd" element={<PRDLayout />}>
-							<Route element={<PRDPage />} index />
-							<Route path="explorer">
-								<Route element={<PRDExplorerPage />} index />
-								<Route element={<PRDExplorerDocPage />} path=":pageId" />
-							</Route>
-							<Route path="search" element={<PRDSearchPage />} />
-							<Route path="versioning" element={<PRDVersioningPage />} />
+						<Route path="prd" element={<PrdLayout />}>
+							<Route element={<PrdDefaultPage />} index />
+							<Route element={<PrdDocPage />} path=":pageId" />
 						</Route>
 						<Route path="tasks">
 							<Route element={<TasksPage />} index />
 							<Route element={<TaskDetailPage />} path=":taskId" />
 						</Route>
-						<Route path="repository">
-							<Route element={<RepositoryPage />} index />
-							<Route element={<RepositoryProjectPage />} path=":projectName" />
-						</Route>
 						<Route element={<StatsPage />} path="stats" />
+					</Route>
+
+					<Route path="settings" element={<SettingsLayout />}>
+						<Route element={<SettingsDefaultPage />} index />
+						<Route element={<RepoSettings />} path="repo" />
+						<Route element={<WorkspaceSettings />} path="workspace" />
 					</Route>
 
 					<Route element={<OnboardingLayout />}>

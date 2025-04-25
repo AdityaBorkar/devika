@@ -1,14 +1,7 @@
-import { useAtomValue } from 'jotai';
-import { Navigate } from 'react-router';
-import { PrdScreenStateAtom } from './store';
-
-export default function PRDPage() {
-	const { tab, explorer } = useAtomValue(PrdScreenStateAtom);
+export default function PrdDefaultPage() {
 	return (
-		<Navigate
-			to={
-				tab === 'explorer' ? `/prd/explorer/${explorer.pageId}` : `/prd/${tab}`
-			}
-		/>
+		<div className="flex h-full w-full items-center justify-center">
+			Blank Screen
+		</div>
 	);
 }

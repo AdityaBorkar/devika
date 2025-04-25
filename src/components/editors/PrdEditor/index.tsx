@@ -240,12 +240,13 @@ export function MDXEditor({
 	}
 
 	return (
-		<div className={cn('border overflow-hidden rounded-md', className)}>
+		<div className={cn('', className)}>
 			<EditorContent
 				editor={editor}
 				className="dark:prose-code:bg-gray-800 dark:prose-p:text-gray-300 dark:prose-pre:bg-gray-800 min-h-[300px] p-6 prose-code:after:content-none prose-code:before:content-none prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-headings:font-semibold prose-ol:list-decimal prose-p:text-gray-700 prose-pre:bg-gray-100 prose-pre:p-4 prose-pre:rounded-md prose-ul:list-disc"
 			/>
-			<div className="bg-gray-50 border-t px-3 py-2 text-xs text-gray-500">
+			{/* Write below as BLOCK PLACEHOLDER */}
+			{/* <div className="bg-gray-50 border-t px-3 py-2 text-xs text-gray-500">
 				Type{' '}
 				<kbd className="bg-gray-200 px-1 py-0.5 rounded text-gray-700">/</kbd>{' '}
 				for commands or{' '}
@@ -255,7 +256,7 @@ export function MDXEditor({
 					Ctrl+Alt+1-3
 				</kbd>{' '}
 				for headings
-			</div>
+			</div> */}
 		</div>
 	);
 }

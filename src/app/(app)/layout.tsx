@@ -1,5 +1,3 @@
-'use client';
-
 import {
 	PiArrowUpRight,
 	PiBookOpen,
@@ -9,6 +7,8 @@ import {
 	PiFileDoc,
 	PiFolder,
 	PiGear,
+	PiHardDrive,
+	PiHardDrives,
 	PiLayout,
 	PiListChecks,
 	PiNotepad,
@@ -47,21 +47,11 @@ const NAV_ITEMS = [
 		icon: PiRepeatOnce,
 		label: 'Cycles',
 	},
-	{
-		href: 'repository',
-		icon: PiFolder,
-		label: 'Repository',
-	},
-	{
-		href: 'agents',
-		icon: PiRobot,
-		label: 'Agents',
-	},
-	{
-		href: 'memory',
-		icon: PiNotepad,
-		label: 'Memory',
-	},
+	// {
+	// 	href: 'repository',
+	// 	icon: PiFolder,
+	// 	label: 'Repository',
+	// },
 	{
 		href: 'stats',
 		icon: PiChartLine,
@@ -149,7 +139,7 @@ export default function AppLayout() {
 					})}
 				</nav>
 
-				<div className="absolute right-4 bottom-2 left-4 rounded-lg border border-border px-4 py-2 text-center text-sm shadow-sm tracking-tighter">
+				<div className="absolute right-4 bottom-2 left-4 rounded-lg border border-border px-4 py-2 text-center text-sm tracking-tighter shadow-sm">
 					Coming Soon: Teams & Cloud
 				</div>
 			</aside>

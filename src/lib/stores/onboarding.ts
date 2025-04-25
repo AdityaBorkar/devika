@@ -209,13 +209,4 @@ const projects: MonorepoApp[] = [
 	},
 ];
 
-const workspace = {
-	monorepo: 'bun',
-	name: 'Devika',
-	repo: 'github',
-	vcs: 'git',
-};
-
 export const ProjectsAtom = atom(projects);
-
-export const WorkspaceAtom = atom(workspace);

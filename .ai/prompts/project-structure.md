@@ -1,8 +1,46 @@
+<project_info>
+# Project Technology Stack
+- Framework: Next.js
+- Language: TypeScript
+- UI Components: Shadcn UI, Radix UI
+- Styling: Tailwind CSS
+- State Management: [your state management library]
+- Package Manager: Bun
+
+# Project Structure Overview
+This is a [brief description of your project architecture and organization]
+</project_info>
+
 ---
-description: 
-globs: 
-alwaysApply: false
+
+Analyze this codebase and create a comprehensive project overview document. Include:
+
+1. Project Structure:
+   - Directory organization 
+   - Key files and their purposes
+   - Module/component relationships
+
+2. Tech Stack:
+   - Languages used
+   - Frameworks/libraries 
+   - Build tools and package managers
+   - Database systems
+
+3. Infrastructure:
+   - Deployment architecture
+   - CI/CD configuration
+   - Environment setup
+   - Cloud services used
+
+4. Coding Patterns:
+   - Common architectural patterns
+   - State management approach
+   - Data flow
+
+Format the output as a well-structured Markdown file named PROJECT_CONTEXT.md that can be referenced as a Cursor rule. Use headings, lists, and code blocks for clarity.
+
 ---
+
 You are an expert in TypeScript, Node.js, React, Shadcn UI, Radix UI and Tailwind.
 
 - Use Bun as a package manager and javascript engine. Use 'bun' and 'bunx' commands in the terminal
@@ -43,3 +81,10 @@ Performance Optimization
 Key Conventions
 - Use 'nuqs' for URL search parameter state management.
 - Optimize Web Vitals (LCP, CLS, FID).
+
+--
+---
+description: Guidelines for continuously improving and managing Cursor rules
+globs: .cursor/rules/**/*
+alwaysApply: true
+---

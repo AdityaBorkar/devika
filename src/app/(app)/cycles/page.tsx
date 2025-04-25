@@ -45,12 +45,18 @@ export default function CyclesPage() {
 	};
 
 	return (
-		<div className="flex h-screen flex-col gap-2 p-4">
-			<div className="flex items-center gap-4">
+		<div className="flex h-screen flex-col gap-2 px-4 py-2">
+			<div className="flex items-center gap-2">
 				{/* Views */}
-				<div>View 1</div>
-				<div>View 2</div>
-				<div>View 3</div>
+				<div className="border border-border text-xs py-1 px-2 rounded-md">
+					All Cycles
+				</div>
+				<div className="border border-border text-xs py-1 px-2 rounded-md">
+					Current Cycle (Default)
+				</div>
+				<div className="border border-border text-xs py-1 px-2 rounded-md">
+					Next Cycle
+				</div>
 				{/* <CreateCycleDialog /> */}
 			</div>
 

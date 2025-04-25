@@ -1,0 +1,57 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Guidelines for automatically detecting when to add project context
+globs: **/*
+alwaysApply: true
+---
+
+# Context Awareness
+
+- **When to Add Context:**
+  - User asks about unfamiliar code areas
+  - Questions about architectural decisions
+  - Requests for implementation explanations
+  - When suggesting changes to existing patterns
+
+- **Project Structure Context:**
+  - Reference [package.json](mdc:package.json) for dependencies
+  - Check relevant directories for implementation patterns:
+    - Components: `src/components/**/*`
+    - API routes: `src/api/**/*` 
+    - App routes: `src/app/**/*`
+    - Hooks: `src/hooks/**/*`
+
+- **Tech Context Signals:**
+  - Unfamiliar terminology questions
+  - How-to implementation questions
+  - Alternative approaches questions
+  - "Why is this done this way" questions
+
+- **Automatic Detection Patterns:**
+  - File being edited not previously mentioned
+  - References to unknown components/functions
+  - Questions about project organization
+  - Implementation requests without context
+
+- **Context Layers:**
+  - **Layer 1:** File-specific context
+    - Import patterns, dependencies, usage
+  - **Layer 2:** Component/module context
+    - Related files, parent/child relationships
+  - **Layer 3:** Architectural context
+    - Design patterns, tech stack decisions
+
+- **Context Sources:**
+  - Project directory structure
+  - Closest related implementation files
+  - Documentation in comments and READMEs
+  - Tech stack defined in tech_stack.mdc
+
+- **Contextual References:**
+  - Always provide file links using `[filename](mdc:path/to/file)` format
+  - Reference implementation examples when explaining patterns
+  - Link to related rule files when applicable

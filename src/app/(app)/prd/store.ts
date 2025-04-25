@@ -1,14 +1,14 @@
 import { atom } from 'jotai';
 
 export const PrdScreenStateAtom = atom({
-	tab: 'explorer',
-	explorer: {
+	tab: 'files',
+	files: {
 		pageId: '',
 	},
 	search: {
 		query: '',
 	},
-	versioning: {
+	version: {
 		id: '',
 		name: 'Roadmap to MVP',
 	},
