@@ -9,16 +9,20 @@ import HomePage from '@/app/(app)/page';
 import { PrdDocPage } from '@/app/(app)/prd/[pageId]/page';
 import PrdLayout from '@/app/(app)/prd/layout';
 import PrdDefaultPage from '@/app/(app)/prd/page';
+import AIModelsSettings from '@/app/(app)/settings/ai-models/page';
+import ConnectedAppsSettings from '@/app/(app)/settings/connected-apps/page';
+import SettingsLayout from '@/app/(app)/settings/layout';
+import SettingsDefaultPage from '@/app/(app)/settings/page';
+import RepoSettings from '@/app/(app)/settings/repo/page';
+import WorkspaceSettings from '@/app/(app)/settings/workspace/page';
 import StatsPage from '@/app/(app)/stats/page';
 import TaskDetailPage from '@/app/(app)/tasks/[id]/page';
 import TasksPage from '@/app/(app)/tasks/page';
 import OnboardingLayout from '@/app/(onboarding)/layout';
 import OnboardingPage from '@/app/(onboarding)/onboarding/page';
-import SettingsLayout from '@/app/settings/layout';
-import SettingsDefaultPage from '@/app/settings/page';
-import RepoSettings from '@/app/settings/repo/page';
-import WorkspaceSettings from '@/app/settings/workspace/page';
+import { Error404 } from '@/app/not-found';
 import AppLayout from './app/(app)/layout';
+import AccountSettings from './app/(app)/settings/account/page';
 import RootLayout from './app/layout';
 
 const app = (
@@ -26,35 +30,42 @@ const app = (
 		<BrowserRouter>
 			<Routes>
 				<Route element={<RootLayout />}>
-					<Route element={<HomePage />} path="/" />
+					<Route path="/" element={<HomePage />} />
 
 					<Route element={<AppLayout />}>
-						<Route element={<DashboardPage />} path="dashboard" />
-						<Route element={<ChatPage />} path="chat" />
+						<Route path="dashboard" element={<DashboardPage />} />
+						<Route path="chat" element={<ChatPage />} />
 						<Route path="cycles">
-							<Route element={<CyclesPage />} index />
-							<Route element={<CycleDetailPage />} path=":cycleId" />
+							<Route index element={<CyclesPage />} />
+							<Route path=":cycleId" element={<CycleDetailPage />} />
 						</Route>
 						<Route path="prd" element={<PrdLayout />}>
-							<Route element={<PrdDefaultPage />} index />
-							<Route element={<PrdDocPage />} path=":pageId" />
+							<Route index element={<PrdDefaultPage />} />
+							<Route path=":pageId" element={<PrdDocPage />} />
 						</Route>
 						<Route path="tasks">
-							<Route element={<TasksPage />} index />
-							<Route element={<TaskDetailPage />} path=":taskId" />
+							<Route index element={<TasksPage />} />
+							<Route path=":taskId" element={<TaskDetailPage />} />
 						</Route>
-						<Route element={<StatsPage />} path="stats" />
-					</Route>
-
-					<Route path="settings" element={<SettingsLayout />}>
-						<Route element={<SettingsDefaultPage />} index />
-						<Route element={<RepoSettings />} path="repo" />
-						<Route element={<WorkspaceSettings />} path="workspace" />
+						<Route path="stats" element={<StatsPage />} />
+						<Route path="settings" element={<SettingsLayout />}>
+							<Route index element={<SettingsDefaultPage />} />
+							{/* <Route path="repo" element={<RepoSettings />} /> */}
+							<Route path="account" element={<AccountSettings />} />
+							<Route path="workspace" element={<WorkspaceSettings />} />
+							<Route path="ai-models" element={<AIModelsSettings />} />
+							<Route
+								path="connected-apps"
+								element={<ConnectedAppsSettings />}
+							/>
+						</Route>
 					</Route>
 
 					<Route element={<OnboardingLayout />}>
-						<Route element={<OnboardingPage />} path="onboarding" />
+						<Route path="onboarding" element={<OnboardingPage />} />
 					</Route>
+
+					<Route path="*" element={<Error404 />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -9,6 +9,14 @@
 
 - Use a database and MCP instead of a file-storage to increase performance.
 
+- Voice to Code
+- Model Selection Strategy
+- Really simple one click rollbacks
+
+- Implements - Linting, Formatting, Testing, Documentation, Error Handling, Logging
+- Parallel Mode with Git
+- Applies DRY (Don’t Repeat Yourself) principles and clean code practices (e.g., modular functions, descriptive naming) to ensure maintainability and reduce technical debt in automated pipelines
+
 ---
 
 ## Prompts:
@@ -230,3 +238,36 @@ Feedback
 	- ask_followup_question: Ask user for clarification
 	- attempt_completion: Present final results
 - 
+
+----
+
+- Inspect and write instructions
+- Scribe and write instructions
+- Open NGROK MCP and start sharing live
+
+
+----
+
+1. do all todos
+2. plan the auto-suggestions and prd-ai generation
+2. plan the review cycle
+3. plan the versioning cycling
+
+
+----
+
+- Release Notes
+- Help
+- Support
+- Discord
+- Forum
+- Documentation
+- Feedback / Bug Reports
+- Changelog
+- Legal
+	- Privacy Policy
+	- Terms of Service
+	- Cookie Policy
+	- Security Policy
+	- DMCA Policy
+	- Copyright Policy

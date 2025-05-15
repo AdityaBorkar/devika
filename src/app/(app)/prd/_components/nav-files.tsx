@@ -26,43 +26,40 @@ const sections = [
 
 export default function FilesNavigation() {
 	return (
-		<div>
-			<nav className="flex h-full flex-col overflow-auto">
-				{/* TOP: Progressive Blur */}
-				{/* <NoteLink to="/prd/new-note" className="mt-4">
+		<nav className="flex flex-col overflow-auto">
+			{/* <NoteLink to="/prd/new-note" className="mt-4">
 					<PiPlus className="-mt-0.5 mr-2 inline-block size-4" />
 					New Note
 				</NoteLink> */}
 
-				{sections.map((section) => (
-					<div key={section.label} className="contents">
-						<div className="mt-6 mb-1 px-4 font-medium text-muted-foreground text-xs">
-							{section.label}
-						</div>
-						<NoteLink to="/prd/list-of-docs">
-							<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
-							List of Docs
-						</NoteLink>
-						<NoteLink to="/prd/list-of-docs">
-							<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
-							List of Docs
-						</NoteLink>
-						<NoteLink to="/prd/list-of-docs">
-							<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
-							List of Docs
-						</NoteLink>
-						<NoteLink to="/prd/list-of-docs">
-							<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
-							List of Docs
-						</NoteLink>
-						<NoteLink to="/prd/list-of-docs">
-							<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
-							List of Docs
-						</NoteLink>
+			{sections.map((section) => (
+				<div key={section.label} className="contents">
+					<div className="mt-6 mb-1 select-none px-5 font-medium text-muted-foreground text-xs first:mt-4">
+						{section.label}
 					</div>
-				))}
-			</nav>
-		</div>
+					<NoteLink to="/prd/list-of-docs">
+						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
+						List of Docs
+					</NoteLink>
+					<NoteLink to="/prd/list-of-docs">
+						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
+						List of Docs
+					</NoteLink>
+					<NoteLink to="/prd/list-of-docs">
+						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
+						List of Docs
+					</NoteLink>
+					<NoteLink to="/prd/list-of-docs">
+						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
+						List of Docs
+					</NoteLink>
+					<NoteLink to="/prd/list-of-docs">
+						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
+						List of Docs
+					</NoteLink>
+				</div>
+			))}
+		</nav>
 	);
 }
 
@@ -77,7 +74,10 @@ function NoteLink({
 }) {
 	return (
 		<Link
-			className={cn('rounded-md px-4 py-1 hover:bg-zinc-200', className)}
+			className={cn(
+				'rounded-md px-4 py-1.5 text-xs hover:bg-zinc-800',
+				className,
+			)}
 			to={to}
 		>
 			{children}

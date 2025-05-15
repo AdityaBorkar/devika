@@ -51,7 +51,7 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({
 						))}
 
 						{tasks.length === 0 && (
-							<div className="rounded-md border border-gray-200 border-dashed p-3 text-center text-muted-foreground text-sm dark:border-gray-700">
+							<div className="rounded-md border border-zinc-200 border-dashed p-3 text-center text-muted-foreground text-sm dark:border-zinc-700">
 								No tasks
 							</div>
 						)}
@@ -83,7 +83,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ tasks }) => {
 				<KanbanColumn
 					color="#6b7280"
 					count={todoTasks.length}
-					onClick={handleTaskClick} // gray-500
+					onClick={handleTaskClick} // zinc-500
 					tasks={todoTasks}
 					title="Todo"
 				/>

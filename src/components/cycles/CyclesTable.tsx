@@ -28,7 +28,7 @@ export function CyclesTable({
 	const getStatusColor = (status: string) => {
 		switch (status) {
 			case 'Not Started':
-				return 'bg-gray-200 text-gray-800 hover:bg-gray-300';
+				return 'bg-zinc-200 text-zinc-800 hover:bg-zinc-300';
 			case 'In Progress':
 				return 'bg-blue-100 text-blue-800 hover:bg-blue-200';
 			case 'Completed':
@@ -36,7 +36,7 @@ export function CyclesTable({
 			case 'Cancelled':
 				return 'bg-red-100 text-red-800 hover:bg-red-200';
 			default:
-				return 'bg-gray-200 text-gray-800 hover:bg-gray-300';
+				return 'bg-zinc-200 text-zinc-800 hover:bg-zinc-300';
 		}
 	};
 
@@ -123,7 +123,7 @@ export function CyclesTable({
 								<TableCell>{cycle.tasks.length}</TableCell>
 								<TableCell>
 									<div className="flex items-center gap-2">
-										<div className="h-2 w-full rounded-full bg-gray-200">
+										<div className="h-2 w-full rounded-full bg-zinc-200">
 											<div
 												className="h-2 rounded-full bg-primary"
 												style={{ width: `${cycle.progress.percentComplete}%` }}

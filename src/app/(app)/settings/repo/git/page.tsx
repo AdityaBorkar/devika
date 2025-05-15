@@ -69,7 +69,7 @@ export default function GitConfigPage() {
 						</TabsList>
 
 						<TabsContent className="mt-0" value="commitStrategy">
-							<div className="mb-2 px-1 text-gray-500 text-sm">
+							<div className="mb-2 px-1 text-sm text-zinc-500">
 								Define whether your team uses Conventional Commits or another
 								approach
 							</div>
@@ -83,7 +83,7 @@ export default function GitConfigPage() {
 						</TabsContent>
 
 						<TabsContent className="mt-0" value="commitFormat">
-							<div className="mb-2 px-1 text-gray-500 text-sm">
+							<div className="mb-2 px-1 text-sm text-zinc-500">
 								Define the structure and guidelines for commit messages
 							</div>
 							<TipTapEditor
@@ -96,7 +96,7 @@ export default function GitConfigPage() {
 						</TabsContent>
 
 						<TabsContent className="mt-0" value="whenToCommit">
-							<div className="mb-2 px-1 text-gray-500 text-sm">
+							<div className="mb-2 px-1 text-sm text-zinc-500">
 								Guidelines on when and how often to make commits
 							</div>
 							<TipTapEditor
@@ -109,7 +109,7 @@ export default function GitConfigPage() {
 						</TabsContent>
 
 						<TabsContent className="mt-0" value="preCommitChecks">
-							<div className="mb-2 px-1 text-gray-500 text-sm">
+							<div className="mb-2 px-1 text-sm text-zinc-500">
 								Automated and manual checks to perform before committing code
 							</div>
 							<TipTapEditor
@@ -122,7 +122,7 @@ export default function GitConfigPage() {
 						</TabsContent>
 
 						<TabsContent className="mt-0" value="branchingStrategy">
-							<div className="mb-2 px-1 text-gray-500 text-sm">
+							<div className="mb-2 px-1 text-sm text-zinc-500">
 								Guidelines for branch organization and management
 							</div>
 							<TipTapEditor

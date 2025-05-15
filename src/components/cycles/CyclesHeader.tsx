@@ -50,7 +50,7 @@ export function CyclesHeader({
 		<div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
 			<div>
 				<h1 className="font-semibold text-2xl">Cycles / Sprints</h1>
-				<p className="text-gray-500 text-sm">
+				<p className="text-sm text-zinc-500">
 					Showing {filteredCycles} of {totalCycles} cycles
 				</p>
 			</div>

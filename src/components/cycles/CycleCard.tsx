@@ -14,7 +14,7 @@ export function CycleCard({ cycle, onSelect }: CycleCardProps) {
 	const getStatusColor = (status: CycleStatus) => {
 		switch (status) {
 			case 'Not Started':
-				return 'bg-gray-200 text-gray-800';
+				return 'bg-zinc-200 text-zinc-800';
 			case 'In Progress':
 				return 'bg-blue-100 text-blue-800';
 			case 'Completed':
@@ -22,7 +22,7 @@ export function CycleCard({ cycle, onSelect }: CycleCardProps) {
 			case 'Cancelled':
 				return 'bg-red-100 text-red-800';
 			default:
-				return 'bg-gray-200 text-gray-800';
+				return 'bg-zinc-200 text-zinc-800';
 		}
 	};
 
@@ -43,11 +43,11 @@ export function CycleCard({ cycle, onSelect }: CycleCardProps) {
 					</span>
 				</div>
 
-				<p className="line-clamp-2 text-gray-600 text-sm">
+				<p className="line-clamp-2 text-sm text-zinc-600">
 					{cycle.description}
 				</p>
 
-				<div className="flex justify-between text-gray-500 text-xs">
+				<div className="flex justify-between text-xs text-zinc-500">
 					<span>
 						{formatDate(cycle.startDate)} - {formatDate(cycle.endDate)}
 					</span>

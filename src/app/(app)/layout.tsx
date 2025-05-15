@@ -1,62 +1,26 @@
 import {
-	PiArrowUpRight,
-	PiBookOpen,
-	PiCaretDown,
-	PiChartLine,
-	PiCode,
-	PiFileDoc,
-	PiFolder,
+	PiChartPie,
+	PiCheckCircleDuotone,
+	PiCheckSquare,
+	PiFiles,
 	PiGear,
-	PiHardDrive,
-	PiHardDrives,
-	PiLayout,
-	PiListChecks,
-	PiNotepad,
-	PiQuestion,
-	PiRepeatOnce,
-	PiRobot,
+	PiHouse,
+	PiPlayCircle,
 } from 'react-icons/pi';
 import { Link, Outlet, redirect, useLocation } from 'react-router';
-import { Button } from '@/components/ui/button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import useConfig from '@/hooks/useConfig';
+import { cn } from '@/lib/utils';
 
-const NAV_ITEMS = [
-	{
-		href: 'dashboard',
-		icon: PiLayout,
-		label: 'Dashboard',
-	},
-	{
-		href: 'prd',
-		icon: PiFileDoc,
-		label: 'PRD',
-	},
-	{
-		href: 'tasks',
-		icon: PiListChecks,
-		label: 'Tasks',
-	},
-	{
-		href: 'cycles',
-		icon: PiRepeatOnce,
-		label: 'Cycles',
-	},
-	// {
-	// 	href: 'repository',
-	// 	icon: PiFolder,
-	// 	label: 'Repository',
-	// },
-	{
-		href: 'stats',
-		icon: PiChartLine,
-		label: 'Stats',
-	},
+const NAV_ITEMS_TOP = [
+	{ href: 'dashboard', icon: PiHouse, label: 'Dashboard' },
+	{ href: 'prd', icon: PiFiles, label: 'PRD' },
+	{ href: 'tasks', icon: PiCheckSquare, label: 'Tasks' },
+	{ href: 'cycles', icon: PiPlayCircle, label: 'Cycles' },
+];
+
+const NAV_ITEMS_BOTTOM = [
+	{ href: 'stats', icon: PiChartPie, label: 'Stats' },
+	{ href: 'settings', icon: PiGear, label: 'Settings' },
 ];
 
 export default function AppLayout() {
@@ -67,85 +31,58 @@ export default function AppLayout() {
 	const segment = location.pathname.split('/')[1];
 
 	return (
-		<div className="grid h-screen grid-cols-[16rem_auto]">
-			<aside className="relative bg-card px-4">
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button
-							variant="ghost"
-							className="mt-3 mb-6 w-full justify-between border border-border bg-accent px-4 py-1.5 font-semibold hover:bg-accent/80"
-						>
-							<div className="flex items-center gap-2">
-								<div className="rounded-full bg-background px-1.5 py-1">
-									<PiCode className="size-4" />
-								</div>
-								{config.workspace.name}
-							</div>
-							<PiCaretDown className="size-4" />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="start" className="w-[14rem]">
-						<DropdownMenuItem>
-							<Link
-								to="/settings/workspace"
-								className="flex items-center gap-2"
-							>
-								<PiGear className="size-4" />
-								Workspace Settings
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<Link
-								to="https://devika.adityab.tech/docs"
-								className="flex w-full justify-between"
-							>
-								<div className="flex items-center gap-2">
-									<PiBookOpen className="size-4" />
-									Documentation
-								</div>
-								<PiArrowUpRight className="size-4" />
-							</Link>
-						</DropdownMenuItem>
-						<DropdownMenuItem>
-							<Link
-								to="https://devika.adityab.tech/support"
-								className="flex w-full justify-between"
-							>
-								<div className="flex items-center gap-2">
-									<PiQuestion className="size-4" />
-									Support
-								</div>
-								<PiArrowUpRight className="size-4" />
-							</Link>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
-
-				<nav>
-					{NAV_ITEMS.map((item) => {
-						return (
-							<Button
-								asChild
-								className="!justify-start !px-4 !py-5 w-full"
-								key={item.href}
-								variant={segment === item.href ? 'secondary' : 'ghost'}
-							>
-								<Link to={item.href}>
-									<item.icon className="size-5" />
-									{item.label}
-								</Link>
-							</Button>
-						);
-					})}
-				</nav>
-
-				<div className="absolute right-4 bottom-2 left-4 rounded-lg border border-border px-4 py-2 text-center text-sm tracking-tighter shadow-sm">
-					Coming Soon: Teams & Cloud
+		<div className="grid h-screen grid-cols-[3.5rem_auto]">
+			<nav className="relative flex flex-col px-1.5 py-1">
+				{NAV_ITEMS_TOP.map((item) => (
+					<NavItem
+						key={item.href}
+						item={item}
+						isActive={segment === item.href}
+					/>
+				))}
+				<div className="grow" />
+				{NAV_ITEMS_BOTTOM.map((item) => (
+					<NavItem
+						key={item.href}
+						item={item}
+						isActive={segment === item.href}
+					/>
+				))}
+				<div
+					// TODO: Open Dialog and Show Connection between IDE, Cloud, Integrations and Chrome Extension
+					className={cn(
+						'my-1 w-full select-none rounded border border-transparent py-2 text-sm text-zinc-500',
+						'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
+					)}
+				>
+					<PiCheckCircleDuotone className="mx-auto size-5 text-green-600 " />
 				</div>
-			</aside>
-			<main className="mx-2 my-2 overflow-y-auto rounded-md border border-border shadow-md">
+			</nav>
+			<main className="my-2 mr-2 overflow-y-auto rounded-md border border-border bg-zinc-900 shadow-md">
 				<Outlet />
 			</main>
 		</div>
+	);
+}
+
+function NavItem({
+	item,
+	isActive,
+}: {
+	item: (typeof NAV_ITEMS_TOP)[number];
+	isActive: boolean;
+}) {
+	return (
+		<Link
+			to={item.href}
+			className={cn(
+				'my-1 w-full select-none rounded border border-transparent py-2 text-sm text-zinc-500',
+				isActive
+					? 'border-border bg-zinc-800 text-zinc-100'
+					: 'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
+			)}
+		>
+			<item.icon className="mx-auto size-5 stroke-3" />
+		</Link>
 	);
 }

@@ -31,7 +31,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 	const getStatusColorClass = (status: string) => {
 		switch (status) {
 			case 'Todo':
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-zinc-100 text-zinc-800';
 			case 'In Progress':
 				return 'bg-blue-100 text-blue-800';
 			case 'Done':
@@ -39,7 +39,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 			case 'Blocked':
 				return 'bg-red-100 text-red-800';
 			default:
-				return 'bg-gray-100 text-gray-800';
+				return 'bg-zinc-100 text-zinc-800';
 		}
 	};
 
@@ -173,7 +173,7 @@ export function TasksTable({ tasks }: TasksTableProps) {
 						})
 					) : (
 						<TableRow>
-							<TableCell className="py-4 text-center text-gray-500" colSpan={6}>
+							<TableCell className="py-4 text-center text-zinc-500" colSpan={6}>
 								No tasks available
 							</TableCell>
 						</TableRow>

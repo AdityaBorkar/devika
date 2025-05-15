@@ -11,7 +11,7 @@ export default function VersionCreate() {
 			</div>
 
 			<div>
-				<button>Generate Summary and End Version</button>
+				<button type="button">Generate Summary and End Version</button>
 			</div>
 			{/* --- */}
 			<div>New Version Name</div>

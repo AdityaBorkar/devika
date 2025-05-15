@@ -106,7 +106,7 @@ export function filterCyclesByStatus(
 export function getStatusColorClass(status: CycleStatus): string {
 	switch (status) {
 		case 'Not Started':
-			return 'bg-gray-200 text-gray-800';
+			return 'bg-zinc-200 text-zinc-800';
 		case 'In Progress':
 			return 'bg-blue-100 text-blue-800';
 		case 'Completed':
@@ -114,6 +114,6 @@ export function getStatusColorClass(status: CycleStatus): string {
 		case 'Cancelled':
 			return 'bg-red-100 text-red-800';
 		default:
-			return 'bg-gray-200 text-gray-800';
+			return 'bg-zinc-200 text-zinc-800';
 	}
 }

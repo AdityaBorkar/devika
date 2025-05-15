@@ -50,10 +50,10 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 	};
 
 	return (
-		<div className="flex items-center gap-4 border-gray-200 border-b px-4 py-2 dark:border-gray-800">
+		<div className="flex items-center gap-4 border-zinc-200 border-b px-4 py-2 dark:border-zinc-800">
 			<div className="flex items-center gap-1">
-				<Filter className="text-gray-500" size={16} />
-				<span className="font-medium text-gray-600 text-sm dark:text-gray-400">
+				<Filter className="text-zinc-500" size={16} />
+				<span className="font-medium text-sm text-zinc-600 dark:text-zinc-400">
 					Filters:
 				</span>
 			</div>
@@ -61,7 +61,7 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 			<div className="flex items-center gap-2">
 				<select
 					aria-label="Filter by status"
-					className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm dark:border-gray-700 dark:bg-gray-900"
+					className="rounded-md border border-zinc-300 bg-white px-2 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
 					onChange={handleStatusChange}
 					value={statusFilter}
 				>
@@ -74,7 +74,7 @@ export const TasksFilter: React.FC<TasksFilterProps> = ({
 
 				<select
 					aria-label="Filter by priority"
-					className="rounded-md border border-gray-300 bg-white px-2 py-1.5 text-sm dark:border-gray-700 dark:bg-gray-900"
+					className="rounded-md border border-zinc-300 bg-white px-2 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
 					onChange={handlePriorityChange}
 					value={priorityFilter}
 				>

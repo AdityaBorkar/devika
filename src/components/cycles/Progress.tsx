@@ -25,12 +25,12 @@ export function Progress({ percent, tasksStatus }: ProgressProps) {
 		<div className="space-y-1">
 			<div className="flex items-center justify-between text-xs">
 				<span className="font-medium">{percent}% complete</span>
-				<span className="text-gray-500">
+				<span className="text-zinc-500">
 					{tasksStatus.done}/{total} tasks
 				</span>
 			</div>
 
-			<div className="h-2 w-full overflow-hidden rounded-full bg-gray-100">
+			<div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100">
 				{/* Stacked bars for different task statuses */}
 				<div className="flex h-full">
 					{/* Done tasks (green) */}
@@ -57,12 +57,12 @@ export function Progress({ percent, tasksStatus }: ProgressProps) {
 						/>
 					)}
 
-					{/* Todo tasks (light gray, rendered by the background) */}
+					{/* Todo tasks (light zinc, rendered by the background) */}
 				</div>
 			</div>
 
 			{/* Legend */}
-			<div className="flex gap-4 text-gray-600 text-xs">
+			<div className="flex gap-4 text-xs text-zinc-600">
 				{tasksStatus.done > 0 && (
 					<div className="flex items-center gap-1">
 						<div className="h-2 w-2 rounded-full bg-green-500" />
@@ -86,7 +86,7 @@ export function Progress({ percent, tasksStatus }: ProgressProps) {
 
 				{tasksStatus.todo > 0 && (
 					<div className="flex items-center gap-1">
-						<div className="h-2 w-2 rounded-full bg-gray-300" />
+						<div className="h-2 w-2 rounded-full bg-zinc-300" />
 						<span>Todo ({tasksStatus.todo})</span>
 					</div>
 				)}

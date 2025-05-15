@@ -10,7 +10,7 @@ interface RoadblocksListProps {
 export function RoadblocksList({ roadblocks }: RoadblocksListProps) {
 	if (roadblocks.length === 0) {
 		return (
-			<div className="py-8 text-center text-gray-500">No roadblocks found</div>
+			<div className="py-8 text-center text-zinc-500">No roadblocks found</div>
 		);
 	}
 
@@ -21,7 +21,7 @@ export function RoadblocksList({ roadblocks }: RoadblocksListProps) {
 					className={`rounded-md border p-4 ${
 						roadblock.status === 'Active'
 							? 'border-red-200 bg-red-50'
-							: 'border-gray-200'
+							: 'border-zinc-200'
 					}`}
 					key={roadblock.id}
 				>
@@ -42,7 +42,7 @@ export function RoadblocksList({ roadblocks }: RoadblocksListProps) {
 								{roadblock.status}
 							</span>
 						</div>
-						<div className="text-gray-500 text-xs">
+						<div className="text-xs text-zinc-500">
 							Created: {formatDate(roadblock.createdAt)}
 							{roadblock.resolvedAt && (
 								<span className="ml-3">
@@ -52,7 +52,7 @@ export function RoadblocksList({ roadblocks }: RoadblocksListProps) {
 						</div>
 					</div>
 
-					<p className="mt-2 text-gray-700">{roadblock.description}</p>
+					<p className="mt-2 text-zinc-700">{roadblock.description}</p>
 				</div>
 			))}
 		</div>

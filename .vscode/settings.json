@@ -1,15 +1,34 @@
 {
-	"cSpell.words": ["arktype", "bunx", "Nuqs", "turbopack", "devika"],
+	"cSpell.words": [
+		"Agentic",
+		"arktype",
+		"bunx",
+		"clinerules",
+		"devika",
+		"keymap",
+		"Nuqs",
+		"Ollama",
+		"Pulumi",
+		"Quillopy",
+		"roomodes",
+		"Serper",
+		"shadcn",
+		"Splitside",
+		"turbopack"
+	],
 	"editor.codeActionsOnSave": {
 		"source.action.useSortedAttributes.biome": "explicit",
 		"source.action.useSortedKeys.biome": "explicit",
 		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
+		"source.organizeImports.biome": "explicit",
+		"quickfix.biome": "explicit"
 	},
 	"editor.quickSuggestions": {
 		"strings": "on"
 	},
 	"javascript.preferences.importModuleSpecifier": "non-relative",
-	"typescript.preferences.autoImportSpecifierExcludeRegexes": ["^(node:)?os$"],
+	"typescript.preferences.autoImportSpecifierExcludeRegexes": [
+		"^(node:)?os$"
+	],
 	"typescript.preferences.importModuleSpecifier": "non-relative"
 }

@@ -24,7 +24,7 @@ export function OverviewCard({
 			case 'negative':
 				return 'text-red-600';
 			default:
-				return 'text-gray-600';
+				return 'text-zinc-600';
 		}
 	};
 
@@ -114,13 +114,13 @@ export function OverviewCard({
 		<Card className="p-4">
 			<div className="flex items-start justify-between">
 				<div>
-					<h4 className="font-medium text-gray-500 text-sm">{title}</h4>
+					<h4 className="font-medium text-sm text-zinc-500">{title}</h4>
 					<div className="mt-1 flex items-baseline">
 						<p className="font-semibold text-2xl">{value}</p>
 					</div>
 					<p className={`text-sm ${getStatusClass()}`}>{description}</p>
 				</div>
-				<div className="text-gray-400">{renderIcon()}</div>
+				<div className="text-zinc-400">{renderIcon()}</div>
 			</div>
 		</Card>
 	);

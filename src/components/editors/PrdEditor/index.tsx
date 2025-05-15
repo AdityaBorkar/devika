@@ -15,7 +15,6 @@ import Strike from '@tiptap/extension-strike';
 import Text from '@tiptap/extension-text';
 import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
-import { useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 import {
 	createDefaultCommands,
@@ -31,8 +30,9 @@ const AUTO_SAVE_DELAY = 1000;
 interface MDXEditorProps {
 	content: string;
 	onChange: (content: string) => void;
+	onUpdate: (editor: any) => void;
 	className?: string;
-	placeholder?: string;
+	placeholder?: React.ReactNode;
 	autoSave?: boolean;
 	documentReferences?: DocumentReference[];
 }
@@ -60,14 +60,12 @@ const HeadingWithID = Heading.extend({
 export function MDXEditor({
 	content,
 	onChange,
+	onUpdate,
 	className,
-	placeholder = 'Start writing...',
+	placeholder,
 	autoSave = true,
 	documentReferences = defaultDocumentReferences,
 }: MDXEditorProps) {
-	// Use a ref to track the timeout ID for debouncing
-	const autoSaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
 	const editor = useEditor({
 		extensions: [
 			Document,
@@ -105,12 +103,12 @@ export function MDXEditor({
 			}),
 			Code.configure({
 				HTMLAttributes: {
-					class: 'bg-gray-100 font-mono px-1 py-0.5 rounded text-sm',
+					class: 'bg-zinc-100 font-mono px-1 py-0.5 rounded text-sm',
 				},
 			}),
 			CodeBlock.configure({
 				HTMLAttributes: {
-					class: 'bg-gray-100 font-mono p-4 rounded-md text-sm',
+					class: 'bg-zinc-100 font-mono p-4 rounded-md text-sm',
 				},
 			}),
 			BulletList.configure({
@@ -138,23 +136,7 @@ export function MDXEditor({
 			createDocumentReferenceExtension(documentReferences),
 		],
 		content,
-		onUpdate: ({ editor }) => {
-			const newContent = editor.getHTML();
-
-			// If auto-save is enabled, debounce the onChange call
-			if (autoSave) {
-				if (autoSaveTimeoutRef.current) {
-					clearTimeout(autoSaveTimeoutRef.current);
-				}
-
-				autoSaveTimeoutRef.current = setTimeout(() => {
-					onChange(newContent);
-				}, AUTO_SAVE_DELAY);
-			} else {
-				// If auto-save is disabled, call onChange immediately
-				onChange(newContent);
-			}
-		},
+		onUpdate,
 		editorProps: {
 			attributes: {
 				class:
@@ -226,15 +208,6 @@ export function MDXEditor({
 		},
 	});
 
-	// Clear timeout on unmount to prevent memory leaks
-	useEffect(() => {
-		return () => {
-			if (autoSaveTimeoutRef.current) {
-				clearTimeout(autoSaveTimeoutRef.current);
-			}
-		};
-	}, []);
-
 	if (!editor) {
 		return null;
 	}
@@ -243,20 +216,8 @@ export function MDXEditor({
 		<div className={cn('', className)}>
 			<EditorContent
 				editor={editor}
-				className="dark:prose-code:bg-gray-800 dark:prose-p:text-gray-300 dark:prose-pre:bg-gray-800 min-h-[300px] p-6 prose-code:after:content-none prose-code:before:content-none prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-headings:font-semibold prose-ol:list-decimal prose-p:text-gray-700 prose-pre:bg-gray-100 prose-pre:p-4 prose-pre:rounded-md prose-ul:list-disc"
+				className="min-h-[300px] prose-ol:list-decimal prose-ul:list-disc prose-code:rounded prose-pre:rounded-md prose-code:bg-zinc-100 prose-pre:bg-zinc-100 p-6 prose-pre:p-4 prose-code:px-1 prose-code:py-0.5 prose-headings:font-semibold prose-p:text-zinc-700 prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-zinc-800 dark:prose-pre:bg-zinc-800 dark:prose-p:text-zinc-300"
 			/>
-			{/* Write below as BLOCK PLACEHOLDER */}
-			{/* <div className="bg-gray-50 border-t px-3 py-2 text-xs text-gray-500">
-				Type{' '}
-				<kbd className="bg-gray-200 px-1 py-0.5 rounded text-gray-700">/</kbd>{' '}
-				for commands or{' '}
-				<kbd className="bg-gray-200 px-1 py-0.5 rounded text-gray-700">@</kbd>{' '}
-				to reference documents • Use{' '}
-				<kbd className="bg-gray-200 px-1 py-0.5 rounded text-gray-700">
-					Ctrl+Alt+1-3
-				</kbd>{' '}
-				for headings
-			</div> */}
 		</div>
 	);
 }

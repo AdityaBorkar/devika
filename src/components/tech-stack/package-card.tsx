@@ -34,16 +34,16 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 	return (
 		<div
 			className={cn(
-				'relative w-full rounded-lg border bg-white p-5 transition-all hover:border-primary/30 hover:shadow-sm dark:bg-gray-900',
+				'relative w-full rounded-lg border bg-white p-5 transition-all hover:border-primary/30 hover:shadow-sm dark:bg-zinc-900',
 				isLocal
 					? 'border-indigo-200 dark:border-indigo-800'
-					: 'border-gray-200 dark:border-gray-800',
+					: 'border-zinc-200 dark:border-zinc-800',
 			)}
 		>
 			<div className="flex items-start justify-between">
 				<div className="flex items-start gap-3">
 					{logoUrl && (
-						<div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-gray-50 p-1 dark:bg-gray-800">
+						<div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-zinc-50 p-1 dark:bg-zinc-800">
 							<img
 								alt={name}
 								className="object-contain"
@@ -72,7 +72,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 
 				<div className="flex items-center gap-2">
 					<a
-						className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+						className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
 						href={docsUrl}
 						rel="noopener noreferrer"
 						target="_blank"
@@ -89,7 +89,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 						)}
 					</a>
 					<button
-						className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+						className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
 						onClick={(e) => {
 							e.stopPropagation();
 							onEditDocs(pkg.id, docsUrl);
@@ -108,7 +108,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 						v{version}
 					</span>
 					{isLocal && docSource && (
-						<span className="flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-xs dark:bg-gray-800">
+						<span className="flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs dark:bg-zinc-800">
 							{docSource === 'path' ? (
 								<FolderDot className="h-3 w-3" />
 							) : (
@@ -137,10 +137,10 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 					)}
 				</div>
 
-				<div className="flex items-center justify-between border-gray-200 border-t border-dashed pt-2 text-muted-foreground text-xs dark:border-gray-800">
+				<div className="flex items-center justify-between border-zinc-200 border-t border-dashed pt-2 text-muted-foreground text-xs dark:border-zinc-800">
 					<span>Last updated: {lastScrapedDate}</span>
 					{isLocal && (
-						<span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs dark:bg-gray-800">
+						<span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs dark:bg-zinc-800">
 							{docsUrl}
 						</span>
 					)}

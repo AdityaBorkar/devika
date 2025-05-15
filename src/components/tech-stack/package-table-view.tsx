@@ -26,26 +26,26 @@ export function PackageTableView({
 	return (
 		<div className="my-4 overflow-x-auto">
 			<h3 className="mb-3 font-medium text-lg">{categoryLabel}</h3>
-			<div className="overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+			<div className="overflow-hidden rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
 				<table className="w-full border-collapse">
-					<thead className="bg-gray-50 dark:bg-gray-900/80">
+					<thead className="bg-zinc-50 dark:bg-zinc-900/80">
 						<tr>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Package
 							</th>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Version
 							</th>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Last Updated
 							</th>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Status
 							</th>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Documentation
 							</th>
-							<th className="border-gray-200 border-b p-3 text-left font-medium text-sm dark:border-gray-800">
+							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Actions
 							</th>
 						</tr>
@@ -53,13 +53,13 @@ export function PackageTableView({
 					<tbody>
 						{packages.map((pkg) => (
 							<tr
-								className="border-gray-200 border-b transition-colors hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/50"
+								className="border-zinc-200 border-b transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/50"
 								key={pkg.id}
 							>
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										{pkg.logoUrl && (
-											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-gray-50 p-0.5 dark:bg-gray-800">
+											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-zinc-50 p-0.5 dark:bg-zinc-800">
 												<img
 													alt={pkg.name}
 													className="object-contain"
@@ -147,7 +147,7 @@ export function PackageTableView({
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										<a
-											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+											className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
 											href={pkg.docsUrl}
 											rel="noopener noreferrer"
 											target="_blank"
@@ -164,7 +164,7 @@ export function PackageTableView({
 											)}
 										</a>
 										<button
-											className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+											className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
 											onClick={() => onEditDocs(pkg.id, pkg.docsUrl)}
 											title="Edit documentation link"
 											type="button"

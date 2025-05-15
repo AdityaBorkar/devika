@@ -1,6 +1,6 @@
 import { Extension } from '@tiptap/core';
 import Mention from '@tiptap/extension-mention';
-import { Editor } from '@tiptap/react';
+import type { Editor } from '@tiptap/react';
 import Suggestion from '@tiptap/suggestion';
 
 // Define the command item interface
@@ -99,14 +99,14 @@ const createDropdownPopup = (
 ) => {
 	const element = document.createElement('div');
 	element.className =
-		'bg-white shadow-lg rounded-md p-1 border border-gray-200 absolute z-50';
+		'bg-white shadow-lg rounded-md p-1 border border-zinc-200 absolute z-50';
 
 	items.forEach((item) => {
 		const button = document.createElement('button');
 		button.className =
-			'block w-full text-left px-3 py-2 rounded hover:bg-gray-100';
+			'block w-full text-left px-3 py-2 rounded hover:bg-zinc-100';
 		button.innerHTML = item.description
-			? `<div>${item.label || item.title}</div><div class="text-xs text-gray-500">${item.description}</div>`
+			? `<div>${item.label || item.title}</div><div class="text-xs text-zinc-500">${item.description}</div>`
 			: item.label || item.title;
 
 		button.addEventListener('click', () => {

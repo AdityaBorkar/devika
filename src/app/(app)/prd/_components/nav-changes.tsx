@@ -1,3 +1,4 @@
+import type { IconType } from 'react-icons/lib';
 import { PiCheckCircle, PiFileDashed, PiFlag } from 'react-icons/pi';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,7 +10,7 @@ export default function ChangesNavigation() {
 			<div className="my-2">
 				<Textarea>Notes</Textarea>
 				<Button
-					className="block w-full mt-2"
+					className="mt-2 block w-full"
 					disabled
 					title="Kindly approve draft changes and complete review to proceed."
 				>
@@ -23,7 +24,7 @@ export default function ChangesNavigation() {
 					count={10}
 					className="text-amber-800"
 				/>
-				<div className="px-4 text-sm text-muted-foreground">No changes</div>
+				<div className="px-4 text-muted-foreground text-sm">No changes</div>
 				{/* <div>List</div> */}
 			</div>
 			<div>
@@ -33,7 +34,7 @@ export default function ChangesNavigation() {
 					count={10}
 					className="text-purple-800"
 				/>
-				<div className="px-4 text-sm text-muted-foreground">No changes</div>
+				<div className="px-4 text-muted-foreground text-sm">No changes</div>
 				{/* <div>List</div> */}
 			</div>
 			<div>
@@ -43,7 +44,7 @@ export default function ChangesNavigation() {
 					count={10}
 					className="text-green-800"
 				/>
-				<div className="px-4 text-sm text-muted-foreground">No changes</div>
+				<div className="px-4 text-muted-foreground text-sm">No changes</div>
 				{/* <div>List</div> */}
 			</div>
 			<div>View Change Timeline</div>
@@ -57,7 +58,7 @@ function GroupLabel({
 	count,
 	className,
 }: {
-	icon: React.ReactNode;
+	icon: IconType;
 	label: string;
 	count: number;
 	className?: string;

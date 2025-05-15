@@ -29,7 +29,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 			<div className="flex items-center justify-between border-b p-4">
 				<div className="flex items-center space-x-3">
 					<button
-						className="text-gray-500 hover:text-gray-700"
+						className="text-zinc-500 hover:text-zinc-700"
 						onClick={onClose}
 						type="button"
 					>
@@ -54,7 +54,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 					</span>
 				</div>
 
-				<div className="text-gray-500 text-sm">
+				<div className="text-sm text-zinc-500">
 					{formatDate(cycle.startDate)} - {formatDate(cycle.endDate)}
 					{cycle.status === 'In Progress' && (
 						<span
@@ -122,7 +122,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 
 						<div>
 							<h3 className="mb-2 font-medium text-lg">Description</h3>
-							<p className="text-gray-700">{cycle.description}</p>
+							<p className="text-zinc-700">{cycle.description}</p>
 						</div>
 
 						{cycle.roadblocks.some((rb) => rb.status === 'Active') && (
@@ -148,7 +148,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 							<h3 className="mb-2 font-medium text-lg">
 								Additional Instructions
 							</h3>
-							<p className="text-gray-700">
+							<p className="text-zinc-700">
 								{cycle.additionalInstructions ||
 									'No additional instructions provided.'}
 							</p>
@@ -159,7 +159,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 								<h3 className="mb-2 font-medium text-lg">Integration Tests</h3>
 								<ul className="list-disc space-y-1 pl-5">
 									{cycle.integrationTests.map((test) => (
-										<li className="text-gray-700" key={test}>
+										<li className="text-zinc-700" key={test}>
 											{test}
 										</li>
 									))}
@@ -181,7 +181,7 @@ export function CycleDetailPanel({ cycle, onClose }: CycleDetailPanelProps) {
 						{cycle.changelog && (
 							<div>
 								<h3 className="mb-2 font-medium text-lg">Changelog</h3>
-								<p className="text-gray-700">{cycle.changelog}</p>
+								<p className="text-zinc-700">{cycle.changelog}</p>
 							</div>
 						)}
 					</TabsContent>

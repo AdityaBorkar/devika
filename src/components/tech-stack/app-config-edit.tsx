@@ -110,7 +110,7 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 					</h3>
 				</div>
 				<button
-					className="rounded-md p-1 text-muted-foreground hover:bg-gray-100 hover:text-primary dark:hover:bg-gray-800"
+					className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
 					onClick={() => setIsEditing(true)}
 					title="Edit config"
 					type="button"

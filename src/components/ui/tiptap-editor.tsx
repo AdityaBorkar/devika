@@ -64,9 +64,9 @@ export function TipTapEditor({
 
 	return (
 		<div className={cn('overflow-hidden rounded-md border', className)}>
-			<div className="flex items-center gap-1 border-b bg-gray-50 p-2">
+			<div className="flex items-center gap-1 border-b bg-zinc-50 p-2">
 				<Button
-					className={editor.isActive('bold') ? 'bg-gray-200' : ''}
+					className={editor.isActive('bold') ? 'bg-zinc-200' : ''}
 					onClick={() => editor.chain().focus().toggleBold().run()}
 					size="icon"
 					variant="ghost"
@@ -74,7 +74,7 @@ export function TipTapEditor({
 					<BoldIcon className="h-4 w-4" />
 				</Button>
 				<Button
-					className={editor.isActive('italic') ? 'bg-gray-200' : ''}
+					className={editor.isActive('italic') ? 'bg-zinc-200' : ''}
 					onClick={() => editor.chain().focus().toggleItalic().run()}
 					size="icon"
 					variant="ghost"
@@ -83,7 +83,7 @@ export function TipTapEditor({
 				</Button>
 				<Button
 					className={
-						editor.isActive('heading', { level: 1 }) ? 'bg-gray-200' : ''
+						editor.isActive('heading', { level: 1 }) ? 'bg-zinc-200' : ''
 					}
 					onClick={() =>
 						editor.chain().focus().toggleHeading({ level: 1 }).run()
@@ -95,7 +95,7 @@ export function TipTapEditor({
 				</Button>
 				<Button
 					className={
-						editor.isActive('heading', { level: 2 }) ? 'bg-gray-200' : ''
+						editor.isActive('heading', { level: 2 }) ? 'bg-zinc-200' : ''
 					}
 					onClick={() =>
 						editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -107,7 +107,7 @@ export function TipTapEditor({
 				</Button>
 				<Button
 					className={
-						editor.isActive('heading', { level: 3 }) ? 'bg-gray-200' : ''
+						editor.isActive('heading', { level: 3 }) ? 'bg-zinc-200' : ''
 					}
 					onClick={() =>
 						editor.chain().focus().toggleHeading({ level: 3 }).run()
@@ -118,7 +118,7 @@ export function TipTapEditor({
 					<Heading3 className="h-4 w-4" />
 				</Button>
 				<Button
-					className={editor.isActive('bulletList') ? 'bg-gray-200' : ''}
+					className={editor.isActive('bulletList') ? 'bg-zinc-200' : ''}
 					onClick={() => editor.chain().focus().toggleBulletList().run()}
 					size="icon"
 					variant="ghost"
@@ -126,7 +126,7 @@ export function TipTapEditor({
 					<List className="h-4 w-4" />
 				</Button>
 				<Button
-					className={editor.isActive('orderedList') ? 'bg-gray-200' : ''}
+					className={editor.isActive('orderedList') ? 'bg-zinc-200' : ''}
 					onClick={() => editor.chain().focus().toggleOrderedList().run()}
 					size="icon"
 					variant="ghost"
@@ -134,7 +134,7 @@ export function TipTapEditor({
 					<ListOrdered className="h-4 w-4" />
 				</Button>
 				<Button
-					className={editor.isActive('code') ? 'bg-gray-200' : ''}
+					className={editor.isActive('code') ? 'bg-zinc-200' : ''}
 					onClick={() => editor.chain().focus().toggleCode().run()}
 					size="icon"
 					variant="ghost"

@@ -273,7 +273,7 @@ export default function RepositoryStructure() {
 			<div key={item.id}>
 				<button
 					className={cn(
-						'group flex w-full cursor-pointer items-center rounded px-2 py-1 text-left hover:bg-gray-100',
+						'group flex w-full cursor-pointer items-center rounded px-2 py-1 text-left hover:bg-zinc-100',
 						item.color,
 					)}
 					disabled={!isDirectory}
@@ -300,13 +300,13 @@ export default function RepositoryStructure() {
 								<FolderIcon className="h-4 w-4 text-blue-500" />
 							)
 						) : (
-							<FileIcon className="h-4 w-4 text-gray-500" />
+							<FileIcon className="h-4 w-4 text-zinc-500" />
 						)}
 					</div>
 
 					<div className="flex-grow font-mono text-sm">{item.name}</div>
 
-					<div className="ml-2 text-gray-500 text-xs">
+					<div className="ml-2 text-xs text-zinc-500">
 						{formatCharCount(item.charCount)}
 					</div>
 
@@ -315,7 +315,7 @@ export default function RepositoryStructure() {
 							{isDirectory && (
 								<>
 									<button
-										className="rounded p-1 hover:bg-gray-200"
+										className="rounded p-1 hover:bg-zinc-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, false);
@@ -326,7 +326,7 @@ export default function RepositoryStructure() {
 										<FolderIcon className="h-3 w-3" />
 									</button>
 									<button
-										className="rounded p-1 hover:bg-gray-200"
+										className="rounded p-1 hover:bg-zinc-200"
 										onClick={(e) => {
 											e.stopPropagation();
 											addNewItem(item.id, true);
@@ -339,7 +339,7 @@ export default function RepositoryStructure() {
 								</>
 							)}
 							<button
-								className="rounded p-1 hover:bg-gray-200"
+								className="rounded p-1 hover:bg-zinc-200"
 								onClick={(e) => {
 									e.stopPropagation();
 									const note = prompt(
@@ -361,7 +361,7 @@ export default function RepositoryStructure() {
 
 				{isPrototypingMode && notes[item.id] && (
 					<div
-						className="ml-6 border-gray-300 border-l-2 py-1 pr-2 pl-2 text-gray-600 text-xs italic"
+						className="ml-6 border-zinc-300 border-l-2 py-1 pr-2 pl-2 text-xs text-zinc-600 italic"
 						style={{ marginLeft: `${indent + 24}px` }}
 					>
 						{notes[item.id]}
@@ -382,14 +382,14 @@ export default function RepositoryStructure() {
 	return (
 		<div className="">
 			<div className="rounded border bg-white shadow-sm">
-				<header className="flex items-center justify-between border-b bg-gray-50 px-4 py-2">
+				<header className="flex items-center justify-between border-b bg-zinc-50 px-4 py-2">
 					<div className="font-medium text-sm">EXPLORER</div>
 					<div className="flex items-center space-x-4">
 						<div className="flex items-center space-x-2">
 							<span className="text-xs">Show Files:</span>
 							{/* TODO: Replace with ShadCN Toggle Component */}
 							<button
-								className="rounded p-1 hover:bg-gray-200"
+								className="rounded p-1 hover:bg-zinc-200"
 								onClick={() => expandCollapseAll(true)}
 								title="Expand all"
 								type="button"
@@ -397,7 +397,7 @@ export default function RepositoryStructure() {
 								<PlusSquareIcon className="h-5 w-5" />
 							</button>
 							<button
-								className="rounded p-1 hover:bg-gray-200"
+								className="rounded p-1 hover:bg-zinc-200"
 								onClick={() => expandCollapseAll(false)}
 								title="Collapse all"
 								type="button"
@@ -405,7 +405,7 @@ export default function RepositoryStructure() {
 								<MinusSquareIcon className="h-5 w-5" />
 							</button>
 						</div>
-						<div className="text-gray-500 text-xs">
+						<div className="text-xs text-zinc-500">
 							Total: {formatCharCount(fileStructure.charCount)}
 						</div>
 					</div>
