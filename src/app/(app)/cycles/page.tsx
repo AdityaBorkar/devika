@@ -1,85 +1,113 @@
 'use client';
 
-import { useAtomValue } from 'jotai';
-import { useQueryState } from 'nuqs';
-import { useState } from 'react';
-import type { CycleStatus, FilterState, SortState } from '@/components/cycles';
+import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
+import type { CycleStatus, FilterState, TabType } from '@/components/cycles';
 import {
 	CreateCycleDialog,
-	CyclesTable,
-	filterCyclesByStatus,
+	CyclesHeader,
+	CyclesToolbar,
+	EnhancedCyclesTable,
 	MOCK_CYCLES,
-	sortCycles,
 } from '@/components/cycles';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { CycleAtom } from '@/lib/stores/app';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function CyclesPage() {
-	const VIEWS = useAtomValue(CycleAtom.Views);
-	const [viewId, setViewId] = useQueryState('view', {
-		defaultValue: VIEWS[0].id,
+	// Tab state
+	const [activeTab, setActiveTab] = useState<TabType>('all');
+	const [searchQuery, setSearchQuery] = useState('');
+	const [showFilterPanel, setShowFilterPanel] = useState(false);
+
+	// Table state
+	const [sorting, setSorting] = useState<SortingState>([]);
+	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+	const [filterState, setFilterState] = useState<FilterState>({
+		status: 'All',
 	});
 
-	const view = VIEWS.find((v) => v.id === viewId);
-	if (!view) throw new Error('View not found');
+	// Update column filters when status filter changes
+	useEffect(() => {
+		if (filterState.status !== 'All') {
+			setColumnFilters((prev) => {
+				// Remove any existing status filter
+				const filtered = prev.filter((filter) => filter.id !== 'status');
+				// Add the new status filter
+				return [...filtered, { id: 'status', value: filterState.status }];
+			});
+		} else {
+			// Remove status filter if 'All' is selected
+			setColumnFilters((prev) =>
+				prev.filter((filter) => filter.id !== 'status'),
+			);
+		}
+	}, [filterState.status]);
 
-	const [filterState, setFilterState] = useState<FilterState>(view.filters[0]);
-	const [sortState, setSortState] = useState<SortState>(view.sort);
-	const [search, setSearch] = useQueryState('search', { defaultValue: '' });
+	// Create new cycle handler
+	const handleCreateCycle = () => {
+		// TODO: Implement create cycle functionality
+		alert('Create new cycle feature not implemented yet');
+	};
 
-	// TODO: FETCH DATA
-	const filteredCycles = filterCyclesByStatus(MOCK_CYCLES, filterState.status);
-	const sortedAndFilteredCycles = sortCycles(filteredCycles, sortState);
+	// Save view handler
+	const handleSaveView = () => {
+		alert('Save view feature not implemented yet');
+	};
 
-	// TODO: Make a component of Table Handlers:
+	// Filter handler
 	const handleFilterChange = (status: CycleStatus | 'All') => {
 		setFilterState({ status });
 	};
-	const handleSortChange = (column: string) => {
-		setSortState((prev) => ({
-			column,
-			direction:
-				prev.column === column && prev.direction === 'asc' ? 'desc' : 'asc',
-		}));
-	};
+
+	// Filter cycles based on active tab
+	const filteredByTabCycles = MOCK_CYCLES.filter((cycle) => {
+		// Tab filtering
+		if (activeTab === 'current') {
+			return cycle.status === 'In Progress';
+		}
+		if (activeTab === 'upcoming') {
+			return cycle.status === 'Not Started';
+		}
+		if (activeTab === 'completed') {
+			return cycle.status === 'Completed';
+		}
+		return true; // 'all' tab
+	});
 
 	return (
-		<div className="flex h-screen flex-col gap-2 px-4 py-2">
-			<div className="flex items-center gap-2">
-				{/* Views */}
-				<div className="border border-border text-xs py-1 px-2 rounded-md">
-					All Cycles
-				</div>
-				<div className="border border-border text-xs py-1 px-2 rounded-md">
-					Current Cycle (Default)
-				</div>
-				<div className="border border-border text-xs py-1 px-2 rounded-md">
-					Next Cycle
-				</div>
-				{/* <CreateCycleDialog /> */}
-			</div>
+		<div className="min-h-screen bg-zinc-50/50 p-6 dark:bg-zinc-950">
+			<h1 className="sr-only">Cycles</h1>
 
-			<div className="flex gap-4">
-				<Input className="grow" placeholder="Filters" />
-				<Button variant="outline">Save View</Button>
-				<Button variant="outline">Display</Button>
-			</div>
+			<Card className="h-[calc(100vh-100px)] overflow-hidden rounded-xl border-zinc-200/80 shadow-sm dark:border-zinc-800/80">
+				<div className="flex h-full flex-col bg-white dark:bg-zinc-900">
+					{/* Header with tabs */}
+					<CyclesHeader
+						activeTab={activeTab}
+						onCreateCycle={handleCreateCycle}
+						onTabChange={setActiveTab}
+					/>
 
-			<div className="flex items-center justify-between">
-				<Input className="max-w-72" placeholder="Search" />
-				<div className="ml-auto text-muted-foreground text-sm">
-					Showing {filteredCycles.length} of {MOCK_CYCLES.length} cycles
+					{/* Toolbar with search and filters */}
+					<CyclesToolbar
+						currentStatus={filterState.status}
+						onSaveView={handleSaveView}
+						onShowFilterPanel={() => setShowFilterPanel(!showFilterPanel)}
+						onStatusChange={handleFilterChange}
+						searchQuery={searchQuery}
+						setSearchQuery={setSearchQuery}
+					/>
+
+					{/* Main content area */}
+					<div className="flex-grow overflow-hidden">
+						<EnhancedCyclesTable
+							columnFilters={columnFilters}
+							cycles={filteredByTabCycles}
+							searchQuery={searchQuery}
+							setSorting={setSorting}
+							sorting={sorting}
+						/>
+					</div>
 				</div>
-			</div>
-
-			<div className="grow">
-				<CyclesTable
-					cycles={sortedAndFilteredCycles}
-					onSortChange={handleSortChange}
-					sortState={sortState}
-				/>
-			</div>
+			</Card>
 		</div>
 	);
 }

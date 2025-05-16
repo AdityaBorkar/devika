@@ -1,11 +1,11 @@
 import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
 
-export default function CycleSummaryCard({ cycle }: { cycle: any }) {
+export function CycleCard({ cycle }: { cycle: any }) {
 	return (
 		<Link
 			to="/cycles"
-			className="grid grid-cols-[1.5rem_auto] rounded-md border border-border px-2 py-2.5 text-sm"
+			className="grid grid-cols-[1.5rem_auto] rounded-md border border-border bg-zinc-800/50 px-2 py-2.5 text-sm"
 		>
 			<div
 				className={cn(
@@ -13,7 +13,7 @@ export default function CycleSummaryCard({ cycle }: { cycle: any }) {
 					cycle.running && 'animate-pulse',
 					cycle.status === 'live' && 'bg-green-600',
 					cycle.status === 'review' && 'bg-yellow-600',
-					cycle.status === 'draft' && 'bg-gray-600',
+					cycle.status === 'draft' && 'bg-zinc-600',
 				)}
 			/>
 			<div>

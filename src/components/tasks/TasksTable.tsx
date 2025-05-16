@@ -41,25 +41,7 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 }) => {
 	const columnHelper = createColumnHelper<Task>();
 
-	// Define global text filter function for search
-	const globalFilterFn = useMemo(() => {
-		return (row: Task) => {
-			if (!searchQuery) return true;
-			const searchLower = searchQuery.toLowerCase();
-			return (
-				row.title.toLowerCase().includes(searchLower) ||
-				row.id.toLowerCase().includes(searchLower) ||
-				row.assignee.toLowerCase().includes(searchLower)
-			);
-		};
-	}, [searchQuery]);
-
-	// Filter tasks using global filter function
-	const filteredTasks = useMemo(() => {
-		return tasks.filter(globalFilterFn);
-	}, [tasks, globalFilterFn]);
-
-	// Define columns
+	// Define columns - memoized for performance
 	const columns = useMemo(
 		() => [
 			columnHelper.accessor('id', {
@@ -99,19 +81,14 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 		[columnHelper],
 	);
 
-	// Initialize the table
+	// Initialize the table - tasks are already filtered at atom level
 	const table = useReactTable({
 		columns,
-		data: filteredTasks,
-		enableColumnFilters: true,
-		enableFilters: true,
-		enableSorting: true,
+		data: tasks, // Use tasks directly as they're already filtered by the atom
 		getCoreRowModel: getCoreRowModel(),
-		getFilteredRowModel: getFilteredRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		onSortingChange: setSorting,
 		state: {
-			columnFilters,
 			sorting,
 		},
 	});
@@ -123,8 +100,8 @@ export const TasksTable: React.FC<TasksTableProps> = ({
 		navigate(`/tasks/${id}`);
 	};
 
-	// Show empty state if no tasks after filtering
-	if (filteredTasks.length === 0) {
+	// Show empty state if no tasks
+	if (tasks.length === 0) {
 		return (
 			<div className="flex flex-grow flex-col items-center justify-center py-16">
 				<p className="mb-2 text-muted-foreground">No tasks found</p>

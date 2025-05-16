@@ -1,8 +1,7 @@
-import { PiTag } from 'react-icons/pi';
 import { Link } from 'react-router';
 import { cn } from '@/lib/utils';
 
-export function PrdCard({ version }: { version: any }) {
+export function DeploymentCard({ version }: { version: any }) {
 	return (
 		<Link
 			to="/prd"
@@ -17,11 +16,8 @@ export function PrdCard({ version }: { version: any }) {
 				)}
 			/>
 			<div>
-				<div className="font-medium text-sm">{version.name}</div>
-				<div className="inline-block text-xs text-zinc-400">
-					<PiTag className="mr-1 inline-block" />
-					{version.version}
-				</div>
+				<div className="font-medium text-sm">v{version.version}</div>
+				<div className="inline-block text-xs text-zinc-400">Visit URL</div>
 			</div>
 		</Link>
 	);

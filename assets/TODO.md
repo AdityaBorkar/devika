@@ -1,3 +1,8 @@
+## Vision
+
+- Automate steps of Software Development Life Cycle
+- Multi-agentic system to solve complex problems in lesser time
+
 ## Issues to solve
 
 - Context Management
@@ -15,7 +20,172 @@
 
 - Implements - Linting, Formatting, Testing, Documentation, Error Handling, Logging
 - Parallel Mode with Git
+
 - Applies DRY (Don’t Repeat Yourself) principles and clean code practices (e.g., modular functions, descriptive naming) to ensure maintainability and reduce technical debt in automated pipelines
+
+---
+
+Defined a common interface (TaskProvider) that specifies methods for task operations (e.g., getTasks, addTask, updateTask, addDependency, removeDependency).
+This allows different backend implementations to be used interchangeably.
+Backend can be linear, jira, trello, etc.
+
+---
+
+Implementation Drift
+
+product-vision.md (or docs/vision.md):
+Purpose: The "North Star" document. High-level, relatively stable.
+Content:
+Overall Product Vision & Mission
+Target Audience / Personas (briefly, links to more detail if needed)
+Core User Problems being Solved (at a high level)
+Key Goals / Objectives (e.g., Business Goals, User Goals)
+High-Level Strategy / Principles
+Maybe core assumptions or non-goals.
+Tool Interaction: This document serves as context for all feature development. It likely shouldn't generate tasks directly but should inform the task generation for individual features.
+
+features/ Directory:
+Purpose: Container for individual, actionable feature specifications.
+Content: Subdirectories or files for each distinct feature or epic.
+features/feature-A/prd.md
+features/feature-B/prd.md
+features/authentication/prd.md
+... potentially other related files (mocks, notes).
+Tool Interaction: Each prd.md is a source document for generating feature-specific tasks.
+tasks.json (Existing Single File - Enhanced):
+Purpose: Remains the central, aggregated task list for the entire project.
+Enhancement: Tasks generated from feature PRDs should ideally include metadata linking them back to their source feature.
+Add a featureSource (or similar) field to each task object: {"id": 1, "title": "...", "featureSource": "feature-A", ...}.
+Tool Interaction: This file is still the target for all task generation and manipulation commands.
+
+
+Read product-vision.md content.
+Read the specified feature PRD (e.g., features/feature-A/prd.md).
+Read the current tasks.json (to know existing tasks and determine the next available ID).
+Construct Prompt for Claude: Include vision context, feature PRD content, and potentially a summary/list of existing task titles from tasks.json to help Claude create relevant dependencies and avoid major overlaps. Crucially, instruct Claude to generate tasks specifically for this feature and potentially suggest dependencies on existing tasks if relevant.
+Parse Claude's response.
+Assign new sequential IDs (continuing from the highest existing ID in tasks.json).
+Add the featureSource: "feature-A" metadata to each newly generated task.
+Append these new tasks to the tasks.json file.
+
+- Set goals & brainstorm metrics ChatPRD can help you brainstorm the right targets to track success for any one of your features.
+Get coached on your PM skills Get direct feedback about your documents, plans, and communication. Get coached by an AI Chief Product Officer anytime you need.
+
+- ChatPRD Templates: https://www.chatprd.ai/templates
+
+---
+
+v2 Features:
+
+- Sound Notifications for:
+	- "I have a question for you"
+	- "Task(s) done!"
+- PRD Version History
+- Rich Text Editor
+	- Width: Standard, Full-Size
+	- Inline Select and Ask AI
+	- Notion Styled TipTap v3 Editor
+	- Export
+		- GitHub, Asana, Trello, Coda, Notion, Google Docs, Linear, Confluence, Jira, etc.
+		- OpenDocumentText, Microsoft Word, Markdown
+	- Version History
+	- "Improve" button
+		- Ask AI to improve the PRD.
+		- Divide the features into smaller docs
+		- Make changes to the system such that this button is never needed.
+- Tasks
+	- Task Management
+		- Task Dependencies
+		- Task Priorities
+		- Task Labels
+		- Task Assignees
+		- Task Due Dates
+		- Complexity Score
+	- Scope-Up - To increase the scope of the task and divide into smaller tasks (Add a Meter - Low, Medium, High)
+	- Scope-Down - To decrease the scope of the task and combine into larger tasks (Add a Meter - Low, Medium, High)
+	- Ask AI to automatically prioritize a certain task for faster MVP creation
+	- Ask AI to automatically backlog the task for the next version
+	- Add Hint Prompts to ask about "Product Strategy", "Competitor Analysis and Market Monitoring", "User Feedback Synthesis and Insights"
+	- Create a group of commits and PR for each task.
+	- 
+
+----
+
+v3 Features:
+
+
+Guide to setup IDE for powerful development
+- Extended tool usage, including web browsing, search engine queries, and LLM-driven text/image analysis
+	- https://github.com/eastlondoner/cursor-tools
+- Generate Rules for Cursor
+	- https://github.com/SlyyCooper/cursorrules-architect
+- Communication Chat-bots
+	- Slack
+	- Discord
+	- Microsoft Teams
+	- Google Chat
+
+---
+
+https://block.github.io/goose/prompt-library
+goose
+
+Implementing a MCP Server
+
+Implementing a voice feature where you just talk with the AI.
+
+---
+
+High-Level Workflow
+1. ideate → Turn idea into a structured product concept (concept.txt)
+2. round-table → Simulate expert discussion and generate improvements (discussion.txt)
+3. refine-concept → Apply refinements from prompts or round table to the concept
+4. generate-prd → Generate full PRD (prd.txt)
+5. (Optional) Generate tasks, continue iteration as needed
+
+--
+Purpose: Simulate a discussion between domain experts to generate insights and recommendations.
+• Flags:
+• --concept-file: Path to the concept.txt
+• --participants: List of expert names or descriptions (e.g. “Nikita Bier”, “experienced growth strategist”, “AI safety researcher”)
+• --refine-concept: Apply recommendations from discussion directly to concept.txt
+• Flow:
+1. Prompts user to define each participant.
+2. Confirms setup and runs simulation.
+3. Outputs full discussion in discussion.txt.
+4. Summarizes actionable recommendations directly in CLI.
+5. If --refine-concept is passed, updates concept.txt with recommendations.
+• Notes:
+• Should feel like a structured roundtable with personas contributing distinct takes.
+• Each contribution should reflect domain-specific thinking.
+
+
+---
+
+Purpose: Improve and deepen the concept via additional research and prompts.
+• Flags:
+• --concept-file: Path to concept.txt
+• --prompt: Custom prompt for refinement (e.g. "Consider using FastMCP for backend modularity.")
+• --discussion-file: Optionally include discussion.txt to automatically pull recommendations into refinement.
+• Flow:
+1. Loads the concept.
+2. Applies additional input (prompt or discussion-based suggestions).
+3. Outputs updated concept.txt.
+
+
+--
+Purpose: Turn the finalized concept into a detailed PRD.
+• Flags:
+• --concept-file: Path to concept.txt
+• --example-prd: Reference template structure
+• --research: Optional live research (e.g. Grok, Perplexity)
+• Output: prd.txt
+• Notes:
+• Should handle both structured concepts and slightly fuzzy ones.
+• Output should be well-structured and scoped (features, goals, edge cases, etc.)
+
+
+
 
 ---
 
@@ -62,7 +232,6 @@ Suggest Features
 Figma and make changes, Drawings and make changes, Inspect elements and make changes
 Auto detect console errors and fix them
 
-voice typing built-in
 
 ---
 
@@ -245,6 +414,9 @@ Feedback
 - Scribe and write instructions
 - Open NGROK MCP and start sharing live
 
+---
+
+- https://www.chatprd.ai/resources/PRD-for-Cursor
 
 ----
 
@@ -253,6 +425,11 @@ Feedback
 2. plan the review cycle
 3. plan the versioning cycling
 
+----
+
+- Build More:
+	- VSCode Extension
+	- Chrome Extension
 
 ----
 

@@ -1,6 +1,7 @@
 'use client';
 
-import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import type React from 'react';
 import { Button } from '@/components/ui/button';
 // import {
 // 	Select,
@@ -11,74 +12,83 @@ import { Button } from '@/components/ui/button';
 // } from '@/components/ui/select';
 import type { CycleStatus, FilterState, SortState } from './types';
 
+export type TabType = 'all' | 'current' | 'upcoming' | 'completed';
+
 interface CyclesHeaderProps {
-	totalCycles: number;
-	filteredCycles: number;
-	filterState: FilterState;
-	sortState: SortState;
-	onFilterChange: (status: CycleStatus | 'All') => void;
-	onSortChange: (column: string) => void;
+	activeTab: TabType;
+	onTabChange: (tab: TabType) => void;
 	onCreateCycle: () => void;
 }
 
-export function CyclesHeader({
-	totalCycles,
-	filteredCycles,
-	filterState,
-	sortState,
-	onFilterChange,
-	onSortChange,
+export const CyclesHeader: React.FC<CyclesHeaderProps> = ({
+	activeTab,
+	onTabChange,
 	onCreateCycle,
-}: CyclesHeaderProps) {
-	const statusOptions: Array<{ value: CycleStatus | 'All'; label: string }> = [
-		{ label: 'All Statuses', value: 'All' },
-		{ label: 'Not Started', value: 'Not Started' },
-		{ label: 'In Progress', value: 'In Progress' },
-		{ label: 'Completed', value: 'Completed' },
-		{ label: 'Cancelled', value: 'Cancelled' },
-	];
-
-	const sortOptions = [
-		{ label: 'Name', value: 'name' },
-		{ label: 'Start Date', value: 'startDate' },
-		{ label: 'End Date', value: 'endDate' },
-		{ label: 'Status', value: 'status' },
-		{ label: 'Progress', value: 'progress' },
-	];
-
+}) => {
 	return (
-		<div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-			<div>
-				<h1 className="font-semibold text-2xl">Cycles / Sprints</h1>
-				<p className="text-sm text-zinc-500">
-					Showing {filteredCycles} of {totalCycles} cycles
-				</p>
-			</div>
-
-			<div className="flex items-center space-x-2">
-				<div className="flex items-center space-x-2">
-					<Button
-						className="h-9 w-9"
-						onClick={() => onSortChange(sortState.column)}
-						size="icon"
-						variant="ghost"
+		<div className="border-zinc-200 border-b dark:border-zinc-800">
+			<div className="flex items-center justify-between px-4 py-3">
+				<div className="flex space-x-1">
+					<button
+						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
+							activeTab === 'all'
+								? 'bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+						}`}
+						onClick={() => onTabChange('all')}
+						type="button"
 					>
-						{sortState.direction === 'asc' ? (
-							<ArrowUpIcon className="h-4 w-4" />
-						) : (
-							<ArrowDownIcon className="h-4 w-4" />
-						)}
-					</Button>
+						All Cycles
+					</button>
+					<button
+						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
+							activeTab === 'current'
+								? 'bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+						}`}
+						onClick={() => onTabChange('current')}
+						type="button"
+					>
+						Current
+					</button>
+					<button
+						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
+							activeTab === 'upcoming'
+								? 'bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+						}`}
+						onClick={() => onTabChange('upcoming')}
+						type="button"
+					>
+						Upcoming
+					</button>
+					<button
+						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
+							activeTab === 'completed'
+								? 'bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+						}`}
+						onClick={() => onTabChange('completed')}
+						type="button"
+					>
+						Completed
+					</button>
 				</div>
 
-				<Button onClick={onCreateCycle}>
-					<PlusIcon className="mr-2 h-4 w-4" />
-					New Cycle
-				</Button>
+				<div className="flex items-center space-x-2">
+					<Button
+						size="sm"
+						onClick={onCreateCycle}
+						className="font-medium text-sm transition-all hover:shadow-md"
+					>
+						<Plus className="mr-1 h-4 w-4" />
+						New Cycle
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
-}
+};
 {
 	/* <Select
 onValueChange={(value) =>

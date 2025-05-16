@@ -1,5 +1,6 @@
 import { MoreHorizontal } from 'lucide-react';
 import type React from 'react';
+import { useNavigate } from 'react-router';
 import {
 	Tooltip,
 	TooltipContent,
@@ -14,13 +15,23 @@ import type { Task } from './types';
 
 interface TaskCardProps {
 	task: Task;
-	onClick: (id: string) => void;
+	onClick?: (id: string) => void;
 }
 
 export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
+	const navigate = useNavigate();
+
+	const handleClick = () => {
+		if (onClick) {
+			onClick(task.id);
+		} else {
+			navigate(`/tasks/${task.id}`);
+		}
+	};
+
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter' || e.key === ' ') {
-			onClick(task.id);
+			handleClick();
 		}
 	};
 
@@ -36,7 +47,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 		<Card
 			aria-label={`Open task ${task.id}: ${task.title}`}
 			className="w-full cursor-pointer border-l-4 transition-all hover:translate-y-[-2px] hover:shadow-md"
-			onClick={() => onClick(task.id)}
+			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			style={{
 				borderLeftColor:

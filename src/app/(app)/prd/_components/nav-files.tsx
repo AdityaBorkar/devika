@@ -75,7 +75,7 @@ function NoteLink({
 	return (
 		<Link
 			className={cn(
-				'rounded-md px-4 py-1.5 text-xs hover:bg-zinc-800',
+				'mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-zinc-800',
 				className,
 			)}
 			to={to}

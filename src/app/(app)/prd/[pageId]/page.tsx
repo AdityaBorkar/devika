@@ -17,7 +17,9 @@ export function PrdDocPage() {
 		{ id: 'list-of-docs', name: 'List of Docs', type: 'doc' },
 		{ id: 'list-of-docs-2', name: 'List of Docs 2', type: 'doc' },
 	] as TabType[];
-	const rightTabs = [] as TabType[];
+	const rightTabs = [
+		{ id: 'chatbot', name: 'Chatterbox', type: 'chat' },
+	] as TabType[];
 	const rightTabCount = rightTabs.length;
 
 	if (!activeTabId) return <PrdDefaultPage />;
@@ -32,7 +34,8 @@ export function PrdDocPage() {
 			{rightTabCount > 0 && (
 				<SplitScreen
 					tabs={rightTabs}
-					activeTabId={activeTabId}
+					// activeTabId={activeTabId}
+					activeTabId={'chatbot'}
 					setActiveTabId={setActiveTabId}
 				/>
 			)}

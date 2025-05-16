@@ -11,8 +11,12 @@ import {
 import { cn } from '@/lib/utils';
 
 import './globals.css';
+import { useEffect } from 'react';
 
 export default function RootLayout() {
+	useEffect(() => {
+		document.addEventListener('contextmenu', (e) => e.preventDefault());
+	}, []);
 	return (
 		<Provider>
 			<NuqsAdapter>

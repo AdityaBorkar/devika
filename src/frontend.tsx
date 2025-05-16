@@ -5,6 +5,7 @@ import ChatPage from '@/app/(app)/chat/page';
 import CycleDetailPage from '@/app/(app)/cycles/[id]/page';
 import CyclesPage from '@/app/(app)/cycles/page';
 import DashboardPage from '@/app/(app)/dashboard/page';
+import DeploymentsPage from '@/app/(app)/deployments/page';
 import HomePage from '@/app/(app)/page';
 import { PrdDocPage } from '@/app/(app)/prd/[pageId]/page';
 import PrdLayout from '@/app/(app)/prd/layout';
@@ -18,6 +19,7 @@ import WorkspaceSettings from '@/app/(app)/settings/workspace/page';
 import StatsPage from '@/app/(app)/stats/page';
 import TaskDetailPage from '@/app/(app)/tasks/[id]/page';
 import TasksPage from '@/app/(app)/tasks/page';
+import VersionsPage from '@/app/(app)/versions/page';
 import OnboardingLayout from '@/app/(onboarding)/layout';
 import OnboardingPage from '@/app/(onboarding)/onboarding/page';
 import { Error404 } from '@/app/not-found';
@@ -47,6 +49,8 @@ const app = (
 							<Route index element={<TasksPage />} />
 							<Route path=":taskId" element={<TaskDetailPage />} />
 						</Route>
+						<Route path="versions" element={<VersionsPage />} />
+						<Route path="deployments" element={<DeploymentsPage />} />
 						<Route path="stats" element={<StatsPage />} />
 						<Route path="settings" element={<SettingsLayout />}>
 							<Route index element={<SettingsDefaultPage />} />

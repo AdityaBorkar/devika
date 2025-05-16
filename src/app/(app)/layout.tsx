@@ -4,6 +4,8 @@ import {
 	PiCheckSquare,
 	PiFiles,
 	PiGear,
+	PiGitMerge,
+	PiHeartbeat,
 	PiHouse,
 	PiPlayCircle,
 } from 'react-icons/pi';
@@ -16,6 +18,8 @@ const NAV_ITEMS_TOP = [
 	{ href: 'prd', icon: PiFiles, label: 'PRD' },
 	{ href: 'tasks', icon: PiCheckSquare, label: 'Tasks' },
 	{ href: 'cycles', icon: PiPlayCircle, label: 'Cycles' },
+	{ href: 'versions', icon: PiGitMerge, label: 'Versions' },
+	{ href: 'deployments', icon: PiHeartbeat, label: 'Deployments' },
 ];
 
 const NAV_ITEMS_BOTTOM = [
@@ -76,7 +80,7 @@ function NavItem({
 		<Link
 			to={item.href}
 			className={cn(
-				'my-1 w-full select-none rounded border border-transparent py-2 text-sm text-zinc-500',
+				'my-1 w-full select-none rounded-md border border-transparent py-2 text-sm text-zinc-400',
 				isActive
 					? 'border-border bg-zinc-800 text-zinc-100'
 					: 'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',

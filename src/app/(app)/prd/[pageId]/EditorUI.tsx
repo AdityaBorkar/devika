@@ -180,7 +180,7 @@ export function EditorUI() {
 							{' for headings'}
 						</div>
 					}
-					className="mx-auto min-h-[300px] w-[44rem] border-border border-b pb-8"
+					className="mx-auto min-h-[300px] max-w-[44rem] border-border border-b pb-8"
 				/>
 			</div>
 		</div>

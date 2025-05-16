@@ -1,6 +1,7 @@
 import logo from '@/../public/logo.svg';
-import CycleSummaryCard from '@/app/(app)/dashboard/_sections/CycleSummaryCard';
-import PrdSummaryCard from '@/app/(app)/dashboard/_sections/PrdSummaryCard';
+import { CycleCard } from '@/app/(app)/dashboard/_sections/CycleCard';
+import { DeploymentCard } from '@/app/(app)/dashboard/_sections/DeploymentCard';
+import { PrdCard } from '@/app/(app)/dashboard/_sections/PrdSummaryCard';
 
 export default function DashboardPage() {
 	const userName = 'Aditya';
@@ -27,17 +28,23 @@ export default function DashboardPage() {
 		name: 'Improve Developer Experience',
 		version: '3.x.x',
 	};
+	const ProductionVersion = {
+		status: 'live',
+		version: '3.10.2',
+	};
 
 	return (
 		<div className="flex h-full flex-col items-center justify-center">
-			<div className="-mt-[5%] w-[24rem]">
-				<img
-					src={logo}
-					alt="logo"
-					className="w-32 rounded-md bg-neutral-800 p-2"
-				/>
-				<div className="mt-4 mb-12 text-left font-bold text-2xl text-zinc-300">
-					Hey {userName}, welcome back!
+			<div className="-mt-[5%] grid w-[44rem] grid-cols-2 gap-x-16">
+				<div className="col-span-2 mb-12">
+					<img
+						src={logo}
+						alt="logo"
+						className="w-32 rounded-md bg-zinc-800 p-2"
+					/>
+					<div className="mt-4 text-left font-bold text-2xl text-zinc-300">
+						Hey {userName}, welcome back!
+					</div>
 				</div>
 
 				<div className="space-y-6">
@@ -45,21 +52,30 @@ export default function DashboardPage() {
 						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
 							Ongoing PRD
 						</div>
-						<PrdSummaryCard version={prdVersion} />
+						<PrdCard version={prdVersion} />
 					</div>
 
 					<div>
 						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
 							Ongoing Cycle
 						</div>
-						<CycleSummaryCard cycle={ongoingCycle} />
+						<CycleCard cycle={ongoingCycle} />
 					</div>
 
 					<div>
 						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
 							Next Cycle
 						</div>
-						<CycleSummaryCard cycle={nextCycle} />
+						<CycleCard cycle={nextCycle} />
+					</div>
+				</div>
+				<div className="space-y-6">
+					<div>
+						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
+							Production Deployment
+						</div>
+						<DeploymentCard version={ProductionVersion} />
+						{/* Production Issues */}
 					</div>
 				</div>
 			</div>

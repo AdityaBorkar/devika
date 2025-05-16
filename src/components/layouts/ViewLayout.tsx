@@ -1,30 +1,29 @@
-import { useAtom } from 'jotai';
-import { ViewLayout } from '@/components/layouts/ViewLayout';
-import { KanbanColumn } from '@/components/tasks/KanbanBoard';
-import { TasksHeader } from '@/components/tasks/TasksHeader';
-import { TasksTable } from '@/components/tasks/TasksTable';
-import { ToolbarControls } from '@/components/tasks/ToolbarControls';
-import {
-	activeTabAtom,
-	columnFiltersAtom,
-	doneTasksAtom,
-	filteredTasksAtom,
-	inProgressTasksAtom,
-	searchQueryAtom,
-	showFilterPanelAtom,
-	sortingAtom,
-	todoTasksAtom,
-	viewModeAtom,
-} from '@/lib/stores/tasks';
+import { cn } from '@/lib/utils';
 
-export default function TasksPage() {
-	// Use Jotai atoms instead of local state
-	const [activeTab, setActiveTab] = useAtom(activeTabAtom);
-	const [viewMode, setViewMode] = useAtom(viewModeAtom);
-	const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
-	const [showFilterPanel, setShowFilterPanel] = useAtom(showFilterPanelAtom);
+export function viewAtoms() {}
 
-	return <ViewLayout wrapperClass="*:px-16" />;
+export function ViewLayout({
+	wrapperClass,
+}: {
+	wrapperClass?: string;
+}) {
+	return (
+		<div className={cn('flex h-full flex-col ', wrapperClass)}>
+            			<TasksHeader activeTab={activeTab} onTabChange={setActiveTab} />
+
+onShowFilterPanel={() => setShowFilterPanel(!showFilterPanel)}
+onViewModeChange={setViewMode}
+searchQuery={searchQuery}
+setSearchQuery={setSearchQuery}
+viewMode={viewMode}
+/>
+
+{/* Main content area */}
+<div className="grow overflow-hidden">
+<ViewOutput />
+</div>
+        </div>
+	);
 }
 
 function ViewOutput() {

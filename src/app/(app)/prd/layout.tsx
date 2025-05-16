@@ -1,9 +1,26 @@
+import { useAtomValue } from 'jotai';
 import { useMemo, useState } from 'react';
-import { PiChat, PiFile, PiPlusMinus } from 'react-icons/pi';
+import {
+	PiCaretDown,
+	PiChat,
+	PiEye,
+	PiFile,
+	PiPencilLine,
+	PiPlus,
+	PiPlusMinus,
+	PiTag,
+} from 'react-icons/pi';
 import { Outlet } from 'react-router';
 import ChangesNavigation from '@/app/(app)/prd/_components/nav-changes';
 import FilesNavigation from '@/app/(app)/prd/_components/nav-files';
 import SearchNavigation from '@/app/(app)/prd/_components/nav-search';
+import { PrdScreenStateAtom } from '@/app/(app)/prd/store';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 
 const TABS = [
@@ -28,7 +45,7 @@ const TABS = [
 ];
 
 export default function PrdLayout() {
-	// const { version } = useAtomValue(PrdScreenStateAtom);
+	const { version } = useAtomValue(PrdScreenStateAtom);
 	const [TabSegment, setTabSegment] = useState('files');
 	const Navigation = useMemo(
 		() => TABS.find((tab) => tab.segment === TabSegment)?.navigation,
@@ -37,21 +54,49 @@ export default function PrdLayout() {
 
 	return (
 		<div className="grid h-full w-full grid-cols-[18rem_1fr]">
-			<aside className="border-border border-r px-2">
-				<div className="my-1.5 grid grid-cols-3 gap-1 rounded-md border border-border bg-zinc-800 p-0.5 font-medium text-xs tracking-tight">
+			<aside className="border-border border-r ">
+				<div className="border-border border-b">
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<div className="flex w-full flex-row items-center gap-2 px-4 pt-2 pb-1.5 font-medium text-zinc-400 hover:bg-zinc-800">
+								<PiTag />
+								{version.name}
+								<span className="rounded-md bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
+									12.x.x
+								</span>
+							</div>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="w-full">
+							<DropdownMenuItem>
+								<PiPencilLine className="mr-2" />
+								Rename Version
+							</DropdownMenuItem>
+							<DropdownMenuItem>
+								<PiPlus className="mr-2" />
+								Create New Version
+							</DropdownMenuItem>
+							<DropdownMenuItem>
+								<PiEye className="mr-2" />
+								View All Versions
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
+				</div>
+
+				<div className="mx-4 my-2 grid grid-cols-3 gap-1 rounded-md border border-border bg-zinc-800 p-0.5 font-medium text-xs tracking-tight">
 					{TABS.map((tab) => (
 						<button
 							key={tab.segment}
 							type="button"
 							className={cn(
-								'select-none rounded-md px-1 py-1 text-center',
+								'select-none rounded-md px-1 py-1.5 text-center',
 								tab.segment === TabSegment
 									? 'bg-zinc-950'
 									: 'hover:bg-zinc-900',
 							)}
 							onClick={() => setTabSegment(tab.segment)}
 						>
-							<tab.icon className="-mt-0.5 mr-1 inline-block w-4" />
+							<tab.icon className="-mt-1 mr-1 inline-block size-4 w-auto" />
 							{tab.label}
 						</button>
 					))}
@@ -63,28 +108,3 @@ export default function PrdLayout() {
 		</div>
 	);
 }
-
-// {/* <div className="my-1 flex flex-row gap-1">
-// 	<DropdownMenu>
-// 		<DropdownMenuTrigger asChild>
-// 			<div className="flex grow flex-row items-center justify-between rounded-md border border-border bg-zinc-800 px-3 py-1.5 font-medium">
-// 				{version.name}
-// 				<PiCaretDown />
-// 			</div>
-// 		</DropdownMenuTrigger>
-// 		<DropdownMenuContent className="w-full">
-// 			<DropdownMenuItem>
-// 				<PiPencilLine className="mr-2" />
-// 				Rename Version
-// 			</DropdownMenuItem>
-// 			<DropdownMenuItem>
-// 				<PiPlus className="mr-2" />
-// 				Create New Version
-// 			</DropdownMenuItem>
-// 			<DropdownMenuItem>
-// 				<PiEye className="mr-2" />
-// 				View All Versions
-// 			</DropdownMenuItem>
-// 		</DropdownMenuContent>
-// 	</DropdownMenu>
-// </div> */}

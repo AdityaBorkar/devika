@@ -1,9 +1,13 @@
 // Components
-
 export { CreateCycleDialog } from './CreateCycleDialog';
 export { CycleCard } from './CycleCard';
 export { CycleDetailPanel } from './CycleDetailPanel';
+export { CycleStatusCard } from './CycleStatusCard';
+export type { TabType } from './CyclesHeader';
+export { CyclesHeader } from './CyclesHeader';
 export { CyclesTable } from './CyclesTable';
+export { CyclesToolbar } from './CyclesToolbar';
+export { EnhancedCyclesTable } from './EnhancedCyclesTable';
 // Data and utils
 export { MOCK_CYCLES } from './mock-data';
 export { OverviewCard } from './OverviewCard';
