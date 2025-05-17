@@ -31,6 +31,18 @@ Backend can be linear, jira, trello, etc.
 
 ---
 
+Process each cycle as a separate branch.
+
+Suggested Tasks
+Run Task without a cycle
+
+---
+
+https://windsurf.com/editor/directory
+https://windsurf.com/flows
+
+---
+
 Implementation Drift
 
 product-vision.md (or docs/vision.md):
@@ -183,9 +195,6 @@ Purpose: Turn the finalized concept into a detailed PRD.
 • Notes:
 • Should handle both structured concepts and slightly fuzzy ones.
 • Output should be well-structured and scoped (features, goals, edge cases, etc.)
-
-
-
 
 ---
 

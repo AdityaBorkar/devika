@@ -1,5 +1,5 @@
 import type React from 'react';
-import type { TaskDetail } from './types';
+import type { TaskDetail } from '../../../../../types/types';
 
 interface TaskDetailSidebarProps {
 	task: TaskDetail;

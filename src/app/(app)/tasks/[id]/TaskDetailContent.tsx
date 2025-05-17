@@ -1,8 +1,11 @@
 import { Calendar, Check, Clock, Tag, User } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
-import type { TaskDetail } from './types';
-import { getPriorityColor, getStatusColor } from './utils';
+import type { TaskDetail } from '../../../../../types/types';
+import {
+	getPriorityColor,
+	getStatusColor,
+} from '../../../../components/tasks/utils';
 
 interface TaskDetailContentProps {
 	task: TaskDetail;

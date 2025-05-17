@@ -55,7 +55,7 @@ export default function AppLayout() {
 				<div
 					// TODO: Open Dialog and Show Connection between IDE, Cloud, Integrations and Chrome Extension
 					className={cn(
-						'my-1 w-full select-none rounded border border-transparent py-2 text-sm text-zinc-500',
+						'relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-zinc-400',
 						'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
 					)}
 				>
@@ -76,16 +76,28 @@ function NavItem({
 	item: (typeof NAV_ITEMS_TOP)[number];
 	isActive: boolean;
 }) {
+	const cue = null;
 	return (
 		<Link
 			to={item.href}
 			className={cn(
-				'my-1 w-full select-none rounded-md border border-transparent py-2 text-sm text-zinc-400',
+				'relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-zinc-400',
 				isActive
 					? 'border-border bg-zinc-800 text-zinc-100'
 					: 'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
 			)}
 		>
+			{cue && (
+				<div
+					className={cn(
+						'absolute top-1.75 right-1.5 size-2 rounded-full',
+						cue === 'error' && 'bg-rose-500/80',
+						cue === 'warning' && 'bg-amber-500/80',
+						cue === 'info' && 'bg-sky-500/80',
+						cue === 'muted' && 'bg-stone-300/80',
+					)}
+				/>
+			)}
 			<item.icon className="mx-auto size-5 stroke-3" />
 		</Link>
 	);

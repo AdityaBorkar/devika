@@ -11,7 +11,10 @@ import {
 import { ArrowDown, ArrowUp } from 'lucide-react';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
-import { Button } from '../ui/button';
+import type { Task } from '../../../../types/types';
+import { TaskPriorityBadge } from '../../tasks/TaskPriorityBadge';
+import { TaskStatusBadge } from '../../tasks/TaskStatusBadge';
+import { Button } from '../../ui/button';
 import {
 	Table,
 	TableBody,
@@ -19,12 +22,9 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from '../ui/table';
-import { TaskPriorityBadge } from './TaskPriorityBadge';
-import { TaskStatusBadge } from './TaskStatusBadge';
-import type { Task } from './types';
+} from '../../ui/table';
 
-interface TasksTableProps {
+interface ListTableProps {
 	tasks: Task[];
 	sorting: SortingState;
 	setSorting: React.Dispatch<React.SetStateAction<SortingState>>;
@@ -32,7 +32,7 @@ interface TasksTableProps {
 	searchQuery: string;
 }
 
-export const TasksTable: React.FC<TasksTableProps> = ({
+export const ListTable: React.FC<ListTableProps> = ({
 	tasks,
 	sorting,
 	setSorting,

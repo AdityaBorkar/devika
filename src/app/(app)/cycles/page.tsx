@@ -1,113 +1,131 @@
 'use client';
 
-import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
-import { useEffect, useState } from 'react';
-import type { CycleStatus, FilterState, TabType } from '@/components/cycles';
+import { CycleCardItem } from '@/components/cycles/CycleCardItem';
+import { CycleListItem } from '@/components/cycles/CycleListItem';
+import { ViewLayout, type ViewTab } from '@/components/layouts/ViewLayout';
+import { Label } from '@/components/ui/label';
 import {
-	CreateCycleDialog,
-	CyclesHeader,
-	CyclesToolbar,
-	EnhancedCyclesTable,
-	MOCK_CYCLES,
-} from '@/components/cycles';
-import { Card, CardContent } from '@/components/ui/card';
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
-export default function CyclesPage() {
-	// Tab state
-	const [activeTab, setActiveTab] = useState<TabType>('all');
-	const [searchQuery, setSearchQuery] = useState('');
-	const [showFilterPanel, setShowFilterPanel] = useState(false);
+export default function CyclesViewPage() {
+	// TODO: Properties
 
-	// Table state
-	const [sorting, setSorting] = useState<SortingState>([]);
-	const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-	const [filterState, setFilterState] = useState<FilterState>({
-		status: 'All',
-	});
+	const viewTabs = [
+		{ label: 'All Cycles', value: 'all', display: 'kanban' },
+		{ label: 'Current', value: 'current', display: 'kanban' },
+		{ label: 'Upcoming', value: 'upcoming', display: 'kanban' },
+	] as ViewTab[];
 
-	// Update column filters when status filter changes
-	useEffect(() => {
-		if (filterState.status !== 'All') {
-			setColumnFilters((prev) => {
-				// Remove any existing status filter
-				const filtered = prev.filter((filter) => filter.id !== 'status');
-				// Add the new status filter
-				return [...filtered, { id: 'status', value: filterState.status }];
-			});
-		} else {
-			// Remove status filter if 'All' is selected
-			setColumnFilters((prev) =>
-				prev.filter((filter) => filter.id !== 'status'),
-			);
-		}
-	}, [filterState.status]);
-
-	// Create new cycle handler
-	const handleCreateCycle = () => {
-		// TODO: Implement create cycle functionality
-		alert('Create new cycle feature not implemented yet');
+	const saveViewTab = (tab: ViewTab) => {
+		// ...
 	};
 
-	// Save view handler
-	const handleSaveView = () => {
-		alert('Save view feature not implemented yet');
+	const cycle = {
+		name: 'Cycle 1',
+		agents: 5,
+		tasks: 10,
+		running: true,
+		finished: false,
+		deployment: {
+			deployWhenCycleEnds: true,
+			deployWhenCycleStarts: true,
+		},
 	};
-
-	// Filter handler
-	const handleFilterChange = (status: CycleStatus | 'All') => {
-		setFilterState({ status });
-	};
-
-	// Filter cycles based on active tab
-	const filteredByTabCycles = MOCK_CYCLES.filter((cycle) => {
-		// Tab filtering
-		if (activeTab === 'current') {
-			return cycle.status === 'In Progress';
-		}
-		if (activeTab === 'upcoming') {
-			return cycle.status === 'Not Started';
-		}
-		if (activeTab === 'completed') {
-			return cycle.status === 'Completed';
-		}
-		return true; // 'all' tab
-	});
 
 	return (
-		<div className="min-h-screen bg-zinc-50/50 p-6 dark:bg-zinc-950">
-			<h1 className="sr-only">Cycles</h1>
-
-			<Card className="h-[calc(100vh-100px)] overflow-hidden rounded-xl border-zinc-200/80 shadow-sm dark:border-zinc-800/80">
-				<div className="flex h-full flex-col bg-white dark:bg-zinc-900">
-					{/* Header with tabs */}
-					<CyclesHeader
-						activeTab={activeTab}
-						onCreateCycle={handleCreateCycle}
-						onTabChange={setActiveTab}
-					/>
-
-					{/* Toolbar with search and filters */}
-					<CyclesToolbar
-						currentStatus={filterState.status}
-						onSaveView={handleSaveView}
-						onShowFilterPanel={() => setShowFilterPanel(!showFilterPanel)}
-						onStatusChange={handleFilterChange}
-						searchQuery={searchQuery}
-						setSearchQuery={setSearchQuery}
-					/>
-
-					{/* Main content area */}
-					<div className="flex-grow overflow-hidden">
-						<EnhancedCyclesTable
-							columnFilters={columnFilters}
-							cycles={filteredByTabCycles}
-							searchQuery={searchQuery}
-							setSorting={setSorting}
-							sorting={sorting}
-						/>
+		<div className="h-full ">
+			<div className="hidden">
+				<div className="border-border border-b px-4 py-2 font-semibold text-base">
+					Cycle Name
+				</div>
+				<div className="grid grid-cols-[1fr_1.5fr] gap-y-2 px-4 py-4">
+					<Label>Git Branch</Label>
+					<Select>
+						<SelectTrigger>
+							<SelectValue placeholder="Select a branch" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="1">Branch 1</SelectItem>
+							<SelectItem value="2">Branch 2</SelectItem>
+							<SelectItem value="3">Branch 3</SelectItem>
+						</SelectContent>
+					</Select>
+					<Label>Agents</Label>
+					<div className="flex items-center divide-x divide-border rounded-lg border border-border bg-zinc-800/50">
+						<div className="rounded-l-md px-3 py-1 hover:bg-zinc-700">+</div>
+						<div className="grow px-2 py-1 text-center">5</div>
+						<div className="rounded-r-md px-3 py-1 hover:bg-zinc-700">-</div>
+					</div>
+					<Label>Auto-Deploy</Label>
+					<Select>
+						<SelectTrigger>
+							<SelectValue placeholder="Off" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="1">Off</SelectItem>
+							<SelectItem value="2">When Cycle Ends</SelectItem>
+							{/* This prevents you from ending a cycle until deployment succeeds */}
+							<SelectItem value="3">When Cycle Starts</SelectItem>
+							{/* Errors when pausing the deployment are added as tasks, which are
+				prioritized before next task */}
+						</SelectContent>
+					</Select>
+					<div className="col-span-2 mt-4 flex justify-between">
+						<Button className="">End Cycle</Button>
+						{cycle.running ? (
+							<Button className="">Pause Cycle</Button>
+						) : (
+							<Button className="">Start Cycle</Button>
+						)}
 					</div>
 				</div>
-			</Card>
+				{/* <div>Tasks marked for Manual Review</div> */}
+
+				<div className="divide-y divide-zinc-800 border-border border-y">
+					<div className="px-4 py-3 hover:bg-zinc-800/50">
+						<div className="font-semibold text-zinc-400">Resource Monitor</div>
+					</div>
+					<div className="px-4 py-3 hover:bg-zinc-800/50">
+						<div className="font-semibold text-zinc-400">Activity</div>
+					</div>
+				</div>
+			</div>
+			{/* Git Branch */}
+			{/* 2 Agents */}
+			{/* Activity */}
+			<ViewLayout
+				wrapperClass="*:px-16"
+				viewTabs={viewTabs}
+				defaultViewTab="current"
+				saveViewTab={saveViewTab}
+				components={{
+					card: CycleCardItem,
+					list: CycleListItem,
+				}}
+			/>
 		</div>
+	);
+}
+
+function Button({
+	children,
+	className,
+}: {
+	children: React.ReactNode;
+	className?: string;
+}) {
+	return (
+		<button
+			type="button"
+			className={cn('rounded-md border px-4 py-1.5 text-white', className)}
+		>
+			{children}
+		</button>
 	);
 }

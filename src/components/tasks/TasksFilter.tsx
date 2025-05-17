@@ -1,6 +1,6 @@
 import { Filter } from 'lucide-react';
 import type React from 'react';
-import type { ColumnFiltersState } from './types';
+import type { ColumnFiltersState } from '../../../types/types';
 import { PRIORITY_OPTIONS, STATUS_OPTIONS } from './utils';
 
 interface TasksFilterProps {

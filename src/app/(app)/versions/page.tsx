@@ -1,3 +1,3 @@
 export default function VersionsPage() {
-	return <div>Versions</div>;
+	return <div>Git Version Control</div>;
 }

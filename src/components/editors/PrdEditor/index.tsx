@@ -140,7 +140,7 @@ export function MDXEditor({
 		editorProps: {
 			attributes: {
 				class:
-					'dark:prose-invert focus:outline-none max-w-none prose prose-sm prose-stone',
+					'dark:prose-invert focus:outline-none max-w-none prose prose-sm prose-zinc',
 			},
 			handleKeyDown: (view, event) => {
 				// Google Docs style shortcuts

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import ChatPage from '@/app/(app)/chat/page';
 import CycleDetailPage from '@/app/(app)/cycles/[id]/page';
-import CyclesPage from '@/app/(app)/cycles/page';
+import CyclesViewPage from '@/app/(app)/cycles/page';
 import DashboardPage from '@/app/(app)/dashboard/page';
 import DeploymentsPage from '@/app/(app)/deployments/page';
 import HomePage from '@/app/(app)/page';
@@ -17,8 +17,8 @@ import SettingsDefaultPage from '@/app/(app)/settings/page';
 import RepoSettings from '@/app/(app)/settings/repo/page';
 import WorkspaceSettings from '@/app/(app)/settings/workspace/page';
 import StatsPage from '@/app/(app)/stats/page';
-import TaskDetailPage from '@/app/(app)/tasks/[id]/page';
-import TasksPage from '@/app/(app)/tasks/page';
+import TaskPage from '@/app/(app)/tasks/[id]/page';
+import TaskViewPage from '@/app/(app)/tasks/page';
 import VersionsPage from '@/app/(app)/versions/page';
 import OnboardingLayout from '@/app/(onboarding)/layout';
 import OnboardingPage from '@/app/(onboarding)/onboarding/page';
@@ -38,7 +38,7 @@ const app = (
 						<Route path="dashboard" element={<DashboardPage />} />
 						<Route path="chat" element={<ChatPage />} />
 						<Route path="cycles">
-							<Route index element={<CyclesPage />} />
+							<Route index element={<CyclesViewPage />} />
 							<Route path=":cycleId" element={<CycleDetailPage />} />
 						</Route>
 						<Route path="prd" element={<PrdLayout />}>
@@ -46,8 +46,8 @@ const app = (
 							<Route path=":pageId" element={<PrdDocPage />} />
 						</Route>
 						<Route path="tasks">
-							<Route index element={<TasksPage />} />
-							<Route path=":taskId" element={<TaskDetailPage />} />
+							<Route index element={<TaskViewPage />} />
+							<Route path=":taskId" element={<TaskPage />} />
 						</Route>
 						<Route path="versions" element={<VersionsPage />} />
 						<Route path="deployments" element={<DeploymentsPage />} />

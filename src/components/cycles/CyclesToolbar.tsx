@@ -43,7 +43,7 @@ export const CyclesToolbar: React.FC<CyclesToolbarProps> = ({
 
 				<div className="relative max-w-xs">
 					<Search
-						className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 transform text-zinc-400"
+						className="-tranzinc-y-1/2 pointer-events-none absolute top-1/2 left-3 transform text-zinc-400"
 						size={14}
 					/>
 					<Input

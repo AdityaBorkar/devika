@@ -1,8 +1,8 @@
 import type { ColumnFiltersState, SortingState } from '@tanstack/react-table';
 import { atom } from 'jotai';
+import type { Task } from 'types/types';
 import { MOCK_TASKS } from '@/components/tasks/mock-data';
 import type { TabType } from '@/components/tasks/TasksHeader';
-import type { Task } from '@/components/tasks/types';
 import type { ViewMode } from '@/components/tasks/ViewToggle';
 
 // Base atoms - primitive state

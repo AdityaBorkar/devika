@@ -103,7 +103,7 @@ export function PackageTableView({
 											</span>
 										)}
 										{pkg.isUnused && (
-											<span className="flex items-center gap-1 rounded-full bg-slate-500/10 px-2 py-0.5 text-slate-500 text-xs">
+											<span className="flex items-center gap-1 rounded-full bg-zinc-500/10 px-2 py-0.5 text-xs text-zinc-500">
 												<Shield className="h-3 w-3" />
 												Unused
 											</span>

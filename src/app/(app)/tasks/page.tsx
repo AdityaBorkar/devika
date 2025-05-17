@@ -1,57 +1,31 @@
-import { useAtom } from 'jotai';
-import { ViewLayout } from '@/components/layouts/ViewLayout';
-import { KanbanColumn } from '@/components/tasks/KanbanBoard';
-import { TasksHeader } from '@/components/tasks/TasksHeader';
-import { TasksTable } from '@/components/tasks/TasksTable';
-import { ToolbarControls } from '@/components/tasks/ToolbarControls';
-import {
-	activeTabAtom,
-	columnFiltersAtom,
-	doneTasksAtom,
-	filteredTasksAtom,
-	inProgressTasksAtom,
-	searchQueryAtom,
-	showFilterPanelAtom,
-	sortingAtom,
-	todoTasksAtom,
-	viewModeAtom,
-} from '@/lib/stores/tasks';
+import { ViewLayout, type ViewTab } from '@/components/layouts/ViewLayout';
+import { TaskCardItem } from '@/components/tasks/TaskCardItem';
+import { TaskListItem } from '@/components/tasks/TaskListItem';
 
-export default function TasksPage() {
-	// Use Jotai atoms instead of local state
-	const [activeTab, setActiveTab] = useAtom(activeTabAtom);
-	const [viewMode, setViewMode] = useAtom(viewModeAtom);
-	const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
-	const [showFilterPanel, setShowFilterPanel] = useAtom(showFilterPanelAtom);
+export default function TaskViewPage() {
+	// TODO: Properties
 
-	return <ViewLayout wrapperClass="*:px-16" />;
-}
+	const viewTabs = [
+		{ label: 'All Tasks', value: 'all', display: 'kanban' },
+		{ label: 'Un-assigned', value: 'all', display: 'list' },
+		{ label: 'Assigned', value: 'active', display: 'kanban' },
+		{ label: 'Backlog', value: 'backlog', display: 'kanban' },
+	] as ViewTab[];
 
-function ViewOutput() {
-	// Derived data from atoms
-	const [filteredTasks] = useAtom(filteredTasksAtom);
-	const [todoTasks] = useAtom(todoTasksAtom);
-	const [inProgressTasks] = useAtom(inProgressTasksAtom);
-	const [doneTasks] = useAtom(doneTasksAtom);
-	const [viewMode] = useAtom(viewModeAtom);
-	const [sorting, setSorting] = useAtom(sortingAtom);
-	const [columnFilters, setColumnFilters] = useAtom(columnFiltersAtom);
-	const [searchQuery, setSearchQuery] = useAtom(searchQueryAtom);
-	if (viewMode === 'list')
-		return (
-			<TasksTable
-				columnFilters={columnFilters}
-				searchQuery={searchQuery}
-				setSorting={setSorting}
-				sorting={sorting}
-				tasks={filteredTasks}
-			/>
-		);
+	const saveViewTab = (tab: ViewTab) => {
+		// ...
+	};
+
 	return (
-		<div className="flex h-full flex-row gap-4 overflow-x-auto py-4 *:w-1/4">
-			<KanbanColumn title="Todo" tasks={todoTasks} />
-			<KanbanColumn title="In Progress" tasks={inProgressTasks} />
-			<KanbanColumn title="Done" tasks={doneTasks} />
-		</div>
+		<ViewLayout
+			wrapperClass="*:px-16"
+			viewTabs={viewTabs}
+			defaultViewTab="active"
+			saveViewTab={saveViewTab}
+			components={{
+				card: TaskCardItem,
+				list: TaskListItem,
+			}}
+		/>
 	);
 }

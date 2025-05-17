@@ -7,18 +7,32 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip';
+import type { Task } from '../../../types/types';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
-import { TaskPriorityBadge } from './TaskPriorityBadge';
-import type { Task } from './types';
 
-interface TaskCardProps {
-	task: Task;
+interface CycleCardProps {
+	data: Task;
 	onClick?: (id: string) => void;
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
+// id: Unique identifier for the task (Example: 1)
+// title: Brief, descriptive title of the task (Example: "Initialize Repo")
+// description: Concise description of what the task involves (Example: "Create a new repository, set up initial structure.")
+// status: Current state of the task (Example: "pending", "done", "deferred")
+// dependencies: IDs of tasks that must be completed before this task (Example: [1, 2])
+// Dependencies are displayed with status indicators (✅ for completed, ⏱️ for pending)
+// This helps quickly identify which prerequisite tasks are blocking work
+// priority: Importance level of the task (Example: "high", "medium", "low")
+// details: In-depth implementation instructions (Example: "Use GitHub client ID/secret, handle callback, set session token.")
+// testStrategy: Verification approach (Example: "Deploy and call endpoint to confirm 'Hello World' response.")
+// subtasks: List of smaller, more specific tasks that make up the main task (Example: [{"id": 1, "title": "Configure OAuth", ...}])
+
+export const CycleCardItem: React.FC<CycleCardProps> = ({
+	data: task,
+	onClick,
+}) => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
@@ -46,7 +60,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 	return (
 		<Card
 			aria-label={`Open task ${task.id}: ${task.title}`}
-			className="w-full cursor-pointer border-l-4 transition-all hover:translate-y-[-2px] hover:shadow-md"
+			className="hover:tranzinc-y-[-2px] w-full cursor-pointer border-l-4 transition-all hover:shadow-md"
 			onClick={handleClick}
 			onKeyDown={handleKeyDown}
 			style={{
@@ -94,7 +108,6 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick }) => {
 
 			<CardFooter className="flex items-center justify-between px-3 py-2">
 				<div className="flex items-center gap-2">
-					<TaskPriorityBadge priority={task.priority} />
 					{isOverdue && (
 						<Badge className="text-[10px]" variant="destructive">
 							Overdue

@@ -1,10 +1,9 @@
 import { ArrowLeft, MoreHorizontal } from 'lucide-react';
 import type React from 'react';
 import { Link } from 'react-router';
-import type { TaskDetail } from './types';
 
 interface TaskDetailHeaderProps {
-	task: TaskDetail;
+	task: Tasks.TaskDetail;
 }
 
 export const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({ task }) => {

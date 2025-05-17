@@ -2,6 +2,7 @@ import logo from '@/../public/logo.svg';
 import { CycleCard } from '@/app/(app)/dashboard/_sections/CycleCard';
 import { DeploymentCard } from '@/app/(app)/dashboard/_sections/DeploymentCard';
 import { PrdCard } from '@/app/(app)/dashboard/_sections/PrdSummaryCard';
+import { cn } from '@/lib/utils';
 
 export default function DashboardPage() {
 	const userName = 'Aditya';
@@ -48,86 +49,52 @@ export default function DashboardPage() {
 				</div>
 
 				<div className="space-y-6">
-					<div>
-						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
-							Ongoing PRD
-						</div>
-						<PrdCard version={prdVersion} />
-					</div>
-
-					<div>
-						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
-							Ongoing Cycle
-						</div>
-						<CycleCard cycle={ongoingCycle} />
-					</div>
-
-					<div>
-						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
-							Next Cycle
-						</div>
-						<CycleCard cycle={nextCycle} />
-					</div>
-				</div>
-				<div className="space-y-6">
-					<div>
-						<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
-							Production Deployment
-						</div>
+					<Card title="Production Deployment">
 						<DeploymentCard version={ProductionVersion} />
-						{/* Production Issues */}
-					</div>
+					</Card>
+
+					<Card title="Ongoing PRD">
+						<PrdCard version={prdVersion} />
+					</Card>
+
+					<Card title="Ongoing Cycle">
+						<CycleCard cycle={ongoingCycle} />
+					</Card>
+
+					<Card title="Next Cycle">
+						<CycleCard cycle={nextCycle} />
+					</Card>
 				</div>
+				<Card title="Notifications">
+					<div
+						className={cn(
+							'rounded-md border border-border bg-zinc-800/50',
+							'flex min-h-16 items-center justify-center',
+						)}
+					>
+						<div className="text-zinc-400">
+							Everything's calm (before `git push`)
+						</div>
+					</div>
+				</Card>
 			</div>
 		</div>
 	);
 }
 
-// <div className="space-y-6">
-// 	<LinkCard
-// 		to="/prd"
-// 		icon={PiFiles}
-// 		className="from-purple-900 to-pink-800"
-// 	>
-// 		PRD
-// 	</LinkCard>
-// 	<LinkCard
-// 		to="/tasks"
-// 		icon={PiCheckSquare}
-// 		className="from-blue-900 to-cyan-800"
-// 	>
-// 		Tasks
-// 	</LinkCard>
-// 	<LinkCard
-// 		to="/cycles"
-// 		icon={PiPlayCircle}
-// 		className="from-green-900 to-emerald-800"
-// 	>
-// 		Cycles
-// 	</LinkCard>
-// </div>
-// function LinkCard({
-// 	to,
-// 	children,
-// 	className,
-// 	icon: Icon,
-// }: {
-// 	to: string;
-// 	icon: React.ElementType;
-// 	className?: string;
-// 	children: React.ReactNode;
-// }) {
-// 	return (
-// 		<Link
-// 			to={to}
-// 			className={cn(
-// 				'flex h-24 flex-col items-start justify-end gap-2 rounded-md bg-gradient-to-tr px-4 py-3 font-semibold',
-// 				'brightness-90 hover:brightness-110',
-// 				className,
-// 			)}
-// 		>
-// 			<Icon className="size-6" />
-// 			{children}
-// 		</Link>
-// 	);
-// }
+function Card({
+	title,
+	children,
+}: {
+	title: string;
+	children: React.ReactNode;
+}) {
+	return (
+		<div>
+			<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
+				{title}
+			</div>
+			{children}
+		</div>
+	);
+}
