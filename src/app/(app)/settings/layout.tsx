@@ -2,10 +2,12 @@ import type { IconType } from 'react-icons';
 import {
 	PiBoxArrowDown,
 	PiBoxArrowUp,
+	PiChatText,
 	PiCirclesThree,
 	PiCommand,
 	PiCube,
 	PiDesktop,
+	PiHeadset,
 	PiUser,
 } from 'react-icons/pi';
 import { Link, Outlet } from 'react-router';
@@ -27,13 +29,34 @@ export default function SettingsLayout() {
 					<NavLink href="/settings/connected-apps" icon={PiCube}>
 						Connected Apps
 					</NavLink>
+					<NavLink href="/settings/support" icon={PiHeadset}>
+						Support
+					</NavLink>
+					<NavLink href="/settings/feedback" icon={PiChatText}>
+						Feedback
+					</NavLink>
 				</div>
 				<div className="flex flex-col gap-1">
-					<NavLink href="/settings/import-profile" icon={PiBoxArrowUp}>
-						Import VSCode Profile
+					{/* <NavLink href="/settings/import-profile" icon={PiBoxArrowUp}>
+						Import VSC Profile
 					</NavLink>
 					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
-						Export VSCode Profile
+						Export VSC Profile
+					</NavLink> */}
+					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+						Community
+					</NavLink>
+					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+						Documentation
+					</NavLink>
+					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+						Guides
+					</NavLink>
+					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+						Release Notes
+					</NavLink>
+					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+						Feedback
 					</NavLink>
 				</div>
 			</nav>
@@ -54,9 +77,9 @@ function NavLink({
 	return (
 		<Link
 			to={href}
-			className="rounded px-2 py-2 text-left text-xs text-zinc-300 hover:bg-zinc-700"
+			className="rounded px-4 py-2 text-left text-text-secondary text-xs hover:bg-bg-tertiary"
 		>
-			<Icon className="-mt-0.5 mr-2 inline-block size-4" />
+			<Icon className="-mt-0.75 mr-2 inline-block size-4" />
 			{children}
 		</Link>
 	);

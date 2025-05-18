@@ -71,7 +71,7 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 	const getStatusColor = (status: string) => {
 		switch (status) {
 			case 'Not Started':
-				return 'bg-zinc-100 border-zinc-200 text-zinc-700';
+				return 'bg-bg-primary border-zinc-200 text-text-primary';
 			case 'In Progress':
 				return 'bg-blue-50 border-blue-200 text-blue-700';
 			case 'Completed':
@@ -79,7 +79,7 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 			case 'Cancelled':
 				return 'bg-red-50 border-red-200 text-red-700';
 			default:
-				return 'bg-zinc-100 border-zinc-200 text-zinc-700';
+				return 'bg-bg-primary border-zinc-200 text-text-primary';
 		}
 	};
 
@@ -140,9 +140,9 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 			columnHelper.accessor((row) => row.progress.percentComplete, {
 				cell: (info) => (
 					<div className="flex items-center gap-2">
-						<div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
+						<div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-primary">
 							<div
-								className="h-1.5 rounded-full bg-primary transition-all duration-300"
+								className="h-1.5 rounded-full bg-bg-primary transition-all duration-300"
 								style={{ width: `${info.getValue()}%` }}
 							/>
 						</div>
@@ -193,9 +193,9 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 	}
 
 	return (
-		<div className="flex-grow overflow-auto rounded-md border bg-white shadow-sm dark:bg-zinc-950">
+		<div className="flex-grow overflow-auto rounded-md border bg-white shadow-sm dark:bg-background">
 			<Table>
-				<TableHeader className="bg-zinc-50 dark:bg-zinc-900">
+				<TableHeader className="bg-bg-primary dark:bg-bg-primary">
 					{table.getHeaderGroups().map((headerGroup) => (
 						<TableRow
 							key={headerGroup.id}
@@ -231,7 +231,7 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 					{table.getRowModel().rows.map((row) => (
 						<TableRow
 							key={row.id}
-							className="cursor-pointer border-zinc-100 border-b transition-colors hover:bg-zinc-50/50 dark:border-zinc-800 dark:hover:bg-zinc-900/50"
+							className="cursor-pointer border-zinc-100 border-b transition-colors hover:bg-bg-primary/50 dark:border-zinc-800 dark:hover:bg-bg-primary/50"
 							onClick={() => handleRowClick(row.original.id)}
 						>
 							{row.getVisibleCells().map((cell) => (
@@ -243,7 +243,7 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 					))}
 				</TableBody>
 			</Table>
-			<div className="flex items-center justify-between border-zinc-100 border-t bg-zinc-50/50 p-3 dark:border-zinc-800 dark:bg-zinc-900/50">
+			<div className="flex items-center justify-between border-zinc-100 border-t bg-bg-primary/50 p-3 dark:border-zinc-800 dark:bg-bg-primary/50">
 				<div className="text-muted-foreground text-xs">
 					Showing {table.getFilteredRowModel().rows.length} of {cycles.length}{' '}
 					cycles

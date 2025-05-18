@@ -67,7 +67,7 @@ export function DocumentOutline({
 	// Don't render if there are no headings
 	if (headings.length === 0) {
 		return (
-			<div className={`text-sm text-zinc-500 italic ${className}`}>
+			<div className={`text-sm text-text-muted italic ${className}`}>
 				No headings found. Add headings to generate an outline.
 			</div>
 		);
@@ -75,7 +75,7 @@ export function DocumentOutline({
 
 	return (
 		<div className={`space-y-2 ${className}`}>
-			<h3 className="mb-2 font-medium text-zinc-900">Document Outline</h3>
+			<h3 className="mb-2 font-medium text-text-primary">Document Outline</h3>
 			<ul className="space-y-1">
 				{headings.map((heading) => (
 					<li key={heading.id} className={getIndentation(heading.level)}>
@@ -85,7 +85,7 @@ export function DocumentOutline({
 							className="w-full truncate text-left hover:text-blue-600 hover:underline"
 							title={heading.text}
 						>
-							<span className="mr-1 text-xs text-zinc-400">
+							<span className="mr-1 text-text-tertiary text-xs">
 								{heading.level === 1 ? '§' : heading.level === 2 ? '§§' : '§§§'}
 							</span>
 							{heading.text}

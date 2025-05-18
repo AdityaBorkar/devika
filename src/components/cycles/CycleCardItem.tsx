@@ -118,7 +118,7 @@ export const CycleCardItem: React.FC<CycleCardProps> = ({
 					<Tooltip>
 						<TooltipTrigger asChild>
 							<div className="flex items-center text-muted-foreground text-xs">
-								<div className="mr-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-xs">
+								<div className="mr-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-bg-secondary text-xs">
 									{task.assignee.charAt(0)}
 								</div>
 								<span>

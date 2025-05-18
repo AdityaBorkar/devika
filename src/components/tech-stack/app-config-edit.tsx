@@ -79,7 +79,7 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 						Cancel
 					</button>
 					<button
-						className="flex items-center gap-1 rounded-md bg-primary px-2 py-1 text-primary-foreground text-xs"
+						className="flex items-center gap-1 rounded-md bg-bg-primary px-2 py-1 text-primary-foreground text-xs"
 						onClick={handleSave}
 						type="button"
 					>
@@ -98,7 +98,7 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 					<h3 className="flex items-center gap-2 font-medium text-base">
 						{config.name}
 						{config.isCommon && (
-							<span className="ml-2 rounded-full bg-secondary px-2 py-0.5 text-xs">
+							<span className="ml-2 rounded-full bg-bg-secondary px-2 py-0.5 text-xs">
 								Common
 							</span>
 						)}
@@ -110,7 +110,7 @@ export function AppConfigEdit({ config, onSave }: AppConfigEditProps) {
 					</h3>
 				</div>
 				<button
-					className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
+					className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-primary dark:hover:bg-bg-secondary"
 					onClick={() => setIsEditing(true)}
 					title="Edit config"
 					type="button"

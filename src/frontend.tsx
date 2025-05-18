@@ -20,6 +20,7 @@ import StatsPage from '@/app/(app)/stats/page';
 import TaskPage from '@/app/(app)/tasks/[id]/page';
 import TaskViewPage from '@/app/(app)/tasks/page';
 import VersionsPage from '@/app/(app)/versions/page';
+import WorkspacePage from '@/app/(app)/workspace/page';
 import OnboardingLayout from '@/app/(onboarding)/layout';
 import OnboardingPage from '@/app/(onboarding)/onboarding/page';
 import { Error404 } from '@/app/not-found';
@@ -49,6 +50,7 @@ const app = (
 							<Route index element={<TaskViewPage />} />
 							<Route path=":taskId" element={<TaskPage />} />
 						</Route>
+						<Route path="workspace" element={<WorkspacePage />} />
 						<Route path="versions" element={<VersionsPage />} />
 						<Route path="deployments" element={<DeploymentsPage />} />
 						<Route path="stats" element={<StatsPage />} />

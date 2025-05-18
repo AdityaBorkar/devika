@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
 import type { Comment, TaskDetail } from 'types/types';
-import { TaskDetailContent } from '@/app/(app)/tasks/[id]/TaskDetailContent';
-import { TaskDetailHeader } from '@/app/(app)/tasks/[id]/TaskDetailHeader';
-import { TaskDetailSidebar } from '@/app/(app)/tasks/[id]/TaskDetailSidebar';
+import { TaskDetailContent } from '@/app/(app)/tasks/[id]/components/TaskDetailContent';
+import { TaskDetailHeader } from '@/app/(app)/tasks/[id]/components/TaskDetailHeader';
+import { TaskDetailSidebar } from '@/app/(app)/tasks/[id]/components/TaskDetailSidebar';
 
 export default function TaskPage() {
 	// Get initial task data

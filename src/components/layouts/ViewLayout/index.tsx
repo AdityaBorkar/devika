@@ -65,7 +65,7 @@ export function ViewLayout({
 				))}
 				<div className="grow" />
 				<button
-					className="flex items-center rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-sm text-white hover:bg-indigo-700"
+					className="flex items-center rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-foreground text-sm hover:bg-indigo-700"
 					// onClick={onCreateTask}
 					type="button"
 				>
@@ -77,7 +77,7 @@ export function ViewLayout({
 			<div className="flex items-center justify-between py-1 dark:border-zinc-800">
 				<div className="flex items-center gap-4">
 					<button
-						className="flex items-center gap-1 rounded px-2 py-1 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+						className="flex items-center gap-1 rounded px-2 py-1 text-sm text-text-muted hover:bg-bg-primary dark:text-text-secondary dark:hover:bg-bg-secondary"
 						// onClick={onShowFilterPanel}
 						type="button"
 					>
@@ -86,11 +86,11 @@ export function ViewLayout({
 					</button>
 					<div className="relative max-w-xs">
 						<Search
-							className="-tranzinc-y-1/2 absolute top-1/2 left-3 transform text-zinc-400"
+							className="-tranzinc-y-1/2 absolute top-1/2 left-3 transform text-text-tertiary"
 							size={16}
 						/>
 						<input
-							className="w-full rounded-md border border-zinc-300 bg-white py-1.5 pr-3 pl-9 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+							className="w-full rounded-md border border-zinc-300 bg-white py-1.5 pr-3 pl-9 text-sm dark:border-zinc-700 dark:bg-bg-primary"
 							placeholder="Search tasks..."
 							type="text"
 						/>

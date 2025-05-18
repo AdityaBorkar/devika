@@ -123,8 +123,8 @@ export function TechStackPicker() {
 									: 'border-zinc-200 dark:border-zinc-800'
 							} w-full text-left transition-all hover:shadow-sm ${
 								selectedConfigId === config.id
-									? 'border-primary bg-primary/5'
-									: 'bg-white hover:border-primary/30 dark:bg-zinc-900'
+									? 'border-primary bg-bg-primary/5'
+									: 'bg-white hover:border-primary/30 dark:bg-bg-primary'
 							}`}
 							key={config.id}
 							onClick={() => handleConfigChange(config.id)}
@@ -138,7 +138,7 @@ export function TechStackPicker() {
 
 			{/* Package display section */}
 			<div className="space-y-4">
-				<div className="flex items-center justify-between rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800">
+				<div className="flex items-center justify-between rounded-lg border border-zinc-200 bg-bg-primary p-4 dark:border-zinc-700 dark:bg-bg-secondary">
 					<h2 className="font-semibold text-xl">
 						{currentConfig?.name || 'Tech Stack'} Packages
 						<span className="ml-2 text-muted-foreground text-sm">
@@ -150,7 +150,7 @@ export function TechStackPicker() {
 
 				{/* No packages message */}
 				{configPackages.length === 0 && (
-					<div className="rounded-lg border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
+					<div className="rounded-lg border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-bg-primary">
 						<p className="text-muted-foreground">
 							No packages found in this configuration.
 						</p>

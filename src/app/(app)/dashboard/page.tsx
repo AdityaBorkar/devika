@@ -1,7 +1,7 @@
 import logo from '@/../public/logo.svg';
-import { CycleCard } from '@/app/(app)/dashboard/_sections/CycleCard';
-import { DeploymentCard } from '@/app/(app)/dashboard/_sections/DeploymentCard';
-import { PrdCard } from '@/app/(app)/dashboard/_sections/PrdSummaryCard';
+import { CycleCard } from '@/app/(app)/dashboard/components/CycleCard';
+import { DeploymentCard } from '@/app/(app)/dashboard/components/DeploymentCard';
+import { PrdCard } from '@/app/(app)/dashboard/components/PrdSummaryCard';
 import { cn } from '@/lib/utils';
 
 export default function DashboardPage() {
@@ -41,9 +41,9 @@ export default function DashboardPage() {
 					<img
 						src={logo}
 						alt="logo"
-						className="w-32 rounded-md bg-zinc-800 p-2"
+						className="w-32 rounded-md bg-bg-secondary p-2"
 					/>
-					<div className="mt-4 text-left font-bold text-2xl text-zinc-300">
+					<div className="mt-4 text-left font-bold text-2xl text-text-secondary">
 						Hey {userName}, welcome back!
 					</div>
 				</div>
@@ -68,11 +68,11 @@ export default function DashboardPage() {
 				<Card title="Notifications">
 					<div
 						className={cn(
-							'rounded-md border border-border bg-zinc-800/50',
+							'rounded-md border border-border bg-bg-secondary/50',
 							'flex min-h-16 items-center justify-center',
 						)}
 					>
-						<div className="text-zinc-400">
+						<div className="text-text-tertiary">
 							Everything's calm (before `git push`)
 						</div>
 					</div>
@@ -91,7 +91,7 @@ function Card({
 }) {
 	return (
 		<div>
-			<div className="px-2 py-1 font-semibold text-xs text-zinc-500">
+			<div className="px-2 py-1 font-semibold text-text-muted text-xs">
 				{title}
 			</div>
 			{children}

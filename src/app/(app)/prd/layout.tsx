@@ -11,9 +11,9 @@ import {
 	PiTag,
 } from 'react-icons/pi';
 import { Outlet } from 'react-router';
-import ChangesNavigation from '@/app/(app)/prd/_components/nav-changes';
-import FilesNavigation from '@/app/(app)/prd/_components/nav-files';
-import SearchNavigation from '@/app/(app)/prd/_components/nav-search';
+import ChangesNavigation from '@/app/(app)/prd/components/nav-changes';
+import FilesNavigation from '@/app/(app)/prd/components/nav-files';
+import SearchNavigation from '@/app/(app)/prd/components/nav-search';
 import { PrdScreenStateAtom } from '@/app/(app)/prd/store';
 import {
 	DropdownMenu,
@@ -58,22 +58,26 @@ export default function PrdLayout() {
 				<div className="border-border border-b">
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
-							<div className="flex w-full flex-row items-center gap-2 px-4 pt-2 pb-1.5 font-medium text-zinc-400 hover:bg-zinc-800">
+							<div className="flex w-full flex-row items-center gap-2 px-4 pt-2 pb-1.5 font-medium text-text-tertiary hover:bg-bg-secondary">
 								<PiTag />
 								{version.name}
-								<span className="rounded-md bg-zinc-800 px-2 py-1 text-xs text-zinc-300">
+								<span className="rounded-md bg-bg-secondary px-2 py-1 text-text-secondary text-xs">
 									12.x.x
 								</span>
 							</div>
 						</DropdownMenuTrigger>
 						<DropdownMenuContent className="w-full">
-							<DropdownMenuItem>
+							<DropdownMenuItem className="w-full">
 								<PiPencilLine className="mr-2" />
 								Rename Version
 							</DropdownMenuItem>
 							<DropdownMenuItem>
 								<PiPlus className="mr-2" />
-								Create New Version
+								Bump Version
+							</DropdownMenuItem>
+							<DropdownMenuItem>
+								<PiPlus className="mr-2" />
+								Switch Version
 							</DropdownMenuItem>
 							<DropdownMenuItem>
 								<PiEye className="mr-2" />
@@ -83,7 +87,7 @@ export default function PrdLayout() {
 					</DropdownMenu>
 				</div>
 
-				<div className="mx-4 my-2 grid grid-cols-3 gap-1 rounded-md border border-border bg-zinc-800 p-0.5 font-medium text-xs tracking-tight">
+				<div className="mx-4 my-2 grid grid-cols-3 gap-1 rounded-md border border-border bg-bg-secondary p-0.5 font-medium text-xs tracking-tight">
 					{TABS.map((tab) => (
 						<button
 							key={tab.segment}
@@ -91,8 +95,8 @@ export default function PrdLayout() {
 							className={cn(
 								'select-none rounded-md px-1 py-1.5 text-center',
 								tab.segment === TabSegment
-									? 'bg-zinc-950'
-									: 'hover:bg-zinc-900',
+									? 'bg-bg-tertiary'
+									: 'hover:bg-bg-tertiary/50',
 							)}
 							onClick={() => setTabSegment(tab.segment)}
 						>

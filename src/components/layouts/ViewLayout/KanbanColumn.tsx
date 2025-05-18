@@ -13,10 +13,10 @@ export function KanbanColumn<T>({
 	const filteredData = data.filter(filter);
 	const total = filteredData.length;
 	return (
-		<div className="h-full rounded-lg bg-zinc-950 px-6 ">
+		<div className="h-full rounded-lg bg-background px-6 ">
 			<div className="flex items-center gap-2 py-4">
 				<h2 className="font-medium text-sm">{title}</h2>
-				<div className="size-5 rounded-full bg-zinc-700 text-center text-xs text-zinc-300 leading-5">
+				<div className="size-5 rounded-full bg-bg-tertiary text-center text-text-secondary text-xs leading-5">
 					{total}
 				</div>
 			</div>

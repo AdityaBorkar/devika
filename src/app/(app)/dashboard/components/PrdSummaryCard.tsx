@@ -6,7 +6,7 @@ export function PrdCard({ version }: { version: any }) {
 	return (
 		<Link
 			to="/prd"
-			className="grid grid-cols-[1.5rem_auto] rounded-md border border-border bg-zinc-800/50 px-2 py-2.5 text-sm"
+			className="grid grid-cols-[1.5rem_auto] rounded-md border border-border bg-bg-secondary/50 px-2 py-2.5 text-sm"
 		>
 			<div
 				className={cn(
@@ -18,7 +18,7 @@ export function PrdCard({ version }: { version: any }) {
 			/>
 			<div>
 				<div className="font-medium text-sm">{version.name}</div>
-				<div className="inline-block text-xs text-zinc-400">
+				<div className="inline-block text-text-tertiary text-xs">
 					<PiTag className="mr-1 inline-block" />
 					{version.version}
 				</div>

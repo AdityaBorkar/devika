@@ -13,8 +13,8 @@ export function TabButton({
 		<button
 			className={`rounded-md border px-3 py-1 font-medium text-sm ${
 				activeTab === value
-					? 'border-border bg-zinc-100 dark:bg-zinc-800'
-					: 'border-transparent text-zinc-500 hover:bg-zinc-700 hover:text-zinc-800 dark:hover:text-zinc-400'
+					? 'border-border bg-bg-primary dark:bg-bg-secondary'
+					: 'border-transparent text-text-muted hover:bg-bg-tertiary hover:text-text-primary dark:hover:text-text-tertiary'
 			}`}
 			onClick={() => onTabChange(value)}
 			type="button"

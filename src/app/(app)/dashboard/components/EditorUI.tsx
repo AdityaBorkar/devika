@@ -111,12 +111,13 @@ export function EditorUI() {
 				<DropdownMenuTrigger
 					className={cn(
 						'absolute top-0 right-0',
-						'flex w-fit flex-row items-center justify-between gap-2 rounded-md border bg-zinc-200 px-3 py-1 font-medium',
+						'flex w-fit flex-row items-center justify-between gap-2 rounded-md border bg-bg-tertiary200 px-3 py-1 font-medium',
 						viewMode === 'Edit' &&
 							'border-amber-400 bg-amber-200 text-amber-800',
 						viewMode === 'Review' &&
 							'border-purple-400 bg-purple-200 text-purple-800',
-						viewMode === 'Read' && 'border-zinc-400 bg-zinc-200 text-zinc-800',
+						viewMode === 'Read' &&
+							'border-zinc-400 bg-bg-tertiary200 text-text-primary',
 					)}
 				>
 					{/* TODO: Animate SVG Morph + Number Counter Effect */}
@@ -164,17 +165,17 @@ export function EditorUI() {
 					onChange={setContent}
 					onUpdate={onUpdate}
 					placeholder={
-						<div className="border-t bg-zinc-50 px-3 py-2 text-xs text-zinc-500">
+						<div className="border-t bg-text-primary px-3 py-2 text-text-muted text-xs">
 							{'Type '}
-							<kbd className="rounded bg-zinc-200 px-1 py-0.5 text-zinc-700">
+							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								/
 							</kbd>
 							{' for commands or '}
-							<kbd className="rounded bg-zinc-200 px-1 py-0.5 text-zinc-700">
+							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								@
 							</kbd>
 							{' to reference documents • Use '}
-							<kbd className="rounded bg-zinc-200 px-1 py-0.5 text-zinc-700">
+							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								Ctrl+Alt+1-3
 							</kbd>
 							{' for headings'}

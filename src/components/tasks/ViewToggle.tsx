@@ -13,14 +13,14 @@ export const ViewToggle: React.FC<ViewToggleProps> = ({
 	onChange,
 }) => {
 	return (
-		<div className="flex items-center overflow-hidden rounded-md bg-zinc-100 dark:bg-zinc-800">
+		<div className="flex items-center overflow-hidden rounded-md bg-bg-primary dark:bg-bg-secondary">
 			<button
 				aria-label="List view"
 				aria-pressed={viewMode === 'list'}
 				className={`flex items-center justify-center p-2 ${
 					viewMode === 'list'
-						? 'bg-white shadow-sm dark:bg-zinc-700'
-						: 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
+						? 'bg-white shadow-sm dark:bg-bg-tertiary'
+						: 'text-text-muted hover:text-text-primary dark:hover:text-text-secondary'
 				}`}
 				onClick={() => onChange('list')}
 				type="button"
@@ -32,8 +32,8 @@ export const ViewToggle: React.FC<ViewToggleProps> = ({
 				aria-pressed={viewMode === 'board'}
 				className={`flex items-center justify-center p-2 ${
 					viewMode === 'board'
-						? 'bg-white shadow-sm dark:bg-zinc-700'
-						: 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
+						? 'bg-white shadow-sm dark:bg-bg-tertiary'
+						: 'text-text-muted hover:text-text-primary dark:hover:text-text-secondary'
 				}`}
 				onClick={() => onChange('board')}
 				type="button"

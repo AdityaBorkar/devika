@@ -34,7 +34,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 	return (
 		<div
 			className={cn(
-				'relative w-full rounded-lg border bg-white p-5 transition-all hover:border-primary/30 hover:shadow-sm dark:bg-zinc-900',
+				'relative w-full rounded-lg border bg-white p-5 transition-all hover:border-primary/30 hover:shadow-sm dark:bg-bg-primary',
 				isLocal
 					? 'border-indigo-200 dark:border-indigo-800'
 					: 'border-zinc-200 dark:border-zinc-800',
@@ -43,7 +43,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 			<div className="flex items-start justify-between">
 				<div className="flex items-start gap-3">
 					{logoUrl && (
-						<div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-zinc-50 p-1 dark:bg-zinc-800">
+						<div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-md bg-bg-primary p-1 dark:bg-bg-secondary">
 							<img
 								alt={name}
 								className="object-contain"
@@ -72,7 +72,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 
 				<div className="flex items-center gap-2">
 					<a
-						className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
+						className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-primary dark:hover:bg-bg-secondary"
 						href={docsUrl}
 						rel="noopener noreferrer"
 						target="_blank"
@@ -89,7 +89,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 						)}
 					</a>
 					<button
-						className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
+						className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-primary dark:hover:bg-bg-secondary"
 						onClick={(e) => {
 							e.stopPropagation();
 							onEditDocs(pkg.id, docsUrl);
@@ -104,11 +104,11 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 
 			<div className="mt-5 flex flex-col gap-3">
 				<div className="flex flex-wrap items-center gap-2">
-					<span className="rounded-full bg-secondary px-2 py-1 text-xs">
+					<span className="rounded-full bg-bg-secondary px-2 py-1 text-xs">
 						v{version}
 					</span>
 					{isLocal && docSource && (
-						<span className="flex items-center gap-1 rounded-full bg-zinc-100 px-2 py-0.5 text-xs dark:bg-zinc-800">
+						<span className="flex items-center gap-1 rounded-full bg-bg-primary px-2 py-0.5 text-xs dark:bg-bg-secondary">
 							{docSource === 'path' ? (
 								<FolderDot className="h-3 w-3" />
 							) : (
@@ -124,7 +124,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 						</span>
 					)}
 					{isUnused && (
-						<span className="flex items-center gap-1 rounded-full bg-zinc-500/10 px-2 py-0.5 text-xs text-zinc-500">
+						<span className="flex items-center gap-1 rounded-full bg-bg-primary0/10 px-2 py-0.5 text-text-muted text-xs">
 							<Shield className="h-3 w-3" />
 							Unused
 						</span>
@@ -140,7 +140,7 @@ export function PackageCard({ pkg, onEditDocs }: PackageCardProps) {
 				<div className="flex items-center justify-between border-zinc-200 border-t border-dashed pt-2 text-muted-foreground text-xs dark:border-zinc-800">
 					<span>Last updated: {lastScrapedDate}</span>
 					{isLocal && (
-						<span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs dark:bg-zinc-800">
+						<span className="rounded-full bg-bg-primary px-2 py-0.5 text-xs dark:bg-bg-secondary">
 							{docsUrl}
 						</span>
 					)}

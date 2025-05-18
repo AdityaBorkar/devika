@@ -16,7 +16,7 @@ export function ViewToggle({ viewMode, onToggle }: ViewToggleProps) {
 				className={cn(
 					'flex items-center gap-2 px-3 py-2 transition-colors',
 					viewMode === 'card'
-						? 'bg-primary text-primary-foreground'
+						? 'bg-bg-primary text-primary-foreground'
 						: 'hover:bg-accent',
 				)}
 				onClick={() => onToggle('card')}
@@ -29,7 +29,7 @@ export function ViewToggle({ viewMode, onToggle }: ViewToggleProps) {
 				className={cn(
 					'flex items-center gap-2 px-3 py-2 transition-colors',
 					viewMode === 'table'
-						? 'bg-primary text-primary-foreground'
+						? 'bg-bg-primary text-primary-foreground'
 						: 'hover:bg-accent',
 				)}
 				onClick={() => onToggle('table')}

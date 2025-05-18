@@ -60,11 +60,11 @@ export function DocUrlDialog({
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-			<div className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-5 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
+			<div className="w-full max-w-md rounded-lg border border-zinc-200 bg-white p-5 shadow-lg dark:border-zinc-700 dark:bg-bg-primary">
 				<div className="mb-4 flex items-center justify-between">
 					<h3 className="font-medium text-lg">Edit Documentation Source</h3>
 					<button
-						className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-foreground dark:hover:bg-zinc-800"
+						className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-foreground dark:hover:bg-bg-secondary"
 						onClick={onClose}
 						type="button"
 					>
@@ -77,14 +77,14 @@ export function DocUrlDialog({
 						<span className="font-medium text-sm">Documentation Type</span>
 						<div className="flex overflow-hidden rounded-md border border-zinc-200 dark:border-zinc-700">
 							<button
-								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'url' ? 'bg-primary text-primary-foreground' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'url' ? 'bg-bg-primary text-primary-foreground' : 'hover:bg-bg-primary dark:hover:bg-bg-secondary'}`}
 								onClick={() => handleSourceChange('url')}
 								type="button"
 							>
 								External URL
 							</button>
 							<button
-								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'path' ? 'bg-primary text-primary-foreground' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'path' ? 'bg-bg-primary text-primary-foreground' : 'hover:bg-bg-primary dark:hover:bg-bg-secondary'}`}
 								onClick={() => handleSourceChange('path')}
 								type="button"
 							>
@@ -92,7 +92,7 @@ export function DocUrlDialog({
 								File Path
 							</button>
 							<button
-								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'jsdoc' ? 'bg-primary text-primary-foreground' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800'}`}
+								className={`flex flex-1 items-center justify-center gap-2 px-4 py-2 text-sm ${docSource === 'jsdoc' ? 'bg-bg-primary text-primary-foreground' : 'hover:bg-bg-primary dark:hover:bg-bg-secondary'}`}
 								onClick={() => handleSourceChange('jsdoc')}
 								type="button"
 							>
@@ -136,14 +136,14 @@ export function DocUrlDialog({
 
 					<div className="flex justify-end gap-2">
 						<button
-							className="rounded-md border px-4 py-2 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-800"
+							className="rounded-md border px-4 py-2 text-sm hover:bg-bg-primary dark:hover:bg-bg-secondary"
 							onClick={onClose}
 							type="button"
 						>
 							Cancel
 						</button>
 						<button
-							className="rounded-md bg-primary px-4 py-2 text-primary-foreground text-sm hover:bg-primary/90"
+							className="rounded-md bg-bg-primary px-4 py-2 text-primary-foreground text-sm hover:bg-bg-primary/90"
 							onClick={handleSave}
 							type="button"
 						>

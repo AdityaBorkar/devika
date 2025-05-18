@@ -25,12 +25,12 @@ export function Progress({ percent, tasksStatus }: ProgressProps) {
 		<div className="space-y-1">
 			<div className="flex items-center justify-between text-xs">
 				<span className="font-medium">{percent}% complete</span>
-				<span className="text-zinc-500">
+				<span className="text-text-muted">
 					{tasksStatus.done}/{total} tasks
 				</span>
 			</div>
 
-			<div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100">
+			<div className="h-2 w-full overflow-hidden rounded-full bg-bg-primary">
 				{/* Stacked bars for different task statuses */}
 				<div className="flex h-full">
 					{/* Done tasks (green) */}
@@ -62,7 +62,7 @@ export function Progress({ percent, tasksStatus }: ProgressProps) {
 			</div>
 
 			{/* Legend */}
-			<div className="flex gap-4 text-xs text-zinc-600">
+			<div className="flex gap-4 text-text-muted text-xs">
 				{tasksStatus.done > 0 && (
 					<div className="flex items-center gap-1">
 						<div className="h-2 w-2 rounded-full bg-green-500" />

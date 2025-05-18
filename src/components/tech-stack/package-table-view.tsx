@@ -26,9 +26,9 @@ export function PackageTableView({
 	return (
 		<div className="my-4 overflow-x-auto">
 			<h3 className="mb-3 font-medium text-lg">{categoryLabel}</h3>
-			<div className="overflow-hidden rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+			<div className="overflow-hidden rounded-lg border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-bg-primary">
 				<table className="w-full border-collapse">
-					<thead className="bg-zinc-50 dark:bg-zinc-900/80">
+					<thead className="bg-bg-primary dark:bg-bg-primary/80">
 						<tr>
 							<th className="border-zinc-200 border-b p-3 text-left font-medium text-sm dark:border-zinc-800">
 								Package
@@ -53,13 +53,13 @@ export function PackageTableView({
 					<tbody>
 						{packages.map((pkg) => (
 							<tr
-								className="border-zinc-200 border-b transition-colors hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-800/50"
+								className="border-zinc-200 border-b transition-colors hover:bg-bg-primary dark:border-zinc-800 dark:hover:bg-bg-secondary/50"
 								key={pkg.id}
 							>
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										{pkg.logoUrl && (
-											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-zinc-50 p-0.5 dark:bg-zinc-800">
+											<div className="relative h-6 w-6 overflow-hidden rounded-sm bg-bg-primary p-0.5 dark:bg-bg-secondary">
 												<img
 													alt={pkg.name}
 													className="object-contain"
@@ -87,7 +87,7 @@ export function PackageTableView({
 									</div>
 								</td>
 								<td className="p-3">
-									<span className="rounded-full bg-secondary px-2 py-1 text-xs">
+									<span className="rounded-full bg-bg-secondary px-2 py-1 text-xs">
 										{pkg.version}
 									</span>
 								</td>
@@ -103,7 +103,7 @@ export function PackageTableView({
 											</span>
 										)}
 										{pkg.isUnused && (
-											<span className="flex items-center gap-1 rounded-full bg-zinc-500/10 px-2 py-0.5 text-xs text-zinc-500">
+											<span className="flex items-center gap-1 rounded-full bg-bg-primary0/10 px-2 py-0.5 text-text-muted text-xs">
 												<Shield className="h-3 w-3" />
 												Unused
 											</span>
@@ -147,7 +147,7 @@ export function PackageTableView({
 								<td className="p-3">
 									<div className="flex items-center gap-2">
 										<a
-											className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
+											className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-primary dark:hover:bg-bg-secondary"
 											href={pkg.docsUrl}
 											rel="noopener noreferrer"
 											target="_blank"
@@ -164,7 +164,7 @@ export function PackageTableView({
 											)}
 										</a>
 										<button
-											className="rounded-md p-1 text-muted-foreground hover:bg-zinc-100 hover:text-primary dark:hover:bg-zinc-800"
+											className="rounded-md p-1 text-muted-foreground hover:bg-bg-primary hover:text-primary dark:hover:bg-bg-secondary"
 											onClick={() => onEditDocs(pkg.id, pkg.docsUrl)}
 											title="Edit documentation link"
 											type="button"

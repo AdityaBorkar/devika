@@ -104,9 +104,9 @@ const createDropdownPopup = (
 	items.forEach((item) => {
 		const button = document.createElement('button');
 		button.className =
-			'block w-full text-left px-3 py-2 rounded hover:bg-zinc-100';
+			'block w-full text-left px-3 py-2 rounded hover:bg-bg-primary';
 		button.innerHTML = item.description
-			? `<div>${item.label || item.title}</div><div class="text-xs text-zinc-500">${item.description}</div>`
+			? `<div>${item.label || item.title}</div><div class="text-xs text-text-muted">${item.description}</div>`
 			: item.label || item.title;
 
 		button.addEventListener('click', () => {

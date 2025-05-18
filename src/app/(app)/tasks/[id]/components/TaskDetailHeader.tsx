@@ -11,7 +11,7 @@ export const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({ task }) => {
 		<div className="flex items-center justify-between border-zinc-200 border-b px-6 py-4 dark:border-zinc-800">
 			<div className="flex items-center gap-3">
 				<Link
-					className="rounded-full p-1 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+					className="rounded-full p-1 hover:bg-bg-primary dark:hover:bg-bg-secondary"
 					to="/tasks"
 				>
 					<ArrowLeft size={18} />
@@ -22,7 +22,7 @@ export const TaskDetailHeader: React.FC<TaskDetailHeaderProps> = ({ task }) => {
 			</div>
 			<div className="flex items-center gap-2">
 				<button
-					className="rounded p-1.5 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+					className="rounded p-1.5 hover:bg-bg-primary dark:hover:bg-bg-secondary"
 					type="button"
 				>
 					<MoreHorizontal size={18} />

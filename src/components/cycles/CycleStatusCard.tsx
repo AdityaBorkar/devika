@@ -25,7 +25,7 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 	const getStatusColor = (status: string) => {
 		switch (status) {
 			case 'Not Started':
-				return 'bg-zinc-100 border-zinc-200 text-zinc-700';
+				return 'bg-bg-primary border-zinc-200 text-text-primary';
 			case 'In Progress':
 				return 'bg-blue-50 border-blue-200 text-blue-700';
 			case 'Completed':
@@ -33,7 +33,7 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 			case 'Cancelled':
 				return 'bg-red-50 border-red-200 text-red-700';
 			default:
-				return 'bg-zinc-100 border-zinc-200 text-zinc-700';
+				return 'bg-bg-primary border-zinc-200 text-text-primary';
 		}
 	};
 
@@ -41,7 +41,7 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 	const getStatusIcon = (status: string) => {
 		switch (status) {
 			case 'Not Started':
-				return <Clock className="h-4 w-4 text-zinc-600" />;
+				return <Clock className="h-4 w-4 text-text-muted" />;
 			case 'In Progress':
 				return <Clock className="h-4 w-4 text-blue-600" />;
 			case 'Completed':
@@ -49,7 +49,7 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 			case 'Cancelled':
 				return <XCircle className="h-4 w-4 text-red-600" />;
 			default:
-				return <Clock className="h-4 w-4 text-zinc-600" />;
+				return <Clock className="h-4 w-4 text-text-muted" />;
 		}
 	};
 
@@ -101,9 +101,9 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 								{cycle.progress.percentComplete}%
 							</span>
 						</div>
-						<div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-100">
+						<div className="h-1.5 w-full overflow-hidden rounded-full bg-bg-primary">
 							<div
-								className="h-1.5 rounded-full bg-primary transition-all duration-300"
+								className="h-1.5 rounded-full bg-bg-primary transition-all duration-300"
 								style={{ width: `${cycle.progress.percentComplete}%` }}
 							/>
 						</div>
@@ -119,13 +119,13 @@ export const CycleStatusCard: React.FC<CycleStatusCardProps> = ({
 					<div className="flex gap-1">
 						<Badge
 							variant="outline"
-							className="border-zinc-200 bg-zinc-50 px-2 py-0.5 text-xs dark:border-zinc-800 dark:bg-zinc-900"
+							className="border-zinc-200 bg-bg-primary px-2 py-0.5 text-xs dark:border-zinc-800 dark:bg-bg-primary"
 						>
 							{cycle.progress.tasksStatus.done} Done
 						</Badge>
 						<Badge
 							variant="outline"
-							className="border-zinc-200 bg-zinc-50 px-2 py-0.5 text-xs dark:border-zinc-800 dark:bg-zinc-900"
+							className="border-zinc-200 bg-bg-primary px-2 py-0.5 text-xs dark:border-zinc-800 dark:bg-bg-primary"
 						>
 							{cycle.progress.tasksStatus.inProgress} In Progress
 						</Badge>

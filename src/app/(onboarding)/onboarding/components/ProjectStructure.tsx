@@ -9,7 +9,7 @@ export default function ProjectOnboarding_ProjectStructure() {
 				Execute this prompt to understand the project structure and generate
 				existing PRD:
 			</Label>
-			<pre className="my-8 rounded-lg border border-border bg-zinc-100 p-4">
+			<pre className="my-8 rounded-lg border border-border bg-text-primary p-4">
 				Prompt
 			</pre>
 

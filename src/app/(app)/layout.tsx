@@ -2,9 +2,10 @@ import {
 	PiChartPie,
 	PiCheckCircleDuotone,
 	PiCheckSquare,
+	PiClockCounterClockwise,
+	PiCode,
 	PiFiles,
 	PiGear,
-	PiGitMerge,
 	PiHeartbeat,
 	PiHouse,
 	PiPlayCircle,
@@ -18,7 +19,8 @@ const NAV_ITEMS_TOP = [
 	{ href: 'prd', icon: PiFiles, label: 'PRD' },
 	{ href: 'tasks', icon: PiCheckSquare, label: 'Tasks' },
 	{ href: 'cycles', icon: PiPlayCircle, label: 'Cycles' },
-	{ href: 'versions', icon: PiGitMerge, label: 'Versions' },
+	{ href: 'workspace', icon: PiCode, label: 'Workspace' },
+	{ href: 'versions', icon: PiClockCounterClockwise, label: 'Versions' },
 	{ href: 'deployments', icon: PiHeartbeat, label: 'Deployments' },
 ];
 
@@ -55,14 +57,14 @@ export default function AppLayout() {
 				<div
 					// TODO: Open Dialog and Show Connection between IDE, Cloud, Integrations and Chrome Extension
 					className={cn(
-						'relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-zinc-400',
-						'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
+						'relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-text-tertiary',
+						'hover:border-border hover:bg-bg-secondary hover:text-text-secondary',
 					)}
 				>
 					<PiCheckCircleDuotone className="mx-auto size-5 text-green-600 " />
 				</div>
 			</nav>
-			<main className="my-2 mr-2 overflow-y-auto rounded-md border border-border bg-zinc-900 shadow-md">
+			<main className="my-2 mr-2 overflow-y-auto rounded-md border border-border bg-bg-primary shadow-md">
 				<Outlet />
 			</main>
 		</div>
@@ -81,10 +83,10 @@ function NavItem({
 		<Link
 			to={item.href}
 			className={cn(
-				'relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-zinc-400',
+				'group relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-text-muted',
 				isActive
-					? 'border-border bg-zinc-800 text-zinc-100'
-					: 'hover:border-border hover:bg-zinc-900 hover:text-zinc-300',
+					? 'border-border bg-bg-secondary text-text-primary'
+					: 'hover:border-border hover:bg-bg-secondary/80 hover:text-text-primary/80',
 			)}
 		>
 			{cue && (
@@ -99,6 +101,9 @@ function NavItem({
 				/>
 			)}
 			<item.icon className="mx-auto size-5 stroke-3" />
+			<div className="invisible absolute top-1.5 left-11 rounded bg-text-tertiary px-2 py-1 font-semibold text-bg-primary text-xs group-hover:visible">
+				{item.label}
+			</div>
 		</Link>
 	);
 }

@@ -57,10 +57,10 @@ export default function CyclesViewPage() {
 						</SelectContent>
 					</Select>
 					<Label>Agents</Label>
-					<div className="flex items-center divide-x divide-border rounded-lg border border-border bg-zinc-800/50">
-						<div className="rounded-l-md px-3 py-1 hover:bg-zinc-700">+</div>
+					<div className="flex items-center divide-x divide-border rounded-lg border border-border bg-bg-secondary/50">
+						<div className="rounded-l-md px-3 py-1 hover:bg-bg-tertiary">+</div>
 						<div className="grow px-2 py-1 text-center">5</div>
-						<div className="rounded-r-md px-3 py-1 hover:bg-zinc-700">-</div>
+						<div className="rounded-r-md px-3 py-1 hover:bg-bg-tertiary">-</div>
 					</div>
 					<Label>Auto-Deploy</Label>
 					<Select>
@@ -88,11 +88,13 @@ export default function CyclesViewPage() {
 				{/* <div>Tasks marked for Manual Review</div> */}
 
 				<div className="divide-y divide-zinc-800 border-border border-y">
-					<div className="px-4 py-3 hover:bg-zinc-800/50">
-						<div className="font-semibold text-zinc-400">Resource Monitor</div>
+					<div className="px-4 py-3 hover:bg-bg-secondary/50">
+						<div className="font-semibold text-text-tertiary">
+							Resource Monitor
+						</div>
 					</div>
-					<div className="px-4 py-3 hover:bg-zinc-800/50">
-						<div className="font-semibold text-zinc-400">Activity</div>
+					<div className="px-4 py-3 hover:bg-bg-secondary/50">
+						<div className="font-semibold text-text-tertiary">Activity</div>
 					</div>
 				</div>
 			</div>
@@ -123,7 +125,7 @@ function Button({
 	return (
 		<button
 			type="button"
-			className={cn('rounded-md border px-4 py-1.5 text-white', className)}
+			className={cn('rounded-md border px-4 py-1.5 text-foreground', className)}
 		>
 			{children}
 		</button>

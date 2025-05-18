@@ -29,25 +29,28 @@ export const CyclesToolbar: React.FC<CyclesToolbarProps> = ({
 	onStatusChange,
 }) => {
 	return (
-		<div className="flex items-center justify-between border-zinc-200 border-b bg-zinc-50/50 px-4 py-3 dark:border-zinc-800 dark:bg-zinc-900/20">
+		<div className="flex items-center justify-between border-zinc-200 border-b bg-bg-primary/50 px-4 py-3 dark:border-zinc-800 dark:bg-bg-primary/20">
 			<div className="flex items-center gap-3">
 				<Button
-					className="flex items-center gap-1 border border-zinc-200 bg-white text-xs text-zinc-700 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800/80"
+					className="flex items-center gap-1 border border-zinc-200 bg-white text-text-primary text-xs shadow-sm hover:bg-bg-primary dark:border-zinc-700 dark:bg-bg-secondary dark:text-text-secondary dark:hover:bg-bg-secondary/80"
 					onClick={onShowFilterPanel}
 					size="sm"
 					variant="outline"
 				>
-					<Filter size={14} className="text-zinc-500 dark:text-zinc-400" />
+					<Filter
+						size={14}
+						className="text-text-muted dark:text-text-tertiary"
+					/>
 					<span>Filter</span>
 				</Button>
 
 				<div className="relative max-w-xs">
 					<Search
-						className="-tranzinc-y-1/2 pointer-events-none absolute top-1/2 left-3 transform text-zinc-400"
+						className="-tranzinc-y-1/2 pointer-events-none absolute top-1/2 left-3 transform text-text-tertiary"
 						size={14}
 					/>
 					<Input
-						className="h-8 border-zinc-200 bg-white pl-9 text-sm focus-visible:ring-primary/20 dark:border-zinc-700 dark:bg-zinc-800"
+						className="h-8 border-zinc-200 bg-white pl-9 text-sm focus-visible:ring-primary/20 dark:border-zinc-700 dark:bg-bg-secondary"
 						onChange={(e) => setSearchQuery(e.target.value)}
 						placeholder="Search cycles..."
 						type="text"
@@ -62,7 +65,7 @@ export const CyclesToolbar: React.FC<CyclesToolbarProps> = ({
 					}
 					value={currentStatus}
 				>
-					<SelectTrigger className="h-8 w-[160px] border-zinc-200 bg-white text-sm focus:ring-primary/20 dark:border-zinc-700 dark:bg-zinc-800">
+					<SelectTrigger className="h-8 w-[160px] border-zinc-200 bg-white text-sm focus:ring-primary/20 dark:border-zinc-700 dark:bg-bg-secondary">
 						<SelectValue placeholder="Status" />
 					</SelectTrigger>
 					<SelectContent>
@@ -77,7 +80,7 @@ export const CyclesToolbar: React.FC<CyclesToolbarProps> = ({
 
 			<div className="flex items-center gap-2">
 				<Button
-					className="border border-zinc-200 bg-white text-xs text-zinc-700 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800/80"
+					className="border border-zinc-200 bg-white text-text-primary text-xs shadow-sm hover:bg-bg-primary dark:border-zinc-700 dark:bg-bg-secondary dark:text-text-secondary dark:hover:bg-bg-secondary/80"
 					onClick={onSaveView}
 					size="sm"
 					variant="outline"
@@ -86,13 +89,13 @@ export const CyclesToolbar: React.FC<CyclesToolbarProps> = ({
 				</Button>
 
 				<Button
-					className="flex items-center gap-1 border border-zinc-200 bg-white text-xs text-zinc-700 shadow-sm hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-800/80"
+					className="flex items-center gap-1 border border-zinc-200 bg-white text-text-primary text-xs shadow-sm hover:bg-bg-primary dark:border-zinc-700 dark:bg-bg-secondary dark:text-text-secondary dark:hover:bg-bg-secondary/80"
 					size="sm"
 					variant="outline"
 				>
 					<SlidersHorizontal
 						size={14}
-						className="text-zinc-500 dark:text-zinc-400"
+						className="text-text-muted dark:text-text-tertiary"
 					/>
 					<span>Display</span>
 				</Button>

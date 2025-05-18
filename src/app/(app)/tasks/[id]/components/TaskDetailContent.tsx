@@ -1,11 +1,11 @@
 import { Calendar, Check, Clock, Tag, User } from 'lucide-react';
 import type React from 'react';
 import { useState } from 'react';
-import type { TaskDetail } from '../../../../../types/types';
+import type { TaskDetail } from '../../../../../../types/types';
 import {
 	getPriorityColor,
 	getStatusColor,
-} from '../../../../components/tasks/utils';
+} from '../../../../../components/tasks/utils';
 
 interface TaskDetailContentProps {
 	task: TaskDetail;
@@ -38,15 +38,15 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 						{task.status}
 					</div>
 				</div>
-				<div className="flex items-center gap-2 text-zinc-500">
+				<div className="flex items-center gap-2 text-text-muted">
 					<Calendar size={14} />
 					<span className="text-sm">Created on {task.createdAt}</span>
 				</div>
-				<div className="flex items-center gap-2 text-zinc-500">
+				<div className="flex items-center gap-2 text-text-muted">
 					<Clock size={14} />
 					<span className="text-sm">Due {task.due}</span>
 				</div>
-				<div className="flex items-center gap-2 text-zinc-500">
+				<div className="flex items-center gap-2 text-text-muted">
 					<User size={14} />
 					<span className="text-sm">{task.assignee}</span>
 				</div>
@@ -62,9 +62,11 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Description */}
 			<div className="mb-8">
-				<h2 className="mb-2 font-medium text-sm text-zinc-500">Description</h2>
-				<div className="rounded-md bg-zinc-50 p-4 dark:bg-zinc-800">
-					<p className="whitespace-pre-line text-sm text-zinc-800 dark:text-zinc-200">
+				<h2 className="mb-2 font-medium text-sm text-text-muted">
+					Description
+				</h2>
+				<div className="rounded-md bg-bg-primary p-4 dark:bg-bg-secondary">
+					<p className="whitespace-pre-line text-sm text-text-primary dark:text-text-secondary">
 						{task.description}
 					</p>
 				</div>
@@ -72,11 +74,11 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Subtasks */}
 			<div className="mb-8">
-				<h2 className="mb-2 font-medium text-sm text-zinc-500">Subtasks</h2>
+				<h2 className="mb-2 font-medium text-sm text-text-muted">Subtasks</h2>
 				<div className="space-y-2">
 					{task.subtasks.map((subtask) => (
 						<div
-							className="flex items-start gap-2 rounded-md p-2 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+							className="flex items-start gap-2 rounded-md p-2 hover:bg-bg-primary dark:hover:bg-bg-secondary"
 							key={subtask.id}
 						>
 							<div className="relative mt-0.5 flex items-center">
@@ -95,7 +97,7 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 								/>
 								{subtask.completed && (
 									<Check
-										className="pointer-events-none absolute ml-0.5 text-white"
+										className="pointer-events-none absolute ml-0.5 text-foreground"
 										size={12}
 									/>
 								)}
@@ -103,8 +105,8 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 							<label
 								className={`text-sm ${
 									subtask.completed
-										? 'text-zinc-400 line-through'
-										: 'text-zinc-800 dark:text-zinc-200'
+										? 'text-text-tertiary line-through'
+										: 'text-text-primary dark:text-text-secondary'
 								}`}
 								htmlFor={`subtask-${subtask.id}`}
 							>
@@ -113,7 +115,7 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 						</div>
 					))}
 
-					<div className="flex cursor-pointer items-center gap-2 p-2 text-zinc-400 hover:text-zinc-600">
+					<div className="flex cursor-pointer items-center gap-2 p-2 text-text-tertiary hover:text-text-muted">
 						<div className="h-4 w-4 rounded-sm border border-zinc-300 border-dashed dark:border-zinc-700" />
 						<span className="text-sm">Add subtask...</span>
 					</div>
@@ -122,20 +124,20 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 
 			{/* Comments */}
 			<div>
-				<h2 className="mb-2 font-medium text-sm text-zinc-500">Comments</h2>
+				<h2 className="mb-2 font-medium text-sm text-text-muted">Comments</h2>
 				<div className="mb-4 space-y-4">
 					{task.comments.map((comment) => (
 						<div
-							className="rounded-md bg-zinc-50 p-3 dark:bg-zinc-800"
+							className="rounded-md bg-bg-primary p-3 dark:bg-bg-secondary"
 							key={comment.id}
 						>
 							<div className="mb-1 flex justify-between">
 								<span className="font-medium text-sm">{comment.author}</span>
-								<span className="text-xs text-zinc-500">
+								<span className="text-text-muted text-xs">
 									{comment.timestamp}
 								</span>
 							</div>
-							<p className="text-sm text-zinc-800 dark:text-zinc-200">
+							<p className="text-sm text-text-primary dark:text-text-secondary">
 								{comment.content}
 							</p>
 						</div>
@@ -153,7 +155,7 @@ export const TaskDetailContent: React.FC<TaskDetailContentProps> = ({
 					/>
 					<div className="mt-2 flex justify-end">
 						<button
-							className="rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-sm text-white hover:bg-indigo-700"
+							className="rounded-md bg-indigo-600 px-3 py-1.5 font-medium text-foreground text-sm hover:bg-indigo-700"
 							disabled={!newComment.trim()}
 							onClick={handleCommentSubmit}
 							type="button"

@@ -1,6 +1,6 @@
 import { PiFile, PiX } from 'react-icons/pi';
-import { ChatUI } from '@/app/(app)/prd/[pageId]/ChatUI';
-import { EditorUI } from '@/app/(app)/prd/[pageId]/EditorUI';
+import { ChatUI } from '@/app/(app)/prd/[pageId]/components/ChatUI';
+import { EditorUI } from '@/app/(app)/prd/[pageId]/components/EditorUI';
 import { cn } from '@/lib/utils';
 
 export function SplitScreen({
@@ -35,13 +35,13 @@ export function SplitScreen({
 							type="button"
 							key={tab.id}
 							className={cn(
-								'group relative block rounded-md border border-transparent px-2 py-1.5 font-medium text-xs text-zinc-400',
+								'group relative block rounded-md border border-transparent px-2 py-1.5 font-medium text-text-tertiary text-xs',
 								tab.id === activeTabId
 									? [
-											'border-border bg-zinc-800 text-zinc-100',
+											'border-border bg-bg-secondary text-text-primary',
 											'after:-bottom-1.5 after:absolute after:right-0 after:w-full after:border-zinc-400 after:border-b',
 										]
-									: 'hover:bg-zinc-800',
+									: 'hover:bg-bg-secondary',
 							)}
 							onClick={() => setActiveTabId(tab.id)}
 						>

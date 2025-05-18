@@ -4,13 +4,13 @@ import type { PriorityOption, StatusOption } from './types';
 export const getStatusColor = (status: string): string => {
 	switch (status) {
 		case 'Todo':
-			return 'bg-zinc-200 text-zinc-800';
+			return 'bg-bg-secondary text-text-primary';
 		case 'In Progress':
 			return 'bg-blue-100 text-blue-800';
 		case 'Done':
 			return 'bg-green-100 text-green-800';
 		default:
-			return 'bg-zinc-200 text-zinc-800';
+			return 'bg-bg-secondary text-text-primary';
 	}
 };
 
@@ -24,7 +24,7 @@ export const getPriorityColor = (priority: string): string => {
 		case 'Low':
 			return 'text-green-600';
 		default:
-			return 'text-zinc-600';
+			return 'text-text-muted';
 	}
 };
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { Divider } from '@/app/(app)/prd/[pageId]/Divider';
+import { Divider } from '@/app/(app)/prd/[pageId]/components/Divider';
 import PrdDefaultPage from '@/app/(app)/prd/page';
-import { SplitScreen } from './SplitScreen';
+import { SplitScreen } from './components/SplitScreen';
 
 type TabType = {
 	id: string;

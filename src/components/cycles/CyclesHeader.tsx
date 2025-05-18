@@ -32,8 +32,8 @@ export const CyclesHeader: React.FC<CyclesHeaderProps> = ({
 					<button
 						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
 							activeTab === 'all'
-								? 'bg-primary/10 text-primary'
-								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+								? 'bg-bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-bg-primary dark:hover:bg-bg-secondary/60'
 						}`}
 						onClick={() => onTabChange('all')}
 						type="button"
@@ -43,8 +43,8 @@ export const CyclesHeader: React.FC<CyclesHeaderProps> = ({
 					<button
 						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
 							activeTab === 'current'
-								? 'bg-primary/10 text-primary'
-								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+								? 'bg-bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-bg-primary dark:hover:bg-bg-secondary/60'
 						}`}
 						onClick={() => onTabChange('current')}
 						type="button"
@@ -54,8 +54,8 @@ export const CyclesHeader: React.FC<CyclesHeaderProps> = ({
 					<button
 						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
 							activeTab === 'upcoming'
-								? 'bg-primary/10 text-primary'
-								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+								? 'bg-bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-bg-primary dark:hover:bg-bg-secondary/60'
 						}`}
 						onClick={() => onTabChange('upcoming')}
 						type="button"
@@ -65,8 +65,8 @@ export const CyclesHeader: React.FC<CyclesHeaderProps> = ({
 					<button
 						className={`rounded-md px-3 py-1.5 font-medium text-sm transition-colors ${
 							activeTab === 'completed'
-								? 'bg-primary/10 text-primary'
-								: 'text-muted-foreground hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
+								? 'bg-bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-bg-primary dark:hover:bg-bg-secondary/60'
 						}`}
 						onClick={() => onTabChange('completed')}
 						type="button"

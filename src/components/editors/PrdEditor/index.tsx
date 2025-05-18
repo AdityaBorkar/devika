@@ -103,12 +103,12 @@ export function MDXEditor({
 			}),
 			Code.configure({
 				HTMLAttributes: {
-					class: 'bg-zinc-100 font-mono px-1 py-0.5 rounded text-sm',
+					class: 'bg-bg-primary font-mono px-1 py-0.5 rounded text-sm',
 				},
 			}),
 			CodeBlock.configure({
 				HTMLAttributes: {
-					class: 'bg-zinc-100 font-mono p-4 rounded-md text-sm',
+					class: 'bg-bg-primary font-mono p-4 rounded-md text-sm',
 				},
 			}),
 			BulletList.configure({
@@ -216,7 +216,7 @@ export function MDXEditor({
 		<div className={cn('', className)}>
 			<EditorContent
 				editor={editor}
-				className="min-h-[300px] prose-ol:list-decimal prose-ul:list-disc prose-code:rounded prose-pre:rounded-md prose-code:bg-zinc-100 prose-pre:bg-zinc-100 p-6 prose-pre:p-4 prose-code:px-1 prose-code:py-0.5 prose-headings:font-semibold prose-p:text-zinc-700 prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-zinc-800 dark:prose-pre:bg-zinc-800 dark:prose-p:text-zinc-300"
+				className="min-h-[300px] prose-ol:list-decimal prose-ul:list-disc prose-code:rounded prose-pre:rounded-md prose-code:bg-bg-primary prose-pre:bg-bg-primary p-6 prose-pre:p-4 prose-code:px-1 prose-code:py-0.5 prose-headings:font-semibold prose-p:text-text-primary prose-code:before:content-none prose-code:after:content-none dark:prose-code:bg-bg-secondary dark:prose-pre:bg-bg-secondary dark:prose-p:text-text-secondary"
 			/>
 		</div>
 	);
