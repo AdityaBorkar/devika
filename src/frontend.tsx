@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import ChatPage from '@/app/(app)/chat/page';
@@ -44,7 +44,20 @@ const app = (
 						</Route>
 						<Route path="prd" element={<PrdLayout />}>
 							<Route index element={<PrdDefaultPage />} />
-							<Route path=":pageId" element={<PrdDocPage />} />
+							<Route
+								path=":pageId"
+								element={
+									<Suspense
+										fallback={
+											<div className="flex h-full w-full items-center justify-center">
+												Loading...
+											</div>
+										}
+									>
+										<PrdDocPage />
+									</Suspense>
+								}
+							/>
 						</Route>
 						<Route path="tasks">
 							<Route index element={<TaskViewPage />} />

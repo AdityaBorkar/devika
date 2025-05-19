@@ -1,21 +1,30 @@
+import { type Atom, useAtom, useAtomValue } from 'jotai';
 import { PiFile, PiX } from 'react-icons/pi';
+import { Link } from 'react-router';
 import { ChatUI } from '@/app/(app)/prd/[pageId]/components/ChatUI';
 import { EditorUI } from '@/app/(app)/prd/[pageId]/components/EditorUI';
 import { cn } from '@/lib/utils';
 
 export function SplitScreen({
-	tabs,
-	activeTabId,
-	setActiveTabId,
+	width,
+	atoms,
+	fallback,
 }: {
-	tabs: any[];
-	activeTabId: string;
-	setActiveTabId: (tabId: string) => void;
+	fallback: React.ReactNode;
+	atoms: {
+		activeTabId: Atom<Promise<string> | string>;
+		tabs: Atom<Promise<{ tabs: TabType[]; openTabId: string }>>;
+	};
+	width?: number;
 }) {
-	const tab = tabs.find((tab) => tab.id === activeTabId);
-	if (!tab) throw new Error(`Tab ${activeTabId} not found`);
+	const [{ tabs, openTabId }, setTabs] = useAtom(atoms.tabs);
+	const [activeTabId, setActiveTabId] = useAtom(atoms.activeTabId);
 
-	// TODO: Manage Tabs and Active Tab
+	const openTab = tabs.find((tab) => tab.id === openTabId);
+	if (!openTab) {
+		console.log({ tabs, openTabId });
+		throw new Error(`Tab ${openTabId} not found`);
+	}
 
 	// Context Menu:
 	// Split Left
@@ -26,34 +35,44 @@ export function SplitScreen({
 	// Close
 	// Delete
 
+	if (tabs.length === 0) return fallback;
 	return (
 		<div className="flex h-full w-full flex-col">
 			<nav className="flex flex-row items-center gap-0.5 border-border border-b p-1">
 				<div className="flex flex-row items-center gap-0.5">
 					{tabs.map((tab) => (
-						<button
+						<Link
 							type="button"
 							key={tab.id}
 							className={cn(
 								'group relative block rounded-md border border-transparent px-2 py-1.5 font-medium text-text-tertiary text-xs',
 								tab.id === activeTabId
 									? [
-											'border-border bg-bg-secondary text-text-primary',
+											'bg-bg-tertiary text-text-primary',
 											'after:-bottom-1.5 after:absolute after:right-0 after:w-full after:border-zinc-400 after:border-b',
 										]
 									: 'hover:bg-bg-secondary',
 							)}
+							to={`/prd/${tab.id}`}
 							onClick={() => setActiveTabId(tab.id)}
 						>
 							<PiFile className="-mt-0.5 mr-1 inline-block size-4" />
 							{tab.name}
-							<PiX className="-mt-0.5 ml-1 inline-block w-4 stroke-3 opacity-0 group-hover:opacity-100" />
-						</button>
+							<PiX
+								className="-mt-0.5 ml-1 inline-block w-4 stroke-3 opacity-0 group-hover:opacity-100"
+								onClick={() =>
+									setTabs({
+										openTabId,
+										tabs: tabs.filter((t) => t.id !== tab.id),
+									})
+								}
+							/>
+						</Link>
 					))}
 				</div>
 			</nav>
 			<div className="relative grow overflow-auto px-8 py-8 ">
-				{tab.type === 'doc' ? <EditorUI /> : <ChatUI />}
+				{openTab.type === 'doc' ? <EditorUI /> : <ChatUI />}
 			</div>
 		</div>
 	);

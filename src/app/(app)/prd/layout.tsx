@@ -1,20 +1,19 @@
 import { useAtomValue } from 'jotai';
 import { useMemo, useState } from 'react';
 import {
-	PiCaretDown,
 	PiChat,
 	PiEye,
 	PiFile,
 	PiPencilLine,
 	PiPlus,
 	PiPlusMinus,
-	PiTag,
+	PiTarget,
 } from 'react-icons/pi';
 import { Outlet } from 'react-router';
 import ChangesNavigation from '@/app/(app)/prd/components/nav-changes';
 import FilesNavigation from '@/app/(app)/prd/components/nav-files';
 import SearchNavigation from '@/app/(app)/prd/components/nav-search';
-import { PrdScreenStateAtom } from '@/app/(app)/prd/store';
+import { PrdVersionAtom } from '@/app/(app)/prd/store';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -45,7 +44,7 @@ const TABS = [
 ];
 
 export default function PrdLayout() {
-	const { version } = useAtomValue(PrdScreenStateAtom);
+	const version = useAtomValue(PrdVersionAtom);
 	const [TabSegment, setTabSegment] = useState('files');
 	const Navigation = useMemo(
 		() => TABS.find((tab) => tab.segment === TabSegment)?.navigation,
@@ -59,7 +58,7 @@ export default function PrdLayout() {
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<div className="flex w-full flex-row items-center gap-2 px-4 pt-2 pb-1.5 font-medium text-text-tertiary hover:bg-bg-secondary">
-								<PiTag />
+								<PiTarget className="size-5" />
 								{version.name}
 								<span className="rounded-md bg-bg-secondary px-2 py-1 text-text-secondary text-xs">
 									12.x.x

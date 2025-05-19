@@ -1,44 +1,42 @@
-import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useAtomValue } from 'jotai';
 import { Divider } from '@/app/(app)/prd/[pageId]/components/Divider';
 import PrdDefaultPage from '@/app/(app)/prd/page';
+import {
+	PrdActiveTabIdAtom,
+	PrdLeftTabsAtom,
+	PrdRightTabsAtom,
+	PrdRightWidthAtom,
+} from '@/app/(app)/prd/store';
 import { SplitScreen } from './components/SplitScreen';
 
-type TabType = {
-	id: string;
-	name: string;
-	type: 'doc' | 'chat';
-};
-
 export function PrdDocPage() {
-	const { pageId } = useParams();
-	const [activeTabId, setActiveTabId] = useState(pageId);
-	const leftTabs = [
-		{ id: 'list-of-docs', name: 'List of Docs', type: 'doc' },
-		{ id: 'list-of-docs-2', name: 'List of Docs 2', type: 'doc' },
-	] as TabType[];
-	const rightTabs = [
-		{ id: 'chatbot', name: 'Chatterbox', type: 'chat' },
-	] as TabType[];
-	const rightTabCount = rightTabs.length;
-
-	if (!activeTabId) return <PrdDefaultPage />;
 	return (
 		<div className="flex flex-row flex-nowrap">
 			<SplitScreen
-				tabs={leftTabs}
-				activeTabId={activeTabId}
-				setActiveTabId={setActiveTabId}
+				fallback={<PrdDefaultPage />}
+				atoms={{
+					tabs: PrdLeftTabsAtom,
+					activeTabId: PrdActiveTabIdAtom,
+				}}
 			/>
-			{rightTabCount > 0 && <Divider />}
-			{rightTabCount > 0 && (
-				<SplitScreen
-					tabs={rightTabs}
-					// activeTabId={activeTabId}
-					activeTabId={'chatbot'}
-					setActiveTabId={setActiveTabId}
-				/>
-			)}
+			<RightSplitScreen />
 		</div>
+	);
+}
+
+function RightSplitScreen() {
+	const rightWidth = useAtomValue(PrdRightWidthAtom);
+	return (
+		<>
+			<Divider atom={PrdRightWidthAtom} />
+			<SplitScreen
+				width={rightWidth}
+				fallback={null}
+				atoms={{
+					tabs: PrdRightTabsAtom,
+					activeTabId: PrdActiveTabIdAtom,
+				}}
+			/>
+		</>
 	);
 }

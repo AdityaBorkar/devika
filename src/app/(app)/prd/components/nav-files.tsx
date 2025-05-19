@@ -1,5 +1,7 @@
+import { useSetAtom } from 'jotai';
 import { PiFile, PiPlus } from 'react-icons/pi';
 import { Link } from 'react-router';
+import { PrdActiveTabIdAtom } from '@/app/(app)/prd/store';
 import { cn } from '@/lib/utils';
 
 const sections = [
@@ -37,23 +39,23 @@ export default function FilesNavigation() {
 					<div className="mt-6 mb-1 select-none px-5 font-medium text-muted-foreground text-xs first:mt-4">
 						{section.label}
 					</div>
-					<NoteLink to="/prd/list-of-docs">
+					<NoteLink tabId="list-of-docs">
 						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
 						List of Docs
 					</NoteLink>
-					<NoteLink to="/prd/list-of-docs">
+					<NoteLink tabId="list-of-docs">
 						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
 						List of Docs
 					</NoteLink>
-					<NoteLink to="/prd/list-of-docs">
+					<NoteLink tabId="list-of-docs">
 						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
 						List of Docs
 					</NoteLink>
-					<NoteLink to="/prd/list-of-docs">
+					<NoteLink tabId="list-of-docs">
 						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
 						List of Docs
 					</NoteLink>
-					<NoteLink to="/prd/list-of-docs">
+					<NoteLink tabId="list-of-docs">
 						<PiFile className="-mt-0.5 mr-1.5 ml-1 inline-block size-4" />
 						List of Docs
 					</NoteLink>
@@ -64,21 +66,24 @@ export default function FilesNavigation() {
 }
 
 function NoteLink({
-	to,
+	tabId,
 	children,
 	className,
 }: {
-	to: string;
+	tabId: string;
 	className?: string;
 	children: React.ReactNode;
 }) {
+	const setActiveTabId = useSetAtom(PrdActiveTabIdAtom);
+
 	return (
 		<Link
+			to={`/prd/${tabId}`}
+			onClick={() => setActiveTabId(tabId)}
 			className={cn(
 				'mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-bg-secondary',
 				className,
 			)}
-			to={to}
 		>
 			{children}
 		</Link>

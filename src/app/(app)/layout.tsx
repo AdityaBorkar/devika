@@ -1,5 +1,7 @@
 import {
+	PiChartBar,
 	PiChartPie,
+	PiChartPieSlice,
 	PiCheckCircleDuotone,
 	PiCheckSquare,
 	PiClockCounterClockwise,
@@ -8,7 +10,9 @@ import {
 	PiGear,
 	PiHeartbeat,
 	PiHouse,
+	PiLightbulbFilament,
 	PiPlayCircle,
+	PiRocketLaunch,
 } from 'react-icons/pi';
 import { Link, Outlet, redirect, useLocation } from 'react-router';
 import useConfig from '@/hooks/useConfig';
@@ -16,16 +20,16 @@ import { cn } from '@/lib/utils';
 
 const NAV_ITEMS_TOP = [
 	{ href: 'dashboard', icon: PiHouse, label: 'Dashboard' },
-	{ href: 'prd', icon: PiFiles, label: 'PRD' },
+	{ href: 'prd', icon: PiLightbulbFilament, label: 'PRD' },
 	{ href: 'tasks', icon: PiCheckSquare, label: 'Tasks' },
 	{ href: 'cycles', icon: PiPlayCircle, label: 'Cycles' },
 	{ href: 'workspace', icon: PiCode, label: 'Workspace' },
 	{ href: 'versions', icon: PiClockCounterClockwise, label: 'Versions' },
-	{ href: 'deployments', icon: PiHeartbeat, label: 'Deployments' },
+	{ href: 'deployments', icon: PiRocketLaunch, label: 'Deployments' },
 ];
 
 const NAV_ITEMS_BOTTOM = [
-	{ href: 'stats', icon: PiChartPie, label: 'Stats' },
+	{ href: 'stats', icon: PiChartPieSlice, label: 'Stats' },
 	{ href: 'settings', icon: PiGear, label: 'Settings' },
 ];
 
@@ -101,7 +105,7 @@ function NavItem({
 				/>
 			)}
 			<item.icon className="mx-auto size-5 stroke-3" />
-			<div className="invisible absolute top-1.5 left-11 rounded bg-text-tertiary px-2 py-1 font-semibold text-bg-primary text-xs group-hover:visible">
+			<div className="invisible absolute top-1.5 left-11 rounded bg-text-tertiary px-2 py-1 font-semibold text-bg-primary text-xs group-hover:visible group-focus-visible:visible">
 				{item.label}
 			</div>
 		</Link>

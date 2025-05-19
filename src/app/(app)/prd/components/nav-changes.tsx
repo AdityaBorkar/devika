@@ -6,11 +6,11 @@ import { cn } from '@/lib/utils';
 
 export default function ChangesNavigation() {
 	return (
-		<div>
-			<div className="my-2">
+		<div className="px-4 py-2">
+			<div className="">
 				<Textarea>Notes</Textarea>
 				<Button
-					className="mt-2 block w-full"
+					className="my-2 block w-full"
 					disabled
 					title="Kindly approve draft changes and complete review to proceed."
 				>
@@ -47,7 +47,6 @@ export default function ChangesNavigation() {
 				<div className="px-4 text-muted-foreground text-sm">No changes</div>
 				{/* <div>List</div> */}
 			</div>
-			<div>View Change Timeline</div>
 		</div>
 	);
 }
