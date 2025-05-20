@@ -1,7 +1,7 @@
 import { Provider } from 'jotai';
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v7';
 import { Link, Navigate, Outlet } from 'react-router';
-import Logo from '@/assets/logo.svg';
+import Logo from '@/../public/logo.svg';
 import { TextShimmer } from '@/components/animations/TextShimmer';
 import { Button } from '@/components/ui/button';
 import {

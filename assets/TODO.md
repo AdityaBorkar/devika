@@ -1,3 +1,19 @@
+Write code extensively using AI. Target 50 requests per day.
+
+1. Connect Database to libSQL and implement CRUD operations.
+2. Implement server and permissions to read from local package.
+	- using a package right now. later upgrade to a VSCode extension.
+3. List of Documents, Screen States, Current PRD Version, PRD Versions
+
+
+
+
+
+
+
+---
+
+
 Generate test file for any task file to easily verify functionality and improve code stability as Cursor implements other tasks
 
 Bulk verify implementation and mark all related tasks as done — makes it easier to drop this into an existing project
