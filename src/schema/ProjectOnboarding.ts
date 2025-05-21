@@ -1,18 +1,10 @@
-import { type } from 'arktype';
+import { type } from "arktype";
 
 export const ProjectOnboarding = type({
-	ide: "'cursor'", // 'github-copilot' | 'windsurf' | 'cline' | 'roo-code'
-	name: 'string',
-	// comments: {
-	// 	todo: 'string',
-	// 	issue: 'string',
-	// },
-	// gitStrategy: 'string',
-	// path: 'string',
-	// web: {
-	// 	host: 'string',
-	// 	port: 'number',
-	// },
+	name: "string",
+	ide: "('cursor'|'github-copilot'|'cline'|'roo-code'|'continue'|'windsurf'|'augment')[]",
+	tdd: "boolean",
+	// path: "string?",
 });
 
 export type ProjectOnboarding = typeof ProjectOnboarding.infer;

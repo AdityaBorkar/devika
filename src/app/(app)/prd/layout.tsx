@@ -1,5 +1,6 @@
-import { useAtomValue } from 'jotai';
-import { useMemo, useState } from 'react';
+import { useAtomValue } from "jotai";
+import { motion } from "motion/react";
+import { useMemo, useState } from "react";
 import {
 	PiChat,
 	PiEye,
@@ -8,51 +9,56 @@ import {
 	PiPlus,
 	PiPlusMinus,
 	PiTarget,
-} from 'react-icons/pi';
-import { Outlet } from 'react-router';
-import ChangesNavigation from '@/app/(app)/prd/components/nav-changes';
-import FilesNavigation from '@/app/(app)/prd/components/nav-files';
-import SearchNavigation from '@/app/(app)/prd/components/nav-search';
-import { PrdVersionAtom } from '@/app/(app)/prd/store';
+} from "react-icons/pi";
+import { Outlet } from "react-router";
+import ChangesNavigation from "@/app/(app)/prd/components/nav-changes";
+import FilesNavigation from "@/app/(app)/prd/components/nav-files";
+import SearchNavigation from "@/app/(app)/prd/components/nav-search";
+import { PrdVersionAtom } from "@/app/(app)/prd/store";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 
 const TABS = [
 	{
-		label: 'Chats',
+		label: "Chats",
 		icon: PiChat,
-		segment: 'search',
+		segment: "search",
 		navigation: SearchNavigation,
 	},
 	{
-		label: 'Files',
+		label: "Files",
 		icon: PiFile,
-		segment: 'files',
+		segment: "files",
 		navigation: FilesNavigation,
 	},
 	{
-		label: 'Changes',
+		label: "Changes",
 		icon: PiPlusMinus,
-		segment: 'changes',
+		segment: "changes",
 		navigation: ChangesNavigation,
 	},
 ];
 
 export default function PrdLayout() {
 	const version = useAtomValue(PrdVersionAtom);
-	const [TabSegment, setTabSegment] = useState('files');
+	const [TabSegment, setTabSegment] = useState("files");
 	const Navigation = useMemo(
 		() => TABS.find((tab) => tab.segment === TabSegment)?.navigation,
 		[TabSegment],
 	);
 
 	return (
-		<div className="grid h-full w-full grid-cols-[18rem_1fr]">
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.2 }}
+			className="grid h-full w-full grid-cols-[18rem_1fr]"
+		>
 			<aside className="border-border border-r ">
 				<div className="border-border border-b">
 					<DropdownMenu>
@@ -92,10 +98,10 @@ export default function PrdLayout() {
 							key={tab.segment}
 							type="button"
 							className={cn(
-								'select-none rounded-md px-1 py-1.5 text-center',
+								"select-none rounded-md px-1 py-1.5 text-center",
 								tab.segment === TabSegment
-									? 'bg-bg-tertiary'
-									: 'hover:bg-bg-tertiary/50',
+									? "bg-bg-tertiary"
+									: "hover:bg-bg-tertiary/50",
 							)}
 							onClick={() => setTabSegment(tab.segment)}
 						>
@@ -108,6 +114,6 @@ export default function PrdLayout() {
 				{Navigation && <Navigation />}
 			</aside>
 			<Outlet />
-		</div>
+		</motion.div>
 	);
 }

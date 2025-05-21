@@ -1,53 +1,77 @@
-import { arktypeResolver } from '@hookform/resolvers/arktype';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
-import { useServerSync } from '@/lib/server-sync/ServerSync';
-import { ProjectOnboarding } from '@/schema/ProjectOnboarding';
+import { arktypeResolver } from "@hookform/resolvers/arktype";
+import { useForm } from "react-hook-form";
+import { useSearchParams } from "react-router";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { $fetch } from "@/lib/$fetch";
+import { ProjectOnboarding } from "@/schema/ProjectOnboarding";
 
-export function Step1({
-	setCurrentStep,
-}: {
-	setCurrentStep: (step: number) => void;
-}) {
-	const { socket } = useServerSync();
+const IDE_OPTIONS = [
+	{ value: "cursor", label: "Cursor" },
+	{ value: "cline", label: "Cline" },
+	{ value: "github-copilot", label: "GitHub Copilot" },
+	{ value: "roo-code", label: "Roo Code" },
+	{ value: "windsurf", label: "Windsurf" },
+	{ value: "continue", label: "Continue" },
+	{ value: "augment", label: "Augment" },
+] as const;
+
+export function Step1({ setStep }: { setStep: (step: number) => void }) {
+	const [searchParams] = useSearchParams();
 	const form = useForm<ProjectOnboarding>({
-		mode: 'onChange',
+		mode: "onChange",
 		resolver: arktypeResolver(ProjectOnboarding),
+		defaultValues: {
+			name: searchParams.get("name") ?? undefined,
+			tdd: searchParams.get("tdd") === "true",
+			// ide: (searchParams.get("ide") ?? "").split(",").filter(Boolean) as ProjectOnboarding["ide"],
+		},
 	});
-
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		setValue,
+		watch,
 	} = form;
 
-	function onSubmit(data: ProjectOnboarding) {
-		const params = { command: 'ONBOARDING', data };
-		socket.send(JSON.stringify(params));
+	const selectedIdes = watch("ide") || [];
+
+	const toggleIde = (value: ProjectOnboarding["ide"][number]) => {
+		const currentValues = [...selectedIdes];
+		const index = currentValues.indexOf(value);
+
+		if (index === -1) {
+			// Add the value if it doesn't exist
+			setValue("ide", [...currentValues, value]);
+		} else {
+			// Remove the value if it exists
+			currentValues.splice(index, 1);
+			setValue("ide", currentValues);
+		}
+	};
+
+	async function onSubmit(inputs: ProjectOnboarding) {
+		// const { success, data } = await $workspace_create(inputs);
+		const { success, data } = await $fetch(
+			"POST",
+			"/api/actions/workspace",
+			inputs,
+		);
+		if (!success) return console.error("Failed to create workspace");
+		console.log({ success, data });
+		// const params = { command: "ONBOARDING", data };
+		// socket.send(JSON.stringify(params));
+		// setStep(2);
 	}
 
-	// Start Creating a Project once NEXT STEP IS CLICKED
-	// add a fake 1 second delay
-
 	return (
-		<form className="relative px-8 py-4" onSubmit={handleSubmit(onSubmit)}>
+		<form className="px-8 py-4" onSubmit={handleSubmit(onSubmit)}>
 			<h1 className="mb-6 font-semibold text-2xl text-card-foreground">
 				Workspace Onboarding
 			</h1>
-
-			<div className="absolute top-2 right-2 w-fit rounded-md border border-border px-2 py-1">
-				Watch 5 min. Tutorial
-			</div>
 
 			<div className="space-y-4">
 				<div className="space-y-2">
@@ -55,66 +79,44 @@ export function Step1({
 					<Input
 						id="name"
 						placeholder="My Awesome Project"
-						{...register('name')}
+						{...register("name")}
 					/>
 					{errors.name && (
 						<p className="text-destructive text-sm">{errors.name.message}</p>
 					)}
 				</div>
-				{/* <div>Project Type - Web Development Project (To Be Automated)</div> */}
-				{/* <div>PRD Name and Target Version</div> */}
-				{/* Development Strategy - Test Driven Development */}
 
 				<div className="space-y-2">
-					<Label htmlFor="ide">Version Strategy: (Read More)</Label>
-					<Select
-						onValueChange={(value: ProjectOnboarding['ide']) => {
-							setValue('ide', value);
-						}}
-					>
-						<SelectTrigger>
-							<SelectValue placeholder="Select AI Editor" />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectItem value="cursor">Devika-Versioning</SelectItem>
-							<SelectItem value="cline">Cline</SelectItem>
-							<SelectItem value="github-copilot">GitHub Copilot</SelectItem>
-							<SelectItem value="roo-code">Roo Code</SelectItem>
-							<SelectItem value="windsurf">Windsurf</SelectItem>
-							<SelectItem value="continue">Continue</SelectItem>
-						</SelectContent>
-					</Select>
-					{errors.ide && (
-						<p className="text-destructive text-sm">{errors.ide.message}</p>
-					)}
-				</div>
-				<div className="space-y-2">
-					<Label htmlFor="ide">Choose AI Editor</Label>
-					<Select
-						onValueChange={(value: ProjectOnboarding['ide']) => {
-							setValue('ide', value);
-						}}
-					>
-						<SelectTrigger>
-							<SelectValue placeholder="Select AI Editor" />
-						</SelectTrigger>
-						<SelectContent>
-							<SelectItem value="cursor">Cursor</SelectItem>
-							<SelectItem value="cline">Cline</SelectItem>
-							<SelectItem value="github-copilot">GitHub Copilot</SelectItem>
-							<SelectItem value="roo-code">Roo Code</SelectItem>
-							<SelectItem value="windsurf">Windsurf</SelectItem>
-							<SelectItem value="continue">Continue</SelectItem>
-						</SelectContent>
-					</Select>
+					<Label>Choose AI Editor(s)</Label>
+					<div className="grid grid-cols-2 gap-2">
+						{IDE_OPTIONS.map((option) => (
+							<div key={option.value} className="flex items-center space-x-2">
+								<Checkbox
+									id={`ide-${option.value}`}
+									checked={selectedIdes.includes(option.value)}
+									onCheckedChange={() => toggleIde(option.value)}
+								/>
+								<Label
+									htmlFor={`ide-${option.value}`}
+									className="cursor-pointer"
+								>
+									{option.label}
+								</Label>
+							</div>
+						))}
+					</div>
 					{errors.ide && (
 						<p className="text-destructive text-sm">{errors.ide.message}</p>
 					)}
 				</div>
 
-				<div>Connect to Local Repository</div>
-				<div>Connect to GitHub Repository</div>
-				<div>Open Router Models in Chat</div>
+				<div className="flex items-center gap-2">
+					<Checkbox id="tdd" {...register("tdd")} />
+					<Label htmlFor="tdd">Enable Test-Driven Development</Label>
+					{errors.tdd && (
+						<p className="text-destructive text-sm">{errors.tdd.message}</p>
+					)}
+				</div>
 
 				<Button className="mt-6 w-full" type="submit">
 					Next

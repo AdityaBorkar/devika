@@ -1,32 +1,32 @@
-import { StrictMode, Suspense } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router';
-import ChatPage from '@/app/(app)/chat/page';
-import CycleDetailPage from '@/app/(app)/cycles/[id]/page';
-import CyclesViewPage from '@/app/(app)/cycles/page';
-import DashboardPage from '@/app/(app)/dashboard/page';
-import DeploymentsPage from '@/app/(app)/deployments/page';
-import HomePage from '@/app/(app)/page';
-import { PrdDocPage } from '@/app/(app)/prd/[pageId]/page';
-import PrdLayout from '@/app/(app)/prd/layout';
-import PrdDefaultPage from '@/app/(app)/prd/page';
-import AIModelsSettings from '@/app/(app)/settings/ai-models/page';
-import ConnectedAppsSettings from '@/app/(app)/settings/connected-apps/page';
-import SettingsLayout from '@/app/(app)/settings/layout';
-import SettingsDefaultPage from '@/app/(app)/settings/page';
-import RepoSettings from '@/app/(app)/settings/repo/page';
-import WorkspaceSettings from '@/app/(app)/settings/workspace/page';
-import StatsPage from '@/app/(app)/stats/page';
-import TaskPage from '@/app/(app)/tasks/[id]/page';
-import TaskViewPage from '@/app/(app)/tasks/page';
-import VersionsPage from '@/app/(app)/versions/page';
-import WorkspacePage from '@/app/(app)/workspace/page';
-import OnboardingLayout from '@/app/(onboarding)/layout';
-import OnboardingPage from '@/app/(onboarding)/onboarding/page';
-import { Error404 } from '@/app/not-found';
-import AppLayout from './app/(app)/layout';
-import AccountSettings from './app/(app)/settings/account/page';
-import RootLayout from './app/layout';
+import { StrictMode, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router";
+import ChatPage from "@/app/(app)/chat/page";
+import CycleDetailPage from "@/app/(app)/cycles/[id]/page";
+import CyclesViewPage from "@/app/(app)/cycles/page";
+import DashboardPage from "@/app/(app)/dashboard/page";
+import DeploymentsPage from "@/app/(app)/deployments/page";
+import HomePage from "@/app/(app)/page";
+import { PrdDocPage } from "@/app/(app)/prd/[pageId]/page";
+import PrdLayout from "@/app/(app)/prd/layout";
+import PrdDefaultPage from "@/app/(app)/prd/page";
+import AIModelsSettings from "@/app/(app)/settings/ai-models/page";
+import ConnectedAppsSettings from "@/app/(app)/settings/connected-apps/page";
+import SettingsLayout from "@/app/(app)/settings/layout";
+import SettingsDefaultPage from "@/app/(app)/settings/page";
+import SupportSettings from "@/app/(app)/settings/support/page";
+import WorkspaceSettings from "@/app/(app)/settings/workspace/page";
+import StatsPage from "@/app/(app)/stats/page";
+import TaskPage from "@/app/(app)/tasks/[id]/page";
+import TaskViewPage from "@/app/(app)/tasks/page";
+import VersionsPage from "@/app/(app)/versions/page";
+import WorkspacePage from "@/app/(app)/workspace/page";
+import OnboardingLayout from "@/app/(onboarding)/layout";
+import OnboardingPage from "@/app/(onboarding)/onboarding/page";
+import { Error404 } from "@/app/not-found";
+import AppLayout from "./app/(app)/layout";
+import AccountSettings from "./app/(app)/settings/account/page";
+import RootLayout from "./app/layout";
 
 const app = (
 	<StrictMode>
@@ -77,6 +77,7 @@ const app = (
 								path="connected-apps"
 								element={<ConnectedAppsSettings />}
 							/>
+							<Route path="support" element={<SupportSettings />} />
 						</Route>
 					</Route>
 
@@ -91,8 +92,8 @@ const app = (
 	</StrictMode>
 );
 
-const elem = document.getElementById('root');
-if (!elem) throw new Error('Root element not found');
+const elem = document.getElementById("root");
+if (!elem) throw new Error("Root element not found");
 
 if (import.meta.hot) {
 	const root = createRoot(elem);

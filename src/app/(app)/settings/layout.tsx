@@ -1,20 +1,28 @@
-import type { IconType } from 'react-icons';
+import { motion } from "motion/react";
+import type { IconType } from "react-icons";
 import {
-	PiBoxArrowDown,
-	PiBoxArrowUp,
-	PiChatText,
+	PiArrowUpRight,
+	PiChatCircleText,
 	PiCirclesThree,
-	PiCommand,
 	PiCube,
 	PiDesktop,
+	PiDiscordLogo,
 	PiHeadset,
+	PiNotebook,
+	PiNotepad,
 	PiUser,
-} from 'react-icons/pi';
-import { Link, Outlet } from 'react-router';
+} from "react-icons/pi";
+import { Link, Outlet } from "react-router";
+import { cn } from "@/lib/utils";
 
 export default function SettingsLayout() {
 	return (
-		<div className="grid h-full grid-cols-[12rem_auto]">
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.2 }}
+			className="grid h-full grid-cols-[12rem_auto]"
+		>
 			<nav className="flex flex-col justify-between border-border border-r px-2 py-2">
 				<div className="flex flex-col gap-0.5">
 					<NavLink href="/settings/account" icon={PiUser}>
@@ -32,36 +40,24 @@ export default function SettingsLayout() {
 					<NavLink href="/settings/support" icon={PiHeadset}>
 						Support
 					</NavLink>
-					<NavLink href="/settings/feedback" icon={PiChatText}>
-						Feedback
-					</NavLink>
 				</div>
 				<div className="flex flex-col gap-1">
-					{/* <NavLink href="/settings/import-profile" icon={PiBoxArrowUp}>
-						Import VSC Profile
-					</NavLink>
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
-						Export VSC Profile
-					</NavLink> */}
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
-						Community
-					</NavLink>
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+					<NavLink href="/docs" icon={PiNotebook} external>
 						Documentation
 					</NavLink>
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
-						Guides
-					</NavLink>
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+					<NavLink href="/release-notes" icon={PiNotepad} external>
 						Release Notes
 					</NavLink>
-					<NavLink href="/settings/export-profile" icon={PiBoxArrowDown}>
+					<NavLink href="/discord" icon={PiDiscordLogo} external>
+						Community
+					</NavLink>
+					<NavLink href="/feedback" icon={PiChatCircleText} external>
 						Feedback
 					</NavLink>
 				</div>
 			</nav>
 			<Outlet />
-		</div>
+		</motion.div>
 	);
 }
 
@@ -69,18 +65,25 @@ function NavLink({
 	icon: Icon,
 	children,
 	href,
+	external = false,
 }: {
 	children: React.ReactNode;
 	icon: IconType;
 	href: string;
+	external?: boolean;
 }) {
 	return (
 		<Link
 			to={href}
-			className="rounded px-4 py-2 text-left text-text-secondary text-xs hover:bg-bg-tertiary"
+			target={external ? "_blank" : undefined}
+			className={cn(
+				"rounded gap-2 flex flex-row items-center  px-4 py-2 text-left text-text-secondary text-xs hover:bg-bg-tertiary",
+				external && "cursor-pointer *:cursor-pointer",
+			)}
 		>
-			<Icon className="-mt-0.75 mr-2 inline-block size-4" />
+			<Icon className="size-4" />
 			{children}
+			{external && <PiArrowUpRight className="ml-auto size-4" />}
 		</Link>
 	);
 }

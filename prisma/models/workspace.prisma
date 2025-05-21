@@ -1,0 +1,31 @@
+model Workspace {
+    workspaceId   String          @id @default(cuid(2))
+    name          String
+    ide           String // array: "cursor", "github-copilot", "augment", "windsurf", "continue", "roo-code", "cline"
+    tdd           Boolean
+    createdAt     DateTime        @default(now())
+    // createdBy            String
+    // createdByUser        User                  @relation(fields: [createdBy], references: [userId], onDelete: Cascade)
+    Task          Task[]
+    Notifications Notifications[]
+}
+
+model WorkspaceState {
+    current_prd   Prd?
+    current_task  Task?
+    current_cycle Cycle?
+    next_task     Task?
+    next_cycle    Cycle?
+    connections   WorkspaceConnection[]
+}
+
+model WorkspaceConnection {
+    connectionId String    @id @default(cuid(2))
+    workspaceId  String
+    isActive     Boolean   @default(true)
+    closedAt     DateTime?
+    createdAt    DateTime  @default(now())
+    screenState  String? // TODO: STORE THIS ONLY ON THE CONNECTION-LEVEL
+    // State: section,
+    // prd changes?
+}

@@ -1,24 +1,24 @@
-import { useSetAtom } from 'jotai';
-import { PiFile, PiPlus } from 'react-icons/pi';
-import { Link } from 'react-router';
-import { PrdActiveTabIdAtom } from '@/app/(app)/prd/store';
-import { cn } from '@/lib/utils';
+import { useSetAtom } from "jotai";
+import { PiFile } from "react-icons/pi";
+import { Link } from "react-router";
+import { PrdActiveTabIdAtom } from "@/app/(app)/prd/store";
+import { cn } from "@/lib/utils";
 
 const sections = [
 	{
-		label: 'Features',
+		label: "Features",
 		// to: '/prd/features',
 	},
 	{
-		label: 'System & Tech Stack',
+		label: "System & Tech Stack",
 		// to: '/prd/system-environment-requirements',
 	},
 	{
-		label: 'Design & UX Flow',
+		label: "Design & UX Flow",
 		// to: '/prd/ux-flow-design-notes',
 	},
 	{
-		label: 'User Stories',
+		label: "User Stories",
 		// to: '/prd/user-stories',
 	},
 ];
@@ -81,7 +81,7 @@ function NoteLink({
 			to={`/prd/${tabId}`}
 			onClick={() => setActiveTabId(tabId)}
 			className={cn(
-				'mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-bg-secondary',
+				"mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-bg-secondary",
 				className,
 			)}
 		>

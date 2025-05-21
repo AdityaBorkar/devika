@@ -1,132 +1,115 @@
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { XIcon } from 'lucide-react';
-import type * as React from 'react';
-import { cn } from '@/lib/utils';
+import { isValidElement, type ReactNode, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { useDialog } from "@/contexts/DialogContext";
+import { cn } from "@/lib/utils";
 
-function Dialog({
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
-	return <DialogPrimitive.Root data-slot="dialog" {...props} />;
-}
-
-function DialogTrigger({
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
-	return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
-}
-
-function DialogPortal({
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
-	return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
-}
-
-function DialogClose({
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
-	return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
-}
-
-function DialogOverlay({
-	className,
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
-	return (
-		<DialogPrimitive.Overlay
-			className={cn(
-				'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=open]:animate-in',
-				className,
-			)}
-			data-slot="dialog-overlay"
-			{...props}
-		/>
-	);
-}
-
-function DialogContent({
-	className,
-	children,
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
-	return (
-		<DialogPortal data-slot="dialog-portal">
-			<DialogOverlay />
-			<DialogPrimitive.Content
-				className={cn(
-					'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 tranzinc-x-[-50%] tranzinc-y-[-50%] fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=closed]:animate-out data-[state=open]:animate-in sm:max-w-lg',
-					className,
-				)}
-				data-slot="dialog-content"
-				{...props}
-			>
-				{children}
-				<DialogPrimitive.Close className="absolute top-4 right-4 rounded-xs opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground [&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0">
-					<XIcon />
-					<span className="sr-only">Close</span>
-				</DialogPrimitive.Close>
-			</DialogPrimitive.Content>
-		</DialogPortal>
-	);
-}
-
-function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
-	return (
-		<div
-			className={cn('flex flex-col gap-2 text-center sm:text-left', className)}
-			data-slot="dialog-header"
-			{...props}
-		/>
-	);
-}
-
-function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
-	return (
-		<div
-			className={cn(
-				'flex flex-col-reverse gap-2 sm:flex-row sm:justify-end',
-				className,
-			)}
-			data-slot="dialog-footer"
-			{...props}
-		/>
-	);
-}
-
-function DialogTitle({
-	className,
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Title>) {
-	return (
-		<DialogPrimitive.Title
-			className={cn('font-semibold text-lg leading-none', className)}
-			data-slot="dialog-title"
-			{...props}
-		/>
-	);
-}
-
-function DialogDescription({
-	className,
-	...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) {
-	return (
-		<DialogPrimitive.Description
-			className={cn('text-muted-foreground text-sm', className)}
-			data-slot="dialog-description"
-			{...props}
-		/>
-	);
-}
-
-export {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogOverlay,
-	DialogPortal,
-	DialogTitle,
-	DialogTrigger,
+// Define type for structured dialog content
+type StructuredDialogContent = {
+	title: string;
+	description?: string;
+	content?: ReactNode;
 };
+
+export function Dialog() {
+	const { dialogContent, isOpen, closeDialog } = useDialog();
+
+	// Handle keyboard shortcuts
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			// Escape to close
+			if (e.key === "Escape") closeDialog();
+
+			// Alt+C to open/close connection dialog
+			if (e.altKey && e.key === "c") {
+				const connectionButton = document.querySelector(
+					"[data-connection-btn]",
+				);
+				if (connectionButton instanceof HTMLElement) {
+					connectionButton.click();
+				}
+			}
+		};
+
+		document.addEventListener("keydown", handleKeyDown);
+
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		}
+
+		return () => {
+			document.removeEventListener("keydown", handleKeyDown);
+			document.body.style.overflow = "";
+		};
+	}, [isOpen, closeDialog]);
+
+	if (!dialogContent) return null;
+
+	// Check if dialogContent is a React element (component)
+	const isComponentContent = isValidElement(dialogContent);
+
+	// Check if dialogContent has structured format
+	const isStructuredContent =
+		typeof dialogContent === "object" &&
+		dialogContent !== null &&
+		!isComponentContent &&
+		"title" in dialogContent;
+
+	return createPortal(
+		<div
+			className={cn(
+				"fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition-opacity duration-200",
+				isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
+			)}
+			onClick={closeDialog}
+		>
+			<div
+				className={cn(
+					"w-full max-w-md rounded-lg bg-bg-primary p-6 shadow-lg transition-all duration-200",
+					isOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+				)}
+				onClick={(e) => e.stopPropagation()}
+			>
+				{isComponentContent ? (
+					// Render component directly
+					dialogContent
+				) : isStructuredContent ? (
+					// Render structured content
+					<>
+						<div className="flex justify-between items-center mb-4">
+							<h2 className="text-xl font-semibold">
+								{(dialogContent as StructuredDialogContent).title}
+							</h2>
+							<button
+								onClick={closeDialog}
+								className="text-text-muted hover:text-text-primary rounded-full p-1"
+							>
+								✕
+							</button>
+						</div>
+						{(dialogContent as StructuredDialogContent).description && (
+							<p className="text-text-muted mb-4">
+								{(dialogContent as StructuredDialogContent).description}
+							</p>
+						)}
+						{(dialogContent as StructuredDialogContent).content}
+					</>
+				) : (
+					// Fallback for other content
+					<>
+						<div className="flex justify-between items-center mb-4">
+							<div className="grow"></div>
+							<button
+								onClick={closeDialog}
+								className="text-text-muted hover:text-text-primary rounded-full p-1"
+							>
+								✕
+							</button>
+						</div>
+						{dialogContent as ReactNode}
+					</>
+				)}
+			</div>
+		</div>,
+		document.body,
+	);
+}

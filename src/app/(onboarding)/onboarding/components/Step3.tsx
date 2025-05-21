@@ -1,9 +1,9 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 export function Step3({
-	setCurrentStep,
+	setStep: setCurrentStep,
 }: {
-	setCurrentStep: (step: number) => void;
+	setStep: (step: number) => void;
 }) {
 	return (
 		<div>

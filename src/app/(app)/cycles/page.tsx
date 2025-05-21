@@ -1,25 +1,25 @@
-'use client';
+"use client";
 
-import { CycleCardItem } from '@/components/cycles/CycleCardItem';
-import { CycleListItem } from '@/components/cycles/CycleListItem';
-import { ViewLayout, type ViewTab } from '@/components/layouts/ViewLayout';
-import { Label } from '@/components/ui/label';
+import { motion } from "motion/react";
+import { CycleCardItem } from "@/components/cycles/CycleCardItem";
+import { CycleListItem } from "@/components/cycles/CycleListItem";
+import { ViewLayout, type ViewTab } from "@/components/layouts/ViewLayout";
+import { Label } from "@/components/ui/label";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/components/ui/select';
-import { cn } from '@/lib/utils';
-
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 export default function CyclesViewPage() {
 	// TODO: Properties
 
 	const viewTabs = [
-		{ label: 'All Cycles', value: 'all', display: 'kanban' },
-		{ label: 'Current', value: 'current', display: 'kanban' },
-		{ label: 'Upcoming', value: 'upcoming', display: 'kanban' },
+		{ label: "All Cycles", value: "all", display: "kanban" },
+		{ label: "Current", value: "current", display: "kanban" },
+		{ label: "Upcoming", value: "upcoming", display: "kanban" },
 	] as ViewTab[];
 
 	const saveViewTab = (tab: ViewTab) => {
@@ -27,7 +27,7 @@ export default function CyclesViewPage() {
 	};
 
 	const cycle = {
-		name: 'Cycle 1',
+		name: "Cycle 1",
 		agents: 5,
 		tasks: 10,
 		running: true,
@@ -39,7 +39,12 @@ export default function CyclesViewPage() {
 	};
 
 	return (
-		<div className="h-full ">
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 0.2 }}
+			className="h-full "
+		>
 			<div className="hidden">
 				<div className="border-border border-b px-4 py-2 font-semibold text-base">
 					Cycle Name
@@ -111,7 +116,7 @@ export default function CyclesViewPage() {
 					list: CycleListItem,
 				}}
 			/>
-		</div>
+		</motion.div>
 	);
 }
 
@@ -125,7 +130,7 @@ function Button({
 	return (
 		<button
 			type="button"
-			className={cn('rounded-md border px-4 py-1.5 text-foreground', className)}
+			className={cn("rounded-md border px-4 py-1.5 text-foreground", className)}
 		>
 			{children}
 		</button>

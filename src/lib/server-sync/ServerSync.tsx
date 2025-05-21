@@ -1,17 +1,6 @@
-import { useSetAtom } from 'jotai';
-import { createContext, use, useEffect, useMemo, useState } from 'react';
-import { ContextAtom } from '@/lib/server-sync/stores';
-
-const logger = {
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	log: (...args: any[]) => {
-		console.log('[ENGINE]', ...args);
-	},
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	error: (...args: any[]) => {
-		console.error('[ENGINE]', ...args);
-	},
-};
+import { useSetAtom } from "jotai";
+import { createContext, use, useEffect, useMemo, useState } from "react";
+import { ContextAtom } from "@/lib/server-sync/stores";
 
 type Context = {
 	status: {
@@ -22,7 +11,7 @@ type Context = {
 };
 
 const StatusContext = createContext<Context>({
-	status: { success: false, message: '' },
+	status: { success: false, message: "" },
 	socket: null as unknown as WebSocket,
 });
 
@@ -37,46 +26,46 @@ export function ServerSyncProvider({
 	children: React.ReactNode;
 }) {
 	const setContextValue = useSetAtom(ContextAtom);
-	const [status, setStatus] = useState<Context['status']>({
-		success: false,
-		message: '',
+	const [status, setStatus] = useState<Context["status"]>({
+		success: true,
+		message: "",
 	});
 
 	const socket = useMemo(() => {
-		const socket = new WebSocket('ws://localhost:3000/api/server');
-		socket.addEventListener('open', () => {
-			// logger.log('Connected to Server');
-			const params = { command: 'START', data: {} };
-			socket.send(JSON.stringify(params));
-		});
-		socket.addEventListener('message', (event) => {
-			logger.log('[CLIENT] Received', event.data);
-			const data = JSON.parse(event.data);
-			const { command, result } = data;
+		const socket = new WebSocket("ws://localhost:3210/api/server");
+		// socket.addEventListener("open", () => {
+		// 	// logger.log('Connected to Server');
+		// 	const params = { command: "START", data: {} };
+		// 	socket.send(JSON.stringify(params));
+		// });
+		// socket.addEventListener("message", (event) => {
+		// 	logger.log("[CLIENT] Received", event.data);
+		// 	const data = JSON.parse(event.data);
+		// 	const { command, result } = data;
 
-			if (command === 'START') {
-				const { success, errors } = result;
-				setStatus({ success, message: errors });
-				return;
-			}
+		// 	if (command === "START") {
+		// 		const { success, errors } = result;
+		// 		setStatus({ success, message: errors });
+		// 		return;
+		// 	}
 
-			if (command === 'SET-DATA') {
-				const { path, data } = result;
-				setContextValue((ctx) => ({ ...ctx, [path]: data }));
-				return;
-			}
+		// 	if (command === "SET-DATA") {
+		// 		const { path, data } = result;
+		// 		setContextValue((ctx) => ({ ...ctx, [path]: data }));
+		// 		return;
+		// 	}
 
-			// if (command === 'STOP') {
-			// 	setStatus({ success: false, message: 'Server Stopped' });
-			// 	return;
-			// }
-		});
+		// 	// if (command === 'STOP') {
+		// 	// 	setStatus({ success: false, message: 'Server Stopped' });
+		// 	// 	return;
+		// 	// }
+		// });
 		return socket;
 	}, [setContextValue]);
 
 	useEffect(() => {
 		return () => {
-			setStatus({ success: false, message: 'Disconnected from Server' });
+			// setStatus({ success: false, message: "Disconnected from Server" });
 			if (socket.readyState === WebSocket.OPEN) socket.close();
 		};
 	}, [socket]);
