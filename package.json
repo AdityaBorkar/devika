@@ -2,6 +2,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "^5.0.1",
 		"@libsql/client": "^0.15.6",
+		"@paralleldrive/cuid2": "^2.2.2",
 		"@prisma/client": "^6.8.2",
 		"@radix-ui/react-checkbox": "^1.3.2",
 		"@radix-ui/react-dialog": "^1.1.13",
@@ -34,6 +35,7 @@
 		"@tiptap/react": "^2.12.0",
 		"@tiptap/suggestion": "^2.12.0",
 		"arktype": "^2.1.20",
+		"better-sqlite3": "^9.4.1",
 		"boxen": "^8.0.1",
 		"bun-plugin-tailwind": "^0.0.15",
 		"chalk": "^5.4.1",
@@ -43,6 +45,7 @@
 		"commander": "^14.0.0",
 		"date-fns": "^4.1.0",
 		"dotenv": "^16.5.0",
+		"drizzle-orm": "^0.30.0",
 		"figlet": "^1.8.1",
 		"gradient-string": "^3.0.0",
 		"jotai": "^2.12.4",
@@ -66,9 +69,11 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.0.0-beta.5",
+		"@types/better-sqlite3": "^7.6.9",
 		"@types/bun": "^1.2.13",
 		"@types/react": "^19.1.4",
 		"@types/react-dom": "^19.1.5",
+		"drizzle-kit": "^0.20.13",
 		"prisma": "^6.8.2"
 	},
 	"main": "src/server.ts",
@@ -78,10 +83,14 @@
 	"scripts": {
 		"build": "bun typecheck && bun lint && bun run build.ts",
 		"dev": "bunx kill-port 3000 && sleep 1 && bun --hot src/server.ts",
+		"dev:db": "turso dev --port 3001 --db-file ./.data/dev.db",
 		"lint": "biome check ./src",
 		"lint:fix": "biome check ./src --fix --unsafe",
 		"start": "NODE_ENV=production bun src/server.ts",
-		"typecheck": "tsc --noEmit --incremental"
+		"typecheck": "tsc --noEmit --incremental",
+		"db:push": "bunx drizzle-kit push:sqlite",
+		"db:generate": "bunx drizzle-kit generate:sqlite",
+		"db:studio": "bunx drizzle-kit studio"
 	},
 	"type": "module",
 	"version": "0.1.0",

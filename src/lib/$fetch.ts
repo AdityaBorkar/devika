@@ -1,16 +1,28 @@
-export async function $fetch(
-	method: "GET" | "POST" | "PUT" | "DELETE",
-	url: string,
-	data?: any,
-) {
-	const response = await fetch(url, { method, body: JSON.stringify(data) });
-	console.log({ response, ok: response.ok });
-	const json = await response.json();
-	console.log({ json });
-	return json as ResponseType;
-}
+import { DOMAIN } from "@/lib/constants";
 
 type ResponseType = {
 	success: boolean;
 	data: any;
 };
+
+export async function $fetch(
+	method: "GET" | "POST" | "PUT" | "DELETE",
+	path: string,
+	data?: any,
+) {
+	const url = new URL(path, DOMAIN);
+	const options = {
+		method,
+		body: method === "GET" ? undefined : JSON.stringify(data),
+	};
+	if (method === "GET") {
+		for (const [key, value] of Object.entries(data)) {
+			url.searchParams.set(key, String(value));
+		}
+	}
+
+	const response = await fetch(url, options);
+	const json = await response.json();
+	// console.log({ url, ok: response.ok, json });
+	return json as ResponseType;
+}

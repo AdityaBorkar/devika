@@ -1,3 +1,4 @@
+import type React from "react";
 import { createContext, useContext, useState } from "react";
 
 interface DialogContextType {
@@ -36,6 +37,32 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
 		</DialogContext.Provider>
 	);
 }
+
+function DialogTrigger({
+	children,
+	content,
+}: {
+	children: React.ReactNode;
+	content: React.ReactNode;
+}) {
+	const [isOpen, setIsOpen] = useState(false);
+	return (
+		<>
+			<span className="contents" onClick={() => setIsOpen(true)}>
+				{children}
+			</span>
+			{isOpen && (
+				<div className="fixed inset-0 bg-background/70 flex items-center justify-center z-50">
+					{content}
+				</div>
+			)}
+		</>
+	);
+}
+
+export const Dialog = {
+	Trigger: DialogTrigger,
+};
 
 export function useDialog() {
 	const context = useContext(DialogContext);

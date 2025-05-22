@@ -1,31 +1,31 @@
 import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import ChatPage from "@/app/(app)/chat/page";
-import CycleDetailPage from "@/app/(app)/cycles/[id]/page";
-import CyclesViewPage from "@/app/(app)/cycles/page";
-import DashboardPage from "@/app/(app)/dashboard/page";
-import DeploymentsPage from "@/app/(app)/deployments/page";
-import HomePage from "@/app/(app)/page";
-import { PrdDocPage } from "@/app/(app)/prd/[pageId]/page";
-import PrdLayout from "@/app/(app)/prd/layout";
-import PrdDefaultPage from "@/app/(app)/prd/page";
-import AIModelsSettings from "@/app/(app)/settings/ai-models/page";
-import ConnectedAppsSettings from "@/app/(app)/settings/connected-apps/page";
-import SettingsLayout from "@/app/(app)/settings/layout";
-import SettingsDefaultPage from "@/app/(app)/settings/page";
-import SupportSettings from "@/app/(app)/settings/support/page";
-import WorkspaceSettings from "@/app/(app)/settings/workspace/page";
-import StatsPage from "@/app/(app)/stats/page";
-import TaskPage from "@/app/(app)/tasks/[id]/page";
-import TaskViewPage from "@/app/(app)/tasks/page";
-import VersionsPage from "@/app/(app)/versions/page";
-import WorkspacePage from "@/app/(app)/workspace/page";
-import OnboardingLayout from "@/app/(onboarding)/layout";
-import OnboardingPage from "@/app/(onboarding)/onboarding/page";
+import OnboardingPage from "@/app/(app)/new/page";
+import ChatPage from "@/app/(workspace)/chat/page";
+import CycleDetailPage from "@/app/(workspace)/cycles/[id]/page";
+import CyclesViewPage from "@/app/(workspace)/cycles/page";
+import DashboardPage from "@/app/(workspace)/dashboard/page";
+import DeploymentsPage from "@/app/(workspace)/deployments/page";
+import EditorPage from "@/app/(workspace)/editor/page";
+import { PrdDocPage } from "@/app/(workspace)/prd/[pageId]/page";
+import PrdLayout from "@/app/(workspace)/prd/layout";
+import PrdDefaultPage from "@/app/(workspace)/prd/page";
+import AIModelsSettings from "@/app/(workspace)/settings/ai-models/page";
+import ConnectedAppsSettings from "@/app/(workspace)/settings/connected-apps/page";
+import SettingsLayout from "@/app/(workspace)/settings/layout";
+import SettingsDefaultPage from "@/app/(workspace)/settings/page";
+import SupportSettings from "@/app/(workspace)/settings/support/page";
+import WorkspaceSettings from "@/app/(workspace)/settings/workspace/page";
+import StatsPage from "@/app/(workspace)/stats/page";
+import TaskPage from "@/app/(workspace)/tasks/[id]/page";
+import TaskViewPage from "@/app/(workspace)/tasks/page";
+import VersionsPage from "@/app/(workspace)/versions/page";
 import { Error404 } from "@/app/not-found";
-import AppLayout from "./app/(app)/layout";
-import AccountSettings from "./app/(app)/settings/account/page";
+import HomePage from "@/app/page";
+import Loading from "@/components/Loading";
+import AppLayout from "./app/(workspace)/layout";
+import AccountSettings from "./app/(workspace)/settings/account/page";
 import RootLayout from "./app/layout";
 
 const app = (
@@ -35,7 +35,16 @@ const app = (
 				<Route element={<RootLayout />}>
 					<Route path="/" element={<HomePage />} />
 
-					<Route element={<AppLayout />}>
+					<Route path="new" element={<OnboardingPage />} />
+
+					<Route
+						path="/:userSlug/:workspaceSlug"
+						element={
+							<Suspense fallback={<Loading />}>
+								<AppLayout />
+							</Suspense>
+						}
+					>
 						<Route path="dashboard" element={<DashboardPage />} />
 						<Route path="chat" element={<ChatPage />} />
 						<Route path="cycles">
@@ -47,13 +56,7 @@ const app = (
 							<Route
 								path=":pageId"
 								element={
-									<Suspense
-										fallback={
-											<div className="flex h-full w-full items-center justify-center">
-												Loading...
-											</div>
-										}
-									>
+									<Suspense fallback={<Loading />}>
 										<PrdDocPage />
 									</Suspense>
 								}
@@ -63,7 +66,7 @@ const app = (
 							<Route index element={<TaskViewPage />} />
 							<Route path=":taskId" element={<TaskPage />} />
 						</Route>
-						<Route path="workspace" element={<WorkspacePage />} />
+						<Route path="workspace" element={<EditorPage />} />
 						<Route path="versions" element={<VersionsPage />} />
 						<Route path="deployments" element={<DeploymentsPage />} />
 						<Route path="stats" element={<StatsPage />} />
@@ -79,10 +82,6 @@ const app = (
 							/>
 							<Route path="support" element={<SupportSettings />} />
 						</Route>
-					</Route>
-
-					<Route element={<OnboardingLayout />}>
-						<Route path="onboarding" element={<OnboardingPage />} />
 					</Route>
 
 					<Route path="*" element={<Error404 />} />

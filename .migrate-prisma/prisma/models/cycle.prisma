@@ -1,0 +1,8 @@
+// model Cycle {
+//     cycleId   String   @id @default(cuid(2))
+//     taskId    String
+//     task      Task     @relation(fields: [taskId], references: [taskId], onDelete: Cascade)
+//     createdAt DateTime @default(now())
+//     updatedAt DateTime @updatedAt
+//     // Workspace Workspace[]
+// }

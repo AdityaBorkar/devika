@@ -1,5 +1,5 @@
 import { serve } from "bun";
-import { POST } from "@/api/actions/workspace/route";
+import * as WorkspaceAPI from "@/api/actions/workspace/route";
 import frontend from "./frontend.html";
 
 const server = serve({
@@ -9,9 +9,7 @@ const server = serve({
 	},
 	routes: {
 		"/*": frontend,
-		"/api/actions/workspace": {
-			POST,
-		},
+		"/api/actions/workspace": WorkspaceAPI,
 	},
 });
 

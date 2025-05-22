@@ -1,17 +1,16 @@
 import { Provider as JotaiProvider } from "jotai";
 import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-import { Link, Navigate, Outlet, useLocation } from "react-router";
+import { useEffect } from "react";
+import { Navigate, Outlet, useLocation } from "react-router";
 import Logo from "@/../public/logo.svg";
 import { TextShimmer } from "@/components/animations/TextShimmer";
-import { Button } from "@/components/ui/button";
+import { DialogProvider } from "@/contexts/DialogContext";
 import {
-	ServerSyncProvider,
-	useServerSync,
+	ClientSyncProvider,
+	useClientSync,
 } from "@/lib/server-sync/ServerSync";
 
 import "./globals.css";
-import { useEffect } from "react";
-import { DialogProvider } from "@/contexts/DialogContext";
 
 export default function RootLayout() {
 	useEffect(() => {
@@ -21,9 +20,9 @@ export default function RootLayout() {
 		<NuqsAdapter>
 			<JotaiProvider>
 				<DialogProvider>
-					<ServerSyncProvider>
+					<ClientSyncProvider>
 						<Children />
-					</ServerSyncProvider>
+					</ClientSyncProvider>
 				</DialogProvider>
 			</JotaiProvider>
 		</NuqsAdapter>
@@ -33,33 +32,13 @@ export default function RootLayout() {
 function Children() {
 	const {
 		status: { success, message },
-	} = useServerSync();
+	} = useClientSync();
 	const location = useLocation();
 
-	if (success || location.pathname === "/onboarding") return <Outlet />;
-	if (message === "INVALID") return <ReinitializeProjectPlaceholder />;
-	if (message === "NOT_FOUND") return <Navigate to="/onboarding" />;
+	if (success || location.pathname === "/new") return <Outlet />;
+	// if (message === "INVALID") return <ReinitializeProjectPlaceholder />;
+	if (message === "NOT_FOUND") return <Navigate to="/new" />;
 	return <LoadingPlaceholder message={message} />;
-}
-
-function ReinitializeProjectPlaceholder() {
-	return (
-		<div className="flex h-screen w-screen select-none flex-col items-center justify-center gap-4">
-			<img src={Logo} alt="Logo" className="w-48" draggable={false} />
-			<div className="max-w-96 border-border border-t px-8 py-4 text-sm">
-				<span className="text-center text-rose-700">
-					Configuration file is invalid. Kindly manually check the file and fix
-					errors, or re-initialize the project.
-				</span>
-
-				<Link to="/onboarding" className="mt-4 block">
-					<Button variant="default" size="sm" className="mx-auto block">
-						Re-initialize Project
-					</Button>
-				</Link>
-			</div>
-		</div>
-	);
 }
 
 function LoadingPlaceholder({ message }: { message: string }) {
@@ -82,3 +61,23 @@ function LoadingPlaceholder({ message }: { message: string }) {
 		</div>
 	);
 }
+
+// function ReinitializeProjectPlaceholder() {
+// 	return (
+// 		<div className="flex h-screen w-screen select-none flex-col items-center justify-center gap-4">
+// 			<img src={Logo} alt="Logo" className="w-48" draggable={false} />
+// 			<div className="max-w-96 border-border border-t px-8 py-4 text-sm">
+// 				<span className="text-center text-rose-700">
+// 					Configuration file is invalid. Kindly manually check the file and fix
+// 					errors, or re-initialize the project.
+// 				</span>
+
+// 				<Link to="/new" className="mt-4 block">
+// 					<Button variant="default" size="sm" className="mx-auto block">
+// 						Re-initialize Project
+// 					</Button>
+// 				</Link>
+// 			</div>
+// 		</div>
+// 	);
+// }

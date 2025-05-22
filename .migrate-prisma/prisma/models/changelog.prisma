@@ -1,0 +1,8 @@
+// model Changelog {
+//     version   String    @id
+//     notes     String
+//     changes   String
+//     closedAt  DateTime?
+//     createdAt DateTime  @default(now())
+//     updatedAt DateTime  @updatedAt
+// }
