@@ -1,4 +1,6 @@
-import prisma from "@/lib/db";
+import { workspace } from "drizzle/schema/workspace";
+import { eq } from "drizzle-orm";
+import db from "@/lib/server-db";
 
 export async function POST(req: Request) {
 	const user = { slug: "adityaborkar" };
@@ -7,8 +9,8 @@ export async function POST(req: Request) {
 	const ide = IDE.sort((a: string, b: string) => a.localeCompare(b)).join(",");
 	const slug = `${user.slug}/${name.toLowerCase().trim().replace(/ /g, "-")}`;
 	const data = { name, tdd, ide, slug };
-	const workspace = await prisma.workspace.create({ data });
-	return new Response(JSON.stringify({ success: true, data: workspace }));
+	const ws = await db.insert(workspace).values(data);
+	return new Response(JSON.stringify({ success: true, data: ws }));
 }
 
 export async function GET(req: Request) {
@@ -19,11 +21,14 @@ export async function GET(req: Request) {
 			JSON.stringify({ success: false, error: "Slug is required" }),
 		);
 
-	const workspace = await prisma.workspace.findUnique({ where: { slug } });
-	if (!workspace)
+	const [ws] = await db
+		.select()
+		.from(workspace)
+		.where(eq(workspace.slug, slug));
+	if (!ws)
 		return new Response(
 			JSON.stringify({ success: false, error: "Workspace not found" }),
 		);
 
-	return new Response(JSON.stringify({ success: true, data: workspace }));
+	return new Response(JSON.stringify({ success: true, data: ws }));
 }

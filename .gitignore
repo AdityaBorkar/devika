@@ -33,3 +33,10 @@ devika.env
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# Test Data
+.data
+
+# Temporary Exclusions:
+.ai
+.migrate-prisma

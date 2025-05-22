@@ -117,3 +117,39 @@ export default function PrdLayout() {
 		</motion.div>
 	);
 }
+
+<div
+	class="aislash-editor-input"
+	contenteditable="true"
+	spellcheck="false"
+	style="resize: none; grid-area: 1 / 1 / 1 / 1; overflow: hidden; line-height: 1.5; font-family: inherit; font-size: 12px; color: var(--vscode-input-foreground); background-color: transparent; display: block; outline: none; scrollbar-width: none; box-sizing: border-box; border: none; overflow-wrap: break-word; word-break: break-word; padding: 0px; user-select: text; white-space: pre-wrap;"
+	data-lexical-editor="true"
+	role="textbox"
+>
+	<p dir="ltr">
+		<span data-lexical-text="true">aditya </span>
+		<span
+			class="mention"
+			contenteditable="false"
+			data-lexical-text="true"
+			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent);"
+		>
+			@src
+		</span>
+		<span data-lexical-text="true"></span>
+		<span data-lexical-text="true"> is here </span>
+		<span
+			class="mention"
+			contenteditable="false"
+			data-mention-name="route.ts"
+			data-mention-key="70"
+			data-typeahead-type="file"
+			data-lexical-text="true"
+			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent); cursor: pointer;"
+		>
+			@route.ts
+		</span>
+		<span data-lexical-text="true"></span>
+		<span data-lexical-text="true"> </span>
+	</p>
+</div>;

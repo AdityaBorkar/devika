@@ -4,7 +4,7 @@ import path from "path";
 export default defineConfig({
 	schema: "./drizzle/schema/*",
 	out: "./drizzle/migrations",
-	driver: "better-sqlite",
+	dialect: "sqlite",
 	dbCredentials: {
 		url: path.resolve(process.cwd(), ".data/dev.db"),
 	},

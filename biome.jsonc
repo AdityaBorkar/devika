@@ -92,7 +92,7 @@
 				"useLiteralEnumMembers": "error",
 				"useNodejsImportProtocol": "error",
 				"useNumberNamespace": "error",
-				"useNumericLiterals": "error",
+				// "useNumericLiterals": "error",
 				"useSelfClosingElements": "error",
 				"useShorthandFunctionType": "error",
 				"useSingleVarDeclarator": "error",

@@ -1,7 +1,10 @@
+import { workspace } from "drizzle/schema/workspace";
+import { eq } from "drizzle-orm";
 import { useSetAtom } from "jotai";
 import { PiFile } from "react-icons/pi";
 import { Link } from "react-router";
 import { PrdActiveTabIdAtom } from "@/app/(workspace)/prd/store";
+import db from "@/lib/client-db";
 import { cn } from "@/lib/utils";
 
 const sections = [
@@ -26,8 +29,20 @@ const sections = [
 // TODO: Double Click to Rename a File
 // TODO: Register shortcut - CTRL+N / CTRL+SHIFT+O
 
+console.log({ db });
+
+async function getFiles() {
+	const slug = "adityaborkar/devika";
+	const files = (await db)
+		.select()
+		.from(workspace)
+		.where(eq(workspace.slug, slug));
+	console.log(files);
+	return files;
+}
+
 export default function FilesNavigation() {
-	const files = 
+	// const files = getFiles();
 	return (
 		<nav className="flex flex-col overflow-auto">
 			{/* <NoteLink to="/prd/new-note" className="mt-4">
