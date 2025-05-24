@@ -1,7 +1,7 @@
-import { useAtomValue } from "jotai";
-import { redirect } from "react-router";
-import { workspaceAtom } from "@/app/(app)/new/store";
-import { Button } from "@/components/ui/button";
+import { useAtomValue } from 'jotai';
+import { redirect } from 'react-router';
+import { workspaceAtom } from '@/app/new/store';
+import { Button } from '@/components/ui/button';
 
 export function Step3({
 	setStep: setCurrentStep,

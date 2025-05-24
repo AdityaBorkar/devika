@@ -1,19 +1,19 @@
-import { motion } from "motion/react";
-import { ViewLayout, type ViewTab } from "@/components/layouts/ViewLayout";
-import { TaskCardItem } from "@/components/tasks/TaskCardItem";
-import { TaskListItem } from "@/components/tasks/TaskListItem";
+import { motion } from 'motion/react';
+import { ViewLayout, type ViewTab } from '@/components/layouts/ViewLayout';
+import { TaskCardItem } from '@/components/tasks/TaskCardItem';
+import { TaskListItem } from '@/components/tasks/TaskListItem';
 
 export default function TaskViewPage() {
 	// TODO: Properties
 
 	const viewTabs = [
-		{ label: "All Tasks", value: "all", display: "kanban" },
-		{ label: "Un-assigned", value: "unassigned", display: "list" },
-		{ label: "Assigned", value: "assigned", display: "kanban" },
-		{ label: "Backlog", value: "backlog", display: "kanban" },
+		{ label: 'All Tasks', value: 'all', display: 'kanban' },
+		{ label: 'Un-assigned', value: 'unassigned', display: 'list' },
+		{ label: 'Assigned', value: 'assigned', display: 'kanban' },
+		{ label: 'Backlog', value: 'backlog', display: 'kanban' },
 	] as ViewTab[];
 
-	const saveViewTab = (tab: ViewTab) => {
+	const saveViewTab = (_tab: ViewTab) => {
 		// ...
 	};
 

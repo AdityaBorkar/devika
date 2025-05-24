@@ -157,7 +157,7 @@ export default function RepositoryStructure() {
 	);
 	const [isPrototypingMode, setIsPrototypingMode] = useState<boolean>(false);
 	const [notes, setNotes] = useState<Record<string, string>>({});
-	const [showFiles, setShowFiles] = useState<boolean>(true);
+	const [showFiles, _setShowFiles] = useState<boolean>(true);
 
 	// Function to collect all directory IDs
 	const getAllDirectoryIds = (item: FileSystemItem): string[] => {
@@ -198,7 +198,7 @@ export default function RepositoryStructure() {
 		setExpandedItems(newExpandedItems);
 	};
 
-	const togglePrototypingMode = (): void => {
+	const _togglePrototypingMode = (): void => {
 		setIsPrototypingMode(!isPrototypingMode);
 	};
 

@@ -1,5 +1,5 @@
-import { PiBoxArrowDown, PiBoxArrowUp } from "react-icons/pi";
-import { Link } from "react-router";
+import { PiBoxArrowDown, PiBoxArrowUp } from 'react-icons/pi';
+import { Link } from 'react-router';
 
 export default function WorkspaceSettings() {
 	return (

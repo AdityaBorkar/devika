@@ -1,6 +1,6 @@
-import { PiCheckCircle, PiXCircle } from "react-icons/pi";
-import { useDialog } from "@/contexts/DialogContext";
-import { cn } from "@/lib/utils";
+import { PiCheckCircle, PiXCircle } from 'react-icons/pi';
+import { useDialog } from '@/contexts/DialogContext';
+import { cn } from '@/lib/utils';
 
 type ConnectionStatusProps = {
 	title: string;
@@ -14,19 +14,19 @@ function ConnectionStatus({
 	details,
 }: ConnectionStatusProps) {
 	return (
-		<div className="flex items-center justify-between mb-3 p-3 rounded-md border border-border">
+		<div className="mb-3 flex items-center justify-between rounded-md border border-border p-3">
 			<div>
 				<h3 className="font-medium">{title}</h3>
-				{details && <p className="text-xs text-text-muted">{details}</p>}
+				{details && <p className="text-text-muted text-xs">{details}</p>}
 			</div>
 			<div className="flex items-center">
 				<span
 					className={cn(
-						"mr-2 text-sm",
-						isConnected ? "text-green-600" : "text-rose-500",
+						'mr-2 text-sm',
+						isConnected ? 'text-green-600' : 'text-rose-500',
 					)}
 				>
-					{isConnected ? "Connected" : "Disconnected"}
+					{isConnected ? 'Connected' : 'Disconnected'}
 				</span>
 				{isConnected ? (
 					<PiCheckCircle className="size-5 text-green-600" />
@@ -43,28 +43,28 @@ export function ConnectionDialog() {
 
 	// These would come from a real state or API in a production app
 	const connections = {
-		ide: { isConnected: true, details: "VSCode Extension v1.2.3" },
-		cloud: { isConnected: false, details: "Not authenticated" },
-		integrations: { isConnected: true, details: "GitHub, Jira" },
+		ide: { isConnected: true, details: 'VSCode Extension v1.2.3' },
+		cloud: { isConnected: false, details: 'Not authenticated' },
+		integrations: { isConnected: true, details: 'GitHub, Jira' },
 		extension: {
 			isConnected: false,
-			details: "Chrome extension not installed",
+			details: 'Chrome extension not installed',
 		},
 	};
 
 	return (
-		<div className="space-y-4 border border-border rounded-md p-4 bg-background">
-			<div className="flex justify-between items-center mb-4">
-				<h2 className="text-xl font-semibold">Connection Status</h2>
+		<div className="space-y-4 rounded-md border border-border bg-background p-4">
+			<div className="mb-4 flex items-center justify-between">
+				<h2 className="font-semibold text-xl">Connection Status</h2>
 				<button
 					onClick={closeDialog}
-					className="text-text-muted hover:text-text-primary rounded-full p-1"
+					className="rounded-full p-1 text-text-muted hover:text-text-primary"
 				>
 					✕
 				</button>
 			</div>
 
-			<p className="text-text-muted mb-4">
+			<p className="mb-4 text-text-muted">
 				View the status of your connections (Alt+C to toggle)
 			</p>
 
@@ -89,8 +89,8 @@ export function ConnectionDialog() {
 				details={connections.extension.details}
 			/>
 
-			<div className="mt-4 pt-4 border-t border-border">
-				<button className="w-full py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
+			<div className="mt-4 border-border border-t pt-4">
+				<button className="w-full rounded-md bg-primary py-2 text-primary-foreground hover:bg-primary/90">
 					Refresh Connections
 				</button>
 			</div>

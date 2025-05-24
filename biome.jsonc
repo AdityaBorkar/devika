@@ -29,12 +29,7 @@
 	// },
 	"files": {
 		"ignoreUnknown": false,
-		"includes": [
-			"**",
-			"!**/dist/*",
-			"!**/node_modules/*",
-			"!**/CHANGELOG.md"
-		]
+		"includes": ["**", "!**/dist/*", "!**/node_modules/*", "!**/CHANGELOG.md"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -62,15 +57,8 @@
 					"fix": "safe",
 					"level": "error",
 					"options": {
-						"attributes": [
-							"classList"
-						],
-						"functions": [
-							"clsx",
-							"cva",
-							"tw",
-							"tw.*"
-						]
+						"attributes": ["classList"],
+						"functions": ["clsx", "cva", "tw", "tw.*"]
 					}
 				}
 			},

@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { type } from 'arktype';
-import { $, file } from 'bun';
+import { file } from 'bun';
 import { ProjectConfig } from '@/schema/ProjectConfig';
 
 const REPO_BASE_PATH = '.';
@@ -20,7 +20,7 @@ export async function start() {
 		return { success: false, errors: 'NOT_FOUND' };
 	}
 
-	const config = await configFile.json().catch((error) => 'INVALID');
+	const config = await configFile.json().catch((_error) => 'INVALID');
 	if (config === 'INVALID') {
 		// TODO: AI Suggestions to fix the file
 		return { success: false, errors: 'INVALID' };

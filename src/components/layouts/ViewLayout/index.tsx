@@ -1,10 +1,4 @@
-import {
-	ChevronDown,
-	Filter,
-	Plus,
-	Search,
-	SlidersHorizontal,
-} from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useQueryState } from 'nuqs';
 import { PiFunnelSimple, PiPlus } from 'react-icons/pi';
 import { KanbanColumn } from '@/components/layouts/ViewLayout/KanbanColumn';

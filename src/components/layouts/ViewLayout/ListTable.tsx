@@ -3,7 +3,6 @@ import {
 	createColumnHelper,
 	flexRender,
 	getCoreRowModel,
-	getFilteredRowModel,
 	getSortedRowModel,
 	type SortingState,
 	useReactTable,

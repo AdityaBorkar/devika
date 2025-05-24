@@ -3,14 +3,6 @@
 import { Plus } from 'lucide-react';
 import type React from 'react';
 import { Button } from '@/components/ui/button';
-// import {
-// 	Select,
-// 	SelectContent,
-// 	SelectItem,
-// 	SelectTrigger,
-// 	SelectValue,
-// } from '@/components/ui/select';
-import type { CycleStatus, FilterState, SortState } from './types';
 
 export type TabType = 'all' | 'current' | 'upcoming' | 'completed';
 

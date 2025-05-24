@@ -155,7 +155,7 @@ export const EnhancedCyclesTable: React.FC<EnhancedCyclesTableProps> = ({
 				id: 'progress',
 			}),
 		],
-		[columnHelper],
+		[columnHelper, getStatusColor],
 	);
 
 	// Initialize the table

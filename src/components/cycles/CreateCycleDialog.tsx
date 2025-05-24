@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { PlusCircle } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { PlusCircle } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
 	Dialog,
 	DialogContent,
@@ -11,10 +11,10 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
 interface CreateCycleDialogProps {
 	onCycleCreate: (data: {
@@ -28,10 +28,10 @@ interface CreateCycleDialogProps {
 export function CreateCycleDialog({ onCycleCreate }: CreateCycleDialogProps) {
 	const [open, setOpen] = useState(false);
 	const [formData, setFormData] = useState({
-		description: "",
-		endDate: "",
-		name: "",
-		startDate: "",
+		description: '',
+		endDate: '',
+		name: '',
+		startDate: '',
 	});
 
 	const handleChange = (
@@ -48,10 +48,10 @@ export function CreateCycleDialog({ onCycleCreate }: CreateCycleDialogProps) {
 		e.preventDefault();
 		onCycleCreate(formData);
 		setFormData({
-			description: "",
-			endDate: "",
-			name: "",
-			startDate: "",
+			description: '',
+			endDate: '',
+			name: '',
+			startDate: '',
 		});
 		setOpen(false);
 	};

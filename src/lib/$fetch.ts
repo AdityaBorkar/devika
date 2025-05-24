@@ -1,4 +1,4 @@
-import { DOMAIN } from "@/lib/constants";
+import { DOMAIN } from '@/lib/constants';
 
 type ResponseType = {
 	success: boolean;
@@ -6,16 +6,16 @@ type ResponseType = {
 };
 
 export async function $fetch(
-	method: "GET" | "POST" | "PUT" | "DELETE",
+	method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 	path: string,
 	data?: any,
 ) {
 	const url = new URL(path, DOMAIN);
 	const options = {
 		method,
-		body: method === "GET" ? undefined : JSON.stringify(data),
+		body: method === 'GET' ? undefined : JSON.stringify(data),
 	};
-	if (method === "GET") {
+	if (method === 'GET') {
 		for (const [key, value] of Object.entries(data)) {
 			url.searchParams.set(key, String(value));
 		}

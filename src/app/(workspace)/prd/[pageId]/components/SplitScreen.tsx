@@ -1,9 +1,9 @@
-import { type Atom, useAtom } from "jotai";
-import { PiFile, PiX } from "react-icons/pi";
-import { Link } from "react-router";
-import { ChatUI } from "@/app/(workspace)/prd/[pageId]/components/ChatUI";
-import { EditorUI } from "@/app/(workspace)/prd/[pageId]/components/EditorUI";
-import { cn } from "@/lib/utils";
+import { type Atom, useAtom } from 'jotai';
+import { PiFile, PiX } from 'react-icons/pi';
+import { Link } from 'react-router';
+import { ChatUI } from '@/app/(workspace)/prd/[pageId]/components/ChatUI';
+import { EditorUI } from '@/app/(workspace)/prd/[pageId]/components/EditorUI';
+import { cn } from '@/lib/utils';
 
 export function SplitScreen({
 	width,
@@ -45,13 +45,13 @@ export function SplitScreen({
 							type="button"
 							key={tab.id}
 							className={cn(
-								"group relative block rounded-md border border-transparent px-2 py-1.5 font-medium text-text-tertiary text-xs",
+								'group relative block rounded-md border border-transparent px-2 py-1.5 font-medium text-text-tertiary text-xs',
 								tab.id === activeTabId
 									? [
-											"bg-bg-tertiary text-text-primary",
-											"after:-bottom-1.5 after:absolute after:right-0 after:w-full after:border-zinc-400 after:border-b",
+											'bg-bg-tertiary text-text-primary',
+											'after:-bottom-1.5 after:absolute after:right-0 after:w-full after:border-zinc-400 after:border-b',
 										]
-									: "hover:bg-bg-secondary",
+									: 'hover:bg-bg-secondary',
 							)}
 							to={`/prd/${tab.id}`}
 							onClick={() => setActiveTabId(tab.id)}
@@ -72,7 +72,7 @@ export function SplitScreen({
 				</div>
 			</nav>
 			<div className="relative grow overflow-auto px-8 py-8 ">
-				{openTab.type === "doc" ? <EditorUI /> : <ChatUI />}
+				{openTab.type === 'doc' ? <EditorUI /> : <ChatUI />}
 			</div>
 		</div>
 	);

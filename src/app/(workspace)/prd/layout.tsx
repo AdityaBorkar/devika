@@ -1,6 +1,6 @@
-import { useAtomValue } from "jotai";
-import { motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useAtomValue } from 'jotai';
+import { motion } from 'motion/react';
+import { useMemo, useState } from 'react';
 import {
 	PiChat,
 	PiEye,
@@ -9,44 +9,44 @@ import {
 	PiPlus,
 	PiPlusMinus,
 	PiTarget,
-} from "react-icons/pi";
-import { Outlet } from "react-router";
-import ChangesNavigation from "@/app/(workspace)/prd/components/nav-changes";
-import FilesNavigation from "@/app/(workspace)/prd/components/nav-files";
-import SearchNavigation from "@/app/(workspace)/prd/components/nav-search";
-import { PrdVersionAtom } from "@/app/(workspace)/prd/store";
+} from 'react-icons/pi';
+import { Outlet } from 'react-router';
+import ChangesNavigation from '@/app/(workspace)/prd/components/nav-changes';
+import FilesNavigation from '@/app/(workspace)/prd/components/nav-files';
+import SearchNavigation from '@/app/(workspace)/prd/components/nav-search';
+import { PrdVersionAtom } from '@/app/(workspace)/prd/store';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 const TABS = [
 	{
-		label: "Chats",
+		label: 'Chats',
 		icon: PiChat,
-		segment: "search",
+		segment: 'search',
 		navigation: SearchNavigation,
 	},
 	{
-		label: "Files",
+		label: 'Files',
 		icon: PiFile,
-		segment: "files",
+		segment: 'files',
 		navigation: FilesNavigation,
 	},
 	{
-		label: "Changes",
+		label: 'Changes',
 		icon: PiPlusMinus,
-		segment: "changes",
+		segment: 'changes',
 		navigation: ChangesNavigation,
 	},
 ];
 
 export default function PrdLayout() {
 	const version = useAtomValue(PrdVersionAtom);
-	const [TabSegment, setTabSegment] = useState("files");
+	const [TabSegment, setTabSegment] = useState('files');
 	const Navigation = useMemo(
 		() => TABS.find((tab) => tab.segment === TabSegment)?.navigation,
 		[TabSegment],
@@ -98,10 +98,10 @@ export default function PrdLayout() {
 							key={tab.segment}
 							type="button"
 							className={cn(
-								"select-none rounded-md px-1 py-1.5 text-center",
+								'select-none rounded-md px-1 py-1.5 text-center',
 								tab.segment === TabSegment
-									? "bg-bg-tertiary"
-									: "hover:bg-bg-tertiary/50",
+									? 'bg-bg-tertiary'
+									: 'hover:bg-bg-tertiary/50',
 							)}
 							onClick={() => setTabSegment(tab.segment)}
 						>
@@ -118,38 +118,38 @@ export default function PrdLayout() {
 	);
 }
 
-<div
-	class="aislash-editor-input"
-	contenteditable="true"
-	spellcheck="false"
-	style="resize: none; grid-area: 1 / 1 / 1 / 1; overflow: hidden; line-height: 1.5; font-family: inherit; font-size: 12px; color: var(--vscode-input-foreground); background-color: transparent; display: block; outline: none; scrollbar-width: none; box-sizing: border-box; border: none; overflow-wrap: break-word; word-break: break-word; padding: 0px; user-select: text; white-space: pre-wrap;"
-	data-lexical-editor="true"
-	role="textbox"
->
-	<p dir="ltr">
-		<span data-lexical-text="true">aditya </span>
-		<span
-			class="mention"
-			contenteditable="false"
-			data-lexical-text="true"
-			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent);"
-		>
-			@src
-		</span>
-		<span data-lexical-text="true"></span>
-		<span data-lexical-text="true"> is here </span>
-		<span
-			class="mention"
-			contenteditable="false"
-			data-mention-name="route.ts"
-			data-mention-key="70"
-			data-typeahead-type="file"
-			data-lexical-text="true"
-			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent); cursor: pointer;"
-		>
-			@route.ts
-		</span>
-		<span data-lexical-text="true"></span>
-		<span data-lexical-text="true"> </span>
-	</p>
-</div>;
+// <div
+// 	class="aislash-editor-input"
+// 	contenteditable="true"
+// 	spellcheck="false"
+// 	style="resize: none; grid-area: 1 / 1 / 1 / 1; overflow: hidden; line-height: 1.5; font-family: inherit; font-size: 12px; color: var(--vscode-input-foreground); background-color: transparent; display: block; outline: none; scrollbar-width: none; box-sizing: border-box; border: none; overflow-wrap: break-word; word-break: break-word; padding: 0px; user-select: text; white-space: pre-wrap;"
+// 	data-lexical-editor="true"
+// 	role="textbox"
+// >
+// 	<p dir="ltr">
+// 		<span data-lexical-text="true">aditya </span>
+// 		<span
+// 			class="mention"
+// 			contenteditable="false"
+// 			data-lexical-text="true"
+// 			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent);"
+// 		>
+// 			@src
+// 		</span>
+// 		<span data-lexical-text="true" />
+// 		<span data-lexical-text="true"> is here </span>
+// 		<span
+// 			class="mention"
+// 			contenteditable="false"
+// 			data-mention-name="route.ts"
+// 			data-mention-key="70"
+// 			data-typeahead-type="file"
+// 			data-lexical-text="true"
+// 			style="background-color: color-mix(in srgb, var(--vscode-charts-blue) 20%, transparent); cursor: pointer;"
+// 		>
+// 			@route.ts
+// 		</span>
+// 		<span data-lexical-text="true" />
+// 		<span data-lexical-text="true"> </span>
+// 	</p>
+// </div>;

@@ -1,20 +1,20 @@
-import { Provider as JotaiProvider } from "jotai";
-import { NuqsAdapter } from "nuqs/adapters/react-router/v7";
-import { useEffect } from "react";
-import { Navigate, Outlet, useLocation } from "react-router";
-import Logo from "@/../public/logo.svg";
-import { TextShimmer } from "@/components/animations/TextShimmer";
-import { DialogProvider } from "@/contexts/DialogContext";
+import { Provider as JotaiProvider } from 'jotai';
+import { NuqsAdapter } from 'nuqs/adapters/react-router/v7';
+import { useEffect } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router';
+import Logo from '@/../public/logo.svg';
+import { TextShimmer } from '@/components/animations/TextShimmer';
+import { DialogProvider } from '@/contexts/DialogContext';
 import {
 	ClientSyncProvider,
 	useClientSync,
-} from "@/lib/server-sync/ServerSync";
+} from '@/lib/server-sync/ServerSync';
 
-import "./globals.css";
+import './globals.css';
 
 export default function RootLayout() {
 	useEffect(() => {
-		document.addEventListener("contextmenu", (e) => e.preventDefault());
+		document.addEventListener('contextmenu', (e) => e.preventDefault());
 	}, []);
 	return (
 		<NuqsAdapter>
@@ -35,9 +35,9 @@ function Children() {
 	} = useClientSync();
 	const location = useLocation();
 
-	if (success || location.pathname === "/new") return <Outlet />;
+	if (success || location.pathname === '/new') return <Outlet />;
 	// if (message === "INVALID") return <ReinitializeProjectPlaceholder />;
-	if (message === "NOT_FOUND") return <Navigate to="/new" />;
+	if (message === 'NOT_FOUND') return <Navigate to="/new" />;
 	return <LoadingPlaceholder message={message} />;
 }
 

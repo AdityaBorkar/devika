@@ -1,4 +1,4 @@
-export function importFromMarkdown(content: string) {
+export function importFromMarkdown(_content: string) {
 	// Simple HTML to Markdown conversion (in a real app, use a proper converter library)
 	// const markdown = content
 	// 	.replace(/<h1>(.*?)<\/h1>/g, '# $1\n\n')

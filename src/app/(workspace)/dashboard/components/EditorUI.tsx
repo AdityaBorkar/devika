@@ -1,17 +1,17 @@
-import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
-import type { Editor } from "@tiptap/core";
-import { useAtom } from "jotai";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { PiCaretDown, PiChecks, PiEye, PiPencilLine } from "react-icons/pi";
-import { NoteContentAtom } from "@/app/(workspace)/prd/[pageId]/store";
-import { MDXEditor } from "@/components/editors/PrdEditor";
-import { DocumentOutline } from "@/components/editors/PrdEditor/DocumentOutline";
+import { DropdownMenuContent } from '@radix-ui/react-dropdown-menu';
+import type { Editor } from '@tiptap/core';
+import { useAtom } from 'jotai';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { PiCaretDown, PiChecks, PiEye, PiPencilLine } from 'react-icons/pi';
+import { NoteContentAtom } from '@/app/(workspace)/prd/[pageId]/store';
+import { MDXEditor } from '@/components/editors/PrdEditor';
+import { DocumentOutline } from '@/components/editors/PrdEditor/DocumentOutline';
 import {
 	DropdownMenu,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 
 export function EditorUI() {
 	// Support for undo-redo
@@ -19,7 +19,7 @@ export function EditorUI() {
 	// AI shall ask questions for specific sections. You must answer the questions.
 	// Gemini-2.5-Flash-Preview & Gemini-2.0-Flash via OpenRouter
 
-	const fileName = "List of Docs";
+	const _fileName = 'List of Docs';
 	const tokenCount = 5000;
 	// const editorRef = useRef<HTMLDivElement>(null);
 	// const [content, setContent] = useState('');
@@ -28,11 +28,11 @@ export function EditorUI() {
 	const [content, setContent] = useAtom(NoteContentAtom);
 
 	const editorRef = useRef<HTMLDivElement>(null);
-	const [viewMode, setViewMode] = useState<ViewMode>("Edit");
+	const [viewMode, setViewMode] = useState<ViewMode>('Edit');
 
 	// Function to cycle through view modes
 	const cycleViewMode = useCallback(() => {
-		const modes: ViewMode[] = ["Edit", "Review", "Read"];
+		const modes: ViewMode[] = ['Edit', 'Review', 'Read'];
 		const currentIndex = modes.indexOf(viewMode);
 		const nextIndex = (currentIndex + 1) % modes.length;
 		setViewMode(modes[nextIndex]);
@@ -41,15 +41,15 @@ export function EditorUI() {
 	// Set up keyboard shortcut (Ctrl+/)
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (e.ctrlKey && e.key === "/") {
+			if (e.ctrlKey && e.key === '/') {
 				e.preventDefault();
 				cycleViewMode();
 				// animation of "active" state
 			}
 		};
 
-		window.addEventListener("keydown", handleKeyDown);
-		return () => window.removeEventListener("keydown", handleKeyDown);
+		window.addEventListener('keydown', handleKeyDown);
+		return () => window.removeEventListener('keydown', handleKeyDown);
 	}, [cycleViewMode]);
 
 	// Function to scroll to a heading when clicked in the outline
@@ -57,7 +57,7 @@ export function EditorUI() {
 		if (!editorRef.current) return;
 
 		// Find the editor's iframe (TipTap uses an iframe)
-		const editorIframe = editorRef.current.querySelector("iframe");
+		const editorIframe = editorRef.current.querySelector('iframe');
 		if (!editorIframe) return;
 
 		// Access the document within the iframe
@@ -70,7 +70,7 @@ export function EditorUI() {
 		if (!headingElement) return;
 
 		// Scroll the heading into view
-		headingElement.scrollIntoView({ behavior: "smooth", block: "start" });
+		headingElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	};
 
 	// Use a ref to track the timeout ID for debouncing
@@ -86,7 +86,7 @@ export function EditorUI() {
 	}, []);
 
 	function onUpdate({ editor }: { editor: Editor }) {
-		const newContent = editor.getHTML();
+		const _newContent = editor.getHTML();
 
 		// // If auto-save is enabled, debounce the onChange call
 		// if (autoSave) {
@@ -103,21 +103,21 @@ export function EditorUI() {
 		// }
 	}
 
-	type ViewMode = "Edit" | "Review" | "Read";
+	type ViewMode = 'Edit' | 'Review' | 'Read';
 
 	return (
 		<div className="relative w-full">
 			<DropdownMenu>
 				<DropdownMenuTrigger
 					className={cn(
-						"absolute top-0 right-0",
-						"flex w-fit flex-row items-center justify-between gap-2 rounded-md border bg-bg-tertiary200 px-3 py-1 font-medium",
-						viewMode === "Edit" &&
-							"border-amber-400 bg-amber-200 text-amber-800",
-						viewMode === "Review" &&
-							"border-purple-400 bg-purple-200 text-purple-800",
-						viewMode === "Read" &&
-							"border-zinc-400 bg-bg-tertiary200 text-text-primary",
+						'absolute top-0 right-0',
+						'flex w-fit flex-row items-center justify-between gap-2 rounded-md border bg-bg-tertiary200 px-3 py-1 font-medium',
+						viewMode === 'Edit' &&
+							'border-amber-400 bg-amber-200 text-amber-800',
+						viewMode === 'Review' &&
+							'border-purple-400 bg-purple-200 text-purple-800',
+						viewMode === 'Read' &&
+							'border-zinc-400 bg-bg-tertiary200 text-text-primary',
 					)}
 				>
 					{/* TODO: Animate SVG Morph + Number Counter Effect */}
@@ -129,21 +129,21 @@ export function EditorUI() {
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="w-24">
 					<DropdownMenuItem
-						onClick={() => setViewMode("Edit")}
+						onClick={() => setViewMode('Edit')}
 						className="px-3"
 					>
 						<PiPencilLine className="mr-1.5" />
 						Edit
 					</DropdownMenuItem>
 					<DropdownMenuItem
-						onClick={() => setViewMode("Review")}
+						onClick={() => setViewMode('Review')}
 						className="px-3"
 					>
 						<PiChecks className="mr-1.5" />
 						Review
 					</DropdownMenuItem>
 					<DropdownMenuItem
-						onClick={() => setViewMode("Read")}
+						onClick={() => setViewMode('Read')}
 						className="px-3"
 					>
 						<PiEye className="mr-1.5" />
@@ -166,19 +166,19 @@ export function EditorUI() {
 					onUpdate={onUpdate}
 					placeholder={
 						<div className="border-t bg-text-primary px-3 py-2 text-text-muted text-xs">
-							{"Type "}
+							{'Type '}
 							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								/
 							</kbd>
-							{" for commands or "}
+							{' for commands or '}
 							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								@
 							</kbd>
-							{" to reference documents • Use "}
+							{' to reference documents • Use '}
 							<kbd className="rounded bg-text-secondary px-1 py-0.5 text-text-primary">
 								Ctrl+Alt+1-3
 							</kbd>
-							{" for headings"}
+							{' for headings'}
 						</div>
 					}
 					className="mx-auto min-h-[300px] max-w-[44rem] border-border border-b pb-8"

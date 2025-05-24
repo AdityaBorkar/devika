@@ -14,7 +14,7 @@ const cache = new Map();
 // }
 
 export function unstable_use<R>(promise: () => Promise<R>) {
-	return new Promise<R>((resolve, reject) => {
+	return new Promise<R>((resolve, _reject) => {
 		if (cache.has(promise)) {
 			const result = cache.get(promise)();
 			return resolve(result);

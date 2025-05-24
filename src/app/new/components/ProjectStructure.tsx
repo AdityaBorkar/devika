@@ -1,6 +1,6 @@
-import { Link } from "react-router";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { Link } from 'react-router';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
 export default function ProjectOnboarding_ProjectStructure() {
 	return (

@@ -1,8 +1,7 @@
 // createProjectStructure.ts
 
-import * as child_process from 'child_process';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as child_process from 'node:child_process';
+import * as fs from 'node:fs';
 
 // Function to get package.json dependencies
 function getDependencies() {
@@ -12,7 +11,7 @@ function getDependencies() {
 			dependencies: packageJson.dependencies || {},
 			devDependencies: packageJson.devDependencies || {},
 		};
-	} catch (error) {
+	} catch (_error) {
 		return { dependencies: {}, devDependencies: {} };
 	}
 }
@@ -29,10 +28,9 @@ function getProjectStructure() {
 				'tree -I "node_modules|.git|dist|.next|out" --dirsfirst -L 3',
 				{ encoding: 'utf8' },
 			);
-		} else {
-			return 'Tree command not found. Please install it or use manual project structure documentation.';
 		}
-	} catch (error) {
+		return 'Tree command not found. Please install it or use manual project structure documentation.';
+	} catch (_error) {
 		return 'Error getting project structure.';
 	}
 }

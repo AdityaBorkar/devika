@@ -1,7 +1,7 @@
-import { isValidElement, type ReactNode, useEffect } from "react";
-import { createPortal } from "react-dom";
-import { useDialog } from "@/contexts/DialogContext";
-import { cn } from "@/lib/utils";
+import { isValidElement, type ReactNode, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { useDialog } from '@/contexts/DialogContext';
+import { cn } from '@/lib/utils';
 
 // Define type for structured dialog content
 type StructuredDialogContent = {
@@ -17,12 +17,12 @@ export function Dialog() {
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			// Escape to close
-			if (e.key === "Escape") closeDialog();
+			if (e.key === 'Escape') closeDialog();
 
 			// Alt+C to open/close connection dialog
-			if (e.altKey && e.key === "c") {
+			if (e.altKey && e.key === 'c') {
 				const connectionButton = document.querySelector(
-					"[data-connection-btn]",
+					'[data-connection-btn]',
 				);
 				if (connectionButton instanceof HTMLElement) {
 					connectionButton.click();
@@ -30,15 +30,15 @@ export function Dialog() {
 			}
 		};
 
-		document.addEventListener("keydown", handleKeyDown);
+		document.addEventListener('keydown', handleKeyDown);
 
 		if (isOpen) {
-			document.body.style.overflow = "hidden";
+			document.body.style.overflow = 'hidden';
 		}
 
 		return () => {
-			document.removeEventListener("keydown", handleKeyDown);
-			document.body.style.overflow = "";
+			document.removeEventListener('keydown', handleKeyDown);
+			document.body.style.overflow = '';
 		};
 	}, [isOpen, closeDialog]);
 
@@ -49,23 +49,23 @@ export function Dialog() {
 
 	// Check if dialogContent has structured format
 	const isStructuredContent =
-		typeof dialogContent === "object" &&
+		typeof dialogContent === 'object' &&
 		dialogContent !== null &&
 		!isComponentContent &&
-		"title" in dialogContent;
+		'title' in dialogContent;
 
 	return createPortal(
 		<div
 			className={cn(
-				"fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition-opacity duration-200",
-				isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
+				'fixed inset-0 z-50 flex items-center justify-center bg-black/50 transition-opacity duration-200',
+				isOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
 			)}
 			onClick={closeDialog}
 		>
 			<div
 				className={cn(
-					"w-full max-w-md rounded-lg bg-bg-primary p-6 shadow-lg transition-all duration-200",
-					isOpen ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
+					'w-full max-w-md rounded-lg bg-bg-primary p-6 shadow-lg transition-all duration-200',
+					isOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0',
 				)}
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -75,19 +75,19 @@ export function Dialog() {
 				) : isStructuredContent ? (
 					// Render structured content
 					<>
-						<div className="flex justify-between items-center mb-4">
-							<h2 className="text-xl font-semibold">
+						<div className="mb-4 flex items-center justify-between">
+							<h2 className="font-semibold text-xl">
 								{(dialogContent as StructuredDialogContent).title}
 							</h2>
 							<button
 								onClick={closeDialog}
-								className="text-text-muted hover:text-text-primary rounded-full p-1"
+								className="rounded-full p-1 text-text-muted hover:text-text-primary"
 							>
 								✕
 							</button>
 						</div>
 						{(dialogContent as StructuredDialogContent).description && (
-							<p className="text-text-muted mb-4">
+							<p className="mb-4 text-text-muted">
 								{(dialogContent as StructuredDialogContent).description}
 							</p>
 						)}
@@ -96,11 +96,11 @@ export function Dialog() {
 				) : (
 					// Fallback for other content
 					<>
-						<div className="flex justify-between items-center mb-4">
-							<div className="grow"></div>
+						<div className="mb-4 flex items-center justify-between">
+							<div className="grow" />
 							<button
 								onClick={closeDialog}
-								className="text-text-muted hover:text-text-primary rounded-full p-1"
+								className="rounded-full p-1 text-text-muted hover:text-text-primary"
 							>
 								✕
 							</button>

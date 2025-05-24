@@ -24,7 +24,7 @@ export function StyleConfigEditor({ config }: StyleConfigEditorProps) {
 		);
 	};
 
-	const getContentForTab = (tab: string) => {
+	const _getContentForTab = (tab: string) => {
 		const key = tab as keyof Omit<StyleConfig, 'id' | 'name' | 'isCommon'>;
 		return config[key];
 	};

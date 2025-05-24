@@ -1,4 +1,4 @@
-import type { Cycle, CycleStatus, SortDirection, SortState } from './types';
+import type { Cycle, CycleStatus, SortState } from './types';
 
 /**
  * Format a date string to a more readable format

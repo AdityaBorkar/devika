@@ -1,9 +1,9 @@
-import { type } from "arktype";
+import { type } from 'arktype';
 
 export const ProjectOnboarding = type({
-	name: "string",
+	name: 'string',
 	ide: "('cursor'|'github-copilot'|'cline'|'roo-code'|'continue'|'windsurf'|'augment')[]",
-	tdd: "boolean",
+	tdd: 'boolean',
 	// path: "string?",
 });
 

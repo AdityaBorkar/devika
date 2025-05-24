@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import type { IconType } from "react-icons/lib";
+import { useEffect, useState } from 'react';
+import type { IconType } from 'react-icons/lib';
 import {
 	PiCheckCircleDuotone,
 	PiCheckSquare,
@@ -8,18 +8,18 @@ import {
 	PiLightbulbFilament,
 	PiPlayCircle,
 	PiXCircleDuotone,
-} from "react-icons/pi";
-import { Link, Navigate, Outlet, useLocation, useParams } from "react-router";
-import { ConnectionDialog } from "@/components/ConnectionDialog";
-import { Dialog } from "@/contexts/DialogContext";
-import { $fetch } from "@/lib/$fetch";
-import { cn } from "@/lib/utils";
+} from 'react-icons/pi';
+import { Link, Navigate, Outlet, useLocation, useParams } from 'react-router';
+import { ConnectionDialog } from '@/components/ConnectionDialog';
+import { Dialog } from '@/contexts/DialogContext';
+import { $fetch } from '@/lib/$fetch';
+import { cn } from '@/lib/utils';
 
 const NAV_ITEMS_TOP = [
-	{ href: "dashboard", icon: PiHouse, label: "Dashboard" },
-	{ href: "prd", icon: PiLightbulbFilament, label: "PRD" },
-	{ href: "tasks", icon: PiCheckSquare, label: "Tasks" },
-	{ href: "cycles", icon: PiPlayCircle, label: "Cycles" },
+	{ href: 'dashboard', icon: PiHouse, label: 'Dashboard' },
+	{ href: 'prd', icon: PiLightbulbFilament, label: 'PRD' },
+	{ href: 'tasks', icon: PiCheckSquare, label: 'Tasks' },
+	{ href: 'cycles', icon: PiPlayCircle, label: 'Cycles' },
 	// { href: 'workspace', icon: PiCode, label: 'Workspace' },
 	// { href: 'versions', icon: PiClockCounterClockwise, label: 'Versions' },
 	// { href: 'deployments', icon: PiRocketLaunch, label: 'Deployments' },
@@ -27,10 +27,10 @@ const NAV_ITEMS_TOP = [
 
 const NAV_ITEMS_BOTTOM = [
 	// { href: "stats", icon: PiChartPieSlice, label: "Stats" },
-	{ href: "settings", icon: PiGear, label: "Settings" },
+	{ href: 'settings', icon: PiGear, label: 'Settings' },
 ];
 
-export default function AppLayout() {
+export default function WorkspaceLayout() {
 	// const workspace = use(useWorkspace());
 	// if (!workspace) redirect("/new");
 
@@ -39,19 +39,19 @@ export default function AppLayout() {
 	useEffect(() => {
 		if (workspace) return;
 		const slug = `${userSlug}/${workspaceSlug}`;
-		$fetch("GET", "/api/actions/workspace", { slug }).then(
+		$fetch('GET', '/api/actions/workspace', { slug }).then(
 			({ success, data }) => {
 				console.log({ success, data });
 				if (success) setWorkspace(data);
-				else setWorkspace("NOT-FOUND");
+				else setWorkspace('NOT-FOUND');
 			},
 		);
-	}, []);
+	}, [userSlug, workspace, workspaceSlug]);
 
 	const location = useLocation();
-	const segment = location.pathname.split("/")[3];
+	const segment = location.pathname.split('/')[3];
 
-	if (workspace === "NOT-FOUND") return <Navigate to="/new" />;
+	if (workspace === 'NOT-FOUND') return <Navigate to="/new" />;
 	// if (workspace === "UNAUTHORIZED")
 	return (
 		<div className="grid h-screen grid-cols-[3.5rem_auto]">
@@ -60,7 +60,7 @@ export default function AppLayout() {
 					<NavItem
 						isActive={false}
 						label="Workspace"
-						className="mt-2 bg-pink-800 text-pink-100 border-pink-700 font-medium py-1.5 hover:bg-pink-700 hover:border-pink-700 hover:text-pink-50"
+						className="mt-2 border-pink-700 bg-pink-800 py-1.5 font-medium text-pink-100 hover:border-pink-700 hover:bg-pink-700 hover:text-pink-50"
 					>
 						{/* Switch Workspace, Account Settings, Logout, All Projects */}
 						DA
@@ -104,17 +104,17 @@ function NavItem({
 	[key: string]: any;
 }) {
 	const cue = null;
-	const to = href ?? "#";
-	const Component = href ? Link : "div";
+	const to = href ?? '#';
+	const Component = href ? Link : 'div';
 	return (
 		<Component
 			to={to}
 			className={cn(
-				"group relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-text-muted",
-				"transition-all duration-200",
+				'group relative my-1 w-fit select-none rounded-md border border-transparent px-2 py-2 text-sm text-text-muted',
+				'transition-all duration-200',
 				isActive
-					? "border-border bg-bg-secondary text-text-primary"
-					: "hover:border-border hover:bg-bg-secondary/80 hover:text-text-primary/80",
+					? 'border-border bg-bg-secondary text-text-primary'
+					: 'hover:border-border hover:bg-bg-secondary/80 hover:text-text-primary/80',
 				className,
 			)}
 			{...props}
@@ -122,11 +122,11 @@ function NavItem({
 			{cue && (
 				<div
 					className={cn(
-						"absolute top-1.75 right-1.5 size-2 rounded-full",
-						cue === "error" && "bg-rose-500/80",
-						cue === "warning" && "bg-amber-500/80",
-						cue === "info" && "bg-sky-500/80",
-						cue === "muted" && "bg-stone-300/80",
+						'absolute top-1.75 right-1.5 size-2 rounded-full',
+						cue === 'error' && 'bg-rose-500/80',
+						cue === 'warning' && 'bg-amber-500/80',
+						cue === 'info' && 'bg-sky-500/80',
+						cue === 'muted' && 'bg-stone-300/80',
 					)}
 				/>
 			)}
@@ -134,9 +134,9 @@ function NavItem({
 			{children}
 			<div
 				className={cn(
-					"invisible absolute text-nowrap top-1.5 pointer-events-none left-11 rounded bg-text-tertiary px-2 py-1 font-semibold text-bg-primary text-xs z-50",
-					"opacity-0 transition-all duration-200",
-					"group-hover:visible group-focus-visible:visible group-hover:opacity-100 group-focus-visible:opacity-100",
+					'pointer-events-none invisible absolute top-1.5 left-11 z-50 text-nowrap rounded bg-text-tertiary px-2 py-1 font-semibold text-bg-primary text-xs',
+					'opacity-0 transition-all duration-200',
+					'group-hover:visible group-hover:opacity-100 group-focus-visible:visible group-focus-visible:opacity-100',
 				)}
 			>
 				{label}

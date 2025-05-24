@@ -1,13 +1,13 @@
-import { useAtomValue } from "jotai";
-import { Divider } from "@/app/(workspace)/prd/[pageId]/components/Divider";
-import PrdDefaultPage from "@/app/(workspace)/prd/page";
+import { useAtomValue } from 'jotai';
+import { Divider } from '@/app/(workspace)/prd/[pageId]/components/Divider';
+import PrdDefaultPage from '@/app/(workspace)/prd/page';
 import {
 	PrdActiveTabIdAtom,
 	PrdLeftTabsAtom,
 	PrdRightTabsAtom,
 	PrdRightWidthAtom,
-} from "@/app/(workspace)/prd/store";
-import { SplitScreen } from "./components/SplitScreen";
+} from '@/app/(workspace)/prd/store';
+import { SplitScreen } from './components/SplitScreen';
 
 export function PrdDocPage() {
 	return (

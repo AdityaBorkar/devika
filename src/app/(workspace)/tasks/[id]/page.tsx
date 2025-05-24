@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 export default function TaskPage() {
 	// Get initial task data

@@ -1,23 +1,23 @@
-import { arktypeResolver } from "@hookform/resolvers/arktype";
-import { useAtom } from "jotai";
-import { useForm } from "react-hook-form";
-import { useSearchParams } from "react-router";
-import { workspaceAtom } from "@/app/(app)/new/store";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { $fetch } from "@/lib/$fetch";
-import { ProjectOnboarding } from "@/schema/ProjectOnboarding";
+import { arktypeResolver } from '@hookform/resolvers/arktype';
+import { useAtom } from 'jotai';
+import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router';
+import { workspaceAtom } from '@/app/new/store';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { $fetch } from '@/lib/$fetch';
+import { ProjectOnboarding } from '@/schema/ProjectOnboarding';
 
 const IDE_OPTIONS = [
-	{ value: "cursor", label: "Cursor" },
-	{ value: "cline", label: "Cline" },
-	{ value: "github-copilot", label: "GitHub Copilot" },
-	{ value: "roo-code", label: "Roo Code" },
-	{ value: "windsurf", label: "Windsurf" },
-	{ value: "continue", label: "Continue" },
-	{ value: "augment", label: "Augment" },
+	{ value: 'cursor', label: 'Cursor' },
+	{ value: 'cline', label: 'Cline' },
+	{ value: 'github-copilot', label: 'GitHub Copilot' },
+	{ value: 'roo-code', label: 'Roo Code' },
+	{ value: 'windsurf', label: 'Windsurf' },
+	{ value: 'continue', label: 'Continue' },
+	{ value: 'augment', label: 'Augment' },
 ] as const;
 
 export function Step1({ setStep }: { setStep: (step: number) => void }) {
@@ -25,13 +25,13 @@ export function Step1({ setStep }: { setStep: (step: number) => void }) {
 
 	const [workspace, setWorkspace] = useAtom(workspaceAtom);
 	const defaultValues = {
-		name: searchParams.get("name") ?? undefined,
-		tdd: searchParams.get("tdd") === "true",
+		name: searchParams.get('name') ?? undefined,
+		tdd: searchParams.get('tdd') === 'true',
 		// ide: (searchParams.get("ide") ?? "").split(",").filter(Boolean) as ProjectOnboarding["ide"],
 	};
 
 	const form = useForm<ProjectOnboarding>({
-		mode: "onChange",
+		mode: 'onChange',
 		resolver: arktypeResolver(ProjectOnboarding),
 		defaultValues: workspace || defaultValues,
 	});
@@ -43,29 +43,29 @@ export function Step1({ setStep }: { setStep: (step: number) => void }) {
 		watch,
 	} = form;
 
-	const selectedIdes = watch("ide") || [];
+	const selectedIdes = watch('ide') || [];
 
-	const toggleIde = (value: ProjectOnboarding["ide"][number]) => {
+	const toggleIde = (value: ProjectOnboarding['ide'][number]) => {
 		const currentValues = [...selectedIdes];
 		const index = currentValues.indexOf(value);
 
 		if (index === -1) {
 			// Add the value if it doesn't exist
-			setValue("ide", [...currentValues, value]);
+			setValue('ide', [...currentValues, value]);
 		} else {
 			// Remove the value if it exists
 			currentValues.splice(index, 1);
-			setValue("ide", currentValues);
+			setValue('ide', currentValues);
 		}
 	};
 
 	async function onSubmit(inputs: ProjectOnboarding) {
 		const { success, data } = await $fetch(
-			"POST",
-			"/api/actions/workspace",
+			'POST',
+			'/api/actions/workspace',
 			inputs,
 		);
-		if (!success) return console.error("Failed to create workspace");
+		if (!success) return console.error('Failed to create workspace');
 
 		const { createdAt, ...workspace } = data;
 		setWorkspace(workspace);
@@ -86,7 +86,7 @@ export function Step1({ setStep }: { setStep: (step: number) => void }) {
 					<Input
 						id="name"
 						placeholder="My Awesome Project"
-						{...register("name")}
+						{...register('name')}
 					/>
 					{errors.name && (
 						<p className="text-destructive text-sm">{errors.name.message}</p>
@@ -118,7 +118,7 @@ export function Step1({ setStep }: { setStep: (step: number) => void }) {
 				</div>
 
 				<div className="flex items-center gap-2">
-					<Checkbox id="tdd" {...register("tdd")} />
+					<Checkbox id="tdd" {...register('tdd')} />
 					<Label htmlFor="tdd">Enable Test-Driven Development</Label>
 					{errors.tdd && (
 						<p className="text-destructive text-sm">{errors.tdd.message}</p>

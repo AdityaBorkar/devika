@@ -1,33 +1,33 @@
-"use client";
+'use client';
 
-import { motion } from "motion/react";
-import { CycleCardItem } from "@/components/cycles/CycleCardItem";
-import { CycleListItem } from "@/components/cycles/CycleListItem";
-import { ViewLayout, type ViewTab } from "@/components/layouts/ViewLayout";
-import { Label } from "@/components/ui/label";
+import { motion } from 'motion/react';
+import { CycleCardItem } from '@/components/cycles/CycleCardItem';
+import { CycleListItem } from '@/components/cycles/CycleListItem';
+import { ViewLayout, type ViewTab } from '@/components/layouts/ViewLayout';
+import { Label } from '@/components/ui/label';
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 export default function CyclesViewPage() {
 	// TODO: Properties
 
 	const viewTabs = [
-		{ label: "All Cycles", value: "all", display: "kanban" },
-		{ label: "Current", value: "current", display: "kanban" },
-		{ label: "Upcoming", value: "upcoming", display: "kanban" },
+		{ label: 'All Cycles', value: 'all', display: 'kanban' },
+		{ label: 'Current', value: 'current', display: 'kanban' },
+		{ label: 'Upcoming', value: 'upcoming', display: 'kanban' },
 	] as ViewTab[];
 
-	const saveViewTab = (tab: ViewTab) => {
+	const saveViewTab = (_tab: ViewTab) => {
 		// ...
 	};
 
 	const cycle = {
-		name: "Cycle 1",
+		name: 'Cycle 1',
 		agents: 5,
 		tasks: 10,
 		running: true,
@@ -130,7 +130,7 @@ function Button({
 	return (
 		<button
 			type="button"
-			className={cn("rounded-md border px-4 py-1.5 text-foreground", className)}
+			className={cn('rounded-md border px-4 py-1.5 text-foreground', className)}
 		>
 			{children}
 		</button>

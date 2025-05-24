@@ -25,7 +25,7 @@ import {
 } from './MDXCommands';
 
 // Auto-save debounce delay in milliseconds
-const AUTO_SAVE_DELAY = 1000;
+const _AUTO_SAVE_DELAY = 1000;
 
 interface MDXEditorProps {
 	content: string;

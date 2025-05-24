@@ -1,14 +1,14 @@
-import { createClient } from "@libsql/client";
+import { createClient } from '@libsql/client';
+import { drizzle } from 'drizzle-orm/libsql';
 
 const client = createClient({
-	url: "http://localhost:3001",
-	authToken: "",
+	url: 'http://localhost:3001',
+	authToken: '',
 	// syncUrl: "http://localhost:3001",
 	syncInterval: 5,
 });
+
 // client.sync();
-export default client;
 
-// const db = drizzle({ client });
-
-// export default db;
+const db = drizzle({ client });
+export default db;

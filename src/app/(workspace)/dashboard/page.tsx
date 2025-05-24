@@ -1,38 +1,38 @@
-import { motion } from "motion/react";
-import logo from "@/../public/logo.svg";
-import { CycleCard } from "@/app/(workspace)/dashboard/components/CycleCard";
-import { DeploymentCard } from "@/app/(workspace)/dashboard/components/DeploymentCard";
-import { PrdCard } from "@/app/(workspace)/dashboard/components/PrdSummaryCard";
-import { cn } from "@/lib/utils";
+import { motion } from 'motion/react';
+import logo from '@/../public/logo.svg';
+import { CycleCard } from '@/app/(workspace)/dashboard/components/CycleCard';
+import { DeploymentCard } from '@/app/(workspace)/dashboard/components/DeploymentCard';
+import { PrdCard } from '@/app/(workspace)/dashboard/components/PrdSummaryCard';
+import { cn } from '@/lib/utils';
 
 export default function DashboardPage() {
-	const userName = "Aditya";
+	const userName = 'Aditya';
 	const ongoingCycle = {
-		status: "live",
+		status: 'live',
 		running: false,
-		name: "Implement Notifications",
+		name: 'Implement Notifications',
 		prd: {
 			ongoing: false,
-			name: "PRD Name",
+			name: 'PRD Name',
 		},
 	};
 	const nextCycle = {
-		status: "draft",
+		status: 'draft',
 		running: false,
-		name: "Implement Light Theme",
+		name: 'Implement Light Theme',
 		prd: {
 			ongoing: false,
-			name: "PRD Name",
+			name: 'PRD Name',
 		},
 	};
 	const prdVersion = {
-		status: "live",
-		name: "Improve Developer Experience",
-		version: "3.x.x",
+		status: 'live',
+		name: 'Improve Developer Experience',
+		version: '3.x.x',
 	};
 	const ProductionVersion = {
-		status: "live",
-		version: "3.10.2",
+		status: 'live',
+		version: '3.10.2',
 	};
 
 	return (
@@ -74,8 +74,8 @@ export default function DashboardPage() {
 				<Card title="Notifications">
 					<div
 						className={cn(
-							"rounded-md border border-border bg-bg-secondary/50",
-							"flex min-h-16 items-center justify-center",
+							'rounded-md border border-border bg-bg-secondary/50',
+							'flex min-h-16 items-center justify-center',
 						)}
 					>
 						<div className="text-text-tertiary">

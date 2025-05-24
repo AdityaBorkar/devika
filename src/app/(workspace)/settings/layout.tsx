@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
-import type { IconType } from "react-icons";
+import { motion } from 'motion/react';
+import type { IconType } from 'react-icons';
 import {
 	PiArrowUpRight,
 	PiChatCircleText,
@@ -11,9 +11,9 @@ import {
 	PiNotebook,
 	PiNotepad,
 	PiUser,
-} from "react-icons/pi";
-import { Link, Outlet } from "react-router";
-import { cn } from "@/lib/utils";
+} from 'react-icons/pi';
+import { Link, Outlet } from 'react-router';
+import { cn } from '@/lib/utils';
 
 export default function SettingsLayout() {
 	return (
@@ -75,10 +75,10 @@ function NavLink({
 	return (
 		<Link
 			to={href}
-			target={external ? "_blank" : undefined}
+			target={external ? '_blank' : undefined}
 			className={cn(
-				"rounded gap-2 flex flex-row items-center  px-4 py-2 text-left text-text-secondary text-xs hover:bg-bg-tertiary",
-				external && "cursor-pointer *:cursor-pointer",
+				'flex flex-row items-center gap-2 rounded px-4 py-2 text-left text-text-secondary text-xs hover:bg-bg-tertiary',
+				external && 'cursor-pointer *:cursor-pointer',
 			)}
 		>
 			<Icon className="size-4" />

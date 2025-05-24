@@ -1,13 +1,13 @@
-import { type } from "arktype";
+import { type } from 'arktype';
 
 export const ProjectConfig = type({
-	id: "string",
-	name: "string",
+	id: 'string',
+	name: 'string',
 	ide: "('cursor'|'github-copilot'|'cline'|'roo-code'|'continue'|'windsurf'|'augment')[]",
-	tdd: "boolean",
-	"server?": {
-		"host?": "string",
-		"port?": "number",
+	tdd: 'boolean',
+	'server?': {
+		'host?': 'string',
+		'port?': 'number',
 	},
 });
 

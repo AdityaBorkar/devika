@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Step1 } from "@/app/(app)/new/components/Step1";
-import { Step2 } from "@/app/(app)/new/components/Step2";
-import { Step3 } from "@/app/(app)/new/components/Step3";
+import { useState } from 'react';
+import { Step1 } from '@/app/new/components/Step1';
+import { Step2 } from '@/app/new/components/Step2';
+import { Step3 } from '@/app/new/components/Step3';
 
 export default function OnboardingPage() {
 	const [step, setStep] = useState(1);

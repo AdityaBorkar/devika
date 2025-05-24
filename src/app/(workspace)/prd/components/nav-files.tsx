@@ -1,27 +1,27 @@
-import { workspace } from "drizzle/schema/workspace";
-import { eq } from "drizzle-orm";
-import { useSetAtom } from "jotai";
-import { PiFile } from "react-icons/pi";
-import { Link } from "react-router";
-import { PrdActiveTabIdAtom } from "@/app/(workspace)/prd/store";
-import db from "@/lib/client-db";
-import { cn } from "@/lib/utils";
+import { workspace } from 'drizzle/schema/workspace';
+import { eq } from 'drizzle-orm';
+import { useSetAtom } from 'jotai';
+import { PiFile } from 'react-icons/pi';
+import { Link } from 'react-router';
+import { PrdActiveTabIdAtom } from '@/app/(workspace)/prd/store';
+import db from '@/lib/client-db';
+import { cn } from '@/lib/utils';
 
 const sections = [
 	{
-		label: "Features",
+		label: 'Features',
 		// to: '/prd/features',
 	},
 	{
-		label: "System & Tech Stack",
+		label: 'System & Tech Stack',
 		// to: '/prd/system-environment-requirements',
 	},
 	{
-		label: "Design & UX Flow",
+		label: 'Design & UX Flow',
 		// to: '/prd/ux-flow-design-notes',
 	},
 	{
-		label: "User Stories",
+		label: 'User Stories',
 		// to: '/prd/user-stories',
 	},
 ];
@@ -31,8 +31,8 @@ const sections = [
 
 console.log({ db });
 
-async function getFiles() {
-	const slug = "adityaborkar/devika";
+async function _getFiles() {
+	const slug = 'adityaborkar/devika';
 	const files = (await db)
 		.select()
 		.from(workspace)
@@ -97,7 +97,7 @@ function NoteLink({
 			to={`/prd/${tabId}`}
 			onClick={() => setActiveTabId(tabId)}
 			className={cn(
-				"mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-bg-secondary",
+				'mx-3 rounded-md px-1 py-1.5 text-xs hover:bg-bg-secondary',
 				className,
 			)}
 		>

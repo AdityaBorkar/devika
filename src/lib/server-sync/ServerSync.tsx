@@ -1,7 +1,6 @@
-import { useSetAtom } from "jotai";
-import { createContext, use, useEffect, useMemo, useState } from "react";
-import { logger } from "@/lib/server-sync/logger";
-import { ContextAtom } from "@/lib/server-sync/stores";
+import { useSetAtom } from 'jotai';
+import { createContext, use, useEffect, useMemo, useState } from 'react';
+import { ContextAtom } from '@/lib/server-sync/stores';
 
 type Context = {
 	status: {
@@ -11,7 +10,7 @@ type Context = {
 	socket: WebSocket;
 };
 
-const defaultStatus = { success: true, message: "" }; // ! `true`
+const defaultStatus = { success: true, message: '' }; // ! `true`
 
 const StatusContext = createContext<Context>({
 	status: defaultStatus,
@@ -28,17 +27,17 @@ export function ClientSyncProvider({
 }: {
 	children: React.ReactNode;
 }) {
-	const setContextValue = useSetAtom(ContextAtom);
-	const [status, setStatus] = useState<Context["status"]>(defaultStatus);
+	const _setContextValue = useSetAtom(ContextAtom);
+	const [status, _setStatus] = useState<Context['status']>(defaultStatus);
 
 	const socket = useMemo(() => {
-		const socket = new WebSocket("ws://localhost:3210/api/server");
-		socket.addEventListener("open", () => {
-			// TODO: PERFORM USER AUTHENTICATION
-			logger.log("Connected to Server");
-			const params = { command: "START", data: {} };
-			socket.send(JSON.stringify(params));
-		});
+		const socket = new WebSocket('ws://localhost:3210/api/server');
+		// socket.addEventListener('open', () => {
+		// 	// TODO: PERFORM USER AUTHENTICATION
+		// 	logger.log('Connected to Server');
+		// 	const params = { command: 'START', data: {} };
+		// 	socket.send(JSON.stringify(params));
+		// });
 		// socket.addEventListener("message", (event) => {
 		// 	logger.log("[CLIENT] Received", event.data);
 		// 	const data = JSON.parse(event.data);
@@ -62,7 +61,7 @@ export function ClientSyncProvider({
 		// 	// }
 		// });
 		return socket;
-	}, [setContextValue]);
+	}, []);
 
 	useEffect(() => {
 		return () => {

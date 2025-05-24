@@ -1,7 +1,7 @@
-import type { IconType } from "react-icons";
-import { PiCloud, PiMonitor, PiToolbox } from "react-icons/pi";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import type { IconType } from 'react-icons';
+import { PiCloud, PiMonitor, PiToolbox } from 'react-icons/pi';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export default function EditorPage() {
 	return (
@@ -59,8 +59,8 @@ function NavItem({
 	return (
 		<div
 			className={cn(
-				"rounded-md px-3 py-2 text-center text-xs",
-				isActive && "bg-bg-tertiary",
+				'rounded-md px-3 py-2 text-center text-xs',
+				isActive && 'bg-bg-tertiary',
 			)}
 		>
 			<Icon className="-mt-0.5 mr-1 inline-block size-4" />

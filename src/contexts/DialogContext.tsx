@@ -1,5 +1,5 @@
-import type React from "react";
-import { createContext, useContext, useState } from "react";
+import type React from 'react';
+import { createContext, useContext, useState } from 'react';
 
 interface DialogContextType {
 	openDialog: (content: React.ReactNode) => void;
@@ -16,7 +16,7 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openDialog = (content: React.ReactNode) => {
-		console.log("openDialog", content);
+		console.log('openDialog', content);
 		setDialogContent(content);
 		setIsOpen(true);
 	};
@@ -30,7 +30,7 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
 		<DialogContext.Provider value={{ openDialog, closeDialog, isOpen }}>
 			{children}
 			{isOpen && (
-				<div className="h-screen w-screen top-0 left-0 fixed flex items-center justify-center bg-background/70">
+				<div className="fixed top-0 left-0 flex h-screen w-screen items-center justify-center bg-background/70">
 					{dialogContent}
 				</div>
 			)}
@@ -52,7 +52,7 @@ function DialogTrigger({
 				{children}
 			</span>
 			{isOpen && (
-				<div className="fixed inset-0 bg-background/70 flex items-center justify-center z-50">
+				<div className="fixed inset-0 z-50 flex items-center justify-center bg-background/70">
 					{content}
 				</div>
 			)}
@@ -67,6 +67,6 @@ export const Dialog = {
 export function useDialog() {
 	const context = useContext(DialogContext);
 	if (!context)
-		throw new Error("useDialog must be used within a DialogProvider");
+		throw new Error('useDialog must be used within a DialogProvider');
 	return context;
 }

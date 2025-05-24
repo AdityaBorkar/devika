@@ -1,3 +1,8 @@
+import { workspace } from 'drizzle/schema';
+import db from '@/lib/client-db';
+
 export default function WorkspacesPage() {
-	return <div>Workspaces</div>;
+	const workspaces = db.select().from(workspace);
+	console.log({ workspaces });
+	return <div>{/* Project Name, GitHub, isRunning, IDE, LOGO */}</div>;
 }
