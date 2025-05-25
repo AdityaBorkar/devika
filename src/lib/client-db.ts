@@ -1,14 +1,18 @@
-import { createClient } from '@libsql/client';
-import { drizzle } from 'drizzle-orm/libsql';
+// import { createClient } from '@libsql/client-wasm';
+// import { drizzle } from 'drizzle-orm/libsql/wasm';
 
-const client = createClient({
-	url: 'http://localhost:3001',
-	authToken: '',
-	// syncUrl: "http://localhost:3001",
-	syncInterval: 5,
-});
+// const client = createClient({ url: 'file:local.db' });
+// const db = drizzle(client);
 
-// client.sync();
+// export default db;
 
-const db = drizzle({ client });
+import { PGlite } from '@electric-sql/pglite';
+import { drizzle } from 'drizzle-orm/pglite';
+
+const client = new PGlite();
+
+await client.query("select 'Hello world' as message;");
+await client.query('select version();');
+
+const db = drizzle(client);
 export default db;
