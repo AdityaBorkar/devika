@@ -1,18 +1,23 @@
-// import { createClient } from '@libsql/client-wasm';
-// import { drizzle } from 'drizzle-orm/libsql/wasm';
-
-// const client = createClient({ url: 'file:local.db' });
-// const db = drizzle(client);
-
-// export default db;
-
+// import { PGlite } from '@/external/pglite';
 import { PGlite } from '@electric-sql/pglite';
+// import { PGlite } from 'https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js';
+
+import { workspace } from 'drizzle/schema';
 import { drizzle } from 'drizzle-orm/pglite';
 
-const client = new PGlite();
+const client = new PGlite('idb://devika-development');
 
-await client.query("select 'Hello world' as message;");
-await client.query('select version();');
+await client.query("select 'Hello world' as message;").then(console.log);
+await client.query('select version();').then(console.log);
 
-const db = drizzle(client);
+const db = drizzle({ client, schema: { workspace } });
+
+// TODO: Migrate Database
+
+// TODO: Run in Web Worker
+// 1. Bundler Works fine
+// 2. There's an issue with the Bun Dev Server
+
 export default db;
+
+// 4939679

@@ -1,11 +1,15 @@
-import path from 'node:path';
 import { defineConfig } from 'drizzle-kit';
 
 export default defineConfig({
 	schema: './drizzle/schema/*',
 	out: './drizzle/migrations',
-	dialect: 'sqlite',
+	dialect: 'postgresql',
 	dbCredentials: {
-		url: path.resolve(process.cwd(), '.data/dev.db'),
+		host: 'localhost',
+		port: 5432,
+		user: '00000000-0000-0000-0000-000000000000',
+		password: 'password',
+		database: 'test',
+		ssl: 'allow',
 	},
 });
