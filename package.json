@@ -80,17 +80,17 @@
 	"name": "devika",
 	"private": true,
 	"scripts": {
-		"build": "bun run build.ts",
-		"build:check": "bun typecheck && bun lint && bun run build",
-		"dev": "bunx kill-port 3000 && sleep 1 && bun --hot src/server.ts",
-		"dev:frontend": "bun build src/frontend.html --outdir='dist' --minify --target=browser --sourcemap='linked' --watch",
+		"dev": "bunx kill-port 3000 && sleep 1 && exit 1 && bun src/server.ts",
+		"dev:backend": "bun --hot src/server.ts",
+		"dev:frontend": "bun run --hot build.ts",
 		"db:start": "nile local start",
 		"db:stop": "nile local stop",
 		"db:push": "bunx drizzle-kit push",
+		"typecheck": "tsc --noEmit --incremental",
 		"lint": "biome check ./src",
 		"lint:fix": "biome check ./src --fix --unsafe",
-		"start": "NODE_ENV=production bun src/server.ts",
-		"typecheck": "tsc --noEmit --incremental"
+		"build": "bun typecheck && bun lint && bun run build.ts",
+		"start": "NODE_ENV=production bun src/serer.ts"
 	},
 	"type": "module",
 	"version": "0.1.0",

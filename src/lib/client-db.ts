@@ -1,23 +1,24 @@
-// import { PGlite } from '@/external/pglite';
 import { PGlite } from '@electric-sql/pglite';
-// import { PGlite } from 'https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/index.js';
-
-import { workspace } from 'drizzle/schema';
 import { drizzle } from 'drizzle-orm/pglite';
+import { Letsync } from '@/lib/db-sync/init';
 
-const client = new PGlite('idb://devika-development');
+async function initDatabase() {
+	// TODO: Run in Web Worker
 
-await client.query("select 'Hello world' as message;").then(console.log);
-await client.query('select version();').then(console.log);
+	const client = new PGlite('idb://devika-development');
+	const db = drizzle({ client });
 
-const db = drizzle({ client, schema: { workspace } });
+	const syncManager = new Letsync({ client });
+	syncManager.connect();
 
-// TODO: Migrate Database
+	// TODO: Extend exports to support:
+	// version - upgrade(version: string), checkForUpdate(), get()
+	// sync - sync(version: string), syncAll()
+	// live - subscribe((db) => db.operations)
 
-// TODO: Run in Web Worker
-// 1. Bundler Works fine
-// 2. There's an issue with the Bun Dev Server
+	return { db };
+}
+
+const { db } = await initDatabase();
 
 export default db;
-
-// 4939679

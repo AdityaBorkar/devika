@@ -18,18 +18,6 @@ if (existsSync(outdir)) {
 
 const start = performance.now();
 
-export function extractPath(path: string) {
-	const marker = '@electric-sql/pglite/dist/';
-	const markerIndex = path.indexOf(marker);
-
-	if (markerIndex === -1) {
-		console.log('Error', path);
-		return path;
-	}
-
-	return path.substring(markerIndex + marker.length);
-}
-
 try {
 	// Build the React frontend
 	const result = await build({
@@ -38,25 +26,7 @@ try {
 		minify: false,
 		target: 'browser',
 		sourcemap: 'linked',
-		plugins: [
-			plugin,
-			// {
-			// 	name: 'Wasm loader',
-			// 	setup(build) {
-			// 		build.onLoad({ filter: /@electric-sql\/pglite/ }, async (args) => {
-			// 			console.log('Loading WASM file:', args.path);
-			// 			const path = extractPath(args.path);
-			// 			console.log('Replacing', args.path, 'with', path);
-			// 			const response = await fetch(
-			// 				`https://cdn.jsdelivr.net/npm/@electric-sql/pglite/dist/${path}`,
-			// 			);
-			// 			const contents = await response.text();
-			// 			console.log(`Resolving ${args.path} to CDN`);
-			// 			return { contents, external: true };
-			// 		});
-			// 	},
-			// },
-		],
+		plugins: [plugin],
 		define: {
 			'process.env.NODE_ENV': JSON.stringify('production'),
 		},
