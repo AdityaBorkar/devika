@@ -12,12 +12,5 @@
 
 import { drizzle } from 'drizzle-orm/node-postgres';
 
-const db = drizzle(process.env.NILEDB_URL);
+const db = drizzle(process.env.NILEDB_URL || '');
 export default db;
-
-// TODO: Choose a database
-// TODO: Run local instances, establish connection
-// TODO: Migrate and sync schemas
-// TODO: Sync Data
-// TODO: Handle edge cases
-// TODO: Make such that later, we can add an adapter to support (Postgres <-> SQLite)

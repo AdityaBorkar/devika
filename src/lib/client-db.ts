@@ -1,6 +1,6 @@
 import { PGlite } from '@electric-sql/pglite';
 import { drizzle } from 'drizzle-orm/pglite';
-import { Letsync } from '@/lib/db-sync/init';
+import { Letsync } from 'letsync/pglite';
 
 async function initDatabase() {
 	// TODO: Run in Web Worker
@@ -8,17 +8,11 @@ async function initDatabase() {
 	const client = new PGlite('idb://devika-development');
 	const db = drizzle({ client });
 
-	const syncManager = new Letsync({ client });
-	syncManager.connect();
-
-	// TODO: Extend exports to support:
-	// version - upgrade(version: string), checkForUpdate(), get()
-	// sync - sync(version: string), syncAll()
-	// live - subscribe((db) => db.operations)
+	const syncManager = new Letsync({ client, debug: true });
+	await syncManager.connect();
 
 	return { db };
 }
 
 const { db } = await initDatabase();
-
 export default db;

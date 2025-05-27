@@ -41,14 +41,14 @@
 
 import path from 'node:path';
 import express from 'express';
-import { WebSocketServer } from 'ws';
+import { LetsyncServer } from 'letsync/express';
 
 const app = express();
 const port = 3000;
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get('/pglite.wasm', (req, res) => {
+app.get('/pglite.wasm', (_, res) => {
 	res.sendFile(
 		path.join(
 			__dirname,
@@ -57,7 +57,7 @@ app.get('/pglite.wasm', (req, res) => {
 	);
 });
 
-app.get('/pglite.data', (req, res) => {
+app.get('/pglite.data', (_, res) => {
 	res.sendFile(
 		path.join(
 			__dirname,
@@ -66,40 +66,21 @@ app.get('/pglite.data', (req, res) => {
 	);
 });
 
-app.get('*splat', (req, res) => {
+app.get('*splat', (_, res) => {
 	res.sendFile(path.join(__dirname, '../dist', 'frontend.html'));
 });
 
 const server = app.listen(port, () => {
 	console.log(`Listening on port ${port}...`);
 });
-
-const wss = new WebSocketServer({ noServer: true });
-
-server.on('upgrade', (request, socket, head) => {
-	const isAuthenticated = true; // TODO: better-auth
-
-	if (isAuthenticated) {
-		wss.handleUpgrade(request, socket, head, (ws) => {
-			wss.emit('connection', ws, request);
-		});
-	} else {
-		socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-		socket.destroy();
-	}
+const wss = LetsyncServer({
+	server,
+	auth(request) {
+		// TODO: better-auth
+		console.log({ request });
+		const user = { id: '123' };
+		return user;
+		// return null; FOR UNAUTHORIZED
+	},
 });
-
-wss.on('connection', (ws) => {
-	console.log('Client connected');
-	ws.send('Hello! Welcome to the websocket server.');
-
-	ws.on('message', (message) => {
-		console.log(`Received message => ${message}`);
-		// Echo message back to client
-		ws.send(`You sent: ${message}`);
-	});
-
-	ws.on('close', () => {
-		console.log('Client disconnected');
-	});
-});
+console.log({ ws: !!wss });

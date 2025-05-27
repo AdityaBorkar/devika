@@ -1,18 +1,35 @@
 import { createId } from '@paralleldrive/cuid2';
-import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { user } from 'drizzle/schema/auth';
+import { boolean, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+
+const ideEnum = pgEnum('ide', [
+	'cursor',
+	'github-copilot',
+	'windsurf',
+	'zed',
+	// 'augment',
+	// 'continue',
+	// 'cline',
+	// 'roo-code',
+]);
 
 export const workspace = pgTable('workspace', {
 	workspaceId: text('workspace_id')
 		.primaryKey()
 		.$defaultFn(() => createId()),
-	createdAt: timestamp('created_at').$defaultFn(() => new Date()),
-	slug: text('slug').notNull().unique(),
+	createdAt: timestamp('created_at')
+		.$defaultFn(() => /* @__PURE__ */ new Date())
+		.notNull(),
+	createdBy: text('created_by')
+		.references(() => user.id)
+		.notNull(),
+	slug: text('slug').unique().notNull(),
 	name: text('name').notNull(),
-	ide: text('ide').notNull(), // array: "cursor", "github-copilot", "augment", "windsurf", "continue", "roo-code", "cline"
+	ide: ideEnum('ide').notNull(),
 	tdd: boolean('tdd').notNull(),
-	// createdBy: text("created_by"),
-	// relations handled in separate functions
-});
+}); // TODO: Read-only on client. Copy all fields.
+
+console.log({ workspace });
 
 // export const workspaceState = sqliteTable('workspace_state', {
 // 	workspaceId: text('workspace_id')
