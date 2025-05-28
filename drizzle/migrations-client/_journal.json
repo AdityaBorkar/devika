@@ -1,0 +1,11 @@
+{
+  "version": "1",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "version": "1",
+      "createdAt": 1748440486211,
+      "tag": "0000_aspiring_hitman"
+    }
+  ]
+}

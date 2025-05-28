@@ -1,6 +1,11 @@
 import type { IncomingMessage, Server } from 'node:http';
+import * as schema from 'drizzle/schema';
+import { eq } from 'drizzle-orm';
+import type { Request, Response } from 'express';
+import { createNewConnection } from 'letsync/express/createNewConnection';
 import type { WebSocket } from 'ws';
 import { WebSocketServer } from 'ws';
+import db from '@/lib/server-db';
 
 interface LetsyncServerProps {
 	server: Server;
@@ -8,18 +13,65 @@ interface LetsyncServerProps {
 }
 
 interface LetsyncWebSocket extends WebSocket {
-	clientId: string;
 	user: { id: string };
+	connection: typeof schema.connection.$inferSelect;
+	isNewConnection: boolean;
 }
 
-export function LetsyncServer({ server, auth }: LetsyncServerProps) {
+export function LetsyncWsServer({ server, auth }: LetsyncServerProps) {
 	const wss = new WebSocketServer({ noServer: true });
+
+	server.on('upgrade', async (request, socket, head) => {
+		const user = auth(request);
+		if (!user) {
+			socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+			socket.destroy();
+			return;
+		}
+
+		const searchParams = new URLSearchParams(request.url);
+		const clientId = searchParams.get('clientId') || null;
+
+		const isNewConnection = !clientId || clientId === 'NULL';
+		const connection = isNewConnection
+			? await createNewConnection(user)
+			: await db.query.connection.findFirst({
+					// TODO: REPLACE DB
+					where: ({ id }, { eq }) => eq(id, clientId), // TODO: Check if user
+				});
+
+		if (!connection) {
+			socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+			socket.destroy();
+			return;
+		}
+
+		const lastSyncedAt = new Date();
+		await db // TODO: REPLACE DB
+			.update(schema.connection)
+			.set({ lastSyncedAt })
+			.where(eq(schema.connection.id, connection.id))
+			.then(() => {
+				if (connection) connection.lastSyncedAt = lastSyncedAt;
+			});
+		console.log('Connection Authorized');
+
+		wss.handleUpgrade(request, socket, head, (client) => {
+			const ws = client as LetsyncWebSocket;
+			ws.user = user;
+			ws.connection = connection;
+			ws.isNewConnection = isNewConnection;
+			wss.emit('connection', ws, request);
+		});
+	});
+
 	wss.on('connection', (ws: LetsyncWebSocket) => {
 		// TODO: UPDATE LIST OF COMMANDS AND RPC
 
-		console.log('Client connected:', ws.clientId);
-		console.log('User:', ws.user);
-		// ws.send('Hello! Welcome to the websocket server.');
+		if (ws.isNewConnection) {
+			// ws.send();
+			// TODO: send new schema and ask to "INIT"
+		}
 
 		ws.on('message', (message) => {
 			console.log(`Received message => ${message}`);
@@ -32,29 +84,10 @@ export function LetsyncServer({ server, auth }: LetsyncServerProps) {
 		});
 	});
 
-	server.on('upgrade', (request, socket, head) => {
-		const user = auth(request);
-		if (!user) {
-			socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-			socket.destroy();
-			return;
-		}
-
-		const searchParams = new URLSearchParams(request.url);
-		const clientId = searchParams.get('clientId') || '';
-		// if (clientId === 'NULL') {
-		// 	generateClientId();
-		// }
-		console.log('Connection Authorized');
-		// TODO: Update as connected in DB
-
-		wss.handleUpgrade(request, socket, head, (client) => {
-			const ws = client as LetsyncWebSocket;
-			ws.user = user;
-			ws.clientId = clientId;
-			wss.emit('connection', ws, request);
-		});
-	});
-
 	return { wss };
+}
+
+export function LetsyncApiHandler(req: Request, res: Response) {
+	console.log({ req });
+	return res.send('Hello from API');
 }

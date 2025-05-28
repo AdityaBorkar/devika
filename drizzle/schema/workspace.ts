@@ -2,7 +2,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { user } from 'drizzle/schema/auth';
 import { boolean, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
-const ideEnum = pgEnum('ide', [
+export const ideEnum = pgEnum('ide', [
 	'cursor',
 	'github-copilot',
 	'windsurf',
@@ -27,9 +27,7 @@ export const workspace = pgTable('workspace', {
 	name: text('name').notNull(),
 	ide: ideEnum('ide').notNull(),
 	tdd: boolean('tdd').notNull(),
-}); // TODO: Read-only on client. Copy all fields.
-
-console.log({ workspace });
+});
 
 // export const workspaceState = sqliteTable('workspace_state', {
 // 	workspaceId: text('workspace_id')

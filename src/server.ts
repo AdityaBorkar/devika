@@ -41,7 +41,7 @@
 
 import path from 'node:path';
 import express from 'express';
-import { LetsyncServer } from 'letsync/express';
+import { LetsyncApiHandler, LetsyncWsServer } from 'letsync/express';
 
 const app = express();
 const port = 3000;
@@ -66,6 +66,10 @@ app.get('/pglite.data', (_, res) => {
 	);
 });
 
+// app.get('/api/auth/*')
+
+app.get('/api/letsync/*splat', LetsyncApiHandler);
+
 app.get('*splat', (_, res) => {
 	res.sendFile(path.join(__dirname, '../dist', 'frontend.html'));
 });
@@ -73,11 +77,12 @@ app.get('*splat', (_, res) => {
 const server = app.listen(port, () => {
 	console.log(`Listening on port ${port}...`);
 });
-const wss = LetsyncServer({
+
+const wss = LetsyncWsServer({
 	server,
 	auth(request) {
 		// TODO: better-auth
-		console.log({ request });
+		// console.log({ request });
 		const user = { id: '123' };
 		return user;
 		// return null; FOR UNAUTHORIZED

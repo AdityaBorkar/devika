@@ -1,1 +1,1 @@
-export { schema } from 'letsync/drizzle';
+export * from 'letsync/drizzle';

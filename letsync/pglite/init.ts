@@ -36,26 +36,26 @@ export class Letsync {
 				// const { version = 'NA', lastSynced = 'NA' } = metadata.rows[0] as any; // TODO: proper type
 				console.log({ metadata });
 				return {
-					version: 'Hello World',
-					clientId: 'Hello World',
+					connectionId: 'Hello World',
 					lastSynced: 'Hello World',
+					version: 'Hello World',
 				};
 			})
 			.catch((err) => {
 				if (err.toString() === 'error: relation "metadata" does not exist')
 					return {
-						version: undefined,
-						clientId: undefined,
+						connectionId: undefined,
 						lastSynced: undefined,
+						version: undefined,
 					};
 				throw err;
 			});
 
-		this.logger.log('Client ID', metadata.clientId);
+		this.logger.log('Connection ID', metadata.connectionId);
 		this.logger.log('Version', metadata.version);
 		this.logger.log('Last synced at', metadata.lastSynced);
 
-		const wsUrl = `ws://localhost:3000/?o=k&clientId=${metadata.clientId || 'NULL'}`;
+		const wsUrl = `ws://localhost:3000/?o=k&id=${metadata.connectionId || 'NULL'}`;
 		this.logger.log('Connecting to WebSocket', wsUrl);
 
 		const ws = new WebSocket(wsUrl);
@@ -73,10 +73,16 @@ export class Letsync {
 		};
 		ws.onmessage = (event) => {
 			this.logger.log('Message from server:', event);
-			// COMMAND:INIT
-			// COMMAND:SYNC
-			// COMMAND:GET_SCHEMA
-			// COMMAND:UPGRADE
+			// "init"
+			// "getSchema"
+			// "upgrade"
+			// "sync"
+			// "data"
+			// "push:data"
+			// "push:operation"
+			// "push:upgrade_complete"
+			// "push:connected"
+			// "push:disconnected"
 
 			// const { type, data } = JSON.parse(event.data.toString());
 			// // if (type === "REQUEST:VERSION")

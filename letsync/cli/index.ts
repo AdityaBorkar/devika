@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { generate } from 'letsync/cli/generate';
-import { publish } from 'letsync/cli/publish';
+import { migrate } from 'letsync/cli/migrate';
 import { detectEnvironment } from 'letsync/cli/utils/detectEnv';
 
 const program = new Command();
@@ -21,27 +21,14 @@ program
 program
 	.command('generate')
 	.description('Generate a schema for use in a client')
-	.option(
-		'-o, --output <path>',
-		'Output directory for generated schema',
-		'./generated',
-	)
-	.option(
-		'-t, --type <type>',
-		'Schema type (typescript|json|graphql)',
-		'typescript',
-	)
-	.option('--orm <orm>', 'ORM to use (drizzle|prisma)', 'drizzle')
 	.option('--dry-run', 'Show what would be generated without creating files')
 	.action(generate);
 
 program
-	.command('publish')
-	.description(
-		'Publish schema changes for public records (creates version number)',
-	)
-	.option('--orm <orm>', 'ORM to use (drizzle|prisma)', 'drizzle')
-	.action(publish);
+	.command('migrate')
+	.description('Migrate schema changes to the database')
+	.option('--dry-run', 'Show what would be generated without creating files')
+	.action(migrate);
 
 program.on('command:*', () => {
 	console.error(

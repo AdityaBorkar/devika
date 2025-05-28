@@ -52,9 +52,10 @@
         "drizzle-orm": "^0.43.1",
         "express": "^5.1.0",
         "fastify": "^5.3.3",
-        "jotai": "^2.12.4",
+        "jotai": "^2.12.5",
         "lucide-react": "^0.511.0",
-        "motion": "^12.12.1",
+        "motion": "^12.15.0",
+        "node-postgres": "^0.6.2",
         "nuqs": "^2.4.3",
         "pg": "^8.16.0",
         "postgres": "^3.4.7",
@@ -62,8 +63,8 @@
         "react-dom": "^19.1.0",
         "react-hook-form": "^7.56.4",
         "react-icons": "^5.5.0",
-        "react-router": "^7.6.0",
-        "react-router-dom": "^7.6.0",
+        "react-router": "^7.6.1",
+        "react-router-dom": "^7.6.1",
         "recharts": "^2.15.3",
         "tailwind-merge": "^3.3.0",
         "tailwindcss": "^4.1.7",
@@ -76,7 +77,7 @@
         "@types/express": "^5.0.2",
         "@types/node": "^22.15.21",
         "@types/pg": "^8.15.2",
-        "@types/react": "^19.1.5",
+        "@types/react": "^19.1.6",
         "@types/react-dom": "^19.1.5",
         "drizzle-kit": "^0.31.1",
       },
@@ -869,6 +870,8 @@
     "node-domexception": ["node-domexception@1.0.0", "", {}, "sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ=="],
 
     "node-fetch": ["node-fetch@3.3.2", "", { "dependencies": { "data-uri-to-buffer": "^4.0.0", "fetch-blob": "^3.1.4", "formdata-polyfill": "^4.0.10" } }, "sha512-dRB78srN/l6gqWulah9SrxeYnxeddIG30+GOqK/9OlLVyLg3HPnr6SqOWTWOXKRwC2eGYCkZ59NNuSgvSrpgOA=="],
+
+    "node-postgres": ["node-postgres@0.6.2", "", {}, "sha512-wjaW+KutPOFemtBDuogyy6OMMOs2vpSOwuqbUhFUbrDEOTk66K2lmRyvOdO4t26qGtnPyZXQ4bAuF17cBhi5aQ=="],
 
     "nuqs": ["nuqs@2.4.3", "", { "dependencies": { "mitt": "^3.0.1" }, "peerDependencies": { "@remix-run/react": ">=2", "next": ">=14.2.0", "react": ">=18.2.0 || ^19.0.0-0", "react-router": "^6 || ^7", "react-router-dom": "^6 || ^7" }, "optionalPeers": ["@remix-run/react", "next", "react-router", "react-router-dom"] }, "sha512-BgtlYpvRwLYiJuWzxt34q2bXu/AIS66sLU1QePIMr2LWkb+XH0vKXdbLSgn9t6p7QKzwI7f38rX3Wl9llTXQ8Q=="],
 
