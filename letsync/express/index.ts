@@ -69,11 +69,30 @@ export function LetsyncWsServer({ server, auth }: LetsyncServerProps) {
 		// TODO: UPDATE LIST OF COMMANDS AND RPC
 
 		if (ws.isNewConnection) {
-			// ws.send();
-			// TODO: send new schema and ask to "INIT"
+			const schema_query = '';
+			const snapshots = [];
+			const pointer = '';
+			const payload = {
+				type: 'C2S:init',
+				data: { schema_query, snapshots, pointer },
+			};
+			ws.send(JSON.stringify(payload));
 		}
 
 		ws.on('message', (message) => {
+			const { type, data } = JSON.parse(message.toString());
+			if (type === 'C2S:upgrade_complete') {
+				const { schema_query, snapshots, pointer } = data;
+				const payload = { type: 'S2C:init', data: {} };
+				ws.send(JSON.stringify(payload));
+			} else if (type === 'C2S:push_data') {
+				const payload = { type: 'S2C:get_schema', data: {} };
+				ws.send(JSON.stringify(payload));
+			} else if (type === 'C2S:push_operation') {
+				const payload = { type: 'S2C:get_schema', data: {} };
+				ws.send(JSON.stringify(payload));
+			}
+
 			console.log(`Received message => ${message}`);
 			// Echo message back to client
 			ws.send(`You sent: ${message}`);
