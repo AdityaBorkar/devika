@@ -1,4 +1,4 @@
-import type { AppConfig, Package } from '@/types/tech-stack';
+import type { AppConfig, Package } from 'types/tech-stack';
 
 export const mockPackages: Package[] = [
 	// Backend packages

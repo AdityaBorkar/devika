@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { mockAppConfigs, mockPackages } from '@/lib/mock-data';
 import type {
 	AppConfig,
 	Package,
 	PackageCategory,
 	ViewMode,
-} from '@/types/tech-stack';
+} from 'types/tech-stack';
+import { mockAppConfigs, mockPackages } from '@/lib/mock-data';
 import { AppConfigEdit } from './app-config-edit';
 import { DocUrlDialog } from './doc-url-dialog';
 import { PackageCard } from './package-card';

@@ -10,7 +10,7 @@ import {
 	ShieldAlert,
 	XCircle,
 } from 'lucide-react';
-import type { Package } from '@/types/tech-stack';
+import type { Package } from 'types/tech-stack';
 
 interface PackageTableViewProps {
 	packages: Package[];

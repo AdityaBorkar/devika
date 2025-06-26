@@ -4,7 +4,7 @@ import { useSetAtom } from 'jotai';
 import { PiFile } from 'react-icons/pi';
 import { Link } from 'react-router';
 import { PrdActiveTabIdAtom } from '@/app/(workspace)/prd/store';
-import db from '@/lib/client-db';
+import { db } from '@/lib/client-db';
 import { cn } from '@/lib/utils';
 
 const sections = [

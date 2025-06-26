@@ -2,7 +2,7 @@
 
 import { Book, FileSymlink, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import type { DocSource } from '@/types/tech-stack';
+import type { DocSource } from 'types/tech-stack';
 
 interface DocUrlDialogProps {
 	isOpen: boolean;

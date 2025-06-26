@@ -2,7 +2,7 @@
 
 import { Edit, Save } from 'lucide-react';
 import { useState } from 'react';
-import type { AppConfig } from '@/types/tech-stack';
+import type { AppConfig } from 'types/tech-stack';
 
 interface AppConfigEditProps {
 	config: AppConfig;

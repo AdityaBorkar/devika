@@ -8,8 +8,8 @@ import {
 	ShieldAlert,
 	XCircle,
 } from 'lucide-react';
+import type { Package } from 'types/tech-stack';
 import { cn } from '@/lib/utils';
-import type { Package } from '@/types/tech-stack';
 
 interface PackageCardProps {
 	pkg: Package;

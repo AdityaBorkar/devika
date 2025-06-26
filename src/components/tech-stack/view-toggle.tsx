@@ -1,8 +1,8 @@
 'use client';
 
 import { LayoutGrid, Table } from 'lucide-react';
+import type { ViewMode } from 'types/tech-stack';
 import { cn } from '@/lib/utils';
-import type { ViewMode } from '@/types/tech-stack';
 
 interface ViewToggleProps {
 	viewMode: ViewMode;

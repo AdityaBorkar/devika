@@ -7,7 +7,6 @@ export class Letsync {
 	private database: PGlite;
 	private db: any;
 	private ws?: WebSocket;
-	private client: typeof client;
 
 	private debug: boolean;
 	private logger = {
@@ -38,10 +37,11 @@ export class Letsync {
 		this.debug = debug ?? false;
 		this.IS_SYNCING = false;
 		this.IS_CONNECTED = false;
-		this.client = new WebSocketClient(client);
 	}
 
 	async connect() {
+		this.client = new WebSocketClient(client);
+
 		const connectionId = await this
 			.#query`SELECT * FROM metadata WHERE id = 'connectionId'`;
 		const version = await this
@@ -181,7 +181,7 @@ const client = {
 		if (type === 'S2C:init:ACK') {
 			//
 		}
-		const { type, data } = JSON.parse(event.data);
+		// const { type, data } = JSON.parse(event.data);
 		if (type === 'S2C:init') {
 			//
 			const { schema_query } = data;

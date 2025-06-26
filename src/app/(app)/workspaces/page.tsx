@@ -1,5 +1,5 @@
 import { workspace } from 'drizzle/schema';
-import db from '@/lib/client-db';
+import { db } from '@/lib/client-db';
 
 const workspaces = db.select().from(workspace).limit(10);
 workspaces.then((data) => console.log({ data }));

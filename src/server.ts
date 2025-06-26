@@ -41,7 +41,7 @@
 
 import path from 'node:path';
 import express from 'express';
-import { LetsyncApiHandler, LetsyncWsServer } from 'letsync/express';
+import { LetsyncApiHandler } from 'letsync/express';
 
 const app = express();
 const port = 3000;
@@ -78,14 +78,14 @@ const server = app.listen(port, () => {
 	console.log(`Listening on port ${port}...`);
 });
 
-const wss = LetsyncWsServer({
-	server,
-	auth(request) {
-		// TODO: better-auth
-		// console.log({ request });
-		const user = { id: '123' };
-		return user;
-		// return null; FOR UNAUTHORIZED
-	},
-});
-console.log({ ws: !!wss });
+// const wss = LetsyncWsServer({
+// 	server,
+// 	auth(request) {
+// 		// TODO: better-auth
+// 		// console.log({ request });
+// 		const user = { id: '123' };
+// 		return user;
+// 		// return null; FOR UNAUTHORIZED
+// 	},
+// });
+// console.log({ ws: !!wss });
